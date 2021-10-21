@@ -3,13 +3,16 @@ layout: page
 title: Deploy Guide
 permalink: /deploy/
 ---
-## System configuration record
 
-**以下内容基本都是转载,如有侵权联系删除**
+相关文件在deploy_guide repo里
+
+* TOC
+{:toc}
+
+
+**转载侵删**
 
 **declare no authorship to this page**
-
-
 
 # Hardware 硬件
 
