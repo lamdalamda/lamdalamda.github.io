@@ -16,22 +16,52 @@ katex: True
 Adapted from vasp wiki
 
 
-# INCAR
+# INCAR-电子步
+
+
+## ICHARG
+
+initial charge density 初始电荷密度
+
+### ICHARG=0
+
+读取WAVECAR来获得初始电荷密度
+
+### ICHARG=1
+
+从CHGCAR里面读取
+
+### ICHARG=2
+
+原文：take superposition of atomic charge densities
+
+不知道什么意思
+
+### ICHARG=4
+
+从POT里面读取
+
+要求LVTOT=.TRUE.
+
+### ICHARG=10+（0，1，2，4）
+
+与前面各自对应，但是电子密度在整个electronic minimization过程中不变
+用处：
+在绘制band structure时候（比如 L-Γ-X-U）的图的时候，通过读取已有的CHGCAR，把KPOINTS设定在L-Γ-X-U，就可以画出来band structure
+
+
+
+## NELMIN
+minimum number of electronic SCF steps：每个离子步中最少的电子步数量
+$$>0$$： relaxation to local energy minimum 计算最小能量的模式：
+
+
+
 
 ## EDIFF
 
 电子步能量收敛的判据
 
-## EDIFFG
-
-离子步能量收敛的判据
-
-
-如果EDIFFG>0当 新的离子步 的 电子步收敛时的**能量** 与 上一个离子步 的 电子步收敛时的**能量** 之差小于收敛判据EDIFFG时离子步优化结束。如果EDIFFG<0,则为当所有力小于EDIFFG绝对值时（负的EDIFFG）离子步优化结束。
-
-
-## SYSTEM = string
-系统的名称，没有锤子用，显示在outcar里面
 
 ## ISMEAR 
 能量在费米能量周围的轨道，其电子占有概率的设置。？
@@ -111,6 +141,31 @@ definition：width of the smearing in eV.
 
 
 
+# INCAR-离子步
+
+## NSW
+
+maxmimum number of ionic steps 最大离子步数量
+
+IBRION =0 时候，是必须项目
+IBRION !=0 时候，即，在进行relaxation时候，能进行的最多离子步数量
+
+
+
+## EDIFFG
+
+离子步能量收敛的判据
+
+
+如果EDIFFG>0当 新的离子步 的 电子步收敛时的**能量** 与 上一个离子步 的 电子步收敛时的**能量** 之差小于收敛判据EDIFFG时离子步优化结束。如果EDIFFG<0,则为当所有力小于EDIFFG绝对值时（负的EDIFFG）离子步优化结束。
+
+
+# INCAR-任务
+
+## SYSTEM = string
+系统的名称，没有锤子用，显示在outcar里面
+
+
 ## IBRION
 
 https://www.vasp.at/wiki/index.php/IBRION
@@ -170,51 +225,13 @@ IBRIO>0时的重要设置，定义了：离子收敛过程中记住的步骤数
 
 看不懂
 
-### NELMIN
-minimum number of electronic SCF steps
-$$>0$$： relaxation to local energy minimum 计算最小能量的模式：
-
-
-### NSW
-
-maxmimum number of ionic steps 最大离子步数量
-
-IBRION =0 时候，是必须项目
-IBRION !=0 时候，即，在进行relaxation时候，能进行的最多离子步数量
-
-## ICHARG
-
-initial charge density 初始电荷密度
-
-### ICHARG=0
-
-读取WAVECAR来获得初始电荷密度
-
-### ICHARG=1
-
-从CHGCAR里面读取
-
-### ICHARG=2
-
-原文：take superposition of atomic charge densities
-
-不知道什么意思
-
-### ICHARG=4
-
-从POT里面读取
-
-要求LVTOT=.TRUE.
-
-### ICHARG=10+（0，1，2，4）
-
-与前面各自对应，但是电子密度在整个electronic minimization过程中不变
-用处：
-在绘制band structure时候（比如 L-Γ-X-U）的图的时候，通过读取已有的CHGCAR，把KPOINTS设定在L-Γ-X-U，就可以画出来band structure
 
 
 
 
+
+
+# INCAR-输出
 
 ## LORBIT
 
@@ -223,7 +240,7 @@ LORBIT于RWIGS一起，决定了输出PROCAR PROOUT
 
 # DOSCAR
 
-需要INCAR 中 定义 LORBIT
+需要INCAR 中 定义 LORBIT才会有这个输出
 
 # POSCAR
 ## vasp5

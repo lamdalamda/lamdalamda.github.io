@@ -1,40 +1,195 @@
+---
+layout: page
+title: vasp理论
+permalink: /vasp_basic/
+katex: True
+---
 
 
+Remake@21.10.22
 
 * TOC
 {:toc}
 
 
 
-# DFT Theory 密度泛函计算基本理论
- latex test docs index
+
+# 必备知识
+
+## Born-oppenheimer approximation 
+
+由于原子核质量远大于电子，在计算电子的一些性质时可以假设原子不动
+## 泛函
 
 
-## basic concepts 基本概念：如何计算
-摘自David S. Sholl, _Density functional Theory_
+方括号是泛函的意思。泛函类似于函数，函数是输入未知数得到一个结果，或者说数到数的对应。而泛函是输入一个函数得到一个数，或者说函数到数的映射。比如说，一个泛函的形式是从0到1积分，那么输入f(x)=x+1这个函数，得到的是数字1.5。泛函跟函数的表达方式类似，但是把圆括号变成方括号
 
-### Hohenberg-Kohn 1st Theorem :
+$$ n(r) -- E[] --> E[n(r)] $$
 
-The ground-state energy from Schroginger's equation is a unique functional of the electron density.
 
-OR
+## fourier transformation
 
-ground state electron density uniquely determines all properties: energy/ wavefunction.
+![Image](./pic/Fourier_series_and_transform.gif)
+转载自 wikipedia
+![Image](./pic/40cf849e55ed95732a60b52d4019d609_720w.jpg)
+转载自_https://zhuanlan.zhihu.com/p/19763358_，这个讲的很清楚
 
-基态能量是电子密度分布函数(或者说，基态电子在空间中的密度分布)的泛函
-一个基态电子密度对应了唯一的能量、波函数。
 
-问题：泛函形式未知
 
-### Hohenberg-Kohn 2nd Theorem :
+# 物质的性质与电子的关系
+_Richard M Martic, Electronic Structure: Basic theory and Practical method_
+物质的所有性质可以被划分为两种，第一种是可以由基态电子决定的性质，第二种是可以由激发态电子来决定的性质
 
-The electron density that minimizes the energy of the overall functional is the true electron density corresponding to the full solution of the schrodinger equation.
+由于原子核质量远大于电子，所以相对电子来说是精致的（波恩奥本海默近似），所以电子决定了物质的绝大部分性质
 
-使这个泛函结果（能量）最低的电子密度是薛定谔方程的解
+基态电子可以决定物质的这些性质：cohesive energy内聚能， equilibrium crystal structure晶体结构， phase transitions 相变，elastic constant弹性常数 charge density电荷密度，magneticorder， static dielectric and magnetic susceptibilities, nuclear vibrations and motion, etc....
 
-->如果知道了泛函的形式，那么就可以计算出基态电子密度
 
-### n(r), 或者基态电子密度
+激发态电子决定了：specific heat 热容,pauli spin susceptibility, transport, insulating gap电阻, optical properties, spectra 光谱
+
+DFT的主要目的：研究基态电子所对应的物质性质
+
+
+## bonding：
+一般认为分为5类：
+closed shell system:稀有气体
+ionic
+metallic
+covalent
+hydrogen:比较特殊，因为氢原子是唯一没有core electron的 （往上面的氦的core electron是1s的两个电子）
+
+实际材料的bonding一般是这五种的结合
+
+## Hartree atomic units
+
+$$\hbar =m_e = e = 4\pi /\epsilon_0 = 1$$
+
+定义以上单位为1，用来简化计算
+
+
+## manybody schrodinger equation
+
+为了研究物质的物理性质，需要解电子的波函数，然后可以通过算符施加在波函数来获得性质（例如用hamiltonian获得基态能量）
+
+多电子的hamiltonian写作如下形式：
+
+$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2+\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+0.5\sum_{i\neq j}\frac{e^2}{|r_i-r_j|}-\sum_I\frac{\hbar ^2 }{2M_I}\sum_I\nabla_I^2+0.5sum_{I\neq J}\frac{Z_IZ_Je^2}{|R_I-R_J|}$$
+
+应用Born Oppenheimer近似：原子核质量远大于电子质量且原子相对静止（R不是变量）
+
+$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2+\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i<j}\frac{e^2}{|r_i-r_j|}+Constant$$
+
+此hamiltonian所对应的含时间的薛定谔方程time dependent schrodinger equation是：
+
+$$i\hbar\frac{d\Psi(r_i,t)}{dt}=\hat{H}\Psi({r_i,t})$$
+
+time dependent schrodinger equation描述了粒子的真实运动方程。
+
+解这个time dependent schrodinger equation，其eigenstate为$$\Psi({r_i,t})=\Psi(r_i)e^{i\frac{E}{\hbar}t}$$。也就说真实粒子的运动必须满足这个方程
+
+而$$E=\frac{\bra{\Psi(r_i)}{\hat{H}}\ket{\Psi(r_i)}}{\bra{\Psi(r_i)}\ket{\Psi(r_i)}}$$
+
+经过书中证明，E的本征值是time independent schrodinger方程中的hamiltonian的本征值
+
+即$$\hat{H}\ket{\Psi _m}=E\ket{\Psi _m }$$
+
+**以上，看不懂，换一种说法：**
+
+有一个time independent schorodinger与时间无关的薛定谔方程
+$$\hat{H}\ket{\Psi }=E\ket{\Psi _m }$$
+
+$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2+\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i<j}\frac{e^2}{|r_i-r_j|}+Constant$$
+
+假设其eigen function本征态的集合是$$\Psi$$,其本征值的集合是E。
+
+这些本征态就是time dependent schorodinger时间相关薛定谔方程本征态$$\Psi({r_i,t})=\Psi(r_i)e^{i\frac{E}{\hbar}t}$$中的$$\Psi(r_i)$$。本征态对应本征值E就是time dependent schorodinger时间相关薛定谔方程本征态$$\Psi({r_i,t})=\Psi(r_i)e^{i\frac{E}{\hbar}t}$$中的E。
+
+或者说time dependent schrodinger equation的本征态是由time independent schrodinger equation来确定的
+
+**注意：书中内容没看懂，所以以上不知道对不对。。。**
+
+实例：
+
+假设一维系统中有A，B两个原子，A是He位于x=5，B是H位于x=9（坐标只是为了方便看），体系中还有三个电子，其坐标为变量$$x_1,x_2,x_3$$。则：
+
+time independent schorodinger方程：
+
+$$[-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2+\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i<j}\frac{e^2}{|r_i-r_j|}+C]\Psi=E\Psi$$
+
+$$-\frac{\hbar ^2 }{2m_e}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})+(\frac{2e^2}{x_1-5}_{He与1号电子相互作用}+\frac{2e^2}{x_2-5}_{He,x_2}+\frac{2e^2}{x_3-5}_{He,x_3}+\frac{1e^2}{x_1-9}_{H,x_1}+\frac{1e^2}{x_2-9}_{H,x_2}+\frac{1e^2}{x_3-9}_{H,x_3}+\frac{e^2}{|x_1-x_2|}+\frac{e^2}{|x_1-x_3|}+\frac{e^2}{|x_2-x_3|}+C)\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
+
+显然形似$$\Psi(x_1,x_2,x_3)=e^{ikx_1}+e^{ikx_2}+e^{ikx_3}$$的这种简单解不成立，整体波函数将会是非常复杂的。注意$$x_1,x_2,x_3$$是三个在x轴上的变量。当然如果确实地解出了波函数（本征方程），那么粒子准确的运动形式就可以知道了（通过将解出的本征方程以及本征值代入time dependent schrodinger equation）
+
+
+# Non-interacting (i.e. Hartree) electron approximation
+
+Hartree like electron approximation是假设电子之间没有互相作用。此假设通过更改hamiltonian来实现，是不准确的。得到的eigenfunction没有实质的物理意义，但是是一种估算
+
+many body hamiltonian:
+$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2+\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i<j}\frac{e^2}{|r_i-r_j|}+Constant$$
+
+而Hartree like approximation中的hamiltonian是
+
+$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2+V_{eff}(r,\sigma)$$
+
+$$V_{eff}(r,\sigma)$$是等效势能，是与位置和电子自旋$$\sigma$$相关的量。
+
+Hartree like approximation最大的作用是使得波函数可以通过hartree product被拆解：当电子之间有interaction时候，整体波函数$$\Psi(r_1,r_2,r_3,...r_i)$$是复杂难以分割的。而当没有interaction（也就是hartree like approximation）的时候，整体波函数可以表示为hartree product的形式，是可以拆分的，hamiltonian也是可以拆分的
+
+
+## Hartree product
+当系统总共只有一个电子时候，
+对于hartree hamiltonian
+
+$$h\Psi(r)=E\Psi(r)$$
+
+即使不能得到解析解，也基本可以得到比较精确的许多个解。最简单地假设V=0，就可以得到比较标准的自由单电子波函数$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2$$
+
+其本征态为$$\Psi_j$$
+对于每个解$$\Psi_1,\Psi_2,\Psi_3,....$$
+(假设$$\Psi_1$$对应了最低能量)
+对应的能量分别是 $$E_1,E_2,E_3,....$$,
+
+其中$$E_1$$是能量最低的基态
+
+**对于多电子体系来说**
+
+当忽略了电子-电子相互作用时hartree approximation
+
+Hamiltonian是可以拆分的： $$H=h_1+h_2+h_3+...$$
+
+$$h_i$$是第i个电子的动能和势能算符
+
+可以得到
+$$\Psi(x_1,x_2,....x_n)=\prod{\phi_{ji}(x_i,j)}$$
+其中j代表了能级（像上面j=1是基态）
+
+对于基态来讲
+$$\Psi(x_1,x_2,....x_n)=\phi_{11}(x_1)\phi_{12}(x_2)\phi_{13}(x_3)...$$
+
+总能量则是每个hamiltonian本征值的简单相加
+$$E=E_{11}+E_{12}+E_{13}+....$$,
+
+以上方法求得的波函数由于忽略了电子-电子相互作用，所以存在以下问题：
+
+_由于电子是费米子，所以当两个电子交换位置时候符号必须改变_
+
+然而，当电子交换位置时候，按照上式，波函数的正负号没有变化
+
+所以：引入Slater determinant
+
+双电子的Slater determinant:
+
+$$\Psi(x_1,x_2)=\frac{1}{\sqrt2}det\left\{\begin{matrix}
+\phi_j(x_1)&\phi_j(x_2)\\
+\phi_k(x_1)&\phi_k(x_2)\\
+\end{matrix}\right\}$$
+
+$$\Psi(x_1,x_2)=\frac{1}{\sqrt2}[\phi_j(x_1)\phi_k(x_2)-\phi_k(x_1)\phi_j(x_2)]$$
+
+这个波函数满足pauli exclusiong principle：不区分电子， 而且当两个电子具有相同坐标的波函数（概率）等于0（也就是说这个波函数不允许两个电子有相同坐标）。此表示方式为hartree product
+
+## n(r), 或者基态电子密度
 
 基态电子密度　$$n_{(r)} = 2\Sigma \phi_i^*(r)\phi_i(r)$$
 
@@ -48,14 +203,105 @@ $$n_{(x)} = 2\phi_1^*(x)\phi_1(x)+2\phi_2^*(x)\phi_2(x)+2\phi_3^*(x)\phi_3(x)+..
 
 是个期望值一样的东西
 
-### 泛函的具体形式 the energy functional=？
+
+
+## hartree fock calculation 
+
+Hartree Fock calculation是： 
+$$[\frac{-\hbar^2}{2m}\nabla^2+V(r)+V_H(r)]\Psi_j(x_1,x_2,....)=E_j\Psi_j(x_1,x_2,....)$$
+
+也就是说hartree hamiltonian
+$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2+V_{eff}(r,\sigma)$$中$$V_{eff}(r,\sigma)=V(r)+V_H(r)$$的情形
+
+由于没有办法直接得到$$\Psi_j(x_1,x_2,....)$$，但是已知$$\Psi_j(x_1,x_2,....)$$可以表示成slater行列式，如果可以解slater行列式中每个元素$$\phi_i(r)$$，那么就知道$$\Psi_j(x_1,x_2,....)$$
+
+解$$\phi_i(r)$$:
+
+如前文所述，可以将hamiltonian进行拆分
+$$H=h_1+h_2+h_3+...$$
+并且
+$$h_i=[\frac{-\hbar^2}{2m}\nabla^2+V_i(r)+V_{Hi}(r)]$$
+
+
+$$[\frac{-\hbar^2}{2m}\nabla^2+V_i(r)+V_{Hi}(r)]\phi_i(x_1)=E_i\phi_i(x_1)$$
+
+其中
+
+$$V_i(r)=\sum_{I}\frac{Z_Ie^2}{r_i-R_I}$$是薛定谔方程中已知的，是电子和所有原子核的相互作用
+
+$$V_{Hi}(r)$$是hartree potential，是 coulomb repulsion  between "this electron" and "the total electron density", 或者说电子i和整个电子密度n(r)之间的coulomb repulsion
+
+$$V_H(r)=e^2\int \frac{n(r')}{|r-r'|}d^3r'$$
+理解为以r点的坐标向外积分？
+
+
+
+## hartree fock limit
+
+
+由前面slater行列式可以看到，如果想要描述一个N个电子体系，那么需要知道$$\phi_1$$到$$\phi_N$$
+
+虽然或许可以通过代数手法硬算，但是也可以通过系数拟合的方式更方便地得到结果。对此，可以找到有限个（K个）函数，即$$\chi_{1}(x)$$到$$\chi_{K}(x)$$，使得这K个函数可以加权相加得到$$\phi_1$$到$$\phi_N$$
+这K个函数被称为basis set
+即：
+
+$$\phi_j(x)=\sum^K_{i=1}\alpha_{j,i}\chi_{i}(x)$$
+
+写的清楚一点，对第一个$$\phi_1(x)$$：
+
+$$\phi_1(x)=\alpha_{1,1}\chi_{1}(x)+\alpha_{1,2}\chi_{2}(x)+...+\alpha_{1,K}\chi_{K}(x)$$
+
+现在已知$$\chi_{1}(x)$$到$$\chi_{K}(x)$$，问题变成了找到$$\alpha_{j,i}$$
+
+找到$$\alpha_{i,j}$$的方式：继续进行递归运算：
+
+1, 猜测一组初始的$$\alpha_{j,i}$$
+
+2，通过这个初始的$$\alpha_{j,i}$$代回$$\phi_j(x)=\sum^K_{i=1}\alpha_{j,i}\chi_{i}(x)$$方程计算出来一组电子密度$$n_{(r)} = 2\Sigma \phi_i^*(r)\phi_i(r)$$
+
+3, 将n(r)代入$$V_H(r)=e^2\int \frac{n(r')}{\vert r-r' \vert}d^3r'$$得到新的hamiltonian，用这个hamiltonian求解本征方程，得到新的$$\alpha_{j,i}$$
+
+通过这个递归运算，可以得到一个精确的能量值，这个能量值是Hartree fock limit.
+
+这个值虽然精确，但并不是实际的电子能量， 因为没有考虑到exchange 和correlation （Exc），即Hartree fock方法实际上并没有解决电子-电子相互作用
+
+
+
+# Kohn Sham方程
+
+## Hohenberg-Kohn 1st Theorem :
+
+The ground-state energy from Schroginger's equation is a unique functional of the electron density.
+
+OR
+
+ground state electron density uniquely determines all properties: energy/ wavefunction.
+
+基态能量是电子密度分布函数(或者说，基态电子在空间中的密度分布)的泛函
+一个基态电子密度对应了唯一的能量、波函数。
+
+问题：泛函形式未知
+
+## Hohenberg-Kohn 2nd Theorem :
+
+The electron density that minimizes the energy of the overall functional is the true electron density corresponding to the full solution of the schrodinger equation.
+
+使这个泛函结果（能量）最低的电子密度是薛定谔方程的解
+
+->如果知道了泛函的形式，那么就可以计算出基态电子密度
+
+
+## 泛函的具体形式 the energy functional
+
+Hohenberg-Kohn 2nd Theorem中的泛函是什么形式？
 
 对于单个电子已知如下：
 
 $$E[\phi_i(r)]=E_{known}[\phi_i(r)]+E_{unknown}[\phi_i(r)]$$
 
-方括号是泛函的意思。泛函类似于函数，函数是输入未知数得到一个结果，或者说数到数的对应。而泛函是输入一个函数得到一个数，或者说函数到数的映射。比如说，一个泛函的形式是从0到1积分，那么输入f(x)=x+1这个函数，得到的是数字1.5。泛函跟函数的表达方式类似，但是把圆括号变成方括号
-$$ n(r) -- E[] --> E[n(r)] $$
+显然，这个泛函就是hamiltonian。
+将其分成已知项和未知项：
+
 
 
 $$E_{known}[]$$是已知的能量泛函，包括电子动能，电子-核与电子-电子
@@ -82,24 +328,14 @@ $$E[2\Sigma \phi_i^*(r)\phi_i(r)]=E_{known}[2\Sigma \phi_i^*(r)\phi_i(r)]+E_{unk
 也就是说电子密度的泛函的形式与波函数相同，是： 
 $$E[]=E_{known}[]+E_{unknown}[]$$
 
-问题：解不出来电子密度n(r)因此需要kohn sham 方程解n(r)
+## Kohn-Sham equation
 
-### Kohn-Sham equation
-
-Kohn-Sham equation是用来找电子密度，即n(r):
 
 Kohn-Sham 方程是:
 
 $$[\frac{-\hbar^2}{2m}\nabla^2+V(r)+V_H(r)+V_{XC}(r)]\phi_i(r)=\epsilon_i\phi_i(r)$$
 
-其中
-
-$$V(r)$$是薛定谔方程中已知的，是电子和所有原子核的相互作用
-
-$$V_H(r)$$是hartree potential，是 coulomb repulsion  between "this electron" and "the total electron density", 或者说电子i和整个电子密度n(r)之间的coulomb repulsion
-
-$$V_H(r)=e^2\int \frac{n(r')}{|r-r'|}d^3r'$$
-理解为以r点的坐标向外积分？
+相比于hartree fock添加了exchange项
 
 $$V_{XC}$$是未知的，虽然有
 $$V_{XC}=\frac{\delta E_{XC}(r)}{\delta n(r)}$$
@@ -110,26 +346,6 @@ $$V_{XC}=\frac{\delta E_{XC}(r)}{\delta n(r)}$$
 
 $$[\frac{-\hbar^2}{2m}\phi_0''(x)+V(x)+e^2\int \frac{n(x')}{|x-x'|}dx'+V_{XC}(x)]\phi_0(x)=\epsilon_0\phi_0(x)$$
 
-### 递归求解
-
-如果不考虑Vxc这个未知项目（直接删掉这个项），那么其余部分是可以通过递归来进行精确求解的：
-1\猜测一个 初始电子密度
-
-guess a initial trial electron density n(r)
-
-2\ 解kohn sham 方程，得到每一个电子的波函数
-
-solve the kohn-sham equation with n(r), get the $$\phi(r)$$
-
-3\ 计算新的电子密度
-
-通过$$n_{(r)} = 2\Sigma \phi_i^*(r)\phi_i(r)$$
-
-4\ 调整电子密度递归运算
-
-### 结论：
-
-通过 Hohenberg-Kohn定理和Kohn-Sham方程，距离比较精确地求解薛定谔方程目前只差一个合适的$$E_{XC}$$泛函
 
 ## 寻找合适的$$E_{XC}$$泛函
 
@@ -175,160 +391,14 @@ $$V_{XC}^{meta-GGA}[n(r),\nabla n(r),\tau(r)]$$
 看不太懂啥意思，形式更加复杂，包含了部分真实Exc项，但是只有在计算小分子时候效果好，在计算bulk material时候不太行的
 
 
-## 寻找合适的波函数-hartree fock
-
-泛函在前文已经基本找好了，这里介绍找波函数的过程
-
-当不考虑Exc时候，可以对KohnSham方程进行比较好的计算：
-
-### 单个电子与多电子的波函数
-
-对于单个电子，其波函数是localized的，可以用类似于$$y=e^{-x^2}$$描述，没有周期性，且在远离x=0的地方y约为0。但是对于晶体等多电子体系，应该使用周期性的波函数，比如$$y=sin^2(x)$$
-
-### Hartree product
-当总共只有一个电子时候，
-
-$$h\Chi=E\Chi$$
-
-会得到许多个解 $$\Chi_j$$
-对于每个解$$\Chi_1,\Chi_2,\Chi_3,....$$
-(假设$$\Chi_1$$对应了最低能量)
-对应的能量分别是 $$E_1,E_2,E_3,....$$,
-
-其中$$E_1$$是能量最低的基态
-
-对于多个电子体系来说
-
-当忽略了电子-电子相互作用时
-
-Hamiltonian： $$H=h_1+h_2+h_3+...$$
-
-$$h_i$$是第i个电子的动能和势能算符
-
-可以得到
-$$\phi(x_1,x_2,....x_n)=\prod{\Chi_{ji}}$$
-其中j代表了能级（像上面j=1是基态）
-
-对于基态来讲
-$$\phi(x_1,x_2,....x_n)=\Chi_{11}(x_1)\Chi_{12}(x_2)\Chi_{13}(x_3)...$$
-
-能量则是简单相加
-$$E=E_{11},E_{12},E_{13},....$$,
-
-以上方法求得的波函数由于忽略了电子-电子相互作用，所以存在以下问题：
-
-_由于电子是费米子，所以当两个电子交换位置时候符号必须改变_
-
-然而，当电子交换位置时候，按照上式，波函数的正负号没有变化
-
-所以：引入Slater determinant
-
-双电子的Slater determinant:
-
-$$\phi(x_1,x_2)=\frac{1}{\sqrt2}det\left\{\begin{matrix}
-\Chi_j(x_1)&\Chi_j(x_2)\\
-\Chi_k(x_1)&\Chi_k(x_2)\\
-\end{matrix}\right\}$$
-
-$$\phi(x_1,x_2)=\frac{1}{\sqrt2}[\Chi_j(x_1)\Chi_k(x_2)-\Chi_k(x_1)\Chi_j(x_2)]$$
-
-这个波函数满足pauli exclusiong principle：不区分电子， 当电子具有相同坐标时等于0
-
-### hartree fock calculation 
-
-hartree fock calculation 基于这个假设；原子核位置固定
-
-
-Kohn sham 方程是
-$$[\frac{-\hbar^2}{2m}\nabla^2+V(r)+V_H(r)+V_{XC}(r)]\phi_i(r)=\epsilon_i\phi_i(r)$$
-
-而对于**单个**电子,HF calculation是： 
-$$[\frac{-\hbar^2}{2m}\nabla^2+V(r)+V_H(r)]\phi_i(x)=E_j\Chi_j(x)$$
-相比于kohn sham减少了一个Exc项
-
-由前面slater行列式可以看到，如果想要描述一个N个电子体系，那么需要知道$$\Chi_1$$到$$\Chi_N$$
-
-对此，可以找到有限个（K个）函数，即$$\phi_{1}(x)$$到$$\phi_{K}(x)$$，使得这K个函数可以加权相加得到$$\Chi_1$$到$$\Chi_N$$
-这K个函数被称为basis set
-即：
-
-$$\Chi_j(x)=\sum^K_{i=1}\alpha_{j,i}\phi_{i}(x)$$
-
-写的清楚一点，对第一个$$\Chi_1(x)$$：
-
-$$\Chi_1(x)=\alpha_{1,1}\phi_{1}(x)+\alpha_{1,2}\phi_{2}(x)+...+\alpha_{1,K}\phi_{K}(x)$$
-
-现在已知$$\phi_{1}(x)$$到$$\phi_{K}(x)$$，问题变成了找到$$\alpha_{j,i}$$
-
-找到$$\alpha_{i,j}$$的方式：继续进行递归运算：
-
-1, 猜测一组初始的$$\alpha_{j,i}$$
-
-2，通过这个初始的$$\alpha_{j,i}$$计算出来一组n(r)
-
-3, n(r)代回$$\Chi_j(x)=\sum^K_{i=1}\alpha_{j,i}\phi_{i}(x)$$方程，求解$$\alpha_{j,i}$$
-
-通过这个递归运算，可以得到一个精确的能量值，这个能量值是Hartree fock limit.
-
-这个值虽然精确，但并不是实际的电子能量， 因为没有考虑到Exc，即Hartree fock方法实际上并没有解决电子-电子相互作用
-
-### DFT计算过程总结
-
-结合上文Kohn sham 方程计算，完整的DFT计算过程如下：
-
-1, 猜测一组初始的$$\alpha_{j,i}$$
-
-2，通过这个初始的$$\alpha_{j,i}$$计算出来一组n(r)
-
-3，通过这个n(r) 解kohn sham方程 （或者不含Exc的Kohn sham方程，这个时候计算的是hartree fock limitx），得到每一个电子的波函数
-
-4, 用每一个电子波函数计算n(r)
-
-（通过$$n_{(r)} = 2\Sigma \phi_i^*(r)\phi_i(r)$$）
-
-5，将n(r)代回$$\Chi_j(x)=\sum^K_{i=1}\alpha_{j,i}\phi_{i}(x)$$方程，求解$$\alpha_{j,i}$$
-
-6，得到的$$\alpha_{j,i}$$代回第二步
-
-### Exc
-
-Electron correlation energy = True system energy - Hartree fock limit.
-
-即Exc就是实际的能量减去Hartree fock limit
-
-
 ## 一些补充
 参考书：Richard M. Martin _Electronic structure: Basic theory and practical method_
 
-## 物质的性质： property of matters
-
-物质属性一般会取决于两个种类：
-1、electronic ground state 基态电子
-2、electronic excited state 激发态电子
-
-原因是；原子核质量远大于电子，因此相对于电子来说可以基本看作静止
-这就是Born-Oppenheimer approximation
-
-电子最低能量态决定了原子核的结构
-the lowest energy state of the elctrons determines the spatial structure of nuclei:
-
-### bonding：
-一般认为分为5类：
-closed shell system:稀有气体
-ionic
-metallic
-covalent
-hydrogen:比较特殊，因为氢原子是唯一没有core electron的 （往上面的氦的core electron是1s的两个电子）
-
-实际材料的bonding一般是这五种的结合
-
-### Hartree atomic units
-
-$$\hbar =m_e = e = 4\pi /\epsilon_0 = 1$$
-
-定义以上单位为1，用来简化计算
 
 # 晶体学知识 crystallography
+
+Kohn Sham或者hartree fock在晶体中会有一些特殊性质，因为其potential是周期性的
+
 
 参考书：Richard M. Martin _Electronic structure: Basic theory and practical method_
 
@@ -343,13 +413,6 @@ wigner seitz cell在倒空间对应的是**first brillouin zone**
 _fcc 的 wigner seitz cell是bcc的first brillouin zone_
 
 
-
-## fourier transformation
-
-![Image](./pic/Fourier_series_and_transform.gif)
-转载自 wikipedia
-![Image](./pic/40cf849e55ed95732a60b52d4019d609_720w.jpg)
-转载自_https://zhuanlan.zhihu.com/p/19763358_，这个讲的很清楚
 
 
 ## reciprocal sapce 倒易空间
@@ -744,34 +807,7 @@ $$\int _{-1}^1f(x)dx \approx \sum_{j=1}^n c_j f(x_j)$$
 
 不均匀分布的取样点是Gaussian quadrature，$$c_j$$是系数，由Gaussian quadrature来规定。
 
-# Hubbard model
 
-## DFT+U
-
-ref: _correlated electrons in quantum matter_
-
-LDA计算结果准确的前提是其电子有效质量$$m^* \approx  m^e$$，然而对于strong correlated electron (heavy quasiparticles)时候$$m^* >> m^e$$,导致结果不准确
-
-对于d和f电子，需要有U参数，这个U参数使得：在向d或者f shell添加电子时，所需要能量要远大于fermi energy。这是由于其他d或者f电子的排斥产生的。
-
-### U参数计算方式
-假设在一个site上面有n个电子，这n个电子之间会互相排斥。这个排斥的能量是
-$$E(n)=\frac{n(n-1)}{2}U$$
-
-可以用以下方法通过LDA来计算U参数：
-设定“the hybridization matrix elements of the atomic like d orbitals with the surroundings, equal to zero”。然后，在一次计算中固定d电子数量$$n_{d_0}$$，然后让其他电子relax并计算其能量。在下一次计算中固定d电子数量为$$n_{d_0}+1$$，计算能量。因为$$U=E(n+1)+E(n-1)-2E(n) \approx \frac{d^2E(n_d)}{d_{n_d}^2}$$，所以通过改变$$n_d$$并计算$$E(n_d)$$对$$n_d$$的二阶导，可以得到U的值。这个值是6~8eV
-
-### U parameter meaning(translated)
-
-The U parameter is working as: Additional energy required to add electron to d or f shell for the transitional metals due to the mutual expulsion by other d or f electrons. 
-
-one way to calculate the U parameter: from the equation $$U=E(n+1)+E(n-1)-2E(n) \approx \frac{d^2E(n_d)}{d_{n_d}^2}$$
-
-For each run: the number of d(or f shell) electron is fixed and calculate the energy. By varying the d electron, calculate the relation between DFT energy and the number of d electron: $$U=\frac{d^2E(n_d)}{d_{n_d}^2}$$
-
-some other methods: machine learning
-
-There is also a J term for the spin states. The J depends on whether the two spins are parallel or antiparallel.
 
 # DFT 实践
 
@@ -855,24 +891,4 @@ Dehoff _Thermodynamics_
 
 Peter Fulde _Correlated Electrons in Quantum Matter_
 
-
-
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
 

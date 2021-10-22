@@ -38,15 +38,7 @@ permalink: /deploy/
 
 再之后，格式化一个u盘，把  v3.efi 和 start.nsh放进去，引导这个优盘，让优盘把v3 efi相当于复制进系统的efi分区即可
 
-## 系统监测：
-
-千万不要用aida64，会导致功耗bug
-
-使用hwinfo
-
-
-
-## 双路设置：
+### 双路设置：
 
 只在1路插内存：即32g内存都在cpu1上面，cpuz跑分15w+
 
@@ -59,8 +51,39 @@ permalink: /deploy/
 而且在wsl相关性设置中，cpu 组1 变成了64个cpu，组2只有8个？？？？
 原本是平均分配的
 
+-->可以通过重启虚拟机解决
 
-wtf？？？
+```
+net stop LxssManager 
+net start LxssManager
+```
+
+### 隔离部分cpu使其只用来运行部分任务
+对于z10pa可以打开/etc/default/grub
+更改：
+```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=2-17,20-35"
+```
+之后
+sudo update-grub
+
+重启之后可以通过资源管理器看，如果一直是0%说明成功
+
+调度被隔离的核心：
+
+使用taskset
+例如：
+
+taskset 2-17,20-35 mpirun -n 32 vasp
+
+这样也可以开启numa然后只在一个numa节点上运行程序
+
+
+## 系统监测：
+
+千万不要用aida64，会导致功耗bug
+
+使用hwinfo
 
 
 ## zbook17 changing to DC screen 换屏幕
