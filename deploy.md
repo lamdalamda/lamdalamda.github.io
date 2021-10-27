@@ -629,6 +629,32 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
       ]
 ```
 
+ ## quantum espresso 
+ ### quantum espresso普通编译
+ 只需要按照操作说明来
+ 
+ ### quantum espresso with ROCM
+ 
+ 安装完全新的ubuntu20.04之后，安装build essential,再按照rocm官方说明安装rocm
+ 
+ 之后下载spack.git 
+ 
+ 按照说明， 找到r9 fury 对应的是gfx803:
+ 
+ spack install sirius +rocm amdgpu_target=gfx803
+
+ openmpi报错找不到fortran和c:
+ ```
+ spack install gcc 
+ spack load gcc 
+ spack compiler find
+ 
+ ```
+ 
+ 
+ 
+ 
+ 
 # 看番
 
 https://github.com/zaxtyson/AnimeSearcher
@@ -638,3 +664,6 @@ https://github.com/zaxtyson/AnimeSearcher
 ## 搜索不到东西等问题
 
 git下来源代码，config里面更改一下端口之后，python运行app.py,之后记得在打开html之后在最底下更改app.py中的地址
+ 
+
+ 
