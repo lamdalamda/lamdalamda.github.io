@@ -329,6 +329,11 @@ pwd显示路径
 
 `apt-get install build-essential gcc-multilib rpm lib32ncurses5 lib32z1`
 
+### ubuntu 20.04
+
+`apt-get install build-essential gcc-multilib rpm lib32z1`
+
+
 ## ubuntu18.04 root 登陆
 
 https://blog.csdn.net/COCO56/article/details/107628019
@@ -402,6 +407,153 @@ git clone git@github.com:openpbs/openpbs.git
 configure之前conda deactivate
 ./configure CC=icc 
 
+
+## quantum espresso
+
+
+### ROCm
+amd gpu加速通过ROCm实现（类似CUDA）
+
+这次直接登陆的root来安装的：
+
+首先安装ROCm 4.3在ubuntu20.04.在安装系统时候不安装图形驱动：
+
+这里logname改称用户名
+
+```
+sudo usermod -a -G video $LOGNAME
+sudo usermod -a -G render $LOGNAME
+
+echo 'ADD_EXTRA_GROUPS=1' | sudo tee -a /etc/adduser.conf
+
+echo 'EXTRA_GROUPS=video' | sudo tee -a /etc/adduser.conf
+
+echo 'EXTRA_GROUPS=render' | sudo tee -a /etc/adduser.conf
+
+sudo apt update
+
+sudo apt dist-upgrade
+
+sudo apt install libnuma-dev
+sudo apt install wget gnupg2
+
+wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
+
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.3/ ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+
+sudo apt update
+sudo apt install rocm-dkms 
+
+echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl/bin' | sudo tee -a /etc/profile.d/rocm.sh
+
+```
+
+重启系统之后
+
+验证安装使用：
+
+/opt/rocm/bin/rocminfo
+/opt/rocm/opencl/bin/clinfo
+
+
+### spack安装
+
+在整个安装过程中还跑了这些指令
+
+```
+apt-get install build-essential gcc-multilib rpm lib32z1
+apt-get install gfortran
+apt-get install hipfort
+
+
+. ~/repo/spack/share/spack/setup-env.sh
+spack install zlib
+spack install gcc
+spack install sirius +rocm amdgpu_target=gfx803
+```
+
+另外注意更改spack的配置文件
+
+~/.spack/packages.yaml
+```
+
+packages:
+  hip:
+    externals:
+    - spec: hip@4.3.0
+      prefix: /opt/rocm/hip
+      extra_attributes:
+        compilers:
+          c: /opt/rocm/llvm/bin/clang++
+          c++: /opt/rocm/llvm/bin/clang++
+          hip: /opt/rocm/hip/bin/hipcc
+      buildable: false
+  hsa-rocr-dev:
+    externals:
+    - spec: hsa-rocr-dev@4.3.0
+      prefix: /opt/rocm
+      extra_attributes:
+        compilers:
+          c: /opt/rocm/llvm/bin/clang++
+          cxx: /opt/rocm/llvm/bin/clang++
+      buildable: false
+  llvm-amdgpu:
+    externals:
+    - spec: llvm-amdgpu@4.3.0
+      prefix: /opt/rocm/llvm
+      extra_attributes:
+        compilers:
+          c: /opt/rocm/llvm/bin/clang++
+          cxx: /opt/rocm/llvm/bin/clang++
+      buildable: false
+
+
+```
+
+~/.spack/linux/compilers.yaml
+
+```
+compilers:
+- compiler:
+    spec: clang@amd
+    paths:
+      cc: /opt/rocm/llvm/bin/clang
+      cxx: /opt/rocm/llvm/bin/clang++
+      f77: null
+      fc: null
+    flags: {}
+    operating_system: ubuntu20.04
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: clang@13.0.0
+    paths:
+      cc: /usr/bin/clang-ocl
+      cxx: null
+      f77: null
+      fc: null
+    flags: {}
+    operating_system: ubuntu20.04
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@9.3.0
+    paths:
+      cc: /usr/bin/gcc
+      cxx: /usr/bin/g++
+      f77: /usr/bin/gfortran
+      fc: /usr/bin/gfortran
+    flags: {}
+    operating_system: ubuntu20.04
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+```
 
 
 
