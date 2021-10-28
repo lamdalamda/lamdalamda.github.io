@@ -329,6 +329,10 @@ pwd显示路径
 
 `apt-get install build-essential gcc-multilib rpm lib32ncurses5 lib32z1`
 
+## ubuntu18.04 root 登陆
+
+https://blog.csdn.net/COCO56/article/details/107628019
+
 # python 
 
 先装好anaconda
