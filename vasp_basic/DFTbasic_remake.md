@@ -361,6 +361,15 @@ $$V_{XC}(r)=V^{electron gas}_{XC}[n(r)]$$
 
 使用LDA近似后，可以精确地解薛定谔方程，但是这个解不是真实解，因为薛定谔方程中的Exc是假的
 
+### LSDA: LDA中与spin相关的项目
+
+在LDA基础上，对于spin进行了区分
+
+$$V_{XC}(r)=V^{electron gas}_{XC}[n(r)^{\uparrow},n(r)^{\downarrow}]$$
+
+如果是没有spin polarize的系统，其结果和LDA是一样的。 但是对于有spin polarize系统等会有一些变化
+
+
 ### GGA
 
 Use local electron density and the local gradient in the electron density calculation
