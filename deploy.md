@@ -635,6 +635,13 @@ LSTOP = True
 不知道跟这个有什么区别
 `LABORT = .True.`
 
+## spack
+
+spack find -v
+
+可以列出已经安装的包的完整名称，之后load
+
+
 ## git & github
 
 对于新的os需要对git以及github进行设置
