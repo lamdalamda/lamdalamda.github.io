@@ -176,19 +176,97 @@ bcdedit /set hypervisorlaunchtype off
 bcdedit /set hypervisorlaunchtype off
 ```
 
-# windows to linux 远程操作linux 
+# SSH设置操作
 
-## 虚拟机注意事项
+## ssh 虚拟机注意事项
 
 安装vmhs-fuge还是啥的，为了虚拟机与实体机通信
 
 虚拟机可以尝试使用固定ip
 
 ### vmware 使用的一些常用指令
+访问硬盘用的
 `/usr/bin/vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs-fuse,allow_other`
 
 
+##  SSH config 文件示例
 
+```markdown
+
+Host 192.168.254.128
+    HostName 192.168.254.128
+    User root
+    IdentityFile "C:\Users\（改成用户名）\.ssh\id_rsa"
+
+```
+
+
+## ssh免密码登录
+
+
+(windows)首先在service服务中，打开openssh，自动启动
+
+ssh-keygen -t rsa -f ~/.ssh/(密钥名字)
+产生ssh密钥
+
+生成的pub放到linux机器的/.ssh下面，再把内容复制到./.ssh/authorized_keys里面
+
+```
+scp ~/.ssh/(密钥名字) (用户名)@(远程主机):~/.ssh/
+
+ssh登录远程主机之后
+
+cat ~/.ssh/(密钥名字) >> ~/.ssh/authorized_keys
+```
+
+之后windows机器ssh-add 私钥名字,或者在。ssh的config里面写好
+注意authorized keys里面每个主机只能有一个密钥
+
+## 映射ssh的磁盘
+
+安装直接前往 github 对应项目的 release 中下载最新版本即可，需注意 sshfs-win 对 winfsp 的最低版本依赖（下载最新版本一般即可满足），另外有GUI（用户图形操作界面）可供下载
+
+sshfs-win：https://github.com/billziss-gh/sshfs-win/releases
+winfsp：https://github.com/billziss-gh/winfsp/releases
+
+然后映射网络磁盘里面输入
+
+\\sshfs\用户名@服务器名字\ 
+
+后面不用加\home啥的，过去就相当于在\home\用户名底下
+
+如果想要上层的话也可以
+
+\\sshfs.r\用户名@服务器名字\home\用户名\.......
+
+sshfs相当于省略\home\用户名的过程
+
+
+
+# linux本身设置
+## basic linux command：
+
+su / sudo ：管理员权限
+
+sh xxxxx.sh :运行sh脚本
+
+yum install / apt-get install : centos 和 ubuntu安装软件
+
+scp （-r） 本地 目标： 可以复制到远程主机
+
+注意！ 远程主机的.bashrc不可以有echo
+
+pwd显示路径
+
+`top`
+查看cpu使用率
+
+`top -u david`
+查看用户的cpu使用率
+
+
+`cat /proc/cpuinfo`
+查看cpu型号核心数量
 ## wsl的基本设置
 
 ### 双路主机：
@@ -240,88 +318,10 @@ Windows X-server based on the xorg git sources (like xming or cygwin's xwin), bu
 
 `startxfce4`
 
-## ssh通信
-
-###  config 文件示例
-
-```markdown
-
-Host 192.168.254.128
-    HostName 192.168.254.128
-    User root
-    IdentityFile "C:\Users\（改成用户名）\.ssh\id_rsa"
-
-```
-
-
-### ssh免密码登录
-
-
-(windows)首先在service服务中，打开openssh，自动启动
-
-ssh-keygen -t rsa -f ~/.ssh/(密钥名字)
-产生ssh密钥
-
-生成的pub放到linux机器的/.ssh下面，再把内容复制到./.ssh/authorized_keys里面
-
-```
-scp ~/.ssh/(密钥名字) (用户名)@(远程主机):~/.ssh/
-
-ssh登录远程主机之后
-
-cat ~/.ssh/(密钥名字) >> ~/.ssh/authorized_keys
-```
-
-之后windows机器ssh-add 私钥名字,或者在。ssh的config里面写好
-注意authorized keys里面每个主机只能有一个密钥
-### 映射ssh的磁盘
-
-安装直接前往 github 对应项目的 release 中下载最新版本即可，需注意 sshfs-win 对 winfsp 的最低版本依赖（下载最新版本一般即可满足），另外有GUI（用户图形操作界面）可供下载
-
-sshfs-win：https://github.com/billziss-gh/sshfs-win/releases
-winfsp：https://github.com/billziss-gh/winfsp/releases
-
-然后映射网络磁盘里面输入
-
-\\sshfs\用户名@服务器名字\ 
-
-后面不用加\home啥的，过去就相当于在\home\用户名底下
-
-如果想要上层的话也可以
-
-\\sshfs.r\用户名@服务器名字\home\用户名\.......
-
-sshfs相当于省略\home\用户名的过程
-
-
-
-# linux本身设置
 
 最好用centos或者ubuntu18.04
 
-## basic linux command：
 
-su / sudo ：管理员权限
-
-sh xxxxx.sh :运行sh脚本
-
-yum install / apt-get install : centos 和 ubuntu安装软件
-
-scp （-r） 本地 目标： 可以复制到远程主机
-
-注意！ 远程主机的.bashrc不可以有echo
-
-pwd显示路径
-
-`top`
-查看cpu使用率
-
-`top -u david`
-查看用户的cpu使用率
-
-
-`cat /proc/cpuinfo`
-查看cpu型号核心数量
 
 ## basic library
 
@@ -337,6 +337,11 @@ pwd显示路径
 ## ubuntu18.04 root 登陆
 
 https://blog.csdn.net/COCO56/article/details/107628019
+
+
+
+
+
 
 # python 
 
@@ -396,22 +401,9 @@ tf.config.list_physical_devices('GPU')
 
 https://www.jianshu.com/p/7c4f251485b7?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
 
-# Softwares 软件问题
-## PBS/qsub 队列
+# Softwares 各种软件问题
 
-安装PBS 队列管理；
-
-git clone git@github.com:openpbs/openpbs.git
-
-按照install操作
-configure之前conda deactivate
-./configure CC=icc 
-
-
-## quantum espresso
-
-
-### ROCm
+## ROCm
 amd gpu加速通过ROCm实现（类似CUDA）
 
 这次直接登陆的root来安装的：
@@ -456,7 +448,41 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 /opt/rocm/opencl/bin/clinfo
 
 
-### spack安装
+
+## PBS/qsub 队列--目前未成功
+
+安装PBS 队列管理；
+
+git clone git@github.com:openpbs/openpbs.git
+
+按照install操作
+configure之前conda deactivate
+./configure CC=icc 
+
+## quantum espresso 
+### quantum espresso普通编译-已经成功
+只需要按照操作说明来
+
+### quantum espresso with ROCM-未成功
+
+安装完全新的ubuntu20.04之后，安装build essential,再按照rocm官方说明安装rocm
+
+之后下载spack.git 
+
+按照说明， 找到r9 fury 对应的是gfx803:
+
+spack install sirius +rocm amdgpu_target=gfx803
+
+openmpi报错找不到fortran和c:
+```
+spack install gcc 
+spack load gcc 
+spack compiler find
+
+```
+
+
+### spack安装--目前未成功
 
 在整个安装过程中还跑了这些指令
 
@@ -555,15 +581,50 @@ compilers:
     extra_rpaths: []
 ```
 
+## lammps-rocm 已成功
+
+不要加载oneapi环境！！！！
+
+
+### 需要安装openmpi
+
+下载openmpi
+
+安装过程：
+./configure
+
+make 
+
+sudo make install 
+
+### 安装lammps-rocm
+sudo apt-get install hipcub ffmpeg
+
+在lammps下载目录中
+
+mkdir build
+cd build
+export HIP_PLATFORM=amd
+cmake -D PKG_GPU=on GPU_API=HIP -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc ../cmake/
+
+运行时候出现问题：找不到libomp.so解决办法：
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rocm-4.3.0/llvm/lib
+
+sudo ldconfig
+
+
 
 
 ## vasp
+
+似乎不能在root账户编译。
 
 首先：安装intel oneapi
 
 会更新
 
-base要安装 hpctookit不知道需不需要
+要安装base和 hpctookit不知道需不需要
 
 wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17977/l_BaseKit_p_2021.3.0.3219_offline.sh
 wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17764/l_HPCKit_p_2021.2.0.2997_offline.sh 
@@ -574,7 +635,7 @@ sh 运行下载好的包，安装oneapi
 在.bashrc里面
 `source /opt/intel/oneapi/setvars.sh`
 
-
+然后编译英特尔库
 **make libintel64** 如果是默认路径
 
 `cd /opt/intel/oneapi/mkl/2021.3.0/interfaces/fftw3xf/ `
@@ -619,21 +680,7 @@ CUDA在makefile include里面要改
 
 vasp6.1的GPU编译，新坑：https://zhuanlan.zhihu.com/p/302826820
 
-### vasp常用命令
 
-ulimit别忘了
-
-### stopcar
-
-stopcar 可以让计算在中途停止，只需要新建STOPCAR 文件 输入以下内容
-
-```markdown
-LSTOP = True
-
-```
-
-不知道跟这个有什么区别
-`LABORT = .True.`
 
 ## spack
 
@@ -792,27 +839,7 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
       ]
 ```
 
- ## quantum espresso 
- ### quantum espresso普通编译
- 只需要按照操作说明来
- 
- ### quantum espresso with ROCM
- 
- 安装完全新的ubuntu20.04之后，安装build essential,再按照rocm官方说明安装rocm
- 
- 之后下载spack.git 
- 
- 按照说明， 找到r9 fury 对应的是gfx803:
- 
- spack install sirius +rocm amdgpu_target=gfx803
 
- openmpi报错找不到fortran和c:
- ```
- spack install gcc 
- spack load gcc 
- spack compiler find
- 
- ```
  
  
  
