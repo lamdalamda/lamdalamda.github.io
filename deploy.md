@@ -839,11 +839,27 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
       ]
 ```
 
-
+## PBS队列管理
+ github上下载master源码（20.0.1还没有ubutnu20.04支持，如果是ubuntu18.04那直接找安装包就行）
+ 
+ 安装依赖
+    sudo apt-get install gcc make libtool libhwloc-dev libx11-dev \
+      libxt-dev libedit-dev libical-dev ncurses-dev perl \
+      postgresql-server-dev-all postgresql-contrib python3-dev tcl-dev tk-dev swig \
+      libexpat-dev libssl-dev libxext-dev libxft-dev autoconf \
+      automake g++
+ 
+ sudo apt install expat libedit2 postgresql python3 postgresql-contrib sendmail-bin \
+      sudo tcl tk libical3 postgresql-server-dev-all
  
  
+ 之后./autogen
  
+ 然后 ./configure CFLAGS="-g -O2 -Wall -Werror -Wno-unused-result -Wno-array-bounds -Wno-stringop-overflow -Wno-format-truncation -Wno-format-overflow" --prefix=/opt/pbs
  
+ make 
+ 
+ sudo make install
  
 # 看番
 
