@@ -839,7 +839,7 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
       ]
 ```
 
-## PBS队列管理
+## PBS队列管理-未成功
  github上下载master源码（20.0.1还没有ubutnu20.04支持，如果是ubuntu18.04那直接找安装包就行）
  
  安装依赖
@@ -860,6 +860,20 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
  make 
  
  sudo make install
+ 
+# slurm队列管理
+ 
+sudo apt install slurm-wlm-torque
+sudo apt install slurm-wlm-emulator
+在slurm官网下载配置文件放到/etc/slurm-llvm/中
+ 
+ 然后
+ systemctl start munge
+systemctl status munge
+# and if everything is ok:
+systemctl enable munge
+ 
+ 
  
 # 看番
 
