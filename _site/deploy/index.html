@@ -91,6 +91,7 @@
         </ul>
       </li>
       <li><a href="#linux-gui" id="markdown-toc-linux-gui">linux GUI</a></li>
+      <li><a href="#远程桌面连接linux" id="markdown-toc-远程桌面连接linux">远程桌面连接linux</a></li>
       <li><a href="#basic-library" id="markdown-toc-basic-library">basic library</a>        <ul>
           <li><a href="#ubuntu-1804" id="markdown-toc-ubuntu-1804">ubuntu 18.04:</a></li>
           <li><a href="#ubuntu-2004" id="markdown-toc-ubuntu-2004">ubuntu 20.04</a></li>
@@ -154,8 +155,11 @@
           <li><a href="#latex中文支持" id="markdown-toc-latex中文支持">latex中文支持</a></li>
         </ul>
       </li>
+      <li><a href="#pbs队列管理-未成功" id="markdown-toc-pbs队列管理-未成功">PBS队列管理-未成功</a></li>
     </ul>
   </li>
+  <li><a href="#slurm队列管理" id="markdown-toc-slurm队列管理">slurm队列管理</a></li>
+  <li><a href="#and-if-everything-is-ok" id="markdown-toc-and-if-everything-is-ok">and if everything is ok:</a></li>
   <li><a href="#看番" id="markdown-toc-看番">看番</a>    <ul>
       <li><a href="#搜索不到东西等问题" id="markdown-toc-搜索不到东西等问题">搜索不到东西等问题</a></li>
     </ul>
@@ -451,6 +455,11 @@ https://zhuanlan.zhihu.com/p/149501381
 <p><code class="language-plaintext highlighter-rouge">startxfce4</code></p>
 
 <p>最好用centos或者ubuntu18.04</p>
+
+<h2 id="远程桌面连接linux">远程桌面连接linux</h2>
+<p>sudo apt install xrdp
+sudo systemctl enable –now xrdp
+sudo ufw allow from 192.168.3.0/24 to any port 3389 proto tcp</p>
 
 <h2 id="basic-library">basic library</h2>
 
@@ -937,6 +946,39 @@ wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17764/l_HPCKit_
         "*.fdb_latexmk"
       ]
 </span></code></pre></div></div>
+
+<h2 id="pbs队列管理-未成功">PBS队列管理-未成功</h2>
+<p>github上下载master源码（20.0.1还没有ubutnu20.04支持，如果是ubuntu18.04那直接找安装包就行）</p>
+
+<p>安装依赖
+    sudo apt-get install gcc make libtool libhwloc-dev libx11-dev <br />
+      libxt-dev libedit-dev libical-dev ncurses-dev perl <br />
+      postgresql-server-dev-all postgresql-contrib python3-dev tcl-dev tk-dev swig <br />
+      libexpat-dev libssl-dev libxext-dev libxft-dev autoconf <br />
+      automake g++</p>
+
+<p>sudo apt install expat libedit2 postgresql python3 postgresql-contrib sendmail-bin <br />
+      sudo tcl tk libical3 postgresql-server-dev-all</p>
+
+<p>之后./autogen</p>
+
+<p>然后 ./configure CFLAGS=”-g -O2 -Wall -Werror -Wno-unused-result -Wno-array-bounds -Wno-stringop-overflow -Wno-format-truncation -Wno-format-overflow” –prefix=/opt/pbs</p>
+
+<p>make</p>
+
+<p>sudo make install</p>
+
+<h1 id="slurm队列管理">slurm队列管理</h1>
+
+<p>sudo apt install slurm-wlm-torque
+sudo apt install slurm-wlm-emulator
+在slurm官网下载配置文件放到/etc/slurm-llvm/中</p>
+
+<p>然后
+ systemctl start munge
+systemctl status munge</p>
+<h1 id="and-if-everything-is-ok">and if everything is ok:</h1>
+<p>systemctl enable munge</p>
 
 <h1 id="看番">看番</h1>
 
