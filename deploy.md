@@ -321,6 +321,10 @@ Windows X-server based on the xorg git sources (like xming or cygwin's xwin), bu
 
 最好用centos或者ubuntu18.04
 
+## 远程桌面连接linux
+sudo apt install xrdp
+sudo systemctl enable --now xrdp
+sudo ufw allow from 192.168.3.0/24 to any port 3389 proto tcp
 
 
 ## basic library
