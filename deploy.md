@@ -478,6 +478,7 @@ sirius手动安装方式：
 在spack安装一遍sirius+rocm之后
 
 在不加载intel oneap：
+```
 module load libxc-5.1.5-gcc-9.3.0-hh5tyyd 
 module load spfft-1.0.4-gcc-9.3.0-uxhem63  
 module load hdf5-1.10.7-gcc-9.3.0-rb5rztf 
@@ -486,12 +487,14 @@ module load spglib-1.16.1-gcc-9.3.0-vhsoqdf
 module load spla-1.5.1-gcc-9.3.0-k4ifbob
 module load openblas-0.3.18-gcc-9.3.0-5p72oue
 module load fftw-3.3.10-gcc-9.3.0-75kqnix 
+```
 在sirius里面
+```
 mkdir build
 cd build
 cmake -DUSE_ROCM=on -DUSE_OPENMP=on ..
 make -j4
-
+```
 
 ### quantum espresso ROCm-spack安装--目前未成功
 
