@@ -467,26 +467,33 @@ configure之前conda deactivate
 ### quantum espresso普通编译-已经成功
 只需要按照操作说明来
 
-### quantum espresso with ROCM-未成功
 
-安装完全新的ubuntu20.04之后，安装build essential,再按照rocm官方说明安装rocm
+### quantum espresso ROCm-sirius
 
-之后下载spack.git 
+quantum  espresso 的gpu实现使用sirius。 
+sirius手动安装方式：
 
-按照说明， 找到r9 fury 对应的是gfx803:
+由于sirius的依赖太复杂，所以可以在spack里面安装sirius然后加载依赖，再手动安装
 
-spack install sirius +rocm amdgpu_target=gfx803
+在spack安装一遍sirius+rocm之后
 
-openmpi报错找不到fortran和c:
-```
-spack install gcc 
-spack load gcc 
-spack compiler find
+在不加载intel oneap：
+module load libxc-5.1.5-gcc-9.3.0-hh5tyyd 
+module load spfft-1.0.4-gcc-9.3.0-uxhem63  
+module load hdf5-1.10.7-gcc-9.3.0-rb5rztf 
+module load gsl-2.7-gcc-9.3.0-jrey7js
+module load spglib-1.16.1-gcc-9.3.0-vhsoqdf
+module load spla-1.5.1-gcc-9.3.0-k4ifbob
+module load openblas-0.3.18-gcc-9.3.0-5p72oue
+module load fftw-3.3.10-gcc-9.3.0-75kqnix 
+在sirius里面
+mkdir build
+cd build
+cmake -DUSE_ROCM=on -DUSE_OPENMP=on ..
+make -j4
 
-```
 
-
-### spack安装--目前未成功
+### quantum espresso ROCm-spack安装--目前未成功
 
 在整个安装过程中还跑了这些指令
 
