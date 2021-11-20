@@ -6,13 +6,13 @@ permalink: /about/
 
 # Education
 
-Bachelor of Decades, No.1 Chinese University proudly ranked by Donald Trump
+Bachelor for Years, No.1 Chinese University ranked by President Trump
 
 
-Master of Grand Order 
+Master of Grand Order, CMU in Pittsburgh
 
 
-Doctor of Arknights
+Doctor of Arknights, Kent Ridge Polytech
 
 # Acknowledge
 

@@ -127,8 +127,8 @@
       <li><a href="#pbsqsub-队列目前未成功" id="markdown-toc-pbsqsub-队列目前未成功">PBS/qsub 队列–目前未成功</a></li>
       <li><a href="#quantum-espresso" id="markdown-toc-quantum-espresso">quantum espresso</a>        <ul>
           <li><a href="#quantum-espresso普通编译-已经成功" id="markdown-toc-quantum-espresso普通编译-已经成功">quantum espresso普通编译-已经成功</a></li>
-          <li><a href="#quantum-espresso-with-rocm-未成功" id="markdown-toc-quantum-espresso-with-rocm-未成功">quantum espresso with ROCM-未成功</a></li>
-          <li><a href="#spack安装目前未成功" id="markdown-toc-spack安装目前未成功">spack安装–目前未成功</a></li>
+          <li><a href="#quantum-espresso-rocm-sirius" id="markdown-toc-quantum-espresso-rocm-sirius">quantum espresso ROCm-sirius</a></li>
+          <li><a href="#quantum-espresso-rocm-spack安装目前未成功" id="markdown-toc-quantum-espresso-rocm-spack安装目前未成功">quantum espresso ROCm-spack安装–目前未成功</a></li>
         </ul>
       </li>
       <li><a href="#lammps-rocm-已成功" id="markdown-toc-lammps-rocm-已成功">lammps-rocm 已成功</a>        <ul>
@@ -589,24 +589,33 @@ configure之前conda deactivate
 <h3 id="quantum-espresso普通编译-已经成功">quantum espresso普通编译-已经成功</h3>
 <p>只需要按照操作说明来</p>
 
-<h3 id="quantum-espresso-with-rocm-未成功">quantum espresso with ROCM-未成功</h3>
+<h3 id="quantum-espresso-rocm-sirius">quantum espresso ROCm-sirius</h3>
 
-<p>安装完全新的ubuntu20.04之后，安装build essential,再按照rocm官方说明安装rocm</p>
+<p>quantum  espresso 的gpu实现使用sirius。 
+sirius手动安装方式：</p>
 
-<p>之后下载spack.git</p>
+<p>由于sirius的依赖太复杂，所以可以在spack里面安装sirius然后加载依赖，再手动安装</p>
 
-<p>按照说明， 找到r9 fury 对应的是gfx803:</p>
+<p>在spack安装一遍sirius+rocm之后</p>
 
-<p>spack install sirius +rocm amdgpu_target=gfx803</p>
-
-<p>openmpi报错找不到fortran和c:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spack install gcc 
-spack load gcc 
-spack compiler find
-
+<p>在不加载intel oneap：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load libxc-5.1.5-gcc-9.3.0-hh5tyyd 
+module load spfft-1.0.4-gcc-9.3.0-uxhem63  
+module load hdf5-1.10.7-gcc-9.3.0-rb5rztf 
+module load gsl-2.7-gcc-9.3.0-jrey7js
+module load spglib-1.16.1-gcc-9.3.0-vhsoqdf
+module load spla-1.5.1-gcc-9.3.0-k4ifbob
+module load openblas-0.3.18-gcc-9.3.0-5p72oue
+module load fftw-3.3.10-gcc-9.3.0-75kqnix 
+</code></pre></div></div>
+<p>在sirius里面</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir build
+cd build
+cmake -DUSE_ROCM=on -DUSE_OPENMP=on ..
+make -j4
 </code></pre></div></div>
 
-<h3 id="spack安装目前未成功">spack安装–目前未成功</h3>
+<h3 id="quantum-espresso-rocm-spack安装目前未成功">quantum espresso ROCm-spack安装–目前未成功</h3>
 
 <p>在整个安装过程中还跑了这些指令</p>
 
