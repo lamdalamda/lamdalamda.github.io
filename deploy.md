@@ -74,7 +74,7 @@ sudo update-grub
 使用taskset
 例如：
 
-taskset 2-17,20-35 mpirun -n 32 vasp
+taskset -c 2-17,20-35 mpirun -n 32 vasp
 
 这样也可以开启numa然后只在一个numa节点上运行程序
 
@@ -449,6 +449,15 @@ if ! shopt -q login_shell; then
   fi
 fi
 ```
+
+- oneapi
+在oneapi根目录下面运行
+
+```{markdown}
+./modulefiles-setup.sh
+module use modulefiles
+```
+
 
 ## easybuild
 

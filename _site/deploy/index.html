@@ -227,7 +227,7 @@ sudo update-grub</p>
 <p>使用taskset
 例如：</p>
 
-<p>taskset 2-17,20-35 mpirun -n 32 vasp</p>
+<p>taskset -c 2-17,20-35 mpirun -n 32 vasp</p>
 
 <p>这样也可以开启numa然后只在一个numa节点上运行程序</p>
 
@@ -576,6 +576,15 @@ sudo ln -s /opt/apps/lmod/lmod/init/profile        /etc/profile.d/z00_lmod.sh
     done
   fi
 fi
+</code></pre>
+
+<ul>
+  <li>oneapi
+在oneapi根目录下面运行</li>
+</ul>
+
+<pre><code class="language-{markdown}">./modulefiles-setup.sh
+module use modulefiles
 </code></pre>
 
 <h2 id="easybuild">easybuild</h2>
