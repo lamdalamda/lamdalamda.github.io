@@ -409,7 +409,8 @@ https://www.jianshu.com/p/7c4f251485b7?utm_campaign=maleskine&utm_content=note&u
 
 ## LMOD
 - lua
-```
+  
+```{markdown}
 sudo apt install lua5.3 lua-bit32:amd64 lua-posix:amd64 lua-posix-dev liblua5.3-0:amd64 liblua5.3-dev:amd64 tcl tcl-dev tcl8.6 tcl8.6-dev:amd64 libtcl8.6:amd64
 
 sudo update-alternatives --install /usr/bin/lua \
@@ -427,14 +428,42 @@ sudo ln -s /usr/lib/x86_64-linux-gnu/liblua5.3-posix.so \
 
 下载lmod本体
 
-```
-  ./configure --prefix=/opt/apps
+```{markdown}
+./configure --prefix=/opt/apps
 sudo make install
-ln -s /opt/apps/lmod/lmod/init/profile        /etc/profile.d/z00_lmod.sh
+sudo ln -s /opt/apps/lmod/lmod/init/profile        /etc/profile.d/z00_lmod.sh
+
+```
+之后：
+`sudo gedit /etc/bash.bashrc`
+添加这些：
+
+```{markdown}
+if ! shopt -q login_shell; then
+  if [ -d /etc/profile.d ]; then
+    for i in /etc/profile.d/*.sh; do
+      if [ -r $i ]; then
+        . $i
+      fi
+    done
+  fi
+fi
 ```
 
+## easybuild
 
+安装好lmod之后
 
+```{markdown}
+export EB_TMPDIR=/tmp/$USER/eb_tmp
+python3 -m pip install --ignore-installed --prefix $EB_TMPDIR easybuild
+export PATH=$EB_TMPDIR/bin:$PATH
+export PYTHONPATH=$(/bin/ls -rtd -1 $EB_TMPDIR/lib*/python*/site-packages | tail -1):$PYTHONPATH
+export EB_PYTHON=python3
+eb --install-latest-eb-release --prefix $HOME/easybuild
+module use $HOME/easybuild/modules/all
+```
+重启清除tmp，之后module load Easybuild使用
 ## ROCm
 amd gpu加速通过ROCm实现（类似CUDA）
 
