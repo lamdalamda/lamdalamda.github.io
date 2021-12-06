@@ -123,14 +123,7 @@
     </ul>
   </li>
   <li><a href="#softwares-各种软件问题" id="markdown-toc-softwares-各种软件问题">Softwares 各种软件问题</a>    <ul>
-      <li><a href="#rocm" id="markdown-toc-rocm">ROCm</a></li>
-      <li><a href="#pbsqsub-队列目前未成功" id="markdown-toc-pbsqsub-队列目前未成功">PBS/qsub 队列–目前未成功</a></li>
-      <li><a href="#quantum-espresso" id="markdown-toc-quantum-espresso">quantum espresso</a>        <ul>
-          <li><a href="#quantum-espresso普通编译-已经成功" id="markdown-toc-quantum-espresso普通编译-已经成功">quantum espresso普通编译-已经成功</a></li>
-          <li><a href="#quantum-espresso-rocm-sirius" id="markdown-toc-quantum-espresso-rocm-sirius">quantum espresso ROCm-sirius</a></li>
-          <li><a href="#quantum-espresso-rocm-spack安装目前未成功" id="markdown-toc-quantum-espresso-rocm-spack安装目前未成功">quantum espresso ROCm-spack安装–目前未成功</a></li>
-        </ul>
-      </li>
+      <li><a href="#lmod" id="markdown-toc-lmod">LMOD</a></li>
       <li><a href="#lammps-rocm-已成功" id="markdown-toc-lammps-rocm-已成功">lammps-rocm 已成功</a>        <ul>
           <li><a href="#需要安装openmpi" id="markdown-toc-需要安装openmpi">需要安装openmpi</a></li>
           <li><a href="#安装lammps-rocm" id="markdown-toc-安装lammps-rocm">安装lammps-rocm</a></li>
@@ -532,109 +525,182 @@ tf.config.list_physical_devices('GPU')
 
 <h1 id="softwares-各种软件问题">Softwares 各种软件问题</h1>
 
-<h2 id="rocm">ROCm</h2>
-<p>amd gpu加速通过ROCm实现（类似CUDA）</p>
+<h2 id="lmod">LMOD</h2>
+<ul>
+  <li>lua
+```
+sudo apt install lua5.3 lua-bit32:amd64 lua-posix:amd64 lua-posix-dev liblua5.3-0:amd64 liblua5.3-dev:amd64 tcl tcl-dev tcl8.6 tcl8.6-dev:amd64 libtcl8.6:amd64</li>
+</ul>
 
-<p>这次直接登陆的root来安装的：</p>
+<p>sudo update-alternatives –install /usr/bin/lua <br />
+    lua-interpreter /usr/bin/lua5.3 130 <br />
+    –slave /usr/share/man/man1/lua.1.gz lua-manual <br />
+    /usr/share/man/man1/lua5.3.1.gz
+sudo update-alternatives –install /usr/bin/luac <br />
+    lua-compiler /usr/bin/luac5.3 130 <br />
+    –slave /usr/share/man/man1/luac.1.gz lua-compiler-manual <br />
+    /usr/share/man/man1/luac5.3.1.gz
+sudo ln -s /usr/lib/x86_64-linux-gnu/liblua5.3-posix.so <br />
+    /usr/lib/x86_64-linux-gnu/lua/5.3/posix.so</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- lmod
 
-<p>首先安装ROCm 4.3在ubuntu20.04.在安装系统时候不安装图形驱动：</p>
-
-<p>这里logname改称用户名</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo usermod -a -G video $LOGNAME
-sudo usermod -a -G render $LOGNAME
-
-echo 'ADD_EXTRA_GROUPS=1' | sudo tee -a /etc/adduser.conf
-
-echo 'EXTRA_GROUPS=video' | sudo tee -a /etc/adduser.conf
-
-echo 'EXTRA_GROUPS=render' | sudo tee -a /etc/adduser.conf
-
-sudo apt update
-
-sudo apt dist-upgrade
-
-sudo apt install libnuma-dev
-sudo apt install wget gnupg2
-
-wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
-
-echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.3/ ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
-
-sudo apt update
-sudo apt install rocm-dkms 
-
-echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl/bin' | sudo tee -a /etc/profile.d/rocm.sh
+下载lmod本体
 
 </code></pre></div></div>
+<p>./configure –prefix=/opt/apps
+sudo make install
+ln -s /opt/apps/lmod/lmod/init/profile        /etc/profile.d/z00_lmod.sh</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 
-<p>重启系统之后</p>
 
-<p>验证安装使用：</p>
+## ROCm
+amd gpu加速通过ROCm实现（类似CUDA）
 
-<p>/opt/rocm/bin/rocminfo
-/opt/rocm/opencl/bin/clinfo</p>
+这次直接登陆的root来安装的：
 
-<h2 id="pbsqsub-队列目前未成功">PBS/qsub 队列–目前未成功</h2>
+首先安装ROCm 4.3在ubuntu20.04.在安装系统时候不安装图形驱动：
 
-<p>安装PBS 队列管理；</p>
+这里logname改称用户名
 
-<p>git clone git@github.com:openpbs/openpbs.git</p>
+</code></pre></div></div>
+<p>sudo usermod -a -G video $LOGNAME
+sudo usermod -a -G render $LOGNAME</p>
 
-<p>按照install操作
+<table>
+  <tbody>
+    <tr>
+      <td>echo ‘ADD_EXTRA_GROUPS=1’</td>
+      <td>sudo tee -a /etc/adduser.conf</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>echo ‘EXTRA_GROUPS=video’</td>
+      <td>sudo tee -a /etc/adduser.conf</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>echo ‘EXTRA_GROUPS=render’</td>
+      <td>sudo tee -a /etc/adduser.conf</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>sudo apt update</p>
+
+<p>sudo apt dist-upgrade</p>
+
+<p>sudo apt install libnuma-dev
+sudo apt install wget gnupg2</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key</td>
+      <td>sudo apt-key add -</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>echo ‘deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.3/ ubuntu main’</td>
+      <td>sudo tee /etc/apt/sources.list.d/rocm.list</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>sudo apt update
+sudo apt install rocm-dkms</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>echo ‘export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl/bin’</td>
+      <td>sudo tee -a /etc/profile.d/rocm.sh</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+重启系统之后
+
+验证安装使用：
+
+/opt/rocm/bin/rocminfo
+/opt/rocm/opencl/bin/clinfo
+
+
+
+## PBS/qsub 队列--目前未成功
+
+安装PBS 队列管理；
+
+git clone git@github.com:openpbs/openpbs.git
+
+按照install操作
 configure之前conda deactivate
-./configure CC=icc</p>
+./configure CC=icc 
 
-<h2 id="quantum-espresso">quantum espresso</h2>
-<h3 id="quantum-espresso普通编译-已经成功">quantum espresso普通编译-已经成功</h3>
-<p>只需要按照操作说明来</p>
+## quantum espresso 
+### quantum espresso普通编译-已经成功
+只需要按照操作说明来
 
-<h3 id="quantum-espresso-rocm-sirius">quantum espresso ROCm-sirius</h3>
 
-<p>quantum  espresso 的gpu实现使用sirius。 
-sirius手动安装方式：</p>
+### quantum espresso ROCm-sirius
 
-<p>由于sirius的依赖太复杂，所以可以在spack里面安装sirius然后加载依赖，再手动安装</p>
+quantum  espresso 的gpu实现使用sirius。 
+sirius手动安装方式：
 
-<p>在spack安装一遍sirius+rocm之后</p>
+由于sirius的依赖太复杂，所以可以在spack里面安装sirius然后加载依赖，再手动安装
 
-<p>在不加载intel oneap：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load libxc-5.1.5-gcc-9.3.0-hh5tyyd 
-module load spfft-1.0.4-gcc-9.3.0-uxhem63  
+在spack安装一遍sirius+rocm之后
+
+在不加载intel oneap：
+</code></pre></div></div>
+<p>module load libxc-5.1.5-gcc-9.3.0-hh5tyyd 
+module load spfft-1.0.4-gcc-9.3.0-uxhem63<br />
 module load hdf5-1.10.7-gcc-9.3.0-rb5rztf 
 module load gsl-2.7-gcc-9.3.0-jrey7js
 module load spglib-1.16.1-gcc-9.3.0-vhsoqdf
 module load spla-1.5.1-gcc-9.3.0-k4ifbob
 module load openblas-0.3.18-gcc-9.3.0-5p72oue
-module load fftw-3.3.10-gcc-9.3.0-75kqnix 
+module load fftw-3.3.10-gcc-9.3.0-75kqnix</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>在sirius里面
 </code></pre></div></div>
-<p>在sirius里面</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir build
+<p>mkdir build
 cd build
 cmake -DUSE_ROCM=on -DUSE_OPENMP=on ..
-make -j4
+make -j4</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+### quantum espresso ROCm-spack安装--目前未成功
+
+在整个安装过程中还跑了这些指令
+
 </code></pre></div></div>
-
-<h3 id="quantum-espresso-rocm-spack安装目前未成功">quantum espresso ROCm-spack安装–目前未成功</h3>
-
-<p>在整个安装过程中还跑了这些指令</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install build-essential gcc-multilib rpm lib32z1
+<p>apt-get install build-essential gcc-multilib rpm lib32z1
 apt-get install gfortran
-apt-get install hipfort
+apt-get install hipfort</p>
 
-
-. ~/repo/spack/share/spack/setup-env.sh
+<p>. ~/repo/spack/share/spack/setup-env.sh
 spack install zlib
 spack install gcc
-spack install sirius +rocm amdgpu_target=gfx803
+spack install sirius +rocm amdgpu_target=gfx803</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+另外注意更改spack的配置文件
+
+~/.spack/packages.yaml
 </code></pre></div></div>
 
-<p>另外注意更改spack的配置文件</p>
-
-<p>~/.spack/packages.yaml</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-packages:
+<p>packages:
   hip:
     externals:
     - spec: hip@4.3.0
@@ -662,54 +728,55 @@ packages:
         compilers:
           c: /opt/rocm/llvm/bin/clang++
           cxx: /opt/rocm/llvm/bin/clang++
-      buildable: false
+      buildable: false</p>
 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+~/.spack/linux/compilers.yaml
 
 </code></pre></div></div>
-
-<p>~/.spack/linux/compilers.yaml</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>compilers:
-- compiler:
-    spec: clang@amd
-    paths:
-      cc: /opt/rocm/llvm/bin/clang
-      cxx: /opt/rocm/llvm/bin/clang++
-      f77: null
-      fc: null
-    flags: {}
-    operating_system: ubuntu20.04
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: clang@13.0.0
-    paths:
-      cc: /usr/bin/clang-ocl
-      cxx: null
-      f77: null
-      fc: null
-    flags: {}
-    operating_system: ubuntu20.04
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: gcc@9.3.0
-    paths:
-      cc: /usr/bin/gcc
-      cxx: /usr/bin/g++
-      f77: /usr/bin/gfortran
-      fc: /usr/bin/gfortran
-    flags: {}
-    operating_system: ubuntu20.04
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-</code></pre></div></div>
+<p>compilers:</p>
+<ul>
+  <li>compiler:
+  spec: clang@amd
+  paths:
+    cc: /opt/rocm/llvm/bin/clang
+    cxx: /opt/rocm/llvm/bin/clang++
+    f77: null
+    fc: null
+  flags: {}
+  operating_system: ubuntu20.04
+  target: x86_64
+  modules: []
+  environment: {}
+  extra_rpaths: []</li>
+  <li>compiler:
+  spec: clang@13.0.0
+  paths:
+    cc: /usr/bin/clang-ocl
+    cxx: null
+    f77: null
+    fc: null
+  flags: {}
+  operating_system: ubuntu20.04
+  target: x86_64
+  modules: []
+  environment: {}
+  extra_rpaths: []</li>
+  <li>compiler:
+  spec: gcc@9.3.0
+  paths:
+    cc: /usr/bin/gcc
+    cxx: /usr/bin/g++
+    f77: /usr/bin/gfortran
+    fc: /usr/bin/gfortran
+  flags: {}
+  operating_system: ubuntu20.04
+  target: x86_64
+  modules: []
+  environment: {}
+  extra_rpaths: []
+```</li>
+</ul>
 
 <h2 id="lammps-rocm-已成功">lammps-rocm 已成功</h2>
 
