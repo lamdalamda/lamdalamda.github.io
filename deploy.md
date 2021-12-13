@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Deploy Guide
+title: "Deploy  Guide"
 permalink: /deploy/
 ---
 

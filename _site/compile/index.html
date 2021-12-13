@@ -3,21 +3,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Welcome to Jekyll! | Personal webpage</title>
+<title>vasp编译 | Personal webpage</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="Welcome to Jekyll!" />
+<meta property="og:title" content="vasp编译" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated." />
-<meta property="og:description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated." />
-<link rel="canonical" href="http://localhost:4000/jekyll/update/2021/10/20/welcome-to-jekyll.html" />
-<meta property="og:url" content="http://localhost:4000/jekyll/update/2021/10/20/welcome-to-jekyll.html" />
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<link rel="canonical" href="http://localhost:4000/compile/" />
+<meta property="og:url" content="http://localhost:4000/compile/" />
 <meta property="og:site_name" content="Personal webpage" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-10-20T15:23:15+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Welcome to Jekyll!" />
+<meta property="twitter:title" content="vasp编译" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/jekyll/update/2021/10/20/welcome-to-jekyll.html"},"@type":"BlogPosting","headline":"Welcome to Jekyll!","dateModified":"2021-10-20T15:23:15+08:00","datePublished":"2021-10-20T15:23:15+08:00","description":"You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.","url":"http://localhost:4000/jekyll/update/2021/10/20/welcome-to-jekyll.html","@context":"https://schema.org"}</script>
+{"@type":"WebPage","headline":"vasp编译","description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","url":"http://localhost:4000/compile/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Personal webpage" /></head>
 <body><header class="site-header" role="banner">
@@ -37,36 +35,49 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+        <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Welcome to Jekyll!</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2021-10-20T15:23:15+08:00" itemprop="datePublished">Oct 20, 2021
-      </time></p>
+    <h1 class="post-title">vasp编译</h1>
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <p>You’ll find this post in your <code class="language-plaintext highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="language-plaintext highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+  <div class="post-content">
+    <p><code class="language-plaintext highlighter-rouge">#查询AMD编译器受教育程度#</code></p>
 
-<p>Jekyll requires blog post files to be named according to the following format:</p>
+<h1 id="vasp-compilation">vasp compilation</h1>
 
-<p><code class="language-plaintext highlighter-rouge">YEAR-MONTH-DAY-title.MARKUP</code></p>
+<h2 id="intel-parallel-studio-2019">intel parallel studio 2019:</h2>
 
-<p>Where <code class="language-plaintext highlighter-rouge">YEAR</code> is a four-digit number, <code class="language-plaintext highlighter-rouge">MONTH</code> and <code class="language-plaintext highlighter-rouge">DAY</code> are both two-digit numbers, and <code class="language-plaintext highlighter-rouge">MARKUP</code> is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<ul>
+  <li>fornax
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OFLAG      = -O3 -xCORE-AVX2 -fma -static
+BLAS       =  $(MKLROOT)/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a $(MKLROOT)/lib/intel64/libmkl_sequential.a $(MKLROOT)/lib/intel64/libmkl_core.a $(MKLROOT)/lib/intel64/libmkl_blacs_intelmpi_lp64.a -Wl,--end-group -lpthread -lm -ldl
+</code></pre></div>    </div>
+  </li>
+</ul>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<h2 id="oneapi">oneapi</h2>
+<p>Remember to change the path of fftw3xf!</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OFLAG      = -O3 -xCORE-AVX2 -fma -static
+OBJECTS    = fftmpiw.o fftmpi_map.o fft3dlib.o fftw3d.o  /opt/intel/oneAPI/2021.2/mkl/latest/interfaces/fftw3xf/libfftw3xf_intel.a
+</code></pre></div></div>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+<h2 id="aocc">aocc</h2>
 
-<p>Check out the <a href="https://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+<h1 id="references">References</h1>
 
+<h2 id="intel-mpi">intel mpi</h2>
+<ul>
+  <li>flags:
+    <ul>
+      <li>https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-link-line-advisor.html</li>
+      <li>https://developer.amd.com/wordpress/media/2020/04/Compiler%20Options%20Quick%20Ref%20Guide%20for%20AMD%20EPYC%207xx2%20Series%20Processors.pdf</li>
+    </ul>
+  </li>
+</ul>
 
-  </div><a class="u-url" href="/jekyll/update/2021/10/20/welcome-to-jekyll.html" hidden></a>
+  </div>
+
 </article>
 
       </div>
