@@ -527,7 +527,14 @@ git clone git@github.com:openpbs/openpbs.git
 
 按照install操作
 configure之前conda deactivate
-./configure CC=icc 
+
+安装libpython3.6和libhwloc5：
+
+
+`sudo add-apt-repository universe`
+`sudo apt-get update`
+
+
 
 ## quantum espresso 
 ### quantum espresso普通编译-已经成功
