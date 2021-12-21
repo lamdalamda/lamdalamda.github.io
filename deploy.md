@@ -528,13 +528,18 @@ git clone git@github.com:openpbs/openpbs.git
 按照install操作
 configure之前conda deactivate
 
-安装libpython3.6和libhwloc5：
-
-
+安装libpython3.6
 `sudo add-apt-repository universe`
 `sudo apt-get update`
+`sudo apt-get install libpython3.6`
 
+安装libhwloc5
 
+`wget http://ftp.de.debian.org/debian/pool/main/h/hwloc/libhwloc5_1.11.12-3_amd64.deb`
+`sudo dpkg -i libhwloc5_1.11.12-3_amd64.deb`
+
+然后运行两次：
+`sudo dpkg -i openpbs-server_20.0.1-1_amd64.deb `
 
 ## quantum espresso 
 ### quantum espresso普通编译-已经成功
