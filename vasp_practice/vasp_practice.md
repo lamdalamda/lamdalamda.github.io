@@ -6,41 +6,7 @@ katex: True
 ---
 # 实例：普通的计算（过渡金属氧化物nasicon）
 
-```
-ADDGRID = False
-ALGO = Normal
-EDIFF = 1e-05
-EDIFFG = -0.01
-ENCUT = 520
-IBRION = 2
-ICHARG = 2
-ISIF = 3
-ISMEAR = 0
-ISPIN = 2
-ISYM = 0
-LASPH = True
-LDAU = True
-LDAUJ = 0 0.0 0 0
-LDAUL = 0 0 0 0
-LDAUPRINT = 1
-LDAUTYPE = 2
-LDAUU = 0 2.5 0 0
-LMAXMIX = 4
-LMIXTAU = True
-LORBIT = 11
-LPLANE = True
-LREAL = Auto
-LWAVE = False
-MAGMOM = 38*0.6
-METAGGA = Scan
-NCORE = 12
-NELM = 200
-NELMIN = 6
-NSIM = 4
-NSW = 150
-PREC = Accurate
-SIGMA = 0.05
-```
+
 ## 计算内容
 通过conjugate gradient算法（studynote里面有）进行对晶格尺寸的优化（ionic relaxation）[IBRION=2]。通过计算力和stress tensor来调整晶格，计算过程中晶格中离子位置 和 晶格形状 和 晶格体积 都是可变的[ISIF=3]。
 
@@ -65,7 +31,7 @@ $$\phi(x,k)=e^{ikx}\sum _{|k+K|<G_{cut}} c_{k+K} e^{iKx}$$
 
 由于过渡金属的存在（Ti），设置了自旋极化的计算[ISPIN = 2]。自旋极化是指d轨道被部分占据时，自旋方向相同的电子会产生磁矩的现象。磁矩大小 与 自旋方向相同的电子数量有关。起始的磁矩猜测是[MAGMOM = 38*0.6]。这个是用pymatgen生成的
 
-另外，过渡金属需要LDA+U计算来引入d电子局域化的影响。U参数是向d或f层加入电子时候的额外能量参数。由[LDAU = True]打开LDA+U计算，[LDAUTYPE = 2]指定了+U计算类别是简化LSDA+U方法。设定[LDAUU = 0 2.5 0 0]中0，2.5，0，0依次对应POSCAR中的四个元素的U值（POSCAR中第二个元素是Ti，对应U=2.5。POSCAR中其他元素不是过渡金属，所以U=0），此参数来源是Sai教授的文章。J参数是与d、f电子自旋相关的参数，但是在[LDAUU = 0 2.5 0 0]的基础上J应当为0，即[LDAUJ = 0 0.0 0 0]。
+另外，过渡金属需要LDA+U计算来引入d电子局域化的影响。U参数是向d或f层加入电子时候的额外能量参数。由[LDAU = True]打开LDA+U计算，[LDAUTYPE = 2]指定了+U计算类别是简化LSDA+U方法。设定[LDAUU]中四个数字依次对应POSCAR中的四个元素的U值（POSCAR中第二个元素是Ti，对应U=某值。POSCAR中其他元素不是过渡金属，所以U=0）。J参数是与d、f电子自旋相关的参数，但是在LDAU的基础上J也有对应的一套参数
 [LDAUL = 0 0 0 0]是quantum number of on-site interaction。[LDAUPRINT = 1]是将LDA+U的一些结果写入OUTCAR输出。[LASPH = True]（平面波基矢的非球面贡献）可增加+U计算的准确性。对于[LDAUTYPE = 2]，[LMAXMIX = 4]可以加速收敛
 
 计算时候使用的赝势是[METAGGA = Scan]，是meta-GGA的一种。[LMIXTAU = True]可以通过传递电子的动能信息帮助收敛。[LREAL = Auto]要求赝势在实空间进行投影，对投影算符进行自动优化，一般都会使用这个。
