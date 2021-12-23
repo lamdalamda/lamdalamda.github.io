@@ -487,6 +487,7 @@ module use $HOME/easybuild/modules/all
 ```
 重启清除tmp，之后module load Easybuild使用
 ## ROCm
+### 4.3
 amd gpu加速通过ROCm实现（类似CUDA）
 
 这次直接登陆的root来安装的：
@@ -529,6 +530,60 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 
 /opt/rocm/bin/rocminfo
 /opt/rocm/opencl/bin/clinfo
+
+
+###4.1
+
+- 安装kernel
+rocm4.1需要linux 5.4kernel（或者5.6？）
+
+经过测试这样安装kernel
+
+sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+sudo dpkg -i *.deb
+
+然后需要将其他rocm卸载干净
+
+sudo apt autoremove rocm-opencl rocm-dkms rocm-dev rocm-utils && sudo reboot
+sudo apt-get purge rocm-libs
+
+安装过程：
+
+sudo apt update
+
+sudo apt dist-upgrade
+
+sudo apt install libnuma-dev
+
+sudo reboot
+wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
+
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1/ xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
+sudo apt update
+echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl/bin' | sudo tee -a /etc/profile.d/rocm.sh
+
+sudo apt install rocm-dkms && sudo reboot
+
+- 安装hip
+
+git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/llvm-project.git
+cd llvm-project
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX=/opt/rocm/llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=1 -               DLLVM_TARGETS_TO_BUILD="AMDGPU;X86" -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt" ../llvm
+make -j
+sudo make install
+
+
+
+
 
 
 
