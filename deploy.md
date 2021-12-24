@@ -38,6 +38,10 @@ permalink: /deploy/
 
 再之后，格式化一个u盘，把  v3.efi 和 start.nsh放进去，引导这个优盘，让优盘把v3 efi相当于复制进系统的efi分区即可
 
+**未证实：**
+似乎刷回5.4kernel之后，系统会卸载微码补丁，此时频率会经常达到3以上。而新版kernel似乎会安装intel microcode，导致破解失效？？
+
+
 ### 双路设置：
 
 只在1路插内存：即32g内存都在cpu1上面，cpuz跑分15w+
