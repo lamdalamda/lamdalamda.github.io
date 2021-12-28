@@ -104,6 +104,12 @@ bios设置：
 尝试把clover放进硬盘里面:
 
 方法，对于目前的GPT硬盘，直接把EFI分区清空之后把200M的clover盘中文件全考进去，重启之后bios可以识别这个uefi并且引导出来就是clover
+## 声卡soundblaster
+
+安装soundblaster xfi notebook （SB0950）:
+下载
+https://files.creative.com/manualdn/Drivers/AVP/10925/0x2F4D4864/SBXN_PCDRV_LB_1_01_0095.exe
+注意：安装时候卸载ESET等任何杀毒软件！
 
 
 ## 苹果
