@@ -63,13 +63,14 @@ net start LxssManager
 ```
 
 ### 隔离部分cpu使其只用来运行部分任务
-对于z10pa可以打开/etc/default/grub
+对于z10pa可以打开
+`gedit /etc/default/grub`
 更改：
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=2-17,20-35"
 ```
 之后
-sudo update-grub
+`sudo update-grub`
 
 重启之后可以通过资源管理器看，如果一直是0%说明成功
 
@@ -78,7 +79,7 @@ sudo update-grub
 使用taskset
 例如：
 
-taskset -c 2-17,20-35 mpirun -n 32 vasp
+`taskset -c 2-17,20-35 mpirun -n 32 vasp`
 
 这样也可以开启numa然后只在一个numa节点上运行程序
 
@@ -237,6 +238,7 @@ cat ~/.ssh/(密钥名字) >> ~/.ssh/authorized_keys
 安装直接前往 github 对应项目的 release 中下载最新版本即可，需注意 sshfs-win 对 winfsp 的最低版本依赖（下载最新版本一般即可满足），另外有GUI（用户图形操作界面）可供下载
 
 sshfs-win：https://github.com/billziss-gh/sshfs-win/releases
+
 winfsp：https://github.com/billziss-gh/winfsp/releases
 
 然后映射网络磁盘里面输入
@@ -256,6 +258,7 @@ sshfs相当于省略\home\用户名的过程
 # linux本身设置
 
 ## 5.4 kernel
+```{markdown}
 sudo apt-get update
 sudo apt-get upgrade
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
@@ -266,7 +269,7 @@ wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
 sudo dpkg -i *.deb
-
+```
 ## basic linux command：
 
 su / sudo ：管理员权限
@@ -290,6 +293,10 @@ pwd显示路径
 
 `cat /proc/cpuinfo`
 查看cpu型号核心数量
+
+`s-tui`
+很好用的检测软件
+
 ## wsl的基本设置
 
 ### 双路主机：
@@ -542,13 +549,13 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 /opt/rocm/opencl/bin/clinfo
 
 
-###4.1
+### 4.1
 
 - 安装kernel
 rocm4.1需要linux 5.4kernel（或者5.6？）
 
 经过测试这样安装kernel
-
+```{markdown}
 sudo apt-get update
 sudo apt-get upgrade
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
@@ -559,14 +566,14 @@ wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
 sudo dpkg -i *.deb
-
+```
 然后需要将其他rocm卸载干净
-
+```
 sudo apt autoremove rocm-opencl rocm-dkms rocm-dev rocm-utils && sudo reboot
 sudo apt-get purge rocm-libs
-
+```
 安装过程：
-
+```
 sudo apt update
 
 sudo apt dist-upgrade
@@ -581,18 +588,18 @@ sudo apt update
 echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl/bin' | sudo tee -a /etc/profile.d/rocm.sh
 
 sudo apt install rocm-dkms && sudo reboot
-
+```
 - 安装hip
-
+```
 git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/llvm-project.git
 cd llvm-project
 mkdir -p build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/opt/rocm/llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=1 -DLLVM_TARGETS_TO_BUILD="AMDGPU;X86" -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt" ../llvm
 make -j
 sudo make install
-
+```
 - ROCM device (用来cmake的？)
-
+```
 export PATH=/opt/rocm/llvm/bin:$PATH
 git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/ROCm-Device-Libs.git
 cd ROCm-Device-Libs
@@ -600,12 +607,12 @@ mkdir -p build && cd build
 CC=clang CXX=clang++ cmake -DLLVM_DIR=/opt/rocm/llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_WERROR=1 -DLLVM_ENABLE_ASSERTIONS=1 -DCMAKE_INSTALL_PREFIX=/opt/rocm ..
 make -j
 sudo make install
-
+```
 
 - 数学lib
 注意一定要在最后安装
-sudo apt-get install rocm-libs
 
+`sudo apt-get install rocm-libs`
 
 
 
@@ -620,12 +627,15 @@ configure之前conda deactivate
 
 安装libpython3.6
 `sudo add-apt-repository universe`
+
 `sudo apt-get update`
+
 `sudo apt-get install libpython3.6`
 
 安装libhwloc5
 
 `wget http://ftp.de.debian.org/debian/pool/main/h/hwloc/libhwloc5_1.11.12-3_amd64.deb`
+
 `sudo dpkg -i libhwloc5_1.11.12-3_amd64.deb`
 
 然后运行两次：
@@ -773,27 +783,27 @@ compilers:
 下载openmpi
 
 安装过程：
-./configure
+`./configure`
 
-make 
+`make`
 
-sudo make install 
+`sudo make install`
 
 ### 安装lammps-rocm
-sudo apt-get install hipcub ffmpeg
+`sudo apt-get install hipcub ffmpeg`
 
 在lammps下载目录中
-
+```{markdown}
 mkdir build
 cd build
 export HIP_PLATFORM=amd
 cmake -D PKG_GPU=on GPU_API=HIP -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc ../cmake/
-
+```
 运行时候出现问题：找不到libomp.so解决办法：
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rocm-4.3.0/llvm/lib
+`export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rocm-4.3.0/llvm/lib`
 
-sudo ldconfig
+`sudo ldconfig`
 
 
 
@@ -808,8 +818,9 @@ sudo ldconfig
 
 要安装base和 hpctookit不知道需不需要
 
-wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17977/l_BaseKit_p_2021.3.0.3219_offline.sh
-wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17764/l_HPCKit_p_2021.2.0.2997_offline.sh 
+`wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17977/l_BaseKit_p_2021.3.0.3219_offline.sh`
+
+`wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17764/l_HPCKit_p_2021.2.0.2997_offline.sh`
 
 sh 运行下载好的包，安装oneapi
 

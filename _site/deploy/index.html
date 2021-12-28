@@ -54,6 +54,7 @@
       <li><a href="#系统监测" id="markdown-toc-系统监测">系统监测：</a></li>
       <li><a href="#zbook17-changing-to-dc-screen-换屏幕" id="markdown-toc-zbook17-changing-to-dc-screen-换屏幕">zbook17 changing to DC screen 换屏幕</a></li>
       <li><a href="#nvme-support" id="markdown-toc-nvme-support">nvme support</a></li>
+      <li><a href="#声卡soundblaster" id="markdown-toc-声卡soundblaster">声卡soundblaster</a></li>
       <li><a href="#苹果" id="markdown-toc-苹果">苹果</a>        <ul>
           <li><a href="#账户无法使用" id="markdown-toc-账户无法使用">账户无法使用</a></li>
           <li><a href="#其他一些问题" id="markdown-toc-其他一些问题">其他一些问题</a></li>
@@ -83,6 +84,7 @@
     </ul>
   </li>
   <li><a href="#linux本身设置" id="markdown-toc-linux本身设置">linux本身设置</a>    <ul>
+      <li><a href="#54-kernel" id="markdown-toc-54-kernel">5.4 kernel</a></li>
       <li><a href="#basic-linux-command" id="markdown-toc-basic-linux-command">basic linux command：</a></li>
       <li><a href="#wsl的基本设置" id="markdown-toc-wsl的基本设置">wsl的基本设置</a>        <ul>
           <li><a href="#双路主机" id="markdown-toc-双路主机">双路主机：</a></li>
@@ -125,7 +127,11 @@
   <li><a href="#softwares-各种软件问题" id="markdown-toc-softwares-各种软件问题">Softwares 各种软件问题</a>    <ul>
       <li><a href="#lmod" id="markdown-toc-lmod">LMOD</a></li>
       <li><a href="#easybuild" id="markdown-toc-easybuild">easybuild</a></li>
-      <li><a href="#rocm" id="markdown-toc-rocm">ROCm</a></li>
+      <li><a href="#rocm" id="markdown-toc-rocm">ROCm</a>        <ul>
+          <li><a href="#43" id="markdown-toc-43">4.3</a></li>
+          <li><a href="#41" id="markdown-toc-41">4.1</a></li>
+        </ul>
+      </li>
       <li><a href="#pbsqsub-队列目前未成功" id="markdown-toc-pbsqsub-队列目前未成功">PBS/qsub 队列–目前未成功</a></li>
       <li><a href="#quantum-espresso" id="markdown-toc-quantum-espresso">quantum espresso</a>        <ul>
           <li><a href="#quantum-espresso普通编译-已经成功" id="markdown-toc-quantum-espresso普通编译-已经成功">quantum espresso普通编译-已经成功</a></li>
@@ -193,6 +199,9 @@
 
 <p>再之后，格式化一个u盘，把  v3.efi 和 start.nsh放进去，引导这个优盘，让优盘把v3 efi相当于复制进系统的efi分区即可</p>
 
+<p><strong>未证实：</strong>
+似乎刷回5.4kernel之后，系统会卸载微码补丁，此时频率会经常达到3以上。而新版kernel似乎会安装intel microcode，导致破解失效？？</p>
+
 <h3 id="双路设置">双路设置：</h3>
 
 <p>只在1路插内存：即32g内存都在cpu1上面，cpuz跑分15w+</p>
@@ -213,12 +222,13 @@ net start LxssManager
 </code></pre></div></div>
 
 <h3 id="隔离部分cpu使其只用来运行部分任务">隔离部分cpu使其只用来运行部分任务</h3>
-<p>对于z10pa可以打开/etc/default/grub
+<p>对于z10pa可以打开
+<code class="language-plaintext highlighter-rouge">gedit /etc/default/grub</code>
 更改：</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=2-17,20-35"
 </code></pre></div></div>
 <p>之后
-sudo update-grub</p>
+<code class="language-plaintext highlighter-rouge">sudo update-grub</code></p>
 
 <p>重启之后可以通过资源管理器看，如果一直是0%说明成功</p>
 
@@ -227,7 +237,7 @@ sudo update-grub</p>
 <p>使用taskset
 例如：</p>
 
-<p>taskset -c 2-17,20-35 mpirun -n 32 vasp</p>
+<p><code class="language-plaintext highlighter-rouge">taskset -c 2-17,20-35 mpirun -n 32 vasp</code></p>
 
 <p>这样也可以开启numa然后只在一个numa节点上运行程序</p>
 
@@ -255,6 +265,12 @@ bios设置：
 尝试把clover放进硬盘里面:</p>
 
 <p>方法，对于目前的GPT硬盘，直接把EFI分区清空之后把200M的clover盘中文件全考进去，重启之后bios可以识别这个uefi并且引导出来就是clover</p>
+<h2 id="声卡soundblaster">声卡soundblaster</h2>
+
+<p>安装soundblaster xfi notebook （SB0950）:
+下载
+https://files.creative.com/manualdn/Drivers/AVP/10925/0x2F4D4864/SBXN_PCDRV_LB_1_01_0095.exe
+注意：安装时候卸载ESET等任何杀毒软件！</p>
 
 <h2 id="苹果">苹果</h2>
 
@@ -368,8 +384,9 @@ cat ~/.ssh/(密钥名字) &gt;&gt; ~/.ssh/authorized_keys
 
 <p>安装直接前往 github 对应项目的 release 中下载最新版本即可，需注意 sshfs-win 对 winfsp 的最低版本依赖（下载最新版本一般即可满足），另外有GUI（用户图形操作界面）可供下载</p>
 
-<p>sshfs-win：https://github.com/billziss-gh/sshfs-win/releases
-winfsp：https://github.com/billziss-gh/winfsp/releases</p>
+<p>sshfs-win：https://github.com/billziss-gh/sshfs-win/releases</p>
+
+<p>winfsp：https://github.com/billziss-gh/winfsp/releases</p>
 
 <p>然后映射网络磁盘里面输入</p>
 
@@ -384,6 +401,19 @@ winfsp：https://github.com/billziss-gh/winfsp/releases</p>
 <p>sshfs相当于省略\home\用户名的过程</p>
 
 <h1 id="linux本身设置">linux本身设置</h1>
+
+<h2 id="54-kernel">5.4 kernel</h2>
+<pre><code class="language-{markdown}">sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+sudo dpkg -i *.deb
+</code></pre>
 <h2 id="basic-linux-command">basic linux command：</h2>
 
 <p>su / sudo ：管理员权限</p>
@@ -406,6 +436,10 @@ winfsp：https://github.com/billziss-gh/winfsp/releases</p>
 
 <p><code class="language-plaintext highlighter-rouge">cat /proc/cpuinfo</code>
 查看cpu型号核心数量</p>
+
+<p><code class="language-plaintext highlighter-rouge">s-tui</code>
+很好用的检测软件</p>
+
 <h2 id="wsl的基本设置">wsl的基本设置</h2>
 
 <h3 id="双路主机">双路主机：</h3>
@@ -601,6 +635,7 @@ module use $HOME/easybuild/modules/all
 </code></pre>
 <p>重启清除tmp，之后module load Easybuild使用</p>
 <h2 id="rocm">ROCm</h2>
+<h3 id="43">4.3</h3>
 <p>amd gpu加速通过ROCm实现（类似CUDA）</p>
 
 <p>这次直接登陆的root来安装的：</p>
@@ -643,6 +678,71 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 <p>/opt/rocm/bin/rocminfo
 /opt/rocm/opencl/bin/clinfo</p>
 
+<h3 id="41">4.1</h3>
+
+<ul>
+  <li>安装kernel
+rocm4.1需要linux 5.4kernel（或者5.6？）</li>
+</ul>
+
+<p>经过测试这样安装kernel</p>
+<pre><code class="language-{markdown}">sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+sudo dpkg -i *.deb
+</code></pre>
+<p>然后需要将其他rocm卸载干净</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt autoremove rocm-opencl rocm-dkms rocm-dev rocm-utils &amp;&amp; sudo reboot
+sudo apt-get purge rocm-libs
+</code></pre></div></div>
+<p>安装过程：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt update
+
+sudo apt dist-upgrade
+
+sudo apt install libnuma-dev
+
+sudo reboot
+wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
+
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1/ xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
+sudo apt update
+echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl/bin' | sudo tee -a /etc/profile.d/rocm.sh
+
+sudo apt install rocm-dkms &amp;&amp; sudo reboot
+</code></pre></div></div>
+<ul>
+  <li>安装hip
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/llvm-project.git
+cd llvm-project
+mkdir -p build &amp;&amp; cd build
+cmake -DCMAKE_INSTALL_PREFIX=/opt/rocm/llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=1 -DLLVM_TARGETS_TO_BUILD="AMDGPU;X86" -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt" ../llvm
+make -j
+sudo make install
+</code></pre></div>    </div>
+  </li>
+  <li>ROCM device (用来cmake的？)
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=/opt/rocm/llvm/bin:$PATH
+git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/ROCm-Device-Libs.git
+cd ROCm-Device-Libs
+mkdir -p build &amp;&amp; cd build
+CC=clang CXX=clang++ cmake -DLLVM_DIR=/opt/rocm/llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_WERROR=1 -DLLVM_ENABLE_ASSERTIONS=1 -DCMAKE_INSTALL_PREFIX=/opt/rocm ..
+make -j
+sudo make install
+</code></pre></div>    </div>
+  </li>
+  <li>数学lib
+注意一定要在最后安装</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install rocm-libs</code></p>
+
 <h2 id="pbsqsub-队列目前未成功">PBS/qsub 队列–目前未成功</h2>
 
 <p>安装PBS 队列管理；</p>
@@ -650,8 +750,23 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 <p>git clone git@github.com:openpbs/openpbs.git</p>
 
 <p>按照install操作
-configure之前conda deactivate
-./configure CC=icc</p>
+configure之前conda deactivate</p>
+
+<p>安装libpython3.6
+<code class="language-plaintext highlighter-rouge">sudo add-apt-repository universe</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get update</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install libpython3.6</code></p>
+
+<p>安装libhwloc5</p>
+
+<p><code class="language-plaintext highlighter-rouge">wget http://ftp.de.debian.org/debian/pool/main/h/hwloc/libhwloc5_1.11.12-3_amd64.deb</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo dpkg -i libhwloc5_1.11.12-3_amd64.deb</code></p>
+
+<p>然后运行两次：
+<code class="language-plaintext highlighter-rouge">sudo dpkg -i openpbs-server_20.0.1-1_amd64.deb </code></p>
 
 <h2 id="quantum-espresso">quantum espresso</h2>
 <h3 id="quantum-espresso普通编译-已经成功">quantum espresso普通编译-已经成功</h3>
@@ -788,27 +903,26 @@ packages:
 <p>下载openmpi</p>
 
 <p>安装过程：
-./configure</p>
+<code class="language-plaintext highlighter-rouge">./configure</code></p>
 
-<p>make</p>
+<p><code class="language-plaintext highlighter-rouge">make</code></p>
 
-<p>sudo make install</p>
+<p><code class="language-plaintext highlighter-rouge">sudo make install</code></p>
 
 <h3 id="安装lammps-rocm">安装lammps-rocm</h3>
-<p>sudo apt-get install hipcub ffmpeg</p>
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install hipcub ffmpeg</code></p>
 
 <p>在lammps下载目录中</p>
-
-<p>mkdir build
+<pre><code class="language-{markdown}">mkdir build
 cd build
 export HIP_PLATFORM=amd
-cmake -D PKG_GPU=on GPU_API=HIP -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc ../cmake/</p>
-
+cmake -D PKG_GPU=on GPU_API=HIP -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc ../cmake/
+</code></pre>
 <p>运行时候出现问题：找不到libomp.so解决办法：</p>
 
-<p>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rocm-4.3.0/llvm/lib</p>
+<p><code class="language-plaintext highlighter-rouge">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rocm-4.3.0/llvm/lib</code></p>
 
-<p>sudo ldconfig</p>
+<p><code class="language-plaintext highlighter-rouge">sudo ldconfig</code></p>
 
 <h2 id="vasp">vasp</h2>
 
@@ -820,8 +934,9 @@ cmake -D PKG_GPU=on GPU_API=HIP -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc .
 
 <p>要安装base和 hpctookit不知道需不需要</p>
 
-<p>wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17977/l_BaseKit_p_2021.3.0.3219_offline.sh
-wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17764/l_HPCKit_p_2021.2.0.2997_offline.sh</p>
+<p><code class="language-plaintext highlighter-rouge">wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17977/l_BaseKit_p_2021.3.0.3219_offline.sh</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17764/l_HPCKit_p_2021.2.0.2997_offline.sh</code></p>
 
 <p>sh 运行下载好的包，安装oneapi</p>
 
