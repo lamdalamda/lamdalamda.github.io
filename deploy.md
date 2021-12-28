@@ -38,6 +38,10 @@ permalink: /deploy/
 
 再之后，格式化一个u盘，把  v3.efi 和 start.nsh放进去，引导这个优盘，让优盘把v3 efi相当于复制进系统的efi分区即可
 
+**未证实：**
+似乎刷回5.4kernel之后，系统会卸载微码补丁，此时频率会经常达到3以上。而新版kernel似乎会安装intel microcode，导致破解失效？？
+
+
 ### 双路设置：
 
 只在1路插内存：即32g内存都在cpu1上面，cpuz跑分15w+
@@ -250,6 +254,19 @@ sshfs相当于省略\home\用户名的过程
 
 
 # linux本身设置
+
+## 5.4 kernel
+sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+sudo dpkg -i *.deb
+
 ## basic linux command：
 
 su / sudo ：管理员权限
@@ -480,6 +497,7 @@ module use $HOME/easybuild/modules/all
 ```
 重启清除tmp，之后module load Easybuild使用
 ## ROCm
+### 4.3
 amd gpu加速通过ROCm实现（类似CUDA）
 
 这次直接登陆的root来安装的：
@@ -524,6 +542,72 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 /opt/rocm/opencl/bin/clinfo
 
 
+###4.1
+
+- 安装kernel
+rocm4.1需要linux 5.4kernel（或者5.6？）
+
+经过测试这样安装kernel
+
+sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+sudo dpkg -i *.deb
+
+然后需要将其他rocm卸载干净
+
+sudo apt autoremove rocm-opencl rocm-dkms rocm-dev rocm-utils && sudo reboot
+sudo apt-get purge rocm-libs
+
+安装过程：
+
+sudo apt update
+
+sudo apt dist-upgrade
+
+sudo apt install libnuma-dev
+
+sudo reboot
+wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
+
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1/ xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
+sudo apt update
+echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl/bin' | sudo tee -a /etc/profile.d/rocm.sh
+
+sudo apt install rocm-dkms && sudo reboot
+
+- 安装hip
+
+git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/llvm-project.git
+cd llvm-project
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX=/opt/rocm/llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=1 -DLLVM_TARGETS_TO_BUILD="AMDGPU;X86" -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt" ../llvm
+make -j
+sudo make install
+
+- ROCM device (用来cmake的？)
+
+export PATH=/opt/rocm/llvm/bin:$PATH
+git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/ROCm-Device-Libs.git
+cd ROCm-Device-Libs
+mkdir -p build && cd build
+CC=clang CXX=clang++ cmake -DLLVM_DIR=/opt/rocm/llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_WERROR=1 -DLLVM_ENABLE_ASSERTIONS=1 -DCMAKE_INSTALL_PREFIX=/opt/rocm ..
+make -j
+sudo make install
+
+
+- 数学lib
+注意一定要在最后安装
+sudo apt-get install rocm-libs
+
+
+
 
 ## PBS/qsub 队列--目前未成功
 
@@ -533,7 +617,19 @@ git clone git@github.com:openpbs/openpbs.git
 
 按照install操作
 configure之前conda deactivate
-./configure CC=icc 
+
+安装libpython3.6
+`sudo add-apt-repository universe`
+`sudo apt-get update`
+`sudo apt-get install libpython3.6`
+
+安装libhwloc5
+
+`wget http://ftp.de.debian.org/debian/pool/main/h/hwloc/libhwloc5_1.11.12-3_amd64.deb`
+`sudo dpkg -i libhwloc5_1.11.12-3_amd64.deb`
+
+然后运行两次：
+`sudo dpkg -i openpbs-server_20.0.1-1_amd64.deb `
 
 ## quantum espresso 
 ### quantum espresso普通编译-已经成功
