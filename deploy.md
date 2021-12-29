@@ -881,7 +881,7 @@ spack find -v
 
 可以列出已经安装的包的完整名称，之后load
 
-### spack nscc
+### spack 镜像
 在没有外网链接的系统上尝试使用spack
 
 1. 在有外网连接的机器上创建镜像
@@ -892,25 +892,16 @@ spack find -v
 注意clingo是必须
 将得到的镜像文件夹上传到没有外网链接的机器
 
-2. spack初始化
+### NSCC
+- spack初始化
 必备条件：python3.8+ gcc6+
 
 nscc上面：module load gcc/6.5.0 python/3.8.3
 
-没有外网连接时候spack初始化会有一定问题。首先运行一次
-`spack spec zlib`
-会出现无法初始化的问题，这一步用来创建.spack 文件夹
+`ssh nscc04-ib0`来获得外网连接
 
-之后运行`spack bootstrap untrust github-actions`
-并且修改`~/app/spack/etc/spack/defaults/mirrors.yaml`，记得替换其中spacemirror文件夹的路径
+之后`spack --insecure -d install zlib`
 
-```{markdown}
-mirrors:
-  local_filesystem: file:///{修改为spack_mirror文件夹的位置！}
-  spack-public: https://mirror.spack.io
-```
-
-之后再运行spack install zlib应该就可以正常工作了
 
 
 ## git & github
