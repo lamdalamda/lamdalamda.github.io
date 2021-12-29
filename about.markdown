@@ -10,7 +10,7 @@ permalink: /about/
 Bachelor for Years, No.1 Chinese University ranked by President Trump
 
 
-Master of Grand Order, CMU in Pittsburgh
+Master of Grand Order, CMU
 
 
 Doctor of Arknights, Kent Ridge Polytech
