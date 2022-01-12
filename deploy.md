@@ -62,6 +62,40 @@ net stop LxssManager
 net start LxssManager
 ```
 
+
+
+## zbook17 changing to DC screen 换屏幕
+
+https://forum.51nb.com/thread-1966563-1-1.html
+
+2020.9新帖子，改30针屏线，没准可行！
+
+目前已有是40针屏线，具有2lane定义，查看b173han04.0 和04.7似乎符合 40pin 2lane 
+
+## nvme support
+
+参照https://tieba.baidu.com/p/6282527282?see_lz=1
+过程，使用clover来进行
+先把原本硬盘数据备份到新盘，再备份回这个m.2
+bios设置：
+制作了clover的启动盘，可以加载nvme驱动并且引导系统
+尝试把clover放进硬盘里面:
+
+方法，对于目前的GPT硬盘，直接把EFI分区清空之后把200M的clover盘中文件全考进去，重启之后bios可以识别这个uefi并且引导出来就是clover
+
+
+
+# MacOS系统问题
+
+## 账户无法使用
+
+绑定银行卡之后再itunes里面激活
+
+## 其他一些问题
+m1的yml和其他yml不太通用
+
+
+# Linux系统设置
 ### 隔离部分cpu使其只用来运行部分任务
 对于z10pa可以打开
 `gedit /etc/default/grub`
@@ -91,44 +125,18 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=2-17,20-35"
 使用hwinfo
 
 
-## zbook17 changing to DC screen 换屏幕
+# windows的一些系统设置
 
-https://forum.51nb.com/thread-1966563-1-1.html
 
-2020.9新帖子，改30针屏线，没准可行！
-
-目前已有是40针屏线，具有2lane定义，查看b173han04.0 和04.7似乎符合 40pin 2lane 
-
-## nvme support
-
-参照https://tieba.baidu.com/p/6282527282?see_lz=1
-过程，使用clover来进行
-先把原本硬盘数据备份到新盘，再备份回这个m.2
-bios设置：
-制作了clover的启动盘，可以加载nvme驱动并且引导系统
-尝试把clover放进硬盘里面:
-
-方法，对于目前的GPT硬盘，直接把EFI分区清空之后把200M的clover盘中文件全考进去，重启之后bios可以识别这个uefi并且引导出来就是clover
-## 声卡soundblaster
+## Driver 安装驱动的那些事
+### 声卡soundblaster
 
 安装soundblaster xfi notebook （SB0950）:
 下载
 https://files.creative.com/manualdn/Drivers/AVP/10925/0x2F4D4864/SBXN_PCDRV_LB_1_01_0095.exe
-注意：安装时候卸载ESET等任何杀毒软件！
+注意：**安装时候卸载ESET等任何杀毒软件！**
 
-
-## 苹果
-
-### 账户无法使用
-
-绑定银行卡之后再itunes里面激活
-
-### 其他一些问题
-m1的yml和其他yml不太通用
-
-# Driver 安装驱动的那些事
-
-## install graphic card driver for unsupported graphic card 安装显卡驱动 zbook17
+### install graphic card driver for unsupported graphic card 安装显卡驱动 zbook17
 
 zbook17显卡：
 根据网上，只支持到p5200?
@@ -144,11 +152,11 @@ inf更改：
 首先设备管理器找到显卡硬件id，然后再nVidia驱动解压出来的文件里面 找惠普对应的（103C结尾，应该是bli之类的inf）
 禁用设备签名（设置里面，恢复，高级重新启动），然后inf右键安装
 
-## killer ax200
+### killer ax200
 
 https://bbs.luobotou.org/thread-45955-1-1.html11
 
-# windows system setting 系统设置
+
 
 ## 开启远程桌面:
 
@@ -187,77 +195,10 @@ bcdedit /set hypervisorlaunchtype off
 bcdedit /set hypervisorlaunchtype off
 ```
 
-# SSH设置操作
 
-## ssh 虚拟机注意事项
+# linux系统设置
 
-安装vmhs-fuge还是啥的，为了虚拟机与实体机通信
-
-虚拟机可以尝试使用固定ip
-
-### vmware 使用的一些常用指令
-访问硬盘用的
-`/usr/bin/vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs-fuse,allow_other`
-
-
-##  SSH config 文件示例
-
-```markdown
-
-Host 192.168.254.128
-    HostName 192.168.254.128
-    User root
-    IdentityFile "C:\Users\（改成用户名）\.ssh\id_rsa"
-
-```
-
-
-## ssh免密码登录
-
-
-(windows)首先在service服务中，打开openssh，自动启动
-
-ssh-keygen -t rsa -f ~/.ssh/(密钥名字)
-产生ssh密钥
-
-生成的pub放到linux机器的/.ssh下面，再把内容复制到./.ssh/authorized_keys里面
-
-```
-scp ~/.ssh/(密钥名字) (用户名)@(远程主机):~/.ssh/
-
-ssh登录远程主机之后
-
-cat ~/.ssh/(密钥名字) >> ~/.ssh/authorized_keys
-```
-
-之后windows机器ssh-add 私钥名字,或者在。ssh的config里面写好
-注意authorized keys里面每个主机只能有一个密钥
-
-## 映射ssh的磁盘
-
-安装直接前往 github 对应项目的 release 中下载最新版本即可，需注意 sshfs-win 对 winfsp 的最低版本依赖（下载最新版本一般即可满足），另外有GUI（用户图形操作界面）可供下载
-
-sshfs-win：https://github.com/billziss-gh/sshfs-win/releases
-
-winfsp：https://github.com/billziss-gh/winfsp/releases
-
-然后映射网络磁盘里面输入
-
-\\sshfs\用户名@服务器名字\ 
-
-后面不用加\home啥的，过去就相当于在\home\用户名底下
-
-如果想要上层的话也可以
-
-\\sshfs.r\用户名@服务器名字\home\用户名\.......
-
-sshfs相当于省略\home\用户名的过程
-
-
-
-# linux本身设置
-
-## 5.4 kernel
+## 安装5.4 kernel
 ```{markdown}
 sudo apt-get update
 sudo apt-get upgrade
@@ -297,9 +238,26 @@ pwd显示路径
 `s-tui`
 很好用的检测软件
 
-## wsl的基本设置
+## basic library
 
-### 双路主机：
+- ubuntu 18.04:
+
+`apt-get install build-essential gcc-multilib rpm lib32ncurses5 lib32z1`
+
+- ubuntu 20.04
+
+`apt-get install build-essential gcc-multilib rpm lib32z1`
+
+
+## ubuntu18.04 root 登陆
+
+https://blog.csdn.net/COCO56/article/details/107628019
+
+
+
+# wsl的基本设置
+
+## 双路主机：
 
 可以任务管理器右键vmmm选择让wsl运行在哪个cpu上面
 
@@ -309,18 +267,18 @@ pwd显示路径
 
 性能测试
 
-### root 权限
+## root 权限
 
  `ubuntu1804.exe config --default-user root` 
 
 打不开的时候：netsh winsock reset
 
-### 重启wsl
+## 重启wsl
 
 `net stop LxssManager`
 `net start LxssManager`
 
-## linux GUI
+## WSl的linux GUI
 GUI-xfce
 https://zhuanlan.zhihu.com/p/150555651
 RDP:
@@ -357,52 +315,116 @@ sudo systemctl enable --now xrdp
 sudo ufw allow from 192.168.3.0/24 to any port 3389 proto tcp
 
 
-## basic library
-
-### ubuntu 18.04:
-
-`apt-get install build-essential gcc-multilib rpm lib32ncurses5 lib32z1`
-
-### ubuntu 20.04
-
-`apt-get install build-essential gcc-multilib rpm lib32z1`
-
-
-## ubuntu18.04 root 登陆
-
-https://blog.csdn.net/COCO56/article/details/107628019
 
 
 
 
+# 软件
 
 
-# python 
+## VMware
+### 虚拟机的ssh注意事项，对于vmware虚拟机
+
+安装vmhs-fuge还是啥的，为了虚拟机与实体机通信
+
+虚拟机可以尝试使用固定ip
+
+### vmware vmhs-fuge 使用的一些常用指令
+访问硬盘用的
+`/usr/bin/vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs-fuse,allow_other`
+
+
+## SSH设置操作
+
+###  SSH config 文件示例
+
+
+```{markdown}
+
+Host vm
+    HostName 192.168.254.128
+    User root
+    IdentityFile "C:\Users\（改成用户名）\.ssh\id_rsa"
+
+```
+
+
+### ssh免密码登录
+
+
+(windows必须)首先在service服务中，打开openssh，自动启动
+
+- 生成ssh密钥
+（可能需要先cd到~/.ssh再生成，因为ssh-keygen的-f有点傻）
+
+
+`ssh-keygen -t rsa -f ~/.ssh/${密钥名字}`
+
+- 将密钥放到远程主机
+
+生成两个文件，把.pub放到远程机器的/.ssh下面，再把内容复制到远程主机的~/.ssh/authorized_keys里面
+
+```
+scp ~/.ssh/${密钥名字}.pub (用户名)@(远程主机):~/.ssh/
+
+ssh登录远程主机之后
+
+cat ~/.ssh/${密钥名字}.pub >> ~/.ssh/authorized_keys
+```
+
+之后windows机器ssh-add 私钥名字,或者在~/.ssh的config里面写好
+
+**注意authorized keys里面每个主机只能有一个密钥**
+
+### ssh映射磁盘
+
+安装直接前往 github 对应项目的 release 中下载最新版本即可，需注意 sshfs-win 对 winfsp 的最低版本依赖（下载最新版本一般即可满足），另外有GUI（用户图形操作界面）可供下载
+
+sshfs-win：https://github.com/billziss-gh/sshfs-win/releases
+
+winfsp：https://github.com/billziss-gh/winfsp/releases
+
+然后映射网络磁盘里面输入
+
+\\sshfs\用户名@服务器名字\ 
+
+后面不用加\home啥的，过去就相当于在\home\用户名底下
+
+如果想要上层的话也可以
+
+\\sshfs.r\用户名@服务器名字\home\用户名\.......
+
+sshfs相当于省略\home\用户名的过程
+
+
+
+
+## python 
 
 先装好anaconda
 
-## environment 环境相关
+### environment 环境相关
 
-### 默认环境
+- 默认环境
 在bashrc里添加
 `conda activate environment name`
 
-### export the environment 导出环境:
+- export the environment 导出环境:
 
 `conda env export --name research > research.yml`
 
 
-### import environment from yml file 导入环境:
+- import environment from yml file 导入环境:
 
 `conda env create -f environment.yml`
 
-### a sample
+- a sample
 
 https://github.com/lamdalamda/system-configure-record/blob/master/CARE/research.yml
 
-## library 库
-### tensorflow:
-#### tensorflow windows 
+### library 库
+#### tensorflow:
+- tensorflow windows 
 假设tensorflow安装在D:\Anaconda3\Lib\site-packages\tensorflow环境里，那么打开D:\Anaconda3\Lib\site-packages\tensorflow\python\platform\build_info.py这个文件
 
 检查一下默认写好的系统变量CUDA_PATH和CUDA_PATH_V9.0是否无误
@@ -420,24 +442,23 @@ tensorflow-cuda：需要找到tensorflow对应的cuda，cudnn
 下载下来之后安装，放在环境变量里面，缺什么加什么
 官网版本未必对应，可以看安装后缺少的dll版本
 
-#### test code for tensorflow tensorflow测试
+- test code for tensorflow tensorflow测试
 
 ```markdown
 import tensorflow as tf
 tf.config.list_physical_devices('GPU')
 ```
 
-## 实例
+### 实例
 
-### 监控网站信息变化，比如托福或者疫苗等
+- 监控网站信息变化，比如托福或者疫苗等
 
 同时具有发送邮件提醒功能
 
 https://www.jianshu.com/p/7c4f251485b7?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
 
-# Softwares 各种软件问题
 
-## LMOD
+## LMOD - module 管理软件
 - lua
   
 ```{markdown}
@@ -480,13 +501,16 @@ if ! shopt -q login_shell; then
 fi
 ```
 
-- oneapi
+- oneapi的module
 在oneapi根目录下面运行
 
 ```{markdown}
 ./modulefiles-setup.sh
 module use modulefiles
 ```
+
+- nvhpc
+nvhpc的modulefile在安装目录的modulefiles里面
 
 
 ## easybuild
@@ -503,6 +527,7 @@ eb --install-latest-eb-release --prefix $HOME/easybuild
 module use $HOME/easybuild/modules/all
 ```
 重启清除tmp，之后module load Easybuild使用
+
 ## ROCm
 ### 4.3
 amd gpu加速通过ROCm实现（类似CUDA）
@@ -640,6 +665,30 @@ configure之前conda deactivate
 
 然后运行两次：
 `sudo dpkg -i openpbs-server_20.0.1-1_amd64.deb `
+
+### 源代码安装-未成功
+ github上下载master源码（20.0.1还没有ubutnu20.04支持，如果是ubuntu18.04那直接找安装包就行）
+ 
+ 安装依赖
+    sudo apt-get install gcc make libtool libhwloc-dev libx11-dev \
+      libxt-dev libedit-dev libical-dev ncurses-dev perl \
+      postgresql-server-dev-all postgresql-contrib python3-dev tcl-dev tk-dev swig \
+      libexpat-dev libssl-dev libxext-dev libxft-dev autoconf \
+      automake g++
+ 
+ sudo apt install expat libedit2 postgresql python3 postgresql-contrib sendmail-bin \
+      sudo tcl tk libical3 postgresql-server-dev-all
+ 
+ 
+ 之后./autogen
+ 
+ 然后 ./configure CFLAGS="-g -O2 -Wall -Werror -Wno-unused-result -Wno-array-bounds -Wno-stringop-overflow -Wno-format-truncation -Wno-format-overflow" --prefix=/opt/pbs
+ 
+ make 
+ 
+ sudo make install
+
+
 
 ## quantum espresso 
 ### quantum espresso普通编译-已经成功
@@ -869,11 +918,6 @@ CUDA在makefile include里面要改
 
 至少需要incar poscar potcar kpoints才能运行
 
-### vasp other
-
-vasp6.1的GPU编译，新坑：https://zhuanlan.zhihu.com/p/302826820
-
-
 
 ## spack
 
@@ -1054,49 +1098,31 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
       ]
 ```
 
-## PBS队列管理-未成功
- github上下载master源码（20.0.1还没有ubutnu20.04支持，如果是ubuntu18.04那直接找安装包就行）
+
  
- 安装依赖
-    sudo apt-get install gcc make libtool libhwloc-dev libx11-dev \
-      libxt-dev libedit-dev libical-dev ncurses-dev perl \
-      postgresql-server-dev-all postgresql-contrib python3-dev tcl-dev tk-dev swig \
-      libexpat-dev libssl-dev libxext-dev libxft-dev autoconf \
-      automake g++
- 
- sudo apt install expat libedit2 postgresql python3 postgresql-contrib sendmail-bin \
-      sudo tcl tk libical3 postgresql-server-dev-all
- 
- 
- 之后./autogen
- 
- 然后 ./configure CFLAGS="-g -O2 -Wall -Werror -Wno-unused-result -Wno-array-bounds -Wno-stringop-overflow -Wno-format-truncation -Wno-format-overflow" --prefix=/opt/pbs
- 
- make 
- 
- sudo make install
- 
-# slurm队列管理
- 
-sudo apt install slurm-wlm-torque
-sudo apt install slurm-wlm-emulator
+## slurm队列管理
+
 在slurm官网下载配置文件放到/etc/slurm-llvm/中
  
  然后
+```{markdown}
+sudo apt install slurm-wlm-torque
+sudo apt install slurm-wlm-emulator
+
  systemctl start munge
 systemctl status munge
-# and if everything is ok:
+
 systemctl enable munge
+```
  
  
- 
-# 看番
+## 看番-animesearcher
 
 https://github.com/zaxtyson/AnimeSearcher
 
 可以git下来源代码使用
 
-## 搜索不到东西等问题
+### 搜索不到东西等问题
 
 git下来源代码，config里面更改一下端口之后，python运行app.py,之后记得在打开html之后在最底下更改app.py中的地址
  
