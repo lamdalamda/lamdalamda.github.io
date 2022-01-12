@@ -319,7 +319,7 @@ sudo ufw allow from 192.168.3.0/24 to any port 3389 proto tcp
 
 
 
-# 软件
+# 软件/基础
 
 
 ## VMware
@@ -690,6 +690,220 @@ configure之前conda deactivate
 
 
 
+
+## spack
+
+spack find -v
+
+可以列出已经安装的包的完整名称，之后load
+
+### spack 镜像
+在没有外网链接的系统上尝试使用spack
+
+1. 在有外网连接的机器上创建镜像
+
+`spack mirror create -d ~/spack_mirror -D nvhpc@20.9 openmpi fftw clingo `
+
+其中-d后面是创建镜像的位置，-D是包括所有的denpendency，后面是包的名称
+注意clingo是必须
+将得到的镜像文件夹上传到没有外网链接的机器
+
+### NSCC
+- spack初始化
+必备条件：python3.8+ gcc6+
+
+nscc上面：module load gcc/6.5.0 python/3.8.3
+
+`ssh nscc04-ib0`来获得外网连接
+
+之后`spack --insecure -d install zlib`
+
+
+
+## git & github
+
+对于新的os需要对git以及github进行设置
+
+`git config --global user.name "lamdalamda"`
+
+`git config --global user.email "邮箱"`
+
+### github ssh
+
+`ssh-keygen -t ed25519 -C "email address"`
+
+`ssh-add ~/.ssh/id_ed25519`
+
+再把pubkey复制到GitHub 设置里面的ssh keys里
+
+之后可以进行正常使用
+
+### github clone
+
+对于需要pull 或者 push 到github的
+如果是在vscode里面打开在点击pull或者push时候github扩展会跳出来打开chrome要求验证
+也可以使用ssh登录，比较费劲
+
+命令示例：
+`git clone git@github.com:lamdalamda/deploy_guide.git`
+
+### GitHub page
+
+一般是在settings-page里面设定source在/docs 下面，然后建立docs文件夹，放进去index.html
+
+如果用index.md使用markdown渲染出来，注意使用vscode插件markdown math和markdown preview enhanced
+
+渲染出来html的话，在GitHub page上面不能显示正确的数学公式，需要在在<head>部分把原本的stylesheet部分换成以下代码
+```markdown
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+```
+
+这段代码会更新
+
+_https://katex.org/docs/autorender.html_
+
+
+
+### github page 目录
+
+使用toc.py 搬运自https://github.com/Higurashi-kagome/pythontools/blob/master/text/toc.py
+
+For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+
+## latex 配置
+### latex中文支持
+参考https://zhuanlan.zhihu.com/p/43133114
+
+
+对于latex workshop插件，在visual studio code的settings.json 里面添加如下内容
+
+```markdown
+    // Latex workshop
+    "latex-workshop.latex.tools": [
+          {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-pdf",
+            "%DOC%"
+            ]
+          },
+          {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOC%"
+              ]
+          },          
+          {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOC%"
+            ]
+          },
+          {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+            "%DOCFILE%"
+            ]
+          }
+        ],
+    "latex-workshop.latex.recipes": [
+          {
+            "name": "xelatex",
+            "tools": [
+            "xelatex"
+                        ]
+                  },
+          {
+            "name": "latexmk",
+            "tools": [
+            "latexmk"
+                        ]
+          },
+
+          {
+            "name": "pdflatex -> bibtex -> pdflatex*2",
+            "tools": [
+            "pdflatex",
+            "bibtex",
+            "pdflatex",
+            "pdflatex"
+                        ]
+          }
+        ],
+    "latex-workshop.view.pdf.viewer": "tab",  
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.ist",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk"
+      ]
+```
+
+
+ 
+## slurm队列管理
+
+在slurm官网下载配置文件放到/etc/slurm-llvm/中
+ 
+ 然后
+```{markdown}
+sudo apt install slurm-wlm-torque
+sudo apt install slurm-wlm-emulator
+
+ systemctl start munge
+systemctl status munge
+
+systemctl enable munge
+```
+ 
+ 
+## 看番-animesearcher
+
+https://github.com/zaxtyson/AnimeSearcher
+
+可以git下来源代码使用
+
+### 搜索不到东西等问题
+
+git下来源代码，config里面更改一下端口之后，python运行app.py,之后记得在打开html之后在最底下更改app.py中的地址
+ 
+
+ 
+
+
+
+## 使用的软件
 ## quantum espresso 
 ### quantum espresso普通编译-已经成功
 只需要按照操作说明来
@@ -918,213 +1132,3 @@ CUDA在makefile include里面要改
 
 至少需要incar poscar potcar kpoints才能运行
 
-
-## spack
-
-spack find -v
-
-可以列出已经安装的包的完整名称，之后load
-
-### spack 镜像
-在没有外网链接的系统上尝试使用spack
-
-1. 在有外网连接的机器上创建镜像
-
-`spack mirror create -d ~/spack_mirror -D nvhpc@20.9 openmpi fftw clingo `
-
-其中-d后面是创建镜像的位置，-D是包括所有的denpendency，后面是包的名称
-注意clingo是必须
-将得到的镜像文件夹上传到没有外网链接的机器
-
-### NSCC
-- spack初始化
-必备条件：python3.8+ gcc6+
-
-nscc上面：module load gcc/6.5.0 python/3.8.3
-
-`ssh nscc04-ib0`来获得外网连接
-
-之后`spack --insecure -d install zlib`
-
-
-
-## git & github
-
-对于新的os需要对git以及github进行设置
-
-`git config --global user.name "lamdalamda"`
-
-`git config --global user.email "邮箱"`
-
-### github ssh
-
-`ssh-keygen -t ed25519 -C "email address"`
-
-`ssh-add ~/.ssh/id_ed25519`
-
-再把pubkey复制到GitHub 设置里面的ssh keys里
-
-之后可以进行正常使用
-
-### github clone
-
-对于需要pull 或者 push 到github的
-如果是在vscode里面打开在点击pull或者push时候github扩展会跳出来打开chrome要求验证
-也可以使用ssh登录，比较费劲
-
-命令示例：
-`git clone git@github.com:lamdalamda/deploy_guide.git`
-
-### GitHub page
-
-一般是在settings-page里面设定source在/docs 下面，然后建立docs文件夹，放进去index.html
-
-如果用index.md使用markdown渲染出来，注意使用vscode插件markdown math和markdown preview enhanced
-
-渲染出来html的话，在GitHub page上面不能显示正确的数学公式，需要在在<head>部分把原本的stylesheet部分换成以下代码
-```markdown
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
-```
-
-这段代码会更新
-
-_https://katex.org/docs/autorender.html_
-
-
-
-### github page 目录
-
-使用toc.py 搬运自https://github.com/Higurashi-kagome/pythontools/blob/master/text/toc.py
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-## latex 配置
-### latex中文支持
-参考https://zhuanlan.zhihu.com/p/43133114
-
-
-对于latex workshop插件，在visual studio code的settings.json 里面添加如下内容
-
-```markdown
-    // Latex workshop
-    "latex-workshop.latex.tools": [
-          {
-            "name": "latexmk",
-            "command": "latexmk",
-            "args": [
-            "-synctex=1",
-            "-interaction=nonstopmode",
-            "-file-line-error",
-            "-pdf",
-            "%DOC%"
-            ]
-          },
-          {
-            "name": "xelatex",
-            "command": "xelatex",
-            "args": [
-            "-synctex=1",
-            "-interaction=nonstopmode",
-            "-file-line-error",
-            "%DOC%"
-              ]
-          },          
-          {
-            "name": "pdflatex",
-            "command": "pdflatex",
-            "args": [
-            "-synctex=1",
-            "-interaction=nonstopmode",
-            "-file-line-error",
-            "%DOC%"
-            ]
-          },
-          {
-            "name": "bibtex",
-            "command": "bibtex",
-            "args": [
-            "%DOCFILE%"
-            ]
-          }
-        ],
-    "latex-workshop.latex.recipes": [
-          {
-            "name": "xelatex",
-            "tools": [
-            "xelatex"
-                        ]
-                  },
-          {
-            "name": "latexmk",
-            "tools": [
-            "latexmk"
-                        ]
-          },
-
-          {
-            "name": "pdflatex -> bibtex -> pdflatex*2",
-            "tools": [
-            "pdflatex",
-            "bibtex",
-            "pdflatex",
-            "pdflatex"
-                        ]
-          }
-        ],
-    "latex-workshop.view.pdf.viewer": "tab",  
-    "latex-workshop.latex.clean.fileTypes": [
-        "*.aux",
-        "*.bbl",
-        "*.blg",
-        "*.idx",
-        "*.ind",
-        "*.lof",
-        "*.lot",
-        "*.out",
-        "*.toc",
-        "*.acn",
-        "*.acr",
-        "*.alg",
-        "*.glg",
-        "*.glo",
-        "*.gls",
-        "*.ist",
-        "*.fls",
-        "*.log",
-        "*.fdb_latexmk"
-      ]
-```
-
-
- 
-## slurm队列管理
-
-在slurm官网下载配置文件放到/etc/slurm-llvm/中
- 
- 然后
-```{markdown}
-sudo apt install slurm-wlm-torque
-sudo apt install slurm-wlm-emulator
-
- systemctl start munge
-systemctl status munge
-
-systemctl enable munge
-```
- 
- 
-## 看番-animesearcher
-
-https://github.com/zaxtyson/AnimeSearcher
-
-可以git下来源代码使用
-
-### 搜索不到东西等问题
-
-git下来源代码，config里面更改一下端口之后，python运行app.py,之后记得在打开html之后在最底下更改app.py中的地址
- 
-
- 
