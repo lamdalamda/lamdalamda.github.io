@@ -12,7 +12,6 @@ permalink: /deploy/
 
 **转载侵删**
 
-**declare no authorship to this page**
 
 # Hardware 硬件
 
