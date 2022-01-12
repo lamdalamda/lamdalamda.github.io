@@ -96,7 +96,65 @@ m1的yml和其他yml不太通用
 
 
 # Linux系统设置
-### 隔离部分cpu使其只用来运行部分任务
+
+## 安装5.4 kernel
+```{markdown}
+sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+sudo dpkg -i *.deb
+```
+## basic linux command：
+
+su / sudo ：管理员权限
+
+sh xxxxx.sh :运行sh脚本
+
+yum install / apt-get install : centos 和 ubuntu安装软件
+
+scp （-r） 本地 目标： 可以复制到远程主机
+
+注意！ 远程主机的.bashrc不可以有echo
+
+pwd显示路径
+
+`top`
+查看cpu使用率
+
+`top -u david`
+查看用户的cpu使用率
+
+
+`cat /proc/cpuinfo`
+查看cpu型号核心数量
+
+`s-tui`
+很好用的检测软件
+
+## basic library
+
+- ubuntu 18.04:
+
+`apt-get install build-essential gcc-multilib rpm lib32ncurses5 lib32z1`
+
+- ubuntu 20.04
+
+`apt-get install build-essential gcc-multilib rpm lib32z1`
+
+
+## ubuntu18.04 root 登陆
+
+https://blog.csdn.net/COCO56/article/details/107628019
+
+
+
+## 隔离部分cpu使其只用来运行部分任务
 对于z10pa可以打开
 `gedit /etc/default/grub`
 更改：
@@ -194,65 +252,6 @@ bcdedit /set hypervisorlaunchtype off
 
 bcdedit /set hypervisorlaunchtype off
 ```
-
-
-# linux系统设置
-
-## 安装5.4 kernel
-```{markdown}
-sudo apt-get update
-sudo apt-get upgrade
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
-sudo dpkg -i *.deb
-```
-## basic linux command：
-
-su / sudo ：管理员权限
-
-sh xxxxx.sh :运行sh脚本
-
-yum install / apt-get install : centos 和 ubuntu安装软件
-
-scp （-r） 本地 目标： 可以复制到远程主机
-
-注意！ 远程主机的.bashrc不可以有echo
-
-pwd显示路径
-
-`top`
-查看cpu使用率
-
-`top -u david`
-查看用户的cpu使用率
-
-
-`cat /proc/cpuinfo`
-查看cpu型号核心数量
-
-`s-tui`
-很好用的检测软件
-
-## basic library
-
-- ubuntu 18.04:
-
-`apt-get install build-essential gcc-multilib rpm lib32ncurses5 lib32z1`
-
-- ubuntu 20.04
-
-`apt-get install build-essential gcc-multilib rpm lib32z1`
-
-
-## ubuntu18.04 root 登陆
-
-https://blog.csdn.net/COCO56/article/details/107628019
-
 
 
 # wsl的基本设置
@@ -903,7 +902,7 @@ git下来源代码，config里面更改一下端口之后，python运行app.py,�
 
 
 
-## 使用的软件
+# 使用的软件
 ## quantum espresso 
 ### quantum espresso普通编译-已经成功
 只需要按照操作说明来
