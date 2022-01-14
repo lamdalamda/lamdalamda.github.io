@@ -2,6 +2,7 @@
 layout: post
 title:  "插层结构中多价离子迁移率"
 categories: "读后感"
+katex: True
 ---
 
 使用NEB算法来计算扩散的过程

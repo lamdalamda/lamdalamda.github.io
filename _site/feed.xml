@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-12-28T10:58:14+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Personal webpage</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Compile</title><link href="http://localhost:4000/2021/12/20/compile.html" rel="alternate" type="text/html" title="Compile" /><published>2021-12-20T00:00:00+08:00</published><updated>2021-12-20T00:00:00+08:00</updated><id>http://localhost:4000/2021/12/20/compile</id><content type="html" xml:base="http://localhost:4000/2021/12/20/compile.html">&lt;p&gt;AMD compiler settings&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-01-14T17:04:34+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Personal webpage</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Compile</title><link href="http://localhost:4000/2021/12/20/compile.html" rel="alternate" type="text/html" title="Compile" /><published>2021-12-20T00:00:00+08:00</published><updated>2021-12-20T00:00:00+08:00</updated><id>http://localhost:4000/2021/12/20/compile</id><content type="html" xml:base="http://localhost:4000/2021/12/20/compile.html">&lt;p&gt;AMD compiler settings&lt;/p&gt;
 
 &lt;p&gt;https://developer.amd.com/wp-content/resources/56827-1-0.pdf&lt;/p&gt;</content><author><name></name></author><summary type="html">AMD compiler settings</summary></entry><entry><title type="html">vasp不收敛的解决办法</title><link href="http://localhost:4000/skills/2021/12/13/skill2.html" rel="alternate" type="text/html" title="vasp不收敛的解决办法" /><published>2021-12-13T00:00:00+08:00</published><updated>2021-12-13T00:00:00+08:00</updated><id>http://localhost:4000/skills/2021/12/13/skill2</id><content type="html" xml:base="http://localhost:4000/skills/2021/12/13/skill2.html">&lt;p&gt;http://bbs.keinsci.com/thread-13065-1-1.html&lt;/p&gt;</content><author><name></name></author><category term="skills" /><summary type="html">http://bbs.keinsci.com/thread-13065-1-1.html</summary></entry><entry><title type="html">错误,Inconsistent Bravais lattice types</title><link href="http://localhost:4000/vasp_error/2021/10/21/error1.html" rel="alternate" type="text/html" title="错误,Inconsistent Bravais lattice types" /><published>2021-10-21T00:00:00+08:00</published><updated>2021-10-21T00:00:00+08:00</updated><id>http://localhost:4000/vasp_error/2021/10/21/error1</id><content type="html" xml:base="http://localhost:4000/vasp_error/2021/10/21/error1.html">&lt;h1 id=&quot;vasp-问题&quot;&gt;VASP 问题&lt;/h1&gt;
 &lt;p&gt;记录跑vasp时候出现的各种问题&lt;/p&gt;
@@ -39,4 +39,69 @@
 &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;Tom&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &apos;Hi, Tom&apos; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Mg-V2O5阴极材料的计算</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/13/The-Intercalation-Phase-Diagram-of-Mg-in-V2O5-from-First-Principles.html" rel="alternate" type="text/html" title="Mg-V2O5阴极材料的计算" /><published>2021-01-13T00:00:00+08:00</published><updated>2021-01-13T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/13/The%20Intercalation%20Phase%20Diagram%20of%20Mg%20in%20V2O5%20from%20First-Principles</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/13/The-Intercalation-Phase-Diagram-of-Mg-in-V2O5-from-First-Principles.html">&lt;p&gt;Mg负极（阳极），V2O5正极（阴极），正极的理论能量密度660Wh/kg，负极Mg金属的能量密度时3833maH/cm3，大于Li-石墨&lt;/p&gt;
+
+&lt;p&gt;可逆嵌入Mg的材料目前只有3个：\(V_2O_5 Mo_3S_4 MoO_3\)&lt;/p&gt;</content><author><name></name></author><category term="读后感" /><summary type="html">Mg负极（阳极），V2O5正极（阴极），正极的理论能量密度660Wh/kg，负极Mg金属的能量密度时3833maH/cm3，大于Li-石墨</summary></entry><entry><title type="html">插层结构中多价离子迁移率</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/13/Materials-Design-Rules-for-Multivalent-Ion-Mobility-in-Intercalation-Structures.html" rel="alternate" type="text/html" title="插层结构中多价离子迁移率" /><published>2021-01-13T00:00:00+08:00</published><updated>2021-01-13T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/13/Materials%20Design%20Rules%20for%20Multivalent%20Ion%20Mobility%20in%20Intercalation%20Structures</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/13/Materials-Design-Rules-for-Multivalent-Ion-Mobility-in-Intercalation-Structures.html">&lt;p&gt;使用NEB算法来计算扩散的过程
+一般实用的迁移壁垒是525mV~650mV,Li的迁移势垒一般会远低于525，电子多的MV势垒会高很多。Mg Zn Ca接近于525～650的极限值，而Al已经远高于阈值&lt;/p&gt;
+
+&lt;p&gt;对于一些密排氧化物， 一般迁移路径是：
+四面体（间隙）-&amp;gt;八面体-&amp;gt; 四面体
+或者
+八面体-四面体-八面体&lt;/p&gt;
+
+&lt;p&gt;四面体间隙处的能量 与 八面体间隙处的能量 的 差可以是迁移率筛选的标准&lt;/p&gt;</content><author><name></name></author><category term="读后感" /><summary type="html">使用NEB算法来计算扩散的过程 一般实用的迁移壁垒是525mV~650mV,Li的迁移势垒一般会远低于525，电子多的MV势垒会高很多。Mg Zn Ca接近于525～650的极限值，而Al已经远高于阈值</summary></entry><entry><title type="html">多价电极材料综述</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/12/Odyssey-of-Multivalent-Cathode-Materials-Open-Questions-and-Future-Challenges.html" rel="alternate" type="text/html" title="多价电极材料综述" /><published>2021-01-12T00:00:00+08:00</published><updated>2021-01-12T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/12/Odyssey%20of%20Multivalent%20Cathode%20Materials%20Open%20Questions%20and%20Future%20Challenges</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/12/Odyssey-of-Multivalent-Cathode-Materials-Open-Questions-and-Future-Challenges.html">&lt;p&gt;啃综述&lt;/p&gt;
+
+&lt;p&gt;阳极=金属端=低电位=负极
+阴极=氧化物端=高电位=正极&lt;/p&gt;
+
+&lt;p&gt;Mg电池目前主要问题在于电解质稳定性（电解质不被电池电解）和Mg的可逆反应&lt;/p&gt;
+
+&lt;h1 id=&quot;硫化物阴极&quot;&gt;硫化物阴极&lt;/h1&gt;
+
+&lt;p&gt;主要阴极材料(state of art)：\(Mg_x Mo_6S_8\)
+问题：Mg不能全部分离&lt;/p&gt;
+
+&lt;p&gt;目前只有含S的阴极材料可以可逆地插入Mg&lt;/p&gt;
+
+&lt;h1 id=&quot;氧化物阴极&quot;&gt;氧化物阴极&lt;/h1&gt;
+
+&lt;p&gt;通过计算扩散速度，要求migration barrier大约在600～750meV级别&lt;/p&gt;
+
+&lt;p&gt;另外一个问题是，相比于Mg的intercalation (\(Mg+TMO_2=MgTMO_2\))，反应\(Mg+TMO_2=MgO+TMO\)也有可能发生。但一般认为Mg在MgO中的迁移速率足够慢&lt;/p&gt;
+
+&lt;p&gt;\(\alpha MoO_3\)有较高的容量和一定的可逆性,但是不是完全可逆而且动力学比较差，循环性能也很差&lt;/p&gt;</content><author><name></name></author><category term="读后感" /><summary type="html">啃综述</summary></entry><entry><title type="html">Li-Fe-P-O2 Phase Diagram from First Principles Calculations</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/11/LiFePO2_phase_diagram_1st_principle_calculation.html" rel="alternate" type="text/html" title="Li-Fe-P-O2 Phase Diagram from First Principles Calculations" /><published>2021-01-11T00:00:00+08:00</published><updated>2021-01-11T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/11/LiFePO2_phase_diagram_1st_principle_calculation</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/11/LiFePO2_phase_diagram_1st_principle_calculation.html">&lt;h1 id=&quot;li-fe-p-o2-phase-diagram-from-first-principles-calculations&quot;&gt;Li-Fe-P-O2 Phase Diagram from First Principles Calculations&lt;/h1&gt;
+&lt;p&gt;这篇文章讲述了建立Li Fe P O2 相图的过程&lt;/p&gt;
+
+\[G(T,P,N_{Li},N_{Fe},N_P,N_{O_2})=H(T,P,N_{Li},N_{Fe},N_P,N_{O_2})-TS(T,P,N_{Li},N_{Fe},N_P,N_{O_2})=E(T,P,N_{Li},N_{Fe},N_P,N_{O_2})+PV(T,P,N_{Li},N_{Fe},N_P,N_{O_2})-TS(T,P,N_{Li},N_{Fe},N_P,N_{O_2})\]
+
+&lt;p&gt;归一化之后可以得到 partial molar?molal? property&lt;/p&gt;
+
+\[G(T,P,x_{Li},x_{Fe},x_P,X_{O_2})=E(T,P,x_{Li},x_{Fe},x_P,X_{O_2})-TS(T,P,x_{Li},x_{Fe},x_P,X_{O_2})+PV(T,P,x_{Li},x_{Fe},x_P,X_{O_2})\]
+
+&lt;p&gt;那么对于两相之间的G差距&lt;/p&gt;
+
+\[\Delta G(T,P,x_{Li},x_{Fe},x_P,X_{O_2})=\Delta E(T,P,x_{Li},x_{Fe},x_P,X_{O_2}) - T\Delta S(T,P,x_{Li},x_{Fe},x_P,X_{O_2}) + P\Delta V(T,P,x_{Li},x_{Fe},x_P,X_{O_2})\]
+
+&lt;p&gt;对比两个固相的话，体积差距是很小的，所以可以将PV项忽略。另外特殊情况当T=0K时候G=E （或者\(\Delta G=\Delta E\)）&lt;/p&gt;
+
+&lt;p&gt;作者通过DFT来计算E。使用的是GGA泛函，设定是ENCUT=500eV，kpoint只说了appropriate，收敛判据是3meV,即EDFIFF=3E-6&lt;/p&gt;
+
+&lt;p&gt;DFT+U参数使用了4.3，这个是二价铁和三价铁U参数的平均值。所以计算二价铁时这个U偏大，计算三价铁时这个U偏小，而对于铁的磷化物来说，由于此时铁的电子不再局域化（DFT+U的前提），所以会有比较大的误差&lt;/p&gt;
+
+&lt;p&gt;另外《First-Principles Prediction of Insertion Potentials in Li-Mn Oxides for Secondary Li Batteries》还计算了TS项的影响。估计\(PV\approx 10^{-5}eV , TS\propto k_bT \approx 25*10^{-3}eV @ 298K\) 可见影响相对较小&lt;/p&gt;</content><author><name></name></author><category term="读后感" /><summary type="html">Li-Fe-P-O2 Phase Diagram from First Principles Calculations 这篇文章讲述了建立Li Fe P O2 相图的过程</summary></entry><entry><title type="html">多价电极材料</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/11/Spinel-compounds-as-multivalent-battery-cathodes-a-systematic-evaluation-based-on-ab-initio-calculations.html" rel="alternate" type="text/html" title="多价电极材料" /><published>2021-01-11T00:00:00+08:00</published><updated>2021-01-11T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/11/Spinel%20compounds%20as%20multivalent%20battery%20cathodes%20a%20systematic%20evaluation%20based%20on%20ab%20initio%20calculations</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2021/01/11/Spinel-compounds-as-multivalent-battery-cathodes-a-systematic-evaluation-based-on-ab-initio-calculations.html">&lt;h1 id=&quot;spinel-compounds-as-multivalent-battery-cathodes-a-systematic-evaluation-based-on-ab-initio-calculations&quot;&gt;Spinel compounds as multivalent battery cathodes: a systematic evaluation based on ab initio calculations&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;DOI: 10.1039/c4ee03389b
+计算了多价离子spinel电极的热力学动力学特征
+主要结论：\(Mn_2O_4\)是可行的结构。二价离子电极电压低于Li，Ca比Mg高0.2V，Mg比Zn高1.4V。Al的activation barrier太高导致不可行。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;spinel structure：
+\(Fd\bar{3}m, MgAl_2O_4\)
+其中Mg是四配位，Al是八配位&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;使用GGA-PBE泛函，假设spinel的网络没有cation disorder&lt;/p&gt;
+
+&lt;p&gt;在计算热力学时候使用了DFT+U，但是在计算动力学（migration path/activation energy）时候没有使用DFT+U因为难以收敛&lt;/p&gt;</content><author><name></name></author><category term="读后感" /><summary type="html">Spinel compounds as multivalent battery cathodes: a systematic evaluation based on ab initio calculations DOI: 10.1039/c4ee03389b 计算了多价离子spinel电极的热力学动力学特征 主要结论：\(Mn_2O_4\)是可行的结构。二价离子电极电压低于Li，Ca比Mg高0.2V，Mg比Zn高1.4V。Al的activation barrier太高导致不可行。</summary></entry></feed>
