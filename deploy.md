@@ -334,6 +334,13 @@ sudo ufw allow from 192.168.3.0/24 to any port 3389 proto tcp
 
 ## SSH设置操作
 
+### ssh-server
+LINUX默认没有ssh-server，也就是说默认不能作为ssh的目标
+
+需要安装openssh-server
+
+`sudo apt-get install openssh-server`
+
 ###  SSH config 文件示例
 
 
