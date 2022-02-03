@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "post spinel氧化物中Mg的迁移率"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "硫尖晶石化合物的评估"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

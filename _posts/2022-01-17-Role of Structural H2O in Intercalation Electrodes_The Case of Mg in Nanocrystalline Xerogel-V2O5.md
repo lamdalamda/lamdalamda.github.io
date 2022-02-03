@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "xerogel-V2O5正极中Mg和水的共同嵌入"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

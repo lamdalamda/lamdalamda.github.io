@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "固体电解质电池综述"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 从微观的原子迁移，到晶界孔隙的影响，再到宏观性质

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Mg电池的coating材料"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

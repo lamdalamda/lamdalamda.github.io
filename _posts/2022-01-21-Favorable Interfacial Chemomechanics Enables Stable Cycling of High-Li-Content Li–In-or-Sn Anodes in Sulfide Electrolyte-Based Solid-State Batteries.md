@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "硫化物正极固体电解质锂电池的界面"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

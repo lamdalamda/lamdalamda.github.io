@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "电池界面的设计"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

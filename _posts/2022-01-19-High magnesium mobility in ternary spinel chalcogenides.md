@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "三元尖晶石氧族化物中的高镁迁移率"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

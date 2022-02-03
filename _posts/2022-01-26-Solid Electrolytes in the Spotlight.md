@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "固体电解质的小综述"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

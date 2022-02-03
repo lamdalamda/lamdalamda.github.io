@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Li-Fe-P-O2 Phase Diagram from First Principles Calculations"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

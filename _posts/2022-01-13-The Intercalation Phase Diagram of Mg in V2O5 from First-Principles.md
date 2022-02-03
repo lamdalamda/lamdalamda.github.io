@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Mg-V2O5阴极材料的计算"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "锂电池固体电解质晶界对于Li传导的的影响"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

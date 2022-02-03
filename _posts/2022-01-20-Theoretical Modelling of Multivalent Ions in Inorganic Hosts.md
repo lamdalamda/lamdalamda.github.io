@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "多价电池的热力学和动力学综述"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

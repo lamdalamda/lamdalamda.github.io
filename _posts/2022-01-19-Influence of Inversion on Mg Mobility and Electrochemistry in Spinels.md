@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Mg电池Mg正极的spinel inversion"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

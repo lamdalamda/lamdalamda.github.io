@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "插层结构中多价离子迁移率"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 

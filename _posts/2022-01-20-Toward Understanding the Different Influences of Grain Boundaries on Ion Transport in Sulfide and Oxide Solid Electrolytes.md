@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "硫化物和氧化物的晶界对于Mg扩散系数的影响"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 和之前那篇研究晶界的文章类似，有比较清楚地表现了分子动力学建模的过程，是很好的参考

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "多价电池中正极发生的是嵌入还是氧化"
-categories: "读后感"
+categories: "阅读文献"
 katex: True
 ---
 
