@@ -1,6 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-01-22T14:54:00+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Personal webpage</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">硫化物正极固体电解质锂电池的界面</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/21/Favorable-Interfacial-Chemomechanics-Enables-Stable-Cycling-of-High-Li-Content-Li-In-or-Sn-Anodes-in-Sulfide-Electrolyte-Based-Solid-State-Batteries.html" rel="alternate" type="text/html" title="硫化物正极固体电解质锂电池的界面" /><published>2022-01-21T00:00:00+08:00</published><updated>2022-01-21T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/21/Favorable%20Interfacial%20Chemomechanics%20Enables%20Stable%20Cycling%20of%20High-Li-Content%20Li%E2%80%93In-or-Sn%20Anodes%20in%20Sulfide%20Electrolyte-Based%20Solid-State%20Batteries</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/21/Favorable-Interfacial-Chemomechanics-Enables-Stable-Cycling-of-High-Li-Content-Li-In-or-Sn-Anodes-in-Sulfide-Electrolyte-Based-Solid-State-Batteries.html">&lt;p&gt;锂电池中固体电解质可以抑制Li枝晶的生长从而使得锂金属阳极成为可能，但是Li枝晶还是可以刺穿固体电解质（通过晶界或者裂纹），这主要是因为固体电解质与Li金属的&lt;strong&gt;界面&lt;/strong&gt;不够平整，化学稳定性有限。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-02-06T15:28:15+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Personal webpage</title><subtitle>stay 24, stay student.</subtitle><entry><title type="html">通过LiCl增加MgCl在THF体系电解液中的溶解度</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/03/Extending-Cycle-Life-of-Mg-S-Battery-by/Cl-Assisted-MgCl2-Solubilization-Mechanism.html" rel="alternate" type="text/html" title="通过LiCl增加MgCl在THF体系电解液中的溶解度" /><published>2022-02-03T00:00:00+08:00</published><updated>2022-02-03T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/03/Extending-Cycle-Life-of-Mg-S-Battery-by/Extending%20Cycle%20Life%20of%20Mg-S%20Battery%20by..Cl-Assisted%20MgCl2%20Solubilization%20Mechanism</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/03/Extending-Cycle-Life-of-Mg-S-Battery-by/Cl-Assisted-MgCl2-Solubilization-Mechanism.html">&lt;p&gt;https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/adfm.201909370&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;电池体系是$$Mg&lt;/td&gt;
+      &lt;td&gt;[Mg(THF)_6][AlCl_4]_2&lt;/td&gt;
+      &lt;td&gt;S$$，其本身过电压大循环寿命短。通过向电解液体系中添加LiCl可以很好地增加Mg的溶解性，增加了效率，循环寿命，降低了过电位&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;DFT计算部分主要用来分析中间结构，使用的Gaussian09 对于溶液体系中的几种可能的配合物进行计算，获得了理论的拉曼光谱，并且与实验结果相对照得到溶液体系中的成分&lt;/p&gt;
+
+&lt;p&gt;正极材料是一种3D碳纳米结构。。。NG(nitrogen doped graphene)-NCNT（nitrogen doped carbon nanotubes） @ NCS (nitrogen doped carbon shell) @ S (sulphur)&lt;/p&gt;
+
+&lt;p&gt;非常粗略的制备过程是，等量NG+NCNT分散在水中，加入苯胺，过硫酸铵，研磨后与硫磺混合。主要应该是用来提高电子和离子导电性&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/adfm.201909370</summary></entry><entry><title type="html">Mg和Ca电池的界面</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/03/Interfaces-and-Interphases-in-Ca-and-Mg-Batteries.html" rel="alternate" type="text/html" title="Mg和Ca电池的界面" /><published>2022-02-03T00:00:00+08:00</published><updated>2022-02-03T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/03/Interfaces%20and%20Interphases%20in%20Ca%20and%20Mg%20Batteries</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/03/Interfaces-and-Interphases-in-Ca-and-Mg-Batteries.html">&lt;p&gt;https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/admi.202101578&lt;/p&gt;
+
+&lt;p&gt;主要是液体电解质体系的MgCa电池界面的综述。亮点是总结了很多的界面产物，或许可以在建模时候参考&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/admi.202101578</summary></entry><entry><title type="html">正极和石榴石界面coating的计算</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Computation-guided-discovery-of-coating-materials-to-stabilize-the-interface-between-lithium-garnet-solid-electrolyte-and-high-energy-cathodes-for-all-solid-state-lithium-batteries.html" rel="alternate" type="text/html" title="正极和石榴石界面coating的计算" /><published>2022-01-28T00:00:00+08:00</published><updated>2022-01-28T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Computation-guided%20discovery%20of%20coating%20materials%20to%20stabilize%20the%20interface%20between%20lithium%20garnet%20solid%20electrolyte%20and%20high-energy%20cathodes%20for%20all-solid-state%20lithium%20batteries</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Computation-guided-discovery-of-coating-materials-to-stabilize-the-interface-between-lithium-garnet-solid-electrolyte-and-high-energy-cathodes-for-all-solid-state-lithium-batteries.html">&lt;p&gt;https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S2405829721002932?via%3Dihub&lt;/p&gt;
+
+&lt;p&gt;评估了几种正极：
+LiNi0.3Mn0.3Co0.3O2 (NMC 111), LiNi0.6Mn0.2Co0.2O2 (NMC 622), and LiNi0.8Mn0.1Co0.1O2 (NMC 811), and the compositions of the NMC cathodes with a single TM cation, LCO, LiNiO2 (LNO), LiMnO2, and LiMn2O4 (LMO).&lt;/p&gt;
+
+&lt;p&gt;有一个非常全面的热力学生成能表格&lt;/p&gt;
+
+&lt;p&gt;数据挺全的，很不错&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S2405829721002932?via%3Dihub</summary></entry><entry><title type="html">NASICON相图</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Phase-Behavior-in-Rhombohedral-NaSiCON-Electrolytes-and-Electrodes.html" rel="alternate" type="text/html" title="NASICON相图" /><published>2022-01-28T00:00:00+08:00</published><updated>2022-01-28T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Phase%20Behavior%20in%20Rhombohedral%20NaSiCON%20Electrolytes%20and%20Electrodes</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Phase-Behavior-in-Rhombohedral-NaSiCON-Electrolytes-and-Electrodes.html">&lt;p&gt;主要是\(Na_{1+x}Zr_2Si_xP_{3-x}O_{12}\)的相图&lt;/p&gt;
+
+&lt;p&gt;这个结构的变化是？&lt;/p&gt;
+
+\[Na_{1}Zr_2P_{3}O_{12}-&amp;gt;Na_{4}Zr_2Si_3O_{12}\]
+
+&lt;p&gt;这是咋变的。。&lt;/p&gt;
+
+&lt;p&gt;方法：grand canonical Monte Carlo siulations based on a cluster expansion model built on DFT calculation.&lt;/p&gt;
+
+&lt;p&gt;为了保持电荷平衡，每个Na变成vacancies时也会同时有Si和P的转化&lt;/p&gt;
+
+&lt;p&gt;DFT计算使用SCAN&lt;/p&gt;
+
+&lt;p&gt;计算结果的相图在x=2。35处与试验结果有出入，可以认为是Si与P重排的势垒比较高，所以这个反应是热力学可行但动力学不可行的&lt;/p&gt;
+
+&lt;p&gt;对于一些其他有更简单组成的NASICON结构也给出了一些相分离的理论&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">主要是\(Na_{1+x}Zr_2Si_xP_{3-x}O_{12}\)的相图</summary></entry><entry><title type="html">Li7La3Zr2O12固体电解质与LiCoO2正极界面的一种优化</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/In-situ-Li7La3Zr2O12-LiCoO2-interface-modification-for-advanced-all-solid-state-battery.html" rel="alternate" type="text/html" title="Li7La3Zr2O12固体电解质与LiCoO2正极界面的一种优化" /><published>2022-01-28T00:00:00+08:00</published><updated>2022-01-28T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/In-situ%20Li7La3Zr2O12-LiCoO2%20interface%20modification%20for%20advanced%20all-solid-state%20battery</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/In-situ-Li7La3Zr2O12-LiCoO2-interface-modification-for-advanced-all-solid-state-battery.html">&lt;p&gt;https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S0378775314003036?via%3Dihub&lt;/p&gt;
+
+&lt;p&gt;并不是计算相关的&lt;/p&gt;
+
+&lt;p&gt;石榴石结构Li7La3Zr2O12本身与锂金属之间有比较好的化学稳定性，有0.5mS/cm的锂离子电导率。但是石榴石与正极之间的界面会出现问题。在实际生产中需要加热以融合正极与电解质使得Li能够扩散。但是，加热过程中界面处发生元素扩散，这个扩散区会导致比较高的电阻 （但不是说电子电阻越大越好么。？可能太大了？），方法是在石榴石上面沉积一层Nb，形成低电阻率非晶层。界面电阻率降低&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S0378775314003036?via%3Dihub</summary></entry><entry><title type="html">石榴石基固态锂金属电池的界面工程：材料、结构和表征</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/27/Interface-Engineering-for-Garnet-Based-Solid-State-Lithium-Metal-Batteries_Materials,-Structures,-and-Characterization.html" rel="alternate" type="text/html" title="石榴石基固态锂金属电池的界面工程：材料、结构和表征" /><published>2022-01-27T00:00:00+08:00</published><updated>2022-01-27T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/27/Interface%20Engineering%20for%20Garnet-Based%20Solid-State%20Lithium-Metal%20Batteries_Materials,%20Structures,%20and%20Characterization</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/27/Interface-Engineering-for-Garnet-Based-Solid-State-Lithium-Metal-Batteries_Materials,-Structures,-and-Characterization.html">&lt;p&gt;https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/adma.201802068&lt;/p&gt;
+
+&lt;p&gt;提到了目前锂电池的阳极-电解质界面问题，
+除了设计界面提高润湿性来使得Li与固体电解质有更好的接触，还提到了可以通过使得Li合金化（之前的Li-In Li-Sn应该是类似思路）来增祺那个。也提到了说，目前固态电池中与锂合金相关的许多电化学与界面性能仍然不太清楚。石榴石-锂合金界面缺乏严谨的理论简介 （石榴石：例如\(Li_7La_3Zr_2O_{12}\)）&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/adma.201802068</summary></entry><entry><title type="html">电池界面的设计</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Towards-autonomous-high-throughput-multiscale-modelling-of-battery-interfaces.html" rel="alternate" type="text/html" title="电池界面的设计" /><published>2022-01-26T00:00:00+08:00</published><updated>2022-01-26T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Towards%20autonomous%20high-throughput%20multiscale%20modelling%20of%20battery%20interfaces</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Towards-autonomous-high-throughput-multiscale-modelling-of-battery-interfaces.html">&lt;p&gt;非常多的计算方法，想要找计算方法看这个就行了&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">非常多的计算方法，想要找计算方法看这个就行了</summary></entry><entry><title type="html">固体电解质的小综述</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Solid-Electrolytes-in-the-Spotlight.html" rel="alternate" type="text/html" title="固体电解质的小综述" /><published>2022-01-26T00:00:00+08:00</published><updated>2022-01-26T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Solid%20Electrolytes%20in%20the%20Spotlight</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Solid-Electrolytes-in-the-Spotlight.html">&lt;p&gt;说过去五年125篇固体电解质文章（应该比这个多？）&lt;/p&gt;
+
+&lt;p&gt;94篇是锂离子电池的固体电解质，25篇钠离子，多价离子电解质是非常小众的&lt;/p&gt;
+
+&lt;p&gt;硫化物固体电解质离子电导率比较高，但是可能在空气中不稳定 和/或 阳极/阴极稳定性差（会被电极氧化或还原）&lt;/p&gt;
+
+&lt;p&gt;”目前为止，探测离子电导率的最常用工具是EIS（电化学阻抗谱）“，提到了有一篇文章给出了一个测量电化学阻抗谱的标准。&lt;/p&gt;
+
+&lt;p&gt;还提到了一些界面相关的问题，比如界面处发生的固体电解质的分解/氧化等。&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">说过去五年125篇固体电解质文章（应该比这个多？）</summary></entry><entry><title type="html">硫化物正极固体电解质锂电池的界面</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/21/Favorable-Interfacial-Chemomechanics-Enables-Stable-Cycling-of-High-Li-Content-Li-In-or-Sn-Anodes-in-Sulfide-Electrolyte-Based-Solid-State-Batteries.html" rel="alternate" type="text/html" title="硫化物正极固体电解质锂电池的界面" /><published>2022-01-21T00:00:00+08:00</published><updated>2022-01-21T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/21/Favorable%20Interfacial%20Chemomechanics%20Enables%20Stable%20Cycling%20of%20High-Li-Content%20Li%E2%80%93In-or-Sn%20Anodes%20in%20Sulfide%20Electrolyte-Based%20Solid-State%20Batteries</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/21/Favorable-Interfacial-Chemomechanics-Enables-Stable-Cycling-of-High-Li-Content-Li-In-or-Sn-Anodes-in-Sulfide-Electrolyte-Based-Solid-State-Batteries.html">&lt;p&gt;锂电池中固体电解质可以抑制Li枝晶的生长从而使得锂金属阳极成为可能，但是Li枝晶还是可以刺穿固体电解质（通过晶界或者裂纹），这主要是因为固体电解质与Li金属的&lt;strong&gt;界面&lt;/strong&gt;不够平整，化学稳定性有限。&lt;/p&gt;
 
 &lt;p&gt;所以使用Li合金的体系作为阳极。这些合金虽然与固体电解质的热力学稳定性窗口不相容（会被氧化），但是可以形成一个稳定的界面相使得循环变得可能。&lt;/p&gt;
+
+&lt;h1 id=&quot;脱li过程中堆叠压力对于界面的影响&quot;&gt;脱Li过程中堆叠压力对于界面的影响&lt;/h1&gt;
+
+&lt;p&gt;实验体系主要是：&lt;/p&gt;
+
+\[A|Li_6PS_5Cl|In\]
+
+&lt;p&gt;其中\(A=(Li_{0.5}In,LiIn,Li_{13}In_3,Li_2Sn,Li)\)&lt;/p&gt;
+
+&lt;p&gt;整体反应类似于\(A+In=ALi_{-x}+Li_{x}In\)&lt;/p&gt;
+
+&lt;p&gt;堆叠压力是指将固体电极以一定的压力压在固体电解质上，从而降低电阻并且增加界面的一致性。通过施加压力，电阻会大约在40欧姆级别，说明是界面接触良好&lt;/p&gt;
+
+&lt;p&gt;在脱锂过程中Li从阳极转移到阴极的In中形成合金。如果只在最初施加堆叠压力，界面电阻显示阴极的In在整个过程中电阻没有什么太大变化，对于不同种类的阳极，纯Li阳极的电阻从最初的非常低的电阻，到反应结束时候变成最高的电阻，这个应该是在界面耗尽形成了空隙的原因。而其他的LiIn合金电阻的变化没有这么显著&lt;/p&gt;
+
+&lt;p&gt;而如果一直施加恒定的堆叠压力，那么电阻的变化不会有那么显著，而且容量也有所增加&lt;/p&gt;
+
+&lt;p&gt;计算部分，主要是计算了每种阴极材料中Li的迁移势垒。有一部分比较值得留意：&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;锂在锂金属（块体）中的迁移显示出最低的迁移能量（~69 meV，图4 e）。这种趋势的一个例外是 LiIn（~34 meV），其中容易的 Li 迁移发生在两个共享面扭曲的 LiIn 4四面体之间（见图 S13 f）。虽然实验报道 LiIn 在室温下是一种稳定的化合物（图1b），LiIn 在计算的 0 K 相图中出现轻微亚稳态（并且位于稳定线上方~3 meV/atom）。由于我们的 NEB 计算站点中的端点结构确实是亚稳态的，因此计算的迁移势垒为 0 K 被人为降低。考虑到我们的初始和最终结构模型的热力学不稳定性（并且 LiIn 模型包含 127 个原子），预计端点结构的稳定性会降低至少 ∼381 meV。因此，如果考虑到 LiIn 的亚稳态，Li +迁移势垒将为 ∼415 meV (381 + 34 meV)，这比 Li 13 In 3情况下计算的势垒高近 3 倍(∼172 meV，图4）。要充分评估 Li +在 LiIn 中的迁移特性，肯定需要更多的计算和实验研究。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;也就是说对于亚稳态的结构需要人工提升这个迁移势垒？必可活用于下一次&lt;/p&gt;
+
+&lt;p&gt;提出Li在合金中有两种不同的传输机制：interstitial或者vacancy。随着合金中Li浓度的变化，传输机制也有可能发生变化，从interstitial变成vacancy的模式&lt;/p&gt;
+
+&lt;h1 id=&quot;对称电池的锂循环&quot;&gt;对称电池的锂循环&lt;/h1&gt;
 
 &lt;p&gt;实验体系主要是：&lt;/p&gt;
 
@@ -8,48 +90,11 @@
 
 &lt;p&gt;其中\(A=(Li_{0.5}In,LiIn,Li_{13}In_3,Li_2Sn)\)&lt;/p&gt;
 
-&lt;p&gt;这是对称电极，充电时候Li会跑到正极，放电时候Li再回到负极&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">锂电池中固体电解质可以抑制Li枝晶的生长从而使得锂金属阳极成为可能，但是Li枝晶还是可以刺穿固体电解质（通过晶界或者裂纹），这主要是因为固体电解质与Li金属的界面不够平整，化学稳定性有限。</summary></entry><entry><title type="html">固体电解质电池综述</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Fundamentals-of-inorganic-solid-state-electrolytes-for-batteries.html" rel="alternate" type="text/html" title="固体电解质电池综述" /><published>2022-01-20T00:00:00+08:00</published><updated>2022-01-20T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Fundamentals%20of%20inorganic%20solid-state%20electrolytes%20for%20batteries</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Fundamentals-of-inorganic-solid-state-electrolytes-for-batteries.html">&lt;p&gt;从微观的原子迁移，到晶界孔隙的影响，再到宏观性质
+&lt;p&gt;这是对称电极，充电时候Li会跑到正极，放电时候Li再回到负极。中间隔着一层（大概很薄的）固体电解质&lt;/p&gt;
+
+&lt;p&gt;结论显示动力学方面讲Li-In合金比Li-Sn合金更好，但是LiIn系统中Li动力学随Li增加变差，但是Li-Sn合金随Li增加会变好。&lt;/p&gt;
+
+&lt;p&gt;循环性能显示在经过500次循环或者说1000消失之后没有非常大的衰减&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">锂电池中固体电解质可以抑制Li枝晶的生长从而使得锂金属阳极成为可能，但是Li枝晶还是可以刺穿固体电解质（通过晶界或者裂纹），这主要是因为固体电解质与Li金属的界面不够平整，化学稳定性有限。</summary></entry><entry><title type="html">固体电解质电池综述</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/20/Fundamentals-of-inorganic-solid-state-electrolytes-for-batteries.html" rel="alternate" type="text/html" title="固体电解质电池综述" /><published>2022-01-20T00:00:00+08:00</published><updated>2022-01-20T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/20/Fundamentals%20of%20inorganic%20solid-state%20electrolytes%20for%20batteries</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/20/Fundamentals-of-inorganic-solid-state-electrolytes-for-batteries.html">&lt;p&gt;从微观的原子迁移，到晶界孔隙的影响，再到宏观性质
 \(\sigma = q\;n\;u = \sigma _0T^m{\mathrm{e}}^{ - E_a/k_{\mathrm{B}}T}\)&lt;/p&gt;
 
-&lt;p&gt;界面相关的部分：电解质与电极的界面会发生比较复杂的反应。可以人工涂层来形成界面，也可以自发形成这个界面。对于界面有很多种性能的要求。&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">从微观的原子迁移，到晶界孔隙的影响，再到宏观性质 \(\sigma = q\;n\;u = \sigma _0T^m{\mathrm{e}}^{ - E_a/k_{\mathrm{B}}T}\)</summary></entry><entry><title type="html">硫化物和氧化物的晶界对于Mg扩散系数的影响</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Toward-Understanding-the-Different-Influences-of-Grain-Boundaries-on-Ion-Transport-in-Sulfide-and-Oxide-Solid-Electrolytes.html" rel="alternate" type="text/html" title="硫化物和氧化物的晶界对于Mg扩散系数的影响" /><published>2022-01-20T00:00:00+08:00</published><updated>2022-01-20T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Toward%20Understanding%20the%20Different%20Influences%20of%20Grain%20Boundaries%20on%20Ion%20Transport%20in%20Sulfide%20and%20Oxide%20Solid%20Electrolytes</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Toward-Understanding-the-Different-Influences-of-Grain-Boundaries-on-Ion-Transport-in-Sulfide-and-Oxide-Solid-Electrolytes.html">&lt;p&gt;和之前那篇研究晶界的文章类似，有比较清楚地表现了分子动力学建模的过程，是很好的参考&lt;/p&gt;
-
-&lt;p&gt;主要研究对象是\(Na_3PS_4 ，Na_3PO_4\)，研究结果是，对于硫化物，晶界并不会很严重地影响离子的扩散系数（relationship between ion transport and grain volume is less significant ），对于氧化物，在晶界处会有比较大的传输阻碍，所以其离子扩散能力随晶粒体积减小而降低。主要认为Na离子在晶界处与O过度配位&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">和之前那篇研究晶界的文章类似，有比较清楚地表现了分子动力学建模的过程，是很好的参考</summary></entry><entry><title type="html">多价电池的热力学和动力学综述</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Theoretical-Modelling-of-Multivalent-Ions-in-Inorganic-Hosts.html" rel="alternate" type="text/html" title="多价电池的热力学和动力学综述" /><published>2022-01-20T00:00:00+08:00</published><updated>2022-01-20T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Theoretical%20Modelling%20of%20Multivalent%20Ions%20in%20Inorganic%20Hosts</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Theoretical-Modelling-of-Multivalent-Ions-in-Inorganic-Hosts.html">&lt;p&gt;主要的热力学的DFT能量相关已经比较熟悉了，文章讲解了大部分的基本公式。另外对于熵有比较多的陈述。声子可以一定程度上的与熵关联。&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">主要的热力学的DFT能量相关已经比较熟悉了，文章讲解了大部分的基本公式。另外对于熵有比较多的陈述。声子可以一定程度上的与熵关联。</summary></entry><entry><title type="html">post spinel氧化物中Mg的迁移率</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Magnesium-ion-mobility-in-post-spinels-accessible-at-ambient-pressure.html" rel="alternate" type="text/html" title="post spinel氧化物中Mg的迁移率" /><published>2022-01-20T00:00:00+08:00</published><updated>2022-01-20T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Magnesium%20ion%20mobility%20in%20post-spinels%20accessible%20at%20ambient%20pressure</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/20/Magnesium-ion-mobility-in-post-spinels-accessible-at-ambient-pressure.html">&lt;p&gt;post spinel结构中Mg的迁移势垒相对比比较低。Mn的post spinel需要在超高压下制备，但是其他的过渡金属氧化物是可以制备的，另外有一些混合的过渡金属氧化物体系也可以。&lt;/p&gt;
-
-&lt;p&gt;研研究时候发现可逆插入Mg是可行的，但是产物的热力学稳定性比较差，可能会分解使得最终反应产物是氧化镁而不是镁的嵌入-&amp;gt;发生的是氧化反应而不是嵌入&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">post spinel结构中Mg的迁移势垒相对比比较低。Mn的post spinel需要在超高压下制备，但是其他的过渡金属氧化物是可以制备的，另外有一些混合的过渡金属氧化物体系也可以。</summary></entry><entry><title type="html">尖晶石镁硫系导体中点缺陷的作用</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/Role-of-Point-Defects-in-Spinel-Mg-Chalcogenide-Conductors.html" rel="alternate" type="text/html" title="尖晶石镁硫系导体中点缺陷的作用" /><published>2022-01-19T00:00:00+08:00</published><updated>2022-01-19T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/Role%20of%20Point%20Defects%20in%20Spinel%20Mg%20Chalcogenide%20Conductors</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/Role-of-Point-Defects-in-Spinel-Mg-Chalcogenide-Conductors.html">&lt;p&gt;待补充&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">待补充</summary></entry><entry><title type="html">多价电池中正极发生的是嵌入还是氧化</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/On-the-Balance-of-Intercalation-and-Conversion-Reactions-in-Battery-Cathode.html" rel="alternate" type="text/html" title="多价电池中正极发生的是嵌入还是氧化" /><published>2022-01-19T00:00:00+08:00</published><updated>2022-01-19T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/On%20the%20Balance%20of%20Intercalation%20and%20Conversion%20Reactions%20in%20Battery%20Cathode</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/On-the-Balance-of-Intercalation-and-Conversion-Reactions-in-Battery-Cathode.html">&lt;p&gt;对于Mg在正极的氧化物材料中的反应，例如\(\lambda-MnO_2\)中Mg是嵌入正极，产生类似于\(\lambda -MgMn_2O_4\)的产物，但是对于另外一些氧化物，发生的不是嵌入，而是氧化。例如
-\(Mg+\alpha- MnO_2=MgO+MnO\)&lt;/p&gt;
-
-&lt;p&gt;（或许也可以解释为\(\alpha-MgMn_2O_4\)发生了分解？）&lt;/p&gt;
-
-&lt;p&gt;结论是，双电子还原（或者说，多价阳离子与氧化物/硫化物征正极反应时候）更倾向于转化（产生两种氧化物）而并非嵌入，单电子还原（和Li金属等反应）部分倾向于嵌入部分倾向于转化&lt;/p&gt;
-
-&lt;p&gt;所以对于多价电池来说，抑制转化反应也是一个课题&lt;/p&gt;
-
-&lt;p&gt;目前发现了Cr对于这类结构来说是最适合多价阳离子嵌入的氧化物载体&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">对于Mg在正极的氧化物材料中的反应，例如\(\lambda-MnO_2\)中Mg是嵌入正极，产生类似于\(\lambda -MgMn_2O_4\)的产物，但是对于另外一些氧化物，发生的不是嵌入，而是氧化。例如 \(Mg+\alpha- MnO_2=MgO+MnO\)</summary></entry><entry><title type="html">Mg电池的coating材料</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/Ionic-Transport-in-Potential-Coating-Materials-for-Mg-Batteries.html" rel="alternate" type="text/html" title="Mg电池的coating材料" /><published>2022-01-19T00:00:00+08:00</published><updated>2022-01-19T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/Ionic%20Transport%20in%20Potential%20Coating%20Materials%20for%20Mg%20Batteries</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/Ionic-Transport-in-Potential-Coating-Materials-for-Mg-Batteries.html">&lt;p&gt;结论\(MgSiN_2 MgI_2 MgBr_2 MgSe MgS\)作为阳极涂层（包裹Mg），\(MgAl_2O_4 Mg(PO_3)_2\)作为阴极coating （包裹过渡金属氧化物）&lt;/p&gt;
-
-&lt;p&gt;对于涂层材料的要求：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;离子传导性
-在这篇文章中对于离子传导性的标准是迁移势垒小于980mV，比其他文章中的迁移势垒要大。这主要是因为涂层材料比较薄（几十纳米），所以对于迁移率要求没有这么严格&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;导电性
-要求比电解质中的导电性低易防止自放电等&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">结论\(MgSiN_2 MgI_2 MgBr_2 MgSe MgS\)作为阳极涂层（包裹Mg），\(MgAl_2O_4 Mg(PO_3)_2\)作为阴极coating （包裹过渡金属氧化物）</summary></entry><entry><title type="html">Mg电池Mg正极的spinel inversion</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/Influence-of-Inversion-on-Mg-Mobility-and-Electrochemistry-in-Spinels.html" rel="alternate" type="text/html" title="Mg电池Mg正极的spinel inversion" /><published>2022-01-19T00:00:00+08:00</published><updated>2022-01-19T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/Influence%20of%20Inversion%20on%20Mg%20Mobility%20and%20Electrochemistry%20in%20Spinels</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/Influence-of-Inversion-on-Mg-Mobility-and-Electrochemistry-in-Spinels.html">&lt;p&gt;\(MgTM_2X_4\),spinel，尖晶石结构。
-尖晶石结构中Mg是四面体配位的，是不利的配位环境，所以这种情况下迁移势垒比较低，动力学比较好&lt;/p&gt;
-
-&lt;p&gt;尖晶石反转现象是Mg与Mn的位置发生互换，反转程度可以从20%到60%左右。另一方面Mn会发生歧化\(Mn^{+3}-&amp;gt;Mn^{+2}+Mn^{+4}\)&lt;/p&gt;
-
-&lt;p&gt;在氧化物和硫化物中都会出现这种情况&lt;/p&gt;
-
-&lt;p&gt;对于不同程度的反转的结构，计算迁移势垒，不同反转结构的Mg的迁移路径也是不一样的&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">\(MgTM_2X_4\),spinel，尖晶石结构。 尖晶石结构中Mg是四面体配位的，是不利的配位环境，所以这种情况下迁移势垒比较低，动力学比较好</summary></entry><entry><title type="html">三元尖晶石氧族化物中的高镁迁移率</title><link href="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/High-magnesium-mobility-in-ternary-spinel-chalcogenides.html" rel="alternate" type="text/html" title="三元尖晶石氧族化物中的高镁迁移率" /><published>2022-01-19T00:00:00+08:00</published><updated>2022-01-19T00:00:00+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/High%20magnesium%20mobility%20in%20ternary%20spinel%20chalcogenides</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E5%90%8E%E6%84%9F/2022/01/19/High-magnesium-mobility-in-ternary-spinel-chalcogenides.html">&lt;p&gt;对于尖晶石结构的$Mg_2X_2Z_4,X=(In,Y,Sc),Z=(S,Se)$进行了研究，有比较高的室温下镁迁移率，而且可以与其他正极结合？&lt;/p&gt;
-
-&lt;p&gt;Mg倾向于八面体配位，而Zn倾向于四面体配位。当金属离子在不利配位的时候，会倾向于（比较容易地）向有力配位迁移。例如Mg在四面体间隙的时候会比较倾向于向八面体间隙中迁移。另外，四面体间隙和八面体间隙位点处的能量差越小越好，这个可以通过调整正极主体结构的金属类型来改善。&lt;/p&gt;
-
-&lt;p&gt;另一方面增加阴离子体积可以促进迁移/降低迁移势垒。&lt;/p&gt;
-
-&lt;p&gt;其他一个问题是，一些正极材料的导电性比较好，应当尽量抑制导电性。&lt;/p&gt;
-
-&lt;p&gt;对于Mg的氧族化物\(MgO, MgS,MgSe\)，这几种物质中MgSe的扩散势垒是695mV最低的，可能作为潜在的界面材料？&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">对于尖晶石结构的$Mg_2X_2Z_4,X=(In,Y,Sc),Z=(S,Se)$进行了研究，有比较高的室温下镁迁移率，而且可以与其他正极结合？</summary></entry></feed>
+&lt;p&gt;界面相关的部分：电解质与电极的界面会发生比较复杂的反应。可以人工涂层来形成界面，也可以自发形成这个界面。对于界面有很多种性能的要求。&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">从微观的原子迁移，到晶界孔隙的影响，再到宏观性质 \(\sigma = q\;n\;u = \sigma _0T^m{\mathrm{e}}^{ - E_a/k_{\mathrm{B}}T}\)</summary></entry></feed>

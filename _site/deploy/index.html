@@ -7,15 +7,15 @@
 <meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Deploy Guide" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
-<meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<meta name="description" content="stay 24, stay student." />
+<meta property="og:description" content="stay 24, stay student." />
 <link rel="canonical" href="http://localhost:4000/deploy/" />
 <meta property="og:url" content="http://localhost:4000/deploy/" />
 <meta property="og:site_name" content="Personal webpage" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Deploy Guide" />
 <script type="application/ld+json">
-{"@type":"WebPage","headline":"Deploy Guide","description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","url":"http://localhost:4000/deploy/","@context":"https://schema.org"}</script>
+{"@type":"WebPage","headline":"Deploy Guide","description":"stay 24, stay student.","url":"http://localhost:4000/deploy/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Personal webpage" /></head>
 <body><header class="site-header" role="banner">
@@ -30,7 +30,7 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/vasp_basic/">vasp理论</a><a class="page-link" href="/about/">About</a><a class="page-link" href="/compile/">vasp编译</a><a class="page-link" href="/deploy/">Deploy  Guide</a><a class="page-link" href="/pymatgen/">pymatgen</a><a class="page-link" href="/vasp_inputs/">vasp输入</a><a class="page-link" href="/vasp_practice/">vasp实例</a></div>
+        <div class="trigger"><a class="page-link" href="/vasp_basic/">vasp理论</a><a class="page-link" href="/about/">About</a><a class="page-link" href="/deploy/">Deploy  Guide</a><a class="page-link" href="/pymatgen/">pymatgen</a><a class="page-link" href="/vasp_inputs/">vasp输入</a><a class="page-link" href="/vasp_practice/">vasp实例</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -95,6 +95,7 @@
         </ul>
       </li>
       <li><a href="#ssh设置操作" id="markdown-toc-ssh设置操作">SSH设置操作</a>        <ul>
+          <li><a href="#ssh-server" id="markdown-toc-ssh-server">ssh-server</a></li>
           <li><a href="#ssh-config-文件示例" id="markdown-toc-ssh-config-文件示例">SSH config 文件示例</a></li>
           <li><a href="#ssh免密码登录" id="markdown-toc-ssh免密码登录">ssh免密码登录</a></li>
           <li><a href="#ssh映射磁盘" id="markdown-toc-ssh映射磁盘">ssh映射磁盘</a></li>
@@ -457,6 +458,13 @@ sudo ufw allow from 192.168.3.0/24 to any port 3389 proto tcp</p>
 <code class="language-plaintext highlighter-rouge">/usr/bin/vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs-fuse,allow_other</code></p>
 
 <h2 id="ssh设置操作">SSH设置操作</h2>
+
+<h3 id="ssh-server">ssh-server</h3>
+<p>LINUX默认没有ssh-server，也就是说默认不能作为ssh的目标</p>
+
+<p>需要安装openssh-server</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install openssh-server</code></p>
 
 <h3 id="ssh-config-文件示例">SSH config 文件示例</h3>
 
@@ -1253,7 +1261,7 @@ cmake -D PKG_GPU=on GPU_API=HIP -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc .
 </div>
 
       <div class="footer-col footer-col-3">
-        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+        <p>stay 24, stay student.</p>
       </div>
     </div>
 

@@ -3,21 +3,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>错误,Inconsistent Bravais lattice types | Personal webpage</title>
+<title>硫尖晶石化合物的评估 | Personal webpage</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="错误,Inconsistent Bravais lattice types" />
+<meta property="og:title" content="硫尖晶石化合物的评估" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="VASP 问题 记录跑vasp时候出现的各种问题" />
-<meta property="og:description" content="VASP 问题 记录跑vasp时候出现的各种问题" />
-<link rel="canonical" href="http://localhost:4000/vasp_error/2021/10/21/error1.html" />
-<meta property="og:url" content="http://localhost:4000/vasp_error/2021/10/21/error1.html" />
+<meta name="description" content="Mg迁移的活化能在大部分氧化物中都会大于650mV的阈值，但是在硫化物中的迁移率会相对比较高，以比较低的电压为代价" />
+<meta property="og:description" content="Mg迁移的活化能在大部分氧化物中都会大于650mV的阈值，但是在硫化物中的迁移率会相对比较高，以比较低的电压为代价" />
+<link rel="canonical" href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/18/Evaluation-of-sulfur-spinel-compounds-for-multivalent-battery-cathode-applications.html" />
+<meta property="og:url" content="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/18/Evaluation-of-sulfur-spinel-compounds-for-multivalent-battery-cathode-applications.html" />
 <meta property="og:site_name" content="Personal webpage" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-10-21T00:00:00+08:00" />
+<meta property="article:published_time" content="2022-01-18T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="错误,Inconsistent Bravais lattice types" />
+<meta property="twitter:title" content="硫尖晶石化合物的评估" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/vasp_error/2021/10/21/error1.html"},"@type":"BlogPosting","headline":"错误,Inconsistent Bravais lattice types","dateModified":"2021-10-21T00:00:00+08:00","datePublished":"2021-10-21T00:00:00+08:00","description":"VASP 问题 记录跑vasp时候出现的各种问题","url":"http://localhost:4000/vasp_error/2021/10/21/error1.html","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/18/Evaluation-of-sulfur-spinel-compounds-for-multivalent-battery-cathode-applications.html"},"@type":"BlogPosting","headline":"硫尖晶石化合物的评估","dateModified":"2022-01-18T00:00:00+08:00","datePublished":"2022-01-18T00:00:00+08:00","description":"Mg迁移的活化能在大部分氧化物中都会大于650mV的阈值，但是在硫化物中的迁移率会相对比较高，以比较低的电压为代价","url":"http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/18/Evaluation-of-sulfur-spinel-compounds-for-multivalent-battery-cathode-applications.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Personal webpage" /></head>
 <body><header class="site-header" role="banner">
@@ -40,39 +40,28 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">错误,Inconsistent Bravais lattice types</h1>
+    <h1 class="post-title p-name" itemprop="name headline">硫尖晶石化合物的评估</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-10-21T00:00:00+08:00" itemprop="datePublished">Oct 21, 2021
+      <time class="dt-published" datetime="2022-01-18T00:00:00+08:00" itemprop="datePublished">Jan 18, 2022
       </time></p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <h1 id="vasp-问题">VASP 问题</h1>
-<p>记录跑vasp时候出现的各种问题</p>
+    <p>Mg迁移的活化能在大部分氧化物中都会大于650mV的阈值，但是在硫化物中的迁移率会相对比较高，以比较低的电压为代价</p>
 
-<h2 id="error">Error</h2>
-<h3 id="inconsistent-bravais-lattice-types-fond-for-crystalline-and-reciprocal-lattice">Inconsistent Bravais lattice types fond for crystalline and reciprocal lattice</h3>
-<p>vasp.out输出：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Inconsistent Bravais lattice types found for crystalline and            |
-|     reciprocal lattice:                                                     |
-|                                                                             |
-|        Crystalline: base-centered monoclinic                                |
-|        Reciprocal : triclinic                                               |
-|                    (instead of base-centered monoclinic)                    |
-|                                                                             |
-|     In most cases this is due to inaccuracies in the specification of       |
-|     the crytalline lattice vectors.                                         |
-|                                                                             |
-|     Suggested SOLUTIONS:                                                    |
-|      ) Refine the lattice parameters of your structure,                     |
-|      ) and/or try changing SYMPREC.                                 
-</code></pre></div></div>
-<p>这个问题发生在211006warmup/results/initial_run/75_perc/Ca6Ti4Si6O24_0中,此项目为首先对晶体进行relax，然后用relax的结构进行重新计算。在重新计算时发生这个错误，这个是由于移除了晶体中的部分离子导致relax之后的结构失去了对称性？</p>
+<p>Mg金属阳极沉积时候的枝晶问题更少（相比于Li来说）</p>
 
-<p>解决办法：在INCAR中加入SYMPREC=1e-08，问题解决</p>
+<p>动力学问题比较严重，从离子在正极中的迁移率低（活化能高）问题到从电解质到电极表面的去溶剂化问题（参考2021-01-14-Elucidating the structure of the magnesium aluminum chloride complex electrolyte for magnesium-ion batteries）</p>
 
+<p>Mg等多价金属迁移率低有可能会是因为与正极的氧形成更强的化学键，另一方面主要是因为扩散路径，通过增加路径的宽度（或者说层状正极材料的层间距）可以增加迁移率。</p>
 
-  </div><a class="u-url" href="/vasp_error/2021/10/21/error1.html" hidden></a>
+<p>energy above hull中，0是stable，0～85meV/atom是metastable的判据，&gt;85eV一般认为是不稳定的</p>
+
+<p>尺寸问题比较明显。Ca离子偏向于八面体配位，而比较小的Mg离子（大约是S离子的40%）对于配位没有太大的倾向性，在四面体间隙中和在八面体间隙中的能量没有太大差别</p>
+
+<p>在计算中使用NEB与另外一个发表有比较大的activation energy barrier的差异，主要是因为在这个计算中晶体结构是relaxed with intercalant，或者说是带着阳离子（Ca/Mg）进行弛豫的，而另一工作是直接把不带阳离子的结构进行弛豫，这两种最后得到的晶格常数不同，这个工作中的activation energy barrier低于另一个工作，大概是因为带着阳离子的话晶体相当于被撑大了，所以更容易发生离子扩散？</p>
+
+  </div><a class="u-url" href="/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/18/Evaluation-of-sulfur-spinel-compounds-for-multivalent-battery-cathode-applications.html" hidden></a>
 </article>
 
       </div>
