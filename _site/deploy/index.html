@@ -1178,6 +1178,47 @@ cmake -D PKG_GPU=on GPU_API=HIP -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc .
 
 <p><code class="language-plaintext highlighter-rouge">sudo ldconfig</code></p>
 
+<ul>
+  <li>第二次安装GPU</li>
+</ul>
+
+<p>环境ROCM-4.1
+spack安装的openmpi
+应该是通过<code class="language-plaintext highlighter-rouge">spack install openmpi^clang@amd</code></p>
+
+<p>clang@amd的配置文件：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- compiler:
+    spec: clang@amd
+    paths:
+      cc: /opt/rocm/llvm/bin/clang
+      cxx: /opt/rocm/llvm/bin/clang++
+      f77: /opt/rocm/llvm/bin/flang
+      fc: /opt/rocm/llvm/bin/flang
+    flags: {}
+    operating_system: ubuntu20.04
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+</code></pre></div></div>
+
+<p>具体安装lammps应该是</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake -D PKG_GPU=on -D GPU_API=HIP -D HIP_PLATFORM=amd -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc -D CMAKE_INSTALL_PREFIX=/home/dx/app/lammps-gpu ../cmake
+make -j32
+make install
+</code></pre></div></div>
+
+<p><strong>注意运行lammps时候需要 -sf gpu才能正常运行</strong></p>
+
+<ul>
+  <li>测试
+<code class="language-plaintext highlighter-rouge">mpirun -n 4 ~/app/lammps-gpu/bin/lmp -sf gpu -var x 70 -in ~/repo/lammps-29sep2021/bench/in.lj</code></li>
+</ul>
+
+<p>var x是将系统扩大，但是x-100时候会爆显存
+x=70左右时候就已经有200w个原子了，应该也够用了</p>
+
 <h2 id="vasp">vasp</h2>
 
 <p>似乎不能在root账户编译。</p>
