@@ -1,8 +1,10 @@
 # lamdalamda.github.io
 
 # local build on windows：
-bundle add webrick
-bundle exec jekyll serve
+`bundle add webrick`
+
+
+`bundle exec jekyll serve`
 
 # latex 公式
 

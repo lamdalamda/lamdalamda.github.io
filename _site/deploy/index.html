@@ -61,6 +61,7 @@
   </li>
   <li><a href="#linux系统设置" id="markdown-toc-linux系统设置">Linux系统设置</a>    <ul>
       <li><a href="#安装54-kernel" id="markdown-toc-安装54-kernel">安装5.4 kernel</a></li>
+      <li><a href="#安装511-kernel" id="markdown-toc-安装511-kernel">安装5.11 kernel</a></li>
       <li><a href="#basic-linux-command" id="markdown-toc-basic-linux-command">basic linux command：</a></li>
       <li><a href="#basic-library" id="markdown-toc-basic-library">basic library</a></li>
       <li><a href="#ubuntu1804-root-登陆" id="markdown-toc-ubuntu1804-root-登陆">ubuntu18.04 root 登陆</a></li>
@@ -154,6 +155,7 @@
       <li><a href="#lammps-rocm-已成功" id="markdown-toc-lammps-rocm-已成功">lammps-rocm 已成功</a>        <ul>
           <li><a href="#需要安装openmpi" id="markdown-toc-需要安装openmpi">需要安装openmpi</a></li>
           <li><a href="#安装lammps-rocm" id="markdown-toc-安装lammps-rocm">安装lammps-rocm</a></li>
+          <li><a href="#lammps-mlip" id="markdown-toc-lammps-mlip">lammps-mlip</a></li>
         </ul>
       </li>
       <li><a href="#vasp" id="markdown-toc-vasp">vasp</a>        <ul>
@@ -251,6 +253,18 @@ wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+sudo dpkg -i *.deb
+</code></pre>
+<h2 id="安装511-kernel">安装5.11 kernel</h2>
+<pre><code class="language-{markdown}">sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.11.0-051100-generic_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.11.0-051100-lowlatency_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.11.0-051100_5.11.0-051100.202102142330_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-image-unsigned-5.11.0-051100-generic_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-image-unsigned-5.11.0-051100-lowlatency_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-modules-5.11.0-051100-generic_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-modules-5.11.0-051100-lowlatency_5.11.0-051100.202102142330_amd64.deb
 sudo dpkg -i *.deb
 </code></pre>
 <h2 id="basic-linux-command">basic linux command：</h2>
@@ -1219,6 +1233,70 @@ make install
 <p>var x是将系统扩大，但是x-100时候会爆显存
 x=70左右时候就已经有200w个原子了，应该也够用了</p>
 
+<h3 id="lammps-mlip">lammps-mlip</h3>
+
+<p>machine learning force field?</p>
+
+<p>尝试使用GPU包安装但是不成功。GPU和mlip是不能一起用的</p>
+
+<p>步骤：</p>
+
+<p><code class="language-plaintext highlighter-rouge">spack install openblas^clang@amd</code></p>
+
+<p>首先解压mlip2， interface， lammps
+然后</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load openblas-*
+mkdir build
+cd build
+cmake .. -D CMAKE_CXX_COMPILER=/opt/rocm/llvm/bin/clang++ -D CMAKE_C_COMPILER=/opt/rocm/llvm/bin/clang -D CMAKE_Fortran_COMPILER=/opt/rocm/llvm/bin/flang -DBLAS_ROOT=/home/dx/app/spack/opt/spack/linux-ubuntu20.04-haswell/clang-amd/openblas-0.3.18-m26i3cw4d3v2h3ntqqdqesjfrq5d5pxo/lib  # 记得改路径
+make -j32
+cp lib_mlip_interface.a /home/dx/repo/interface-lammps-mlip-2-master # 改路径
+export LAMMPS_PATH=/home/dx/repo/lammps-29Sep2021
+mkdir -p $LAMMPS_PATH/lib/mlip
+cp lib_mlip_interface.a $LAMMPS_PATH/lib/mlip
+cp LAMMPS/Makefile.lammps.template $LAMMPS_PATH/lib/mlip/Makefile.lammps
+cp -r LAMMPS/USER-MLIP/ $LAMMPS_PATH/src/
+cp LAMMPS/Install.sh $LAMMPS_PATH/src/USER-MLIP/
+cp LAMMPS/README $LAMMPS_PATH/src/USER-MLIP/
+cd $LAMMPS_PATH/src
+make no-user-mlip
+make yes-user-mlip
+# 之后需要修改一些makefile
+</code></pre></div></div>
+<p>安装GPU包
+需要在/home/dx/repo/lammps-29Sep2021/lib/gpu/Makefile.hip中，在“don’t change section below without need”之前添加</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HIP_PLATFORM=amd
+HIP_ARCH=gfx803
+</code></pre></div></div>
+<p>然后在这个文件夹里面<code class="language-plaintext highlighter-rouge">make -j32 -f Makefile.hip</code></p>
+
+<p>之后修改lammps-29Sep2021/src/MAKE/Makefile.mpi(注意路径)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CC =		mpicxx
+CCFLAGS =	-g -O3 -std=c++11 -lgfortran -L/opt/rocm/lib -lamdhip64   -fopenmp -L/home/dx/app/spack/opt/spack/linux-ubuntu20.04-haswell/clang-amd/openblas-0.3.18-m26i3cw4d3v2h3ntqqdqesjfrq5d5pxo/lib	-lopenblas
+
+
+SHFLAGS =	-fPIC
+DEPFLAGS =	-M
+
+LINK =		mpicxx
+LINKFLAGS =	-g -O3 -std=c++11  -lgfortran -L/opt/rocm/lib -lamdhip64   -fopenmp -L/home/dx/app/spack/opt/spack/linux-ubuntu20.04-haswell/clang-amd/openblas-0.3.18-m26i3cw4d3v2h3ntqqdqesjfrq5d5pxo/lib	-lopenblas
+LIB =
+SIZE =		size
+</code></pre></div></div>
+
+<p>以及<code class="language-plaintext highlighter-rouge">lammps-29Sep2021/src/STUBS/Makefile</code></p>
+
+<p>把g++改成<code class="language-plaintext highlighter-rouge">/opt/rocm/llvm/bin/clang++</code>（不确定有没有必要但还是改了吧）</p>
+
+<p>然后lammps-29Sep2021/src/中</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make yes-gpu
+make mpi-stubs
+make -j32 mpi
+
+</code></pre></div></div>
+<p>最后会得到lmp-mpi</p>
 <h2 id="vasp">vasp</h2>
 
 <p>似乎不能在root账户编译。</p>
