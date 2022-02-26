@@ -673,6 +673,14 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 /opt/rocm/opencl/bin/clinfo
 
 
+### 5.0.1
+
+5.0.1 要求5.8或者5.11kernel
+根据文档，如果想要安装多个rocm版本的话，需要先安装最新的。比如想要安装5.0.1和4.1，那么需要先安装5.0.1
+
+首先移除了所有的旧版软件，然后安装5.11kernel
+
+
 ### 4.1
 
 - 安装kernel
