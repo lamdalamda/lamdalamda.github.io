@@ -14,11 +14,16 @@ Remake@21.10.22
 
 
 
-# 必备知识
+# 必备知识（或者说一些写法之类的）
 
 ## Born-oppenheimer approximation 
 
 由于原子核质量远大于电子，在计算电子的一些性质时可以假设原子不动
+
+## bracket
+
+$$<\hat{O}>=<\Phi|\hat{O}|\Phi>=\int\int\int...\int\Phi^*\hat{O}\Phi dx_0dx_1.....dx_n$$
+
 ## 泛函
 
 
@@ -67,7 +72,158 @@ $$\hbar =m_e = e = 4\pi /\epsilon_0 = 1$$
 定义以上单位为1，用来简化计算
 
 
-## manybody schrodinger equation
+
+#  single electron scrodinger equation
+单电子薛定谔方程
+
+以原子核为坐标原点
+
+$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\nabla^2-\frac{Ze^2}{4\pi\epsilon_0r}$$
+
+$$-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(x,y,z)}{dx^2}-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(x,y,z)}{dy^2}-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(x,y,z)}{dz^2}-\frac{Ze^2}{4\pi\epsilon_0\sqrt{x^2+y^2+z^2}}\Psi=E\Psi$$
+
+转化为球坐标
+
+$$x=rcos\phi sin\theta$$
+$$y=rsin\phi sin\theta$$
+$$z=rcos\theta$$
+
+得到
+
+$$-\frac{\hbar^2 }{2m_e}\frac{d^2\Psi(r,\theta,\phi)}{d(rcos\phi sin\theta)^2}-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(r,\theta,\phi)}{d(rsin\phi sin\theta)^2}-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(r,\theta,\phi)}{d(rcos\theta)^2}-\frac{Ze^2}{4\pi\epsilon_0r}\Psi=E\Psi$$
+
+
+我不会解这个东西，网上得到的转换是
+
+
+
+$$-\frac{\hbar ^2 }{2\mu r^2}\frac{d[r^2\frac{d\Psi}{dr}]}{dr}-\frac{\hbar ^2 }{2\mu r^2 sin\theta}\frac{d[sin\theta \frac{d\Psi}{d\theta}]}{d\theta}-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}\frac{d^2\Psi}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}\Psi=E\Psi$$
+
+
+
+$$-\frac{\hbar ^2 }{2\mu r^2}[2r\frac{d\Psi}{dr}+r^2\frac{d^2\Psi}{dr^2}]-\frac{\hbar ^2 }{2\mu r^2 sin\theta}[cos\theta\frac{d\Psi}{d\theta}+sin\theta\frac{d^2\Psi}{d\theta^2}]-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}\frac{d^2\Psi}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}\Psi=E\Psi$$
+
+
+$$-\frac{\hbar ^2 }{\mu r}\frac{d\Psi}{dr}-\frac{\hbar ^2 }{2\mu }\frac{d^2\Psi}{dr^2}-\frac{\hbar ^2 cos\theta}{2\mu r^2 sin\theta}\frac{d\Psi}{d\theta}-\frac{\hbar ^2 }{2\mu r^2 }\frac{d^2\Psi}{d\theta^2}-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}\frac{d^2\Psi}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}\Psi=E\Psi$$
+
+将波函数分成r部分和角度部分
+
+$$\Psi(r,\theta,\phi)=R(r)Y(\theta,\phi)$$
+
+$$-\frac{\hbar ^2 }{\mu r}\frac{d(R(r)Y(\theta,\phi))}{dr}-\frac{\hbar ^2 }{2\mu }\frac{d^2(R(r)Y(\theta,\phi))}{dr^2}-\frac{\hbar ^2 cos\theta}{2\mu r^2 sin\theta}\frac{d(R(r)Y(\theta,\phi))}{d\theta}-\frac{\hbar ^2 }{2\mu r^2 }\frac{d^2(R(r)Y(\theta,\phi))}{d\theta^2}-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}\frac{d^2(R(r)Y(\theta,\phi))}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}(R(r)Y(\theta,\phi))=E(R(r)Y(\theta,\phi))$$
+
+$$-\frac{\hbar ^2 }{\mu r}Y(\theta,\phi)\frac{dR(r)}{dr}-\frac{\hbar ^2 }{2\mu }Y(\theta,\phi)\frac{d^2R(r)}{dr^2}-\frac{\hbar ^2 cos\theta}{2\mu r^2 sin\theta}R(r)\frac{dY(\theta,\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu r^2 }R(r)\frac{d^2Y(\theta,\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}R(r)\frac{d^2Y(\theta,\phi)}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}R(r)Y(\theta,\phi)=ER(r)Y(\theta,\phi)$$
+
+
+两边乘以$$\frac{r^2}{R(r)Y(\theta,\phi)}$$
+
+$$-\frac{\hbar ^2 r}{\mu R(r)}\frac{dR(r)}{dr}-\frac{\hbar ^2 r^2}{2\mu R(r)}\frac{d^2R(r)}{dr^2}-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta Y(\theta,\phi)}\frac{dY(\theta,\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu  Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2 Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\phi^2}-\frac{Ze^2r^2}{4\pi\epsilon_0}=E$$
+
+
+
+
+
+由此将整个的hamiltonian算符分割成了两个部分
+
+
+
+也就是说可以假设E=y+r（两个常数使得）
+
+$$-\frac{\hbar ^2 r}{\mu R(r)}\frac{dR(r)}{dr}-\frac{\hbar ^2 r^2}{2\mu R(r)}\frac{d^2R(r)}{dr^2}-\frac{Ze^2r^2}{4\pi\epsilon_0}=r_0$$
+
+$$-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta Y(\theta,\phi)}\frac{dY(\theta,\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu  Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2 Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\phi^2}=y_0$$
+
+这里相当于解也不知道叫啥（常微分？）方程
+
+然后继续分割角度部分
+
+$$-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta Y(\theta,\phi)}\frac{dY(\theta,\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu  Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2 Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\phi^2}=y_0$$
+
+$$-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta  \Theta(\theta)\Phi(\phi)}\frac{d \Theta(\theta)\Phi(\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)\Phi(\phi)}\frac{d^2 \Theta(\theta)\Phi(\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2  \Theta(\theta)\Phi(\phi)}\frac{d^2 \Theta(\theta)\Phi(\phi)}{d\phi^2}=y_0$$
+
+$$-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta  \Theta(\theta)\Phi(\phi)}\Phi(\phi)\frac{d \Theta(\theta)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)\Phi(\phi)}\Phi(\phi)\frac{d^2 \Theta(\theta)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2  \Theta(\theta)\Phi(\phi)}\Theta(\theta)\frac{d^2 \Phi(\phi)}{d\phi^2}=y_0$$
+
+$$-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta  \Theta(\theta)}\frac{d \Theta(\theta)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)}\frac{d^2 \Theta(\theta)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2  \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=y_0$$
+
+$$-\frac{\hbar ^2 cos\theta sin\theta}{2\mu   \Theta(\theta)}\frac{d \Theta(\theta)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)}sin\theta^2\frac{d^2 \Theta(\theta)}{d\theta^2}-\frac{\hbar ^2 }{2\mu   \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=y_0sin\theta^2$$
+
+得到
+
+$$-\frac{\hbar ^2 }{2\mu   \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=\phi_0$$
+
+和
+
+$$-\frac{\hbar ^2 cos\theta sin\theta}{2\mu   \Theta(\theta)}\frac{d \Theta(\theta)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)}sin\theta^2\frac{d^2 \Theta(\theta)}{d\theta^2}=y_0sin\theta^2-\phi_0$$
+
+实质上可以看出来，这两个之间是挺难分开的，干脆就是说，分不开。所以在解方程时候要先解phi的部分，将phi的结果代入theta
+
+## Azimuth part
+也就是$$\Phi$$
+
+$$-\frac{\hbar ^2 }{2\mu   \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=\phi_0$$
+
+有简单的解
+
+$$\Phi _m=c_1e^{im_l\phi}$$
+
+带回去得到
+
+$$-\frac{\hbar ^2 }{2\mu   c_1e^{im_l\phi}}[c_1(-m_l^2) e^{im_l\phi}]=\phi_0$$
+
+$$\frac{\hbar ^2m_l^2 }{2\mu }=\phi_0, (m_l=0,\pm 1,\pm 2, ...)$$
+
+可见这里面phi是一个比较均匀的项
+
+## theta part
+
+一堆看不懂的多项式，随量子数变化非常复杂，而且是一个与phi有关的
+
+在解这个的同时，theta回对phi的量子数进行限制
+
+结果上来看的话
+
+(5215)
+$$P(cos\theta)=sin^m\theta(a_0\sum_{n=0}^{\infty}\frac{a_{2n}}{a_0}cos^{2n}\theta+a_1\sum_{n=1}^{\infty}\frac{a_{2n+1}}{a_1}cos^{2n+1}\theta)$$
+
+
+
+
+
+
+$$l=0,ml=0,p=1$$
+$$l=0,ml=0,p=sin\theta$$
+$$l=0,ml=1,p=cos\theta$$
+
+$$l=2 ml=0 p=1.5cos^2\theta-0.5$$
+
+$$l=2 ml=1 p=3cos\theta sin\theta=1.5cos2\theta$$
+$$l=2 ml=2 p=3-3cos^2\theta=3sin^2\theta$$
+
+## R part
+
+$$-\frac{\hbar ^2 r}{\mu R(r)}\frac{dR(r)}{dr}-\frac{\hbar ^2 r^2}{2\mu R(r)}\frac{d^2R(r)}{dr^2}-\frac{Ze^2r^2}{4\pi\epsilon_0}=r_0$$
+
+解是
+
+$$R_{n,l}(r)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}$$
+n是主量子数，l是角量子数,b是一个与l相关的常数
+## Spin
+spin有点像一个dummy项，按照《a chemistry guide》书里面定义来
+$$\sigma(s), \sigma=[\alpha , \beta] $$
+一个与xyz无关的项和波函数相乘，所以其实在计算时候不会影响，因为算微分之类的东西的时候直接就被分离跑了.对于单个电子来说，spin或许是个无所谓的东西？（虽然它确实会受到外在磁场的影响）但是在研究多电子体系的时候则必须将spin纳入考虑。
+
+此时的oribtal变成了spin orbital
+
+$$\chi(r,\theta,\phi,\sigma)=\Psi(r,\theta,\phi)\alpha(s)$$
+
+## 单电子schrodinger方程最终形式(可能少了几项)
+
+$$\chi_{n,l,m_l,m_s}(r,\theta,\phi,s)=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)\sigma_{m_s}(s)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}c_1e^{im_l\phi}P(cos\theta)\sigma_{m_s}(s)$$
+
+
+# Manybody schrodinger equation
+
+(订正：注意这里面波函数应该有自旋项)
 
 为了研究物质的物理性质，需要解电子的波函数，然后可以通过算符施加在波函数来获得性质（例如用hamiltonian获得基态能量）
 
@@ -118,12 +274,12 @@ $$[-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2+\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum
 
 $$-\frac{\hbar ^2 }{2m_e}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})+(\frac{2e^2}{x_1-5}_{He与1号电子相互作用}+\frac{2e^2}{x_2-5}_{He,x_2}+\frac{2e^2}{x_3-5}_{He,x_3}+\frac{1e^2}{x_1-9}_{H,x_1}+\frac{1e^2}{x_2-9}_{H,x_2}+\frac{1e^2}{x_3-9}_{H,x_3}+\frac{e^2}{|x_1-x_2|}+\frac{e^2}{|x_1-x_3|}+\frac{e^2}{|x_2-x_3|}+C)\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
 
-显然形似$$\Psi(x_1,x_2,x_3)=e^{ikx_1}+e^{ikx_2}+e^{ikx_3}$$的这种简单解不成立，整体波函数将会是非常复杂的。注意$$x_1,x_2,x_3$$是三个在x轴上的变量。当然如果确实地解出了波函数（本征方程），那么粒子准确的运动形式就可以知道了（通过将解出的本征方程以及本征值代入time dependent schrodinger equation）
+显然形似$$\Psi(x_1,x_2,x_3)=e^{ikx_1}+e^{ikx_2}+e^{ikx_3}$$的这种简单解不成立，整体波函数将会是非常复杂的。注意$$x_1,x_2,x_3$$是三个在x轴上的变量。当然如果确实地解出了波函数（本征方程），那么粒子准确的运动形式就可以知道了（通过将解出的本征方程以及本征值代入time dependent schrodinger equation，可以得到比如x1与x2x3的关联）
 
 
 # Non-interacting (i.e. Hartree) electron approximation
 
-Hartree like electron approximation是假设电子之间没有互相作用。此假设通过更改hamiltonian来实现，是不准确的。得到的eigenfunction没有实质的物理意义，但是是一种估算
+Hartree like electron approximation是假设电子之间没有互相作用。此假设通过更改hamiltonian来实现，是不准确的。得到的eigenfunction没有实质的物理意义，但是是一种还算合理估算
 
 many body hamiltonian:
 $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2+\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i<j}\frac{e^2}{|r_i-r_j|}+Constant$$
@@ -290,6 +446,8 @@ The electron density that minimizes the energy of the overall functional is the 
 
 ->如果知道了泛函的形式，那么就可以计算出基态电子密度
 
+
+又或者说，引申一下，（书中没有）使得泛函能量最低的电子密度是薛定谔方程的解，而任何使得泛函成立的电子密度分布方程，其代入泛函后得到的值（或者说，其期待值）总大于等于薛定谔方程的基态能量？
 
 ## 泛函的具体形式 the energy functional
 
