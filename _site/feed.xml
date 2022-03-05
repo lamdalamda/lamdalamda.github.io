@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-02-10T11:14:45+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Personal webpage</title><subtitle>stay 24, stay student.</subtitle><entry><title type="html">无极固体电解质电池的interphase与interface</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/08/Interfaces-and-Interphases-in-All-Solid-State-Batteries-with-Inorganic-Solid-Electrolytes.html" rel="alternate" type="text/html" title="无极固体电解质电池的interphase与interface" /><published>2022-02-08T00:00:00+08:00</published><updated>2022-02-08T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/08/Interfaces%20and%20Interphases%20in%20All-Solid-State%20Batteries%20with%20Inorganic%20Solid%20Electrolytes</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/08/Interfaces-and-Interphases-in-All-Solid-State-Batteries-with-Inorganic-Solid-Electrolytes.html">&lt;p&gt;还是一个需要重点看的综述。本篇内容主要是和硫化物固体电解质有关。
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-02-26T22:21:32+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Personal webpage</title><subtitle>stay 24, stay student.</subtitle><entry><title type="html">锂电池界面的建模</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/10/Modeling-interfaces-between-solids-Application-to-Li-battery-materials.html" rel="alternate" type="text/html" title="锂电池界面的建模" /><published>2022-02-10T00:00:00+08:00</published><updated>2022-02-10T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/10/Modeling%20interfaces%20between%20solids-Application%20to%20Li%20battery%20materials</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/10/Modeling-interfaces-between-solids-Application-to-Li-battery-materials.html">&lt;p&gt;也是一个要重点读的文章，这篇文章非常明确地介绍了整个计算过程&lt;/p&gt;
+
+&lt;p&gt;所以这里面的界面应该就是说interface而不是interphase，或者也可以说是interphase和其他phase的interface（什么鬼）。总之讲的是两相之间界面的建模&lt;/p&gt;
+
+&lt;p&gt;第一个重点公式，也挺好理解的&lt;/p&gt;
+
+&lt;p&gt;界面的能量interface energy\(\gamma_{ab}(\Omega)=\frac{E_{ab}(\Omega,A,n_a,n_b)-n_aE_a-n_bE_b}{A}\)&lt;/p&gt;
+
+&lt;p&gt;其中Eab是建模的体系中a相+b相+interface区域的总能量，Ea和Eb是bulk energy，omega这里面指代表面的原子配置。&lt;/p&gt;
+
+&lt;p&gt;第二个公式work of adhesion&lt;/p&gt;
+
+\[W_{ab}(\Omega)=\gamma_{a,vacuum}(\Omega)+\gamma_{b,vacuum}(\Omega)-\gamma_{ab}(\Omega)\]
+
+&lt;p&gt;代入一下的话&lt;/p&gt;
+
+\[W_{ab}(\Omega)=\frac{E_{a,vacuum}(\Omega,A,n_a)-n_aE_a}{A}+\frac{E_{b,vacuum}(\Omega,A,n_b)-n_bE_b}{A}-\frac{E_{ab}(\Omega,A,n_a,n_b)-n_aE_a-n_bE_b}{A}=\frac{E_{a,vacuum}(\Omega,A,n_a)+E_{b,vacuum}(\Omega,A,n_b)-E_{ab}(\Omega,A,n_a,n_b)}{A}\]
+
+&lt;p&gt;那么这两个的区别在于，interface energy是界面体系总能量\(E_{ab}(\Omega,A,n_a,n_b)\)减去&lt;strong&gt;bulk&lt;/strong&gt;的A相和B相，而负的work of adhesion是界面体系总能量\(E_{ab}(\Omega,A,n_a,n_b)\)减去&lt;strong&gt;表面&lt;/strong&gt;的的A相和B相&lt;/p&gt;
+
+&lt;p&gt;以上显然对于coherent interface是适用的，但是对于semi-coherent或者incoherent interface来说，可能会形成位错之类的，那么会有一个额外的能量\(E_{strain}\)。文章里面稍微有点绕，讲了一些小体系中Estrain与原子数量的关系，
+对于小体系，从&lt;/p&gt;
+
+\[\gamma_{ab}(\Omega)=\frac{E_{ab}(\Omega,A,n_a,n_b)-n_aE_a-n_bE_b}{A}\]
+
+&lt;p&gt;变成了&lt;/p&gt;
+
+\[\gamma_{ab}(\Omega,n_a,n_b)=\frac{E_{ab}(\Omega,A,n_a,n_b)-n_aE_a-n_bE_b}{A}\]
+
+&lt;p&gt;也就是说现在interface energy从只和表面构型有关变成了除了与表面构型，和原子数量也相关。这主要是因为，原本因为除以了表面积，所以与原子数量无关，现在即使除了表面积，由于改变na或者nb会影响位错的数量 （比如晶格常数差距10%，那么5个a原子可能对应5个b原子，也可能会对上6个b原子），所以这时候interface energy会是na，nb的函数。这个Eab隐含了位错或者形变导致的能量&lt;/p&gt;
+
+&lt;p&gt;但是实际上一般研究的都是对于一个表面很大的体系，那么位错与原子数量na或者nb是成比例的，比如晶格常数相差10%，那么可以非常粗略的认为表面每10个晶格就会有一个位错引入，那么可以对公式进行改进&lt;/p&gt;
+
+&lt;p&gt;从&lt;/p&gt;
+
+\[\gamma_{ab}(\Omega,n_a,n_b)=\frac{E_{ab}(\Omega,A,n_a,n_b)-n_aE_a-n_bE_b}{A}\]
+
+&lt;p&gt;变成&lt;/p&gt;
+
+\[\gamma^{lim}_{ab}(\Omega)=\frac{E_{ab}(\Omega,A,n_a,n_b)-n_aE_a-n_bE_b-E_{strain}(\Omega,n_a,n_b)}{A}\]
+
+&lt;p&gt;计算strain energy的方法是，通过固定na的数量，调整nb的数量，计算能量的变化&lt;/p&gt;
+
+\[\gamma_{ab}(\Omega,n_a,n_b)=\gamma^{lim}_{ab}(\Omega)+n_b\sigma\]
+
+&lt;p&gt;比如说1000个a原子，晶格常数差距10%，那么可能会对b从890到910个进行计算，然后得到这个strain energy&lt;/p&gt;
+
+&lt;p&gt;而真实能量\(\gamma_{ab}(\Omega)\)会处在这个范围&lt;/p&gt;
+
+\[\gamma_{ab}^{lim}(\Omega)&amp;lt;\gamma_{ab}(\Omega)&amp;lt;\gamma_{ab}(\Omega,n_a,n_b)\]</content><author><name></name></author><category term="阅读文献" /><summary type="html">也是一个要重点读的文章，这篇文章非常明确地介绍了整个计算过程</summary></entry><entry><title type="html">无极固体电解质电池的interphase与interface</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/08/Interfaces-and-Interphases-in-All-Solid-State-Batteries-with-Inorganic-Solid-Electrolytes.html" rel="alternate" type="text/html" title="无极固体电解质电池的interphase与interface" /><published>2022-02-08T00:00:00+08:00</published><updated>2022-02-08T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/08/Interfaces%20and%20Interphases%20in%20All-Solid-State%20Batteries%20with%20Inorganic%20Solid%20Electrolytes</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/08/Interfaces-and-Interphases-in-All-Solid-State-Batteries-with-Inorganic-Solid-Electrolytes.html">&lt;p&gt;还是一个需要重点看的综述。本篇内容主要是和硫化物固体电解质有关。
 电解质被阳极金属还原生成的SEI，被阴极氧化的话则是生成CEI。硫化物的话稳定性窗口比较窄，两者都有可能发生。&lt;/p&gt;
 
 &lt;p&gt;文章里面有一个有趣的对晶界的定义：文章对晶界定义是：两个粒子接触时如果有不同的electrochemical potential，Li离子会从其中一个转移到另一个，形成一个缺锂的space charge layer，这会很大程度上使锂离子的传输变难&lt;/p&gt;
@@ -159,14 +208,7 @@
 
 &lt;p&gt;非常粗略的制备过程是，等量NG+NCNT分散在水中，加入苯胺，过硫酸铵，研磨后与硫磺混合。主要应该是用来提高电子和离子导电性&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/adfm.201909370</summary></entry><entry><title type="html">Mg和Ca电池的界面</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/03/Interfaces-and-Interphases-in-Ca-and-Mg-Batteries.html" rel="alternate" type="text/html" title="Mg和Ca电池的界面" /><published>2022-02-03T00:00:00+08:00</published><updated>2022-02-03T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/03/Interfaces%20and%20Interphases%20in%20Ca%20and%20Mg%20Batteries</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/02/03/Interfaces-and-Interphases-in-Ca-and-Mg-Batteries.html">&lt;p&gt;https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/admi.202101578&lt;/p&gt;
 
-&lt;p&gt;主要是液体电解质体系的MgCa电池界面的综述。亮点是总结了很多的界面产物，或许可以在建模时候参考&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/admi.202101578</summary></entry><entry><title type="html">正极和石榴石界面coating的计算</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Computation-guided-discovery-of-coating-materials-to-stabilize-the-interface-between-lithium-garnet-solid-electrolyte-and-high-energy-cathodes-for-all-solid-state-lithium-batteries.html" rel="alternate" type="text/html" title="正极和石榴石界面coating的计算" /><published>2022-01-28T00:00:00+08:00</published><updated>2022-01-28T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Computation-guided%20discovery%20of%20coating%20materials%20to%20stabilize%20the%20interface%20between%20lithium%20garnet%20solid%20electrolyte%20and%20high-energy%20cathodes%20for%20all-solid-state%20lithium%20batteries</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Computation-guided-discovery-of-coating-materials-to-stabilize-the-interface-between-lithium-garnet-solid-electrolyte-and-high-energy-cathodes-for-all-solid-state-lithium-batteries.html">&lt;p&gt;https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S2405829721002932?via%3Dihub&lt;/p&gt;
-
-&lt;p&gt;评估了几种正极：
-LiNi0.3Mn0.3Co0.3O2 (NMC 111), LiNi0.6Mn0.2Co0.2O2 (NMC 622), and LiNi0.8Mn0.1Co0.1O2 (NMC 811), and the compositions of the NMC cathodes with a single TM cation, LCO, LiNiO2 (LNO), LiMnO2, and LiMn2O4 (LMO).&lt;/p&gt;
-
-&lt;p&gt;有一个非常全面的热力学生成能表格&lt;/p&gt;
-
-&lt;p&gt;数据挺全的，很不错&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S2405829721002932?via%3Dihub</summary></entry><entry><title type="html">NASICON相图</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Phase-Behavior-in-Rhombohedral-NaSiCON-Electrolytes-and-Electrodes.html" rel="alternate" type="text/html" title="NASICON相图" /><published>2022-01-28T00:00:00+08:00</published><updated>2022-01-28T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Phase%20Behavior%20in%20Rhombohedral%20NaSiCON%20Electrolytes%20and%20Electrodes</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Phase-Behavior-in-Rhombohedral-NaSiCON-Electrolytes-and-Electrodes.html">&lt;p&gt;主要是\(Na_{1+x}Zr_2Si_xP_{3-x}O_{12}\)的相图&lt;/p&gt;
+&lt;p&gt;主要是液体电解质体系的MgCa电池界面的综述。亮点是总结了很多的界面产物，或许可以在建模时候参考&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/admi.202101578</summary></entry><entry><title type="html">NASICON相图</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Phase-Behavior-in-Rhombohedral-NaSiCON-Electrolytes-and-Electrodes.html" rel="alternate" type="text/html" title="NASICON相图" /><published>2022-01-28T00:00:00+08:00</published><updated>2022-01-28T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Phase%20Behavior%20in%20Rhombohedral%20NaSiCON%20Electrolytes%20and%20Electrodes</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Phase-Behavior-in-Rhombohedral-NaSiCON-Electrolytes-and-Electrodes.html">&lt;p&gt;主要是\(Na_{1+x}Zr_2Si_xP_{3-x}O_{12}\)的相图&lt;/p&gt;
 
 &lt;p&gt;这个结构的变化是？&lt;/p&gt;
 
@@ -186,7 +228,14 @@ LiNi0.3Mn0.3Co0.3O2 (NMC 111), LiNi0.6Mn0.2Co0.2O2 (NMC 622), and LiNi0.8Mn0.1Co
 
 &lt;p&gt;并不是计算相关的&lt;/p&gt;
 
-&lt;p&gt;石榴石结构Li7La3Zr2O12本身与锂金属之间有比较好的化学稳定性，有0.5mS/cm的锂离子电导率。但是石榴石与正极之间的界面会出现问题。在实际生产中需要加热以融合正极与电解质使得Li能够扩散。但是，加热过程中界面处发生元素扩散，这个扩散区会导致比较高的电阻 （但不是说电子电阻越大越好么。？可能太大了？），方法是在石榴石上面沉积一层Nb，形成低电阻率非晶层。界面电阻率降低&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S0378775314003036?via%3Dihub</summary></entry><entry><title type="html">石榴石基固态锂金属电池的界面工程：材料、结构和表征</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/27/Interface-Engineering-for-Garnet-Based-Solid-State-Lithium-Metal-Batteries_Materials,-Structures,-and-Characterization.html" rel="alternate" type="text/html" title="石榴石基固态锂金属电池的界面工程：材料、结构和表征" /><published>2022-01-27T00:00:00+08:00</published><updated>2022-01-27T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/27/Interface%20Engineering%20for%20Garnet-Based%20Solid-State%20Lithium-Metal%20Batteries_Materials,%20Structures,%20and%20Characterization</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/27/Interface-Engineering-for-Garnet-Based-Solid-State-Lithium-Metal-Batteries_Materials,-Structures,-and-Characterization.html">&lt;p&gt;https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/adma.201802068&lt;/p&gt;
+&lt;p&gt;石榴石结构Li7La3Zr2O12本身与锂金属之间有比较好的化学稳定性，有0.5mS/cm的锂离子电导率。但是石榴石与正极之间的界面会出现问题。在实际生产中需要加热以融合正极与电解质使得Li能够扩散。但是，加热过程中界面处发生元素扩散，这个扩散区会导致比较高的电阻 （但不是说电子电阻越大越好么。？可能太大了？），方法是在石榴石上面沉积一层Nb，形成低电阻率非晶层。界面电阻率降低&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S0378775314003036?via%3Dihub</summary></entry><entry><title type="html">正极和石榴石界面coating的计算</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Computation-guided-discovery-of-coating-materials-to-stabilize-the-interface-between-lithium-garnet-solid-electrolyte-and-high-energy-cathodes-for-all-solid-state-lithium-batteries.html" rel="alternate" type="text/html" title="正极和石榴石界面coating的计算" /><published>2022-01-28T00:00:00+08:00</published><updated>2022-01-28T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Computation-guided%20discovery%20of%20coating%20materials%20to%20stabilize%20the%20interface%20between%20lithium%20garnet%20solid%20electrolyte%20and%20high-energy%20cathodes%20for%20all-solid-state%20lithium%20batteries</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/28/Computation-guided-discovery-of-coating-materials-to-stabilize-the-interface-between-lithium-garnet-solid-electrolyte-and-high-energy-cathodes-for-all-solid-state-lithium-batteries.html">&lt;p&gt;https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S2405829721002932?via%3Dihub&lt;/p&gt;
+
+&lt;p&gt;评估了几种正极：
+LiNi0.3Mn0.3Co0.3O2 (NMC 111), LiNi0.6Mn0.2Co0.2O2 (NMC 622), and LiNi0.8Mn0.1Co0.1O2 (NMC 811), and the compositions of the NMC cathodes with a single TM cation, LCO, LiNiO2 (LNO), LiMnO2, and LiMn2O4 (LMO).&lt;/p&gt;
+
+&lt;p&gt;有一个非常全面的热力学生成能表格&lt;/p&gt;
+
+&lt;p&gt;数据挺全的，很不错&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://www-sciencedirect-com.libproxy1.nus.edu.sg/science/article/pii/S2405829721002932?via%3Dihub</summary></entry><entry><title type="html">石榴石基固态锂金属电池的界面工程：材料、结构和表征</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/27/Interface-Engineering-for-Garnet-Based-Solid-State-Lithium-Metal-Batteries_Materials,-Structures,-and-Characterization.html" rel="alternate" type="text/html" title="石榴石基固态锂金属电池的界面工程：材料、结构和表征" /><published>2022-01-27T00:00:00+08:00</published><updated>2022-01-27T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/27/Interface%20Engineering%20for%20Garnet-Based%20Solid-State%20Lithium-Metal%20Batteries_Materials,%20Structures,%20and%20Characterization</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/27/Interface-Engineering-for-Garnet-Based-Solid-State-Lithium-Metal-Batteries_Materials,-Structures,-and-Characterization.html">&lt;p&gt;https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/adma.201802068&lt;/p&gt;
 
 &lt;p&gt;提到了目前锂电池的阳极-电解质界面问题，
 除了设计界面提高润湿性来使得Li与固体电解质有更好的接触，还提到了可以通过使得Li合金化（之前的Li-In Li-Sn应该是类似思路）来增祺那个。也提到了说，目前固态电池中与锂合金相关的许多电化学与界面性能仍然不太清楚。石榴石-锂合金界面缺乏严谨的理论简介 （石榴石：例如\(Li_7La_3Zr_2O_{12}\)）&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">https://onlinelibrary-wiley-com.libproxy1.nus.edu.sg/doi/10.1002/adma.201802068</summary></entry><entry><title type="html">固体电解质的小综述</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Solid-Electrolytes-in-the-Spotlight.html" rel="alternate" type="text/html" title="固体电解质的小综述" /><published>2022-01-26T00:00:00+08:00</published><updated>2022-01-26T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Solid%20Electrolytes%20in%20the%20Spotlight</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Solid-Electrolytes-in-the-Spotlight.html">&lt;p&gt;说过去五年125篇固体电解质文章（应该比这个多？）&lt;/p&gt;
@@ -197,4 +246,4 @@ LiNi0.3Mn0.3Co0.3O2 (NMC 111), LiNi0.6Mn0.2Co0.2O2 (NMC 622), and LiNi0.8Mn0.1Co
 
 &lt;p&gt;”目前为止，探测离子电导率的最常用工具是EIS（电化学阻抗谱）“，提到了有一篇文章给出了一个测量电化学阻抗谱的标准。&lt;/p&gt;
 
-&lt;p&gt;还提到了一些界面相关的问题，比如界面处发生的固体电解质的分解/氧化等。&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">说过去五年125篇固体电解质文章（应该比这个多？）</summary></entry><entry><title type="html">电池界面的设计</title><link href="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Towards-autonomous-high-throughput-multiscale-modelling-of-battery-interfaces.html" rel="alternate" type="text/html" title="电池界面的设计" /><published>2022-01-26T00:00:00+08:00</published><updated>2022-01-26T00:00:00+08:00</updated><id>http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Towards%20autonomous%20high-throughput%20multiscale%20modelling%20of%20battery%20interfaces</id><content type="html" xml:base="http://localhost:4000/%E9%98%85%E8%AF%BB%E6%96%87%E7%8C%AE/2022/01/26/Towards-autonomous-high-throughput-multiscale-modelling-of-battery-interfaces.html">&lt;p&gt;非常多的计算方法，想要找计算方法看这个就行了&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">非常多的计算方法，想要找计算方法看这个就行了</summary></entry></feed>
+&lt;p&gt;还提到了一些界面相关的问题，比如界面处发生的固体电解质的分解/氧化等。&lt;/p&gt;</content><author><name></name></author><category term="阅读文献" /><summary type="html">说过去五年125篇固体电解质文章（应该比这个多？）</summary></entry></feed>

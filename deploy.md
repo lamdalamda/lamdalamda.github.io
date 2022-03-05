@@ -109,6 +109,19 @@ wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
 sudo dpkg -i *.deb
 ```
+## 安装5.11 kernel
+```{markdown}
+sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.11.0-051100-generic_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.11.0-051100-lowlatency_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.11.0-051100_5.11.0-051100.202102142330_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-image-unsigned-5.11.0-051100-generic_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-image-unsigned-5.11.0-051100-lowlatency_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-modules-5.11.0-051100-generic_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-modules-5.11.0-051100-lowlatency_5.11.0-051100.202102142330_amd64.deb
+sudo dpkg -i *.deb
+```
 ## basic linux command：
 
 su / sudo ：管理员权限
@@ -660,6 +673,14 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 /opt/rocm/opencl/bin/clinfo
 
 
+### 5.0.1
+
+5.0.1 要求5.8或者5.11kernel
+根据文档，如果想要安装多个rocm版本的话，需要先安装最新的。比如想要安装5.0.1和4.1，那么需要先安装5.0.1
+
+首先移除了所有的旧版软件，然后安装5.11kernel
+
+
 ### 4.1
 
 - 安装kernel
@@ -1114,8 +1135,74 @@ make install
 var x是将系统扩大，但是x-100时候会爆显存
 x=70左右时候就已经有200w个原子了，应该也够用了
 
+### lammps-mlip
+
+machine learning force field?
+
+尝试使用GPU包安装但是不成功。GPU和mlip是不能一起用的
+
+步骤：
+
+`spack install openblas^clang@amd`
+
+首先解压mlip2， interface， lammps
+然后
+
+```
+module load openblas-*
+mkdir build
+cd build
+cmake .. -D CMAKE_CXX_COMPILER=/opt/rocm/llvm/bin/clang++ -D CMAKE_C_COMPILER=/opt/rocm/llvm/bin/clang -D CMAKE_Fortran_COMPILER=/opt/rocm/llvm/bin/flang -DBLAS_ROOT=/home/dx/app/spack/opt/spack/linux-ubuntu20.04-haswell/clang-amd/openblas-0.3.18-m26i3cw4d3v2h3ntqqdqesjfrq5d5pxo/lib  # 记得改路径
+make -j32
+cp lib_mlip_interface.a /home/dx/repo/interface-lammps-mlip-2-master # 改路径
+export LAMMPS_PATH=/home/dx/repo/lammps-29Sep2021
+mkdir -p $LAMMPS_PATH/lib/mlip
+cp lib_mlip_interface.a $LAMMPS_PATH/lib/mlip
+cp LAMMPS/Makefile.lammps.template $LAMMPS_PATH/lib/mlip/Makefile.lammps
+cp -r LAMMPS/USER-MLIP/ $LAMMPS_PATH/src/
+cp LAMMPS/Install.sh $LAMMPS_PATH/src/USER-MLIP/
+cp LAMMPS/README $LAMMPS_PATH/src/USER-MLIP/
+cd $LAMMPS_PATH/src
+make no-user-mlip
+make yes-user-mlip
+# 之后需要修改一些makefile
+```
+安装GPU包
+需要在/home/dx/repo/lammps-29Sep2021/lib/gpu/Makefile.hip中，在“don't change section below without need”之前添加
+```
+HIP_PLATFORM=amd
+HIP_ARCH=gfx803
+```
+然后在这个文件夹里面`make -j32 -f Makefile.hip`
+
+之后修改lammps-29Sep2021/src/MAKE/Makefile.mpi(注意路径)
+```
+CC =		mpicxx
+CCFLAGS =	-g -O3 -std=c++11 -lgfortran -L/opt/rocm/lib -lamdhip64   -fopenmp -L/home/dx/app/spack/opt/spack/linux-ubuntu20.04-haswell/clang-amd/openblas-0.3.18-m26i3cw4d3v2h3ntqqdqesjfrq5d5pxo/lib	-lopenblas
 
 
+SHFLAGS =	-fPIC
+DEPFLAGS =	-M
+
+LINK =		mpicxx
+LINKFLAGS =	-g -O3 -std=c++11  -lgfortran -L/opt/rocm/lib -lamdhip64   -fopenmp -L/home/dx/app/spack/opt/spack/linux-ubuntu20.04-haswell/clang-amd/openblas-0.3.18-m26i3cw4d3v2h3ntqqdqesjfrq5d5pxo/lib	-lopenblas
+LIB =
+SIZE =		size
+```
+
+以及`lammps-29Sep2021/src/STUBS/Makefile`
+
+把g++改成`/opt/rocm/llvm/bin/clang++`（不确定有没有必要但还是改了吧）
+
+然后lammps-29Sep2021/src/中
+
+```
+make yes-gpu
+make mpi-stubs
+make -j32 mpi
+
+```
+最后会得到lmp-mpi
 ## vasp
 
 似乎不能在root账户编译。
