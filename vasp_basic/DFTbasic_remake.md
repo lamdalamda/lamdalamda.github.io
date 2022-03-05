@@ -380,7 +380,7 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
     - 所以最后是:
 
     $$H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})$$
-    
+
     $$H_{ele}\Psi(x_1,x_2,x_3)=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
 
 - Hartree Fock的表示法;
@@ -482,7 +482,7 @@ $$〈E〉=\int\Phi^*\hat{H}\Phi d\tau$$
 
 鬼知道这是个什么.
 
-$$\hat{h_1}\chi_1^{n_1,m_{s1}}(x_1)+\sum_j^N()$$
+
 
 $$-\frac{1}{2}\frac{d^2\chi_1^{n_1,m_{s1}*}(x_1)}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\chi_1^{n_1,m_{s1}*}(x_1)+[(\int \frac{\chi_2^{n_2,m_{s2}*}(x_2)\chi_2^{n_2,m_{s2}}(x_2)}{x_1-x_2}dx_2)\chi_1^{n_1,m_{s1}}(x_1)+(\int \frac{\chi_3^{n_3,m_{s3}*}(x_2)\chi_3^{n_3,m_{s3}}(x_2)}{x_1-x_2}dx_2)\chi_1^{n_1,m_{s1}}(x_1)]-[(\int \frac{\chi_2^{n_2,m_{s2}*}(x_2)\chi_1^{n_2,m_{s2}}(x_2)}{x_1-x_2}dx_2)\chi_2^{n_2,m_{s2}}(x_2)+(\int \frac{\chi_3^{n_3,m_{s3}*}(x_2)\chi_1^{n_3,m_{s3}}(x_2)}{x_1-x_2}dx_2)\chi_3^{n_3,m_{s3}}(x_2)]=\epsilon_i\chi_1^{n_1,m_{s1}}(x_1)$$
 
