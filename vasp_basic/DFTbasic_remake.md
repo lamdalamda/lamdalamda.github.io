@@ -80,31 +80,47 @@ notation and symbol
 
 区分这些符号是非常重要的.以下全部假设空间是一维的.扩充到三维只需要把变量和量子数从1变成3,或者说,x变成(x,y,z)或者($$r,\theta,\phi$$),量子数$$n,m_s$$变成$$n,l,m_l,m_s$$
 
-- $$\Psi^{n_0,n_1,...n_i,m_{s0},m_{s1},...m_{si}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Psi
-true wave function: 真正的(实际的)原子波函数,可以是单个电子体系,也可以是多个电子体系,i是总共的电子数.包含了来自于原子核和电子的所有信息.对于多个电子体系来讲这个Psi是个根本就无法表示也求不出来的理想值,是我们想要去趋近的值.**另外,这个波函数的变量数目是灵活的,他可以是spin的函数,或者时间的函数,也可以不考虑这两个变量.因为spin,时间,和电子坐标这三个东西不会互相影响(或许),所以把他们劈开看是没什么问题的**
+- $$\Psi^{n_0,n_1,...n_?,m_{s0},m_{s1},...m_{s?}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Psi
 
-- $$\Psi_{ele}^{n_0,n_1,...n_i,m_{s0},m_{s1},...m_{si}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Psi——electron
+true wave function: 真正的(实际的)原子波函数,可以是单个电子体系,也可以是多个电子体系,i是总共的电子数.包含了来自于原子核和电子的所有信息.对于多个电子体系来讲这个Psi是个根本就无法表示也求不出来的理想值,是我们想要去趋近的值.**另外,这个波函数的变量数目是灵活的,他可以是spin的函数,或者时间的函数,也可以不考虑这两个变量.因为spin,时间,和电子坐标这三个东西不会互相影响(或许),所以把他们劈开看是没什么问题的**,至于量子数,我也不知道这个有多少个量子数
+
+
+- $$\Psi_{ele}^{n_0,n_1,...n_?,m_{s0},m_{s1},...m_{s?}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Psi——electron
+
 True electronic wave function: 真正的(实际的)电子波函数,只表示电子部分而不表示原子部分.但是复杂度与Psi是一样的,因为原子部分只是一个常数(或者说随原子间距简单变化的值)
 
 
-- $$\Phi^{n_0,n_1,...n_i,m_{s0},m_{s1},...m_{si}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Phi
-Trial wave function: 指以Slater determinant形式模拟出来的波函数,是可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值
+- $$\Phi^{n_0,n_1,...n_?,m_{s0},m_{s1},...m_{s?}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Phi
+
+Trial wave function: 指以Slater determinant形式模拟出来的波函数,不是实际的波函数.是由$$\chi^{n,m_s}(x,\alpha(\sigma))$$形成slater行列式组合出来的波函数.如果$$\chi^{n,m_s}(x,\alpha(\sigma))$$可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值,则$$\Phi^{n_0,n_1,...n_i,m_{s0},m_{s1},...m_{si}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$也是数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值,但是这个的本征值不是真实值,而是真实原子波函数的本征值的近似,根据variational theory其能量总高于真实波函数的真实能量.
+
 
 - $$\phi^{n}(x)$$,phi
-Spatial orbital / Monoelectron Orbital / Hydrogen like orbital:没有包含电子自旋信息的单电子波函数/单电子轨道.可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值
+
+Spatial orbital / Monoelectron Orbital / Hydrogen like orbital:没有包含电子自旋信息的,真实类氢原子单电子波函数/单电子轨道.可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值,其就是single electron schrodinger方程的解.其能量是真实能量,本征态是真实本征态,有实际的物理意义.量子数(一维下是n,三维下是三个量子数)可以理解为变量,随能量不同而变化.
+
+- $$\chi^{n_1,n_2,...,n_K,m_s}(x,\alpha(\sigma))$$,chi
+
+spin orbital: 包括了spin信息的单电子波函数/单电子轨道(未必是类氢原子的),用来组合出slater determinant.是近似出来的波函数,不是真实的.
+
+其中一种得到$$\chi$$的方法是使用LCAO,对K个LCAO轨道$$\psi^{n}(x)$$进行线性组合,并且加入自旋部分.即$$\chi^{n,m_s}(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)+...+c_{K}\psi^{n_K}(x)]\alpha(\sigma)=[\sum_{\mu=1}^{K}c_{\mu}\psi^{n_{\mu}}(x)]\alpha(\sigma)$$
+
+- $$\psi^{n}(x)$$,psi
+
+在LCAO方法中组成$$\chi$$的单个类氢原子单电子波函数/单电子轨道,可以在数值或者形式上精确且完整地表达出来的波函数,有唯一明确形式,而且只有x一个变量,可求本征值,与$$\phi^{n}(x)$$不同的是,其量子数(一维下是n,三维下是三个量子数)是固定的,多个具有不同量子数的$$\psi$$组成了$$\chi^{n,m_s}(x,\alpha(\sigma))$$
+
 
 - $$\alpha(\sigma),\beta(\sigma)$$
 spin function, 表示电子自旋量的函数,不知道怎么表达(但是好像也不需要表达)
 
-- $$\chi^{n,m_s}(x,\alpha(\sigma))$$,chi
-spin orbital: 包括了spin信息的单电子波函数/单电子轨道,spin信息以外是可以精确且完整表示的.$$\chi(x,\alpha(\sigma))=\phi(x)$$
-
-- $$\psi^{n,m_s}(x,\alpha)$$,psi
-LCAO orbital: 一个LCAO orbital,是spin orbital的一种表示法???
 
 
 
-#  single electron scrodinger equation
+
+
+
+
+#  single electron schrodinger equation
 
 单电子薛定谔方程,此体系中只有一个电子.在不考虑电子自旋时候(也不需要考虑,因为自旋部分的方程和其他未知量是不相关的,即使算微分也是直接就被扔在外面)
 
@@ -259,7 +275,7 @@ spin有点像一个dummy项，$$s^{m_s}(\sigma), s=[\alpha , \beta],s取哪个�
 
 spatial orbital: $$\phi^{n,l,m_l}(x,y,z)=\phi^{n,l,m_l}(r,\theta,\phi)=\Psi^{n,l,m_l}(r,\theta,\phi)=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)$$
 
-spin orbital: $$\chi^{n,l,m_l,m_s}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))$$
+只有一个LCAO的spin orbital: $$\chi^{n,l,m_l,m_s}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))$$
 
 ## 单电子schrodinger方程大约的最终形式
 
@@ -418,7 +434,7 @@ _定理(还是公理?):由于电子是费米子，所以当两个电子交换位
 - $$\Phi^{n_0,n_1,...n_i,m_{s0},m_{s1},...m_{si}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Phi
 Trial wave function: 指以Slater determinant形式模拟出来的波函数,是可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值
 
-一维三电子的Slater determinant: 我懒得把alpha放在变量里面了,我不知道对不对,大概可能,比如状态为$$\alpha(\sigma)$$只能占据ms=+0.5的轨道,而状态为$$\beta(\sigma)$$只能占据ms=-0.5的轨道?或许吧,需要以后搞清楚
+一维三电子的Slater determinant: 我懒得把alpha放在变量里面了,我不知道对不对,大概可能,比如状态为$$\alpha(\sigma)$$只能占据ms=+0.5的轨道,而状态为$$\beta(\sigma)$$只能占据ms=-0.5的轨道?或许吧,需要以后搞清楚.另外这里面假设$$Chi$$就是单个spacial orbital对应的spin orbital.如果是LCAO的话那就把n看成其对应的LCAO的集合就行.
 
 $$\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))=\frac{1}{\sqrt6}det\left\{\begin{matrix}
 \chi_1^{n_1,m_{s1}}(x_1)&\chi_1^{n_1,m_{s1}}(x_2)&\chi_1^{n_1,m_{s1}}(x_3)\\
