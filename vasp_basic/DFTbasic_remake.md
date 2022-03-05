@@ -380,6 +380,7 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
     - 所以最后是:
 
     $$H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})$$
+    
     $$H_{ele}\Psi(x_1,x_2,x_3)=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
 
 - Hartree Fock的表示法;
@@ -464,7 +465,7 @@ $$〈E〉=\int\Phi^*\hat{H}\Phi d\tau$$
     回顾一下,前面说的$$\chi_1^{n_1,m_{s1}}(x_1)$$是单个电子的spin orbital,这是个有明确数学表达的function,那么显然E的这个期待值,不管是用手算还是用电脑积分,肯定是能得到一个确定的值的
 
     (脑洞)另外,如果上面的成立的话,似乎说明了电子之间无法区分,因为大概这个也是对的?
-    
+
     $$\int \chi_1^{n_1,m_{s1}*}(x_1)\hat{h}_1\chi_1^{n_1,m_{s1}}(x_1)dx_1=\int \chi_1^{n_1,m_{s1}*}(x_2)\hat{h}_1\chi_1^{n_1,m_{s1}}(x_2)dx_2=\int \chi_1^{n_1,m_{s1}*}(x_2)[-\frac{1}{2}\frac{d^2\chi_1^{n_1,m_{s1}*}(x_2)}{dx_2^2}-(\frac{1}{x_2-9}+\frac{1}{x_2-5})\chi_1^{n_1,m_{s1}*}(x_2)]dx$$
 
     虽然我不知道到底$$\chi_1^{n_1,m_{s1}}(x_1)=\chi_1^{n_1,m_{s1}}(x_2)$$还是$$\chi_1^{n_1,m_{s1}}(x_1)=-\chi_1^{n_1,m_{s1}}(x_2)$$,因为这两个都可以满足上面的公式,也有可能两个都不对
