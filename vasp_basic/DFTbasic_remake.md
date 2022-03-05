@@ -218,17 +218,21 @@ $$\frac{\hbar ^2m_l^2 }{2\mu }=\phi_0, (m_l=0,\pm 1,\pm 2, ...)$$
 结果上来看的话
 
 (5215)
+
 $$P(cos\theta)=sin^m\theta(a_0\sum_{n=0}^{\infty}\frac{a_{2n}}{a_0}cos^{2n}\theta+a_1\sum_{n=1}^{\infty}\frac{a_{2n+1}}{a_1}cos^{2n+1}\theta)$$
 
 
 
 $$l=0,ml=0,p=1$$
+
 $$l=0,ml=0,p=sin\theta$$
+
 $$l=0,ml=1,p=cos\theta$$
 
 $$l=2,ml=0, p=1.5cos^2\theta-0.5$$
 
 $$l=2, ml=1, p=3cos\theta sin\theta=1.5cos2\theta$$
+
 $$l=2, ml=2, p=3-3cos^2\theta=3sin^2\theta$$
 
 ## R part
@@ -248,7 +252,7 @@ $$\phi^{n,l,m_l}(x,y,z)=\Psi^{n,l,m_l}(r,\theta,\phi)=R_{n,l}(r)\Phi_{m_l}(\phi)
 
 
 ## Spin
-spin有点像一个dummy项，$$s^{m_s}(\sigma), s=[\alpha , \beta],s取哪个由m_s决定 $$
+spin有点像一个dummy项，$$s^{m_s}(\sigma), s=[\alpha , \beta],s取哪个由m_s决定$$
 一个与xyz无关的项和波函数相乘，所以其实在计算时候不会影响，因为算微分之类的东西的时候直接就被分离跑了.对于单个电子来说，spin或许是个无所谓的东西？（虽然它确实会受到外在磁场的影响）但是在研究多电子体系的时候则必须将spin纳入考虑。
 
 在考虑电子自旋之后此时的oribtal变成了spin orbital. 试试区分这两个
@@ -258,6 +262,7 @@ spatial orbital: $$\phi^{n,l,m_l}(x,y,z)=\phi^{n,l,m_l}(r,\theta,\phi)=\Psi^{n,l
 spin orbital: $$\chi^{n,l,m_l,m_s}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))$$
 
 ## 单电子schrodinger方程大约的最终形式
+
 (可能少了几项,估计哪里可能写错了,但不重要,反正没人在乎对不对,我们只需要知道这东西是能表示出来的就彳亍.)
 
 $$\chi_{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)\alpha^{m_s}(\sigma)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}c_1e^{im_l\phi}P(cos\theta)\alpha^{m_s}(\sigma)$$
@@ -325,6 +330,7 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
 所以说,还是研究不含时间的薛定谔方程
 
 对于真实Hamiltonian,可以进行一些简化.这些简化不损害其准确性.
+
 - 继续使用这个实例系统:
 
     假设**一维系统**中有A，B两个原子，A是He位于**x=5**，B是H位于**x=9**（**坐标只是为了方便看**），体系中还有三个电子，其坐标为变量$$x_1,x_2,x_3$$。则：
@@ -354,21 +360,34 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
     $$\hat{H}_{ele}\Psi=-\frac{1}{2}\sum_i\nabla_i^2\Psi-\sum_{i,I}\frac{Z_I}{r_i-R_I}\Psi+\sum_{i<j}\frac{1}{|r_i-r_j|}\Psi$$    
 
     - 电子动能:
+
     $$-\frac{1}{2}\sum_i\nabla_i^2\Psi=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})$$
+
     - 电子和He原子核的相互作用:(注意,电子之间不区分,所以三个电子既与He作用又与H作用)
+
     $$-\sum_{i,He}\frac{Z_{He}}{x_i-x_{He}}\Psi=-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5})\Psi$$
+
     - 电子和H原子核的相互作用:
+
     $$-\sum_{i,H}\frac{Z_{H}}{x_i-x_{H}}\Psi=-(\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})\Psi$$
+
     - 电子之间的相互作用
+
     $$\sum_{i<j}\frac{1}{|r_i-r_j|}\Psi=(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi$$
+
     - 原子核动能和相互作用在电子Hamiltonian中不写
+
     - 所以最后是:
+
     $$H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})$$
     $$H_{ele}\Psi(x_1,x_2,x_3)=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
 
 - Hartree Fock的表示法;
+
     主要是为了把单电子和双电子部分区分开,跟Hamiltonian本身没有区别
+
     令:
+
     $$\hat{h}_i=\hat{T_e^i}+\hat{V_{ne}^i}=-\frac{1}{2}\nabla_i^2-\sum_{I}\frac{Z_I}{r_i-R_I}$$
 
     $$\hat{V}_{ee}^{i,j}=\frac{1}{|r_i-r_j|}$$
@@ -376,8 +395,11 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
     $$\hat{H}_{ele}=\sum_i \hat{h}_i+\sum_i \sum_{j<i} \hat{V}_{ee}^{i,j}$$
 
     - 实例:对于之前实例中的第一个电子
+
     $$\hat{h}_1=\hat{T_e^1}+\hat{V_{ne}^1}=-\frac{1}{2}\nabla_1^2-\sum_{I}\frac{Z_I}{x_1-x_I}=-\frac{1}{2}\nabla_1^2-\frac{1}{x_1-9}-\frac{1}{x_1-5}$$
+
     $$\hat{h}_1\Psi=\hat{T_e^1}\Psi+\hat{V_{ne}^1}\Psi=-\frac{1}{2}\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\Psi$$
+
     $$\hat{V}_{ee}^{1,2}=\frac{1}{|x_1-x_2|}$$
 
 
@@ -391,6 +413,7 @@ _定理(还是公理?):由于电子是费米子，所以当两个电子交换位
 所以：引入Slater determinant来作为一种,模拟或者说,近似地表示多电子体系波函数的方式.
 
 前面说到
+
 - $$\Phi^{n_0,n_1,...n_i,m_{s0},m_{s1},...m_{si}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Phi
 Trial wave function: 指以Slater determinant形式模拟出来的波函数,是可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值
 
@@ -441,6 +464,7 @@ $$〈E〉=\int\Phi^*\hat{H}\Phi d\tau$$
     回顾一下,前面说的$$\chi_1^{n_1,m_{s1}}(x_1)$$是单个电子的spin orbital,这是个有明确数学表达的function,那么显然E的这个期待值,不管是用手算还是用电脑积分,肯定是能得到一个确定的值的
 
     (脑洞)另外,如果上面的成立的话,似乎说明了电子之间无法区分,因为大概这个也是对的?
+    
     $$\int \chi_1^{n_1,m_{s1}*}(x_1)\hat{h}_1\chi_1^{n_1,m_{s1}}(x_1)dx_1=\int \chi_1^{n_1,m_{s1}*}(x_2)\hat{h}_1\chi_1^{n_1,m_{s1}}(x_2)dx_2=\int \chi_1^{n_1,m_{s1}*}(x_2)[-\frac{1}{2}\frac{d^2\chi_1^{n_1,m_{s1}*}(x_2)}{dx_2^2}-(\frac{1}{x_2-9}+\frac{1}{x_2-5})\chi_1^{n_1,m_{s1}*}(x_2)]dx$$
 
     虽然我不知道到底$$\chi_1^{n_1,m_{s1}}(x_1)=\chi_1^{n_1,m_{s1}}(x_2)$$还是$$\chi_1^{n_1,m_{s1}}(x_1)=-\chi_1^{n_1,m_{s1}}(x_2)$$,因为这两个都可以满足上面的公式,也有可能两个都不对
