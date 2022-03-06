@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: DFT抽象圣经
 permalink: /vasp_basic/
 katex: True
@@ -66,55 +66,81 @@ hydrogen:比较特殊，因为氢原子是唯一没有core electron的 （往上
 
 实际材料的bonding一般是这五种的结合
 
+
+# 度量衡
+
 ## Hartree atomic units
 
 $$\hbar =m_e = e = 4\pi /\epsilon_0 = 1$$
 
+## Notation，那堆符号
+
 定义以上单位为1，用来简化计算
-
-# 度量衡
-
 取自MLE5215
 
 notation and symbol 
 
 区分这些符号是非常重要的.以下全部假设空间是一维的.扩充到三维只需要把变量和量子数从1变成3,或者说,x变成(x,y,z)或者($$r,\theta,\phi$$),量子数$$n,m_s$$变成$$n,l,m_l,m_s$$
 
-- $$\Psi^{n_0,n_1,...n_?,m_{s0},m_{s1},...m_{s?}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Psi
+- 电子数量N
 
-true wave function: 真正的(实际的)原子波函数,可以是单个电子体系,也可以是多个电子体系,i是总共的电子数.包含了来自于原子核和电子的所有信息.对于多个电子体系来讲这个Psi是个根本就无法表示也求不出来的理想值,是我们想要去趋近的值.**另外,这个波函数的变量数目是灵活的,他可以是spin的函数,或者时间的函数,也可以不考虑这两个变量.因为spin,时间,和电子坐标这三个东西不会互相影响(或许),所以把他们劈开看是没什么问题的**,至于量子数,我也不知道这个有多少个量子数
+体系中电子数量，N
+
+- $$\Psi^{n_0,n_1,...n_?,m_{s}^0,m_{s}^1,...m_{s}^{N}}(x_0,x_1,...x_N,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_N(\sigma_N))$$, Psi
+
+true wave function: 真正的(实际的)原子波函数,可以是单个电子体系,也可以是多个电子体系,N是总共的电子数.包含了来自于原子核和电子的所有信息.对于多个电子体系来讲这个Psi是个根本就无法表示也求不出来的理想值,是我们想要去趋近的值.**另外,这个波函数的变量数目是灵活的,取决于你考虑什么。他可以是spin的函数,或者时间的函数,也可以不考虑这两个变量.因为spin,时间,和电子坐标这三个东西应该说，是不会互相影响，还是说，线性不相关？所以(或许)把他们劈开看是没什么问题的**,至于量子数,我也不知道这个有多少个量子数，可能是3*电子数，也可能不是。在N>=2不可解，无法求本征值
 
 
-- $$\Psi_{ele}^{n_0,n_1,...n_?,m_{s0},m_{s1},...m_{s?}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Psi——electron
+- $$\Psi_{ele}^{n_0,n_1,...n_?,m_{s}^0,m_{s}^1,...m_{s}^{N}}(x_0,x_1,...x_N,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_N(\sigma_N))$$, Psi——electron
 
 True electronic wave function: 真正的(实际的)电子波函数,只表示电子部分而不表示原子部分.但是复杂度与Psi是一样的,因为原子部分只是一个常数(或者说随原子间距简单变化的值)
 
-
-- $$\Phi^{n_0,n_1,...n_?,m_{s0},m_{s1},...m_{s?}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Phi
-
-Trial wave function: 指以Slater determinant形式模拟出来的波函数,不是实际的波函数.是由$$\chi^{n,m_s}(x,\alpha(\sigma))$$形成slater行列式组合出来的波函数.如果$$\chi^{n,m_s}(x,\alpha(\sigma))$$可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值,则$$\Phi^{n_0,n_1,...n_i,m_{s0},m_{s1},...m_{si}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$也是数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值,但是这个的本征值不是真实值,而是真实原子波函数的本征值的近似,根据variational theory其能量总高于真实波函数的真实能量.
-
-
 - $$\phi^{n}(x)$$,phi
 
-Spatial orbital / Monoelectron Orbital / Hydrogen like orbital:没有包含电子自旋信息的,真实类氢原子单电子波函数/单电子轨道.可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值,其就是single electron schrodinger方程的解.其能量是真实能量,本征态是真实本征态,有实际的物理意义.量子数(一维下是n,三维下是三个量子数)可以理解为变量,随能量不同而变化.
+Spatial orbital / Monoelectron Orbital / Hydrogen like orbital:没有包含电子自旋信息的（也不需要包含电子自旋信息的）,真实类氢原子单电子波函数/单电子轨道.可以在数值或者形式上精确且完整地表达出来的波函数。可求本征值,其就是single electron schrodinger方程的解.其能量是真实能量,本征态是真实本征态,有实际的物理意义.与$$\chi，\psi$$不同在于，其量子数(一维下是n,三维下是三个量子数n,l,$$m_l$$)是一个变量,而不是预先定好的。会随能量不同而变化，反映出不同能级。$$\phi^{n}(x)$$是具有实际物理含义而且是真实描述了单电子体系中电子的波函数的。
 
-- $$\chi^{n_1,n_2,...,n_K,m_s}(x,\alpha(\sigma))$$,chi
+- $$\psi^{n_0}(x)$$,psi
 
-spin orbital: 包括了spin信息的单电子波函数/单电子轨道(未必是类氢原子的),用来组合出slater determinant.是近似出来的波函数,不是真实的.
+在LCAO方法中量子数确定的，单个类氢原子单电子波函数/单电子轨道,可以在数值或者形式上精确且完整地表达出来的波函数,有唯一明确形式,而且只有x是变量,可求本征值,与$$\phi^{n}(x)$$不同的是,其量子数(一维下是n,三维下是三个量子数)是固定的（或者提前确定好的）.或者说， $$\psi^{n_0}(x)$$是n=n0时候的$$\phi^{n}(x)$$。在LCAO方法中用来组成$$\chi$$.K个具有不同量子数的$$\psi^{n_i}(x)$$组成了$$\chi^{n_1,n_2,...,n_K,m_s}(x,\alpha(\sigma))$$
 
-其中一种得到$$\chi$$的方法是使用LCAO,对K个LCAO轨道$$\psi^{n}(x)$$进行线性组合,并且加入自旋部分.即$$\chi^{n,m_s}(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)+...+c_{K}\psi^{n_K}(x)]\alpha(\sigma)=[\sum_{\mu=1}^{K}c_{\mu}\psi^{n_{\mu}}(x)]\alpha(\sigma)$$
+- $$\chi^{n,m_s}(x,\alpha(\sigma))$$，或者\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma)),chi
 
-- $$\psi^{n}(x)$$,psi
+    spin orbital: 包括了spin信息的单电子波函数/单电子轨道。未必是类氢原子的，也可以是多电子体系中某单个电子的波函数
 
-在LCAO方法中组成$$\chi$$的单个类氢原子单电子波函数/单电子轨道,可以在数值或者形式上精确且完整地表达出来的波函数,有唯一明确形式,而且只有x一个变量,可求本征值,与$$\phi^{n}(x)$$不同的是,其量子数(一维下是n,三维下是三个量子数)是固定的,多个具有不同量子数的$$\psi$$组成了$$\chi^{n,m_s}(x,\alpha(\sigma))$$
+    是用来组合出slater determinant，作为slater行列式中的单个元素存在
+
+    可以表示真实的原子轨道，也可以表示近似的原子轨道。一般对于单电子体系，表示真实原子轨道；对于多电子体系，表示（通过LCAO或者其他方法）近似出来的原子轨道
+
+    - 如果表示真实波函数:
+
+        如果在单电子体系中，则有明确解，可以表示为$$\chi^{n,l,m_{l},m_{s}}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_{l},m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))$$。
+
+        但如果是多电子体系，则其函数是未知的。n是一个变量集合，而且不知道有多少个量子数，而且如果组合成slater determinant，则slater determinant也是无法表示，不可解的
+
+        所以一般在单电子体系中，表示的是真实的自旋轨道
+
+    - 如果是近似波函数
+
+        也可以是近似出来的波函数,一般用来在多电子体系中组合出slater determinant。其中一种得到近似的$$\chi$$的方法是使用LCAO,对K个LCAO轨道$$\psi^{n_i}(x)$$进行线性组合,并且加入自旋部分，注意此时的量子数n是由LCAO决定的确定值，形式上发生了变化：
+
+        $$\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)+...+c_{K}\psi^{n_K}(x)]\alpha(\sigma)=[\sum_{\mu=1}^{K}c_{\mu}\psi^{n_{\mu}}(x)]\alpha(\sigma)$$。
+
+        以此种方法得到的spin orbital$$\chi$$可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值。以此种方法得到的spin orbital$$\chi$$的量子数是LCAO轨道们的量子数的集合，是固定的，不是变量
+
+        但是，未必就要用LCAO方法来得到$$\chi$$，也可以（可能）有其他方法。（平面波基矢？不知道是不是）
+
+- $$\Phi^{n_0,n_1,...n_{(K*N)},m_{s}^0,m_{s}^1,...m_{s}^{N}}(x_0,x_1,...x_N,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_N(\sigma_N))$$, Phi
+
+Trial wave function: 指以Slater determinant形式模拟出来的波函数,不是实际的波函数.是由$$\chi^{n,m_s}(x,\alpha(\sigma))$$形成slater行列式组合出来的波函数.
+
+如果$$\chi^{n,m_s}(x,\alpha(\sigma))$$可以在数值或者形式上精确且完整地表达出来的波函数，例如使用LCAO方法,将spin orbital近似为K个原子轨道的linear combination：$$\chi^{n,m_s}(x,\alpha(\sigma))\approx\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma))$$，这里面除了x和spin都是常数
+
+则N个电子的trial wave function可以表示成$$\Phi^{n_0,n_1,...n_{(K*N)},m_{s}^0,m_{s}^1,...m_{s}^{N}}(x_0,x_1,...x_N,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_N(\sigma_N))$$此形式。是数值或者形式上可以精确且完整地表达出来的波函数,可解,可求本征值,但是这个的本征值不是真实值,而是真实原子波函数的本征值的近似,根据variational theory其能量总高于真实波函数的真实能量.
+
 
 
 - $$\alpha(\sigma),\beta(\sigma)$$
 spin function, 表示电子自旋量的函数,不知道怎么表达(但是好像也不需要表达)
-
-
-
 
 
 
@@ -207,61 +233,64 @@ $$-\frac{\hbar ^2 cos\theta sin\theta}{2\mu   \Theta(\theta)}\frac{d \Theta(\the
 
 实质上可以看出来，这两个之间是挺难分开的，干脆就是说，分不开。所以在解方程时候要先解phi的部分，将phi的结果代入theta.注意这个phi不是什么trial wave function,而是真实波函数的一部分.只是恰好这些有相同的希腊字母
 
-## Azimuth part
-也就是$$\Phi$$
+- Azimuth part $$\Phi$$
 
-$$-\frac{\hbar ^2 }{2\mu   \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=\phi_0$$
+  也就是$$\Phi$$
 
-有简单的解
+  $$-\frac{\hbar ^2 }{2\mu   \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=\phi_0$$
 
-$$\Phi _m=c_1e^{im_l\phi}$$
+  有简单的解
 
-带回去得到
+  $$\Phi _m=c_1e^{im_l\phi}$$
 
-$$-\frac{\hbar ^2 }{2\mu   c_1e^{im_l\phi}}[c_1(-m_l^2) e^{im_l\phi}]=\phi_0$$
+  带回去得到
 
-$$\frac{\hbar ^2m_l^2 }{2\mu }=\phi_0, (m_l=0,\pm 1,\pm 2, ...)$$
+  $$-\frac{\hbar ^2 }{2\mu   c_1e^{im_l\phi}}[c_1(-m_l^2) e^{im_l\phi}]=\phi_0$$
 
-大概能体会到这里面phi是一个在整个空间中比较均匀的项
+  $$\frac{\hbar ^2m_l^2 }{2\mu }=\phi_0, (m_l=0,\pm 1,\pm 2, ...)$$
 
-
-## theta part
-
-一堆看不懂的多项式，随量子数变化非常复杂，而且是一个与phi有关的
-
-在解这个的同时，theta回对phi的量子数进行限制
-
-结果上来看的话
-
-(5215)
-
-$$P(cos\theta)=sin^m\theta(a_0\sum_{n=0}^{\infty}\frac{a_{2n}}{a_0}cos^{2n}\theta+a_1\sum_{n=1}^{\infty}\frac{a_{2n+1}}{a_1}cos^{2n+1}\theta)$$
+  大概能体会到这里面phi是一个在整个空间中比较均匀的项
 
 
+- theta part $$\Theta$$
 
-$$l=0,ml=0,p=1$$
+  一堆看不懂的多项式，随量子数变化非常复杂，而且是一个与phi有关的
 
-$$l=0,ml=0,p=sin\theta$$
+  在解这个的同时，theta回对phi的量子数进行限制
 
-$$l=0,ml=1,p=cos\theta$$
+  结果上来看的话
 
-$$l=2,ml=0, p=1.5cos^2\theta-0.5$$
+  (5215)
 
-$$l=2, ml=1, p=3cos\theta sin\theta=1.5cos2\theta$$
+  $$P(cos\theta)=sin^m\theta(a_0\sum_{n=0}^{\infty}\frac{a_{2n}}{a_0}cos^{2n}\theta+a_1\sum_{n=1}^{\infty}\frac{a_{2n+1}}{a_1}cos^{2n+1}\theta)$$
 
-$$l=2, ml=2, p=3-3cos^2\theta=3sin^2\theta$$
 
-## R part
 
-$$-\frac{\hbar ^2 r}{\mu R(r)}\frac{dR(r)}{dr}-\frac{\hbar ^2 r^2}{2\mu R(r)}\frac{d^2R(r)}{dr^2}-\frac{Ze^2r^2}{4\pi\epsilon_0}=r_0$$
+  $$l=0,ml=0,p=1$$
 
-解是
+  $$l=0,ml=0,p=sin\theta$$
 
-$$R_{n,l}(r)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}$$
-n是主量子数，l是角量子数,b是一个与l相关的常数
+  $$l=0,ml=1,p=cos\theta$$
+
+  $$l=2,ml=0, p=1.5cos^2\theta-0.5$$
+
+  $$l=2, ml=1, p=3cos\theta sin\theta=1.5cos2\theta$$
+
+  $$l=2, ml=2, p=3-3cos^2\theta=3sin^2\theta$$
+
+- R part
+
+  $$-\frac{\hbar ^2 r}{\mu R(r)}\frac{dR(r)}{dr}-\frac{\hbar ^2 r^2}{2\mu R(r)}\frac{d^2R(r)}{dr^2}-\frac{Ze^2r^2}{4\pi\epsilon_0}=r_0$$
+
+  解是
+
+  $$R_{n,l}(r)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}$$
+  n是主量子数，l是角量子数,b是一个与l相关的常数
 
 ## spatial orbital
+
 已经解好了这几个部分的话,就可以得到单电子的,不考虑电子自旋时候的,spatial orbital(参考度量衡部分)
+量子数反映了能级，不同量子数对应不同能级/激发态（不知道这么说对不对）
 
 $$\phi^{n,l,m_l}(x,y,z)=\Psi^{n,l,m_l}(r,\theta,\phi)=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)$$
 
@@ -271,17 +300,19 @@ $$\phi^{n,l,m_l}(x,y,z)=\Psi^{n,l,m_l}(r,\theta,\phi)=R_{n,l}(r)\Phi_{m_l}(\phi)
 spin有点像一个dummy项，$$s^{m_s}(\sigma), s=[\alpha , \beta],s取哪个由m_s决定$$
 一个与xyz无关的项和波函数相乘，所以其实在计算时候不会影响，因为算微分之类的东西的时候直接就被分离跑了.对于单个电子来说，spin或许是个无所谓的东西？（虽然它确实会受到外在磁场的影响）但是在研究多电子体系的时候则必须将spin纳入考虑。
 
-在考虑电子自旋之后此时的oribtal变成了spin orbital. 试试区分这两个
+在考虑电子自旋之后此时的oribtal变成了spin orbital. 试试区分这两个。注意这个spin orbital是前面定义中，表示真实波函数的情形，其量子数为变量。
+
 
 spatial orbital: $$\phi^{n,l,m_l}(x,y,z)=\phi^{n,l,m_l}(r,\theta,\phi)=\Psi^{n,l,m_l}(r,\theta,\phi)=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)$$
 
-只有一个LCAO的spin orbital: $$\chi^{n,l,m_l,m_s}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))$$
+量子数是变量的spin orbital: $$\chi^{n,l,m_{l},m_{s}}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_{l},m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))$$
 
 ## 单电子schrodinger方程大约的最终形式
 
 (可能少了几项,估计哪里可能写错了,但不重要,反正没人在乎对不对,我们只需要知道这东西是能表示出来的就彳亍.)
 
-$$\chi_{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)\alpha^{m_s}(\sigma)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}c_1e^{im_l\phi}P(cos\theta)\alpha^{m_s}(\sigma)$$
+spin orbital: $$\chi_{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)\alpha^{m_s}(\sigma)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}c_1e^{im_l\phi}P(cos\theta)\alpha^{m_s}(\sigma)$$
+
 
 
 # Manybody schrodinger equation
@@ -291,7 +322,7 @@ $$\chi_{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=R_{n,l}(r)\Phi_{m_l}(\phi)\Th
 
 多电子的,不考虑时间的,真实Hamiltonian写作如下形式：
 
-$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+0.5\sum_{i\neq j}\frac{e^2}{|r_i-r_j|}-\sum_I\frac{\hbar ^2 }{2M_I}\sum_I\nabla_I^2+0.5sum_{I\neq J}\frac{Z_IZ_Je^2}{|R_I-R_J|}$$
+$$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+0.5\sum_{i\neq j}\frac{e^2}{|r_i-r_j|}-\sum_I\frac{\hbar ^2 }{2M_I}\sum_I\nabla_I^2+0.5\sum_{I\neq J}\frac{Z_IZ_Je^2}{|R_I-R_J|}$$
 
 注意
 
@@ -299,7 +330,7 @@ $$0.5\sum_{i\neq j}\frac{e^2}{|r_i-r_j|}=\sum_{i< j}\frac{e^2}{|r_i-r_j|}$$
 
 - 实例
 
-    假设**一维系统**中有A，B两个原子，A是He位于x=5，B是H位于x=9（坐标只是为了方便看），体系中还有三个电子，其坐标为变量$$x_1,x_2,x_3$$。则：
+    假设**一维系统**中有A，B两个原子，A是He位于x=5，B是H位于x=9（坐标只是为了方便看），体系中还有三个电子，其坐标为变量$$x_1,x_2,x_3$$。则,如果把原子核之间相互作用和原子核动能项写作C：
 
     time independent schorodinger方程：
 
@@ -311,7 +342,7 @@ $$0.5\sum_{i\neq j}\frac{e^2}{|r_i-r_j|}=\sum_{i< j}\frac{e^2}{|r_i-r_j|}$$
 
 ## 时间相关的薛定谔方程
 
-**这个可以完全不看,不需要管波函数随时间怎么变化.结论就是,我们想要的结果是不需要考虑时间变量也可以得到的**
+**这部分可以先跳过,不需要管波函数随时间怎么变化.结论就是,我们想要的结果是不需要考虑时间变量也可以得到的**
 
 此hamiltonian所对应的含时间的薛定谔方程time dependent schrodinger equation是：
 
@@ -343,9 +374,9 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
 
 ## 一些简化
 
-所以说,还是研究不含时间的薛定谔方程
+所以说,继续研究这个不含时间的薛定谔方程
 
-对于真实Hamiltonian,可以进行一些简化.这些简化不损害其准确性.
+对于真实Hamiltonian,可以进行一些简化.这些简化不损害其准确性和物理意义.
 
 - 继续使用这个实例系统:
 
@@ -356,7 +387,7 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
 
     $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i<j}\frac{e^2}{|r_i-r_j|}+Constant$$
 
-    得到的是电子hamiltonian
+    刨去那个constant，剩下得到的是电子hamiltonian
 
     $$\hat{H}_{ele}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i<j}\frac{e^2}{|r_i-r_j|}=\hat{T}_{electron}+\hat{V}_{nuclei-electron}+\hat{V}_{electron-electron}=\hat{T_e}+\hat{V_{ne}}+\hat{V_{ee}}$$
 
@@ -395,7 +426,7 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
 
     - 所以最后是:
 
-    $$H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})$$
+    $$H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})$$
 
     $$H_{ele}\Psi(x_1,x_2,x_3)=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
 
@@ -423,18 +454,28 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
 ## Slater determinant
 
 
+波函数的第一次近似
+
+算符简化完了之后，得想想办法把波函数给表示出来。遗憾的是，简化了半天，波函数肯定还是算不出来。所以通过variational theory，寻找近似的足够好的波函数。波函数的一个还算好的表示法是slater determinant
+
+
 _定理(还是公理?):由于电子是费米子，所以当两个电子交换位置时候符号必须改变_
 
 如果电子之间没有相互作用(这是错的),则波函数可以写作简单的单电子波函数相乘的形式.然而，当电子交换位置时候，波函数的正负号没有变化
 
 所以：引入Slater determinant来作为一种,模拟或者说,近似地表示多电子体系波函数的方式.
 
+也就是说$$\Psi\approx \Phi$$
+
 前面说到
 
 - $$\Phi^{n_0,n_1,...n_i,m_{s0},m_{s1},...m_{si}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))$$, Phi
 Trial wave function: 指以Slater determinant形式模拟出来的波函数,是可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值
 
-一维三电子的Slater determinant: 我懒得把alpha放在变量里面了,我不知道对不对,大概可能,比如状态为$$\alpha(\sigma)$$只能占据ms=+0.5的轨道,而状态为$$\beta(\sigma)$$只能占据ms=-0.5的轨道?或许吧,需要以后搞清楚.另外这里面假设$$Chi$$就是单个spacial orbital对应的spin orbital.如果是LCAO的话那就把n看成其对应的LCAO的集合就行.
+
+前面说到，如果$$\chi^{n,m_{s}}$$表示真实波函数:如果在单电子体系中，则有明确解，可以表示为$$\chi^{n,l,m_{l},m_{s}}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_{l},m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))$$。但如果是多电子体系，则其函数是未知的。此时n不是单个量子数，而是一个变量集合，而且不知道有多少个量子数，而且如果组合成slater determinant，则slater determinant也是无法表示，不可解的
+
+继续沿用那个实例体系:则一维三电子的Slater determinant: 我懒得把alpha放在变量里面了,我不知道对不对,大概可能,比如状态为$$\alpha(\sigma)$$只能占据ms=+0.5的轨道,而状态为$$\beta(\sigma)$$只能占据ms=-0.5的轨道?或许吧,需要以后搞清楚.另外这里面的$$\chi^{n,m_{s}}$$是真实波函数，在这个多电子体系下，是一个未知的函数。其中n1，n2，n3各自是一个不知道多少个量子数的集合，ms倒是确定只有一个。
 
 $$\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))=\frac{1}{\sqrt6}det\left\{\begin{matrix}
 \chi_1^{n_1,m_{s1}}(x_1)&\chi_1^{n_1,m_{s1}}(x_2)&\chi_1^{n_1,m_{s1}}(x_3)\\
@@ -444,7 +485,76 @@ $$\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_
 
 $$\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))=\frac{1}{\sqrt6}[\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)\chi_3^{n_3,m_{s3}}(x_3)+\chi_2^{n_2,m_{s2}}(x_1)\chi_3^{n_3,m_{s3}}(x_2)\chi_1^{n_1,m_{s1}}(x_3)+\chi_3^{n_3,m_{s3}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)\chi_2^{n_2,m_{s2}}(x_3)-\chi_3^{n_3,m_{s3}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)\chi_1^{n_1,m_{s1}}(x_3)-\chi_1^{n_1,m_{s1}}(x_1)\chi_3^{n_3,m_{s3}}(x_2)\chi_2^{n_2,m_{s2}}(x_3)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)\chi_3^{n_3,m_{s3}}(x_3)]$$
 
-这个波函数满足pauli exclusiong principle：不区分电子， 而且当两个电子具有相同坐标的波函数（概率）等于0（也就是说这个波函数不允许两个电子有相同坐标）。此表示方式也称为(不知道对不对)hartree product
+这个slater determinant主要是用来满足pauli exclusiong principle：不区分电子， 而且当两个电子具有相同坐标的波函数（概率）等于0（也就是说这个波函数不允许两个电子有相同坐标）。此表示方式也称为(不知道对不对)hartree product。不过虽然slater determinant有了明确形式，但是行列式里面每个元素（spin orbital）的形式暂时还不知道
+
+
+## LCAO- Linear-Combination of Atomic Orbitals
+
+LCAO是其中一种得到slater determinant中spin orbital的近似的方法，
+
+即
+
+
+$$\chi^{n,m_{s}}\approx\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)+...+c_{K}\psi^{n_K}(x)]\alpha(\sigma)=[\sum_{\mu=1}^{K}c_{\mu}\psi^{n_{\mu}}(x)]\alpha(\sigma)$$。
+
+
+沿用实例中，假设是每个spin orbital由两个atomic orbital模拟组成，即K=2情形
+
+$$\chi_1^{n_1,n_2,m_s}_(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)]\alpha(\sigma)$$
+
+
+一维的spatial orbital
+
+$$\frac{d^2 \Psi(x)}{dx^2}+\frac{Z}{x-x_{N}}\Psi=E\Psi$$
+
+看起来不知道怎么解，人手算估计费劲，但是肯定电脑能给出一个足够好的解（真实解而不是近似，实际上的一维单电子波函数）。为了理解起来方便，假设和三维单电子波函数的R部分相同或者类似（只是为了说明这是一个明确的公式，别那么抽象）
+
+根据网上的R部分解（https://chem.libretexts.org/Courses/University_of_California_Davis/UCD_Chem_107B%3A_Physical_Chemistry_for_Life_Scientists/Chapters/4%3A_Quantum_Theory/4.10%3A_The_Schr%C3%B6dinger_Wave_Equation_for_the_Hydrogen_Atom）
+
+$$\psi^{n=1}(x)=\frac{1}{\sqrt{\pi}}(\frac{Z}{a_0})^{1.5}e^{-\frac{Zx}{a_0}}$$
+
+$$\psi^{n=2}(x)=\frac{1}{\sqrt{32\pi}}(\frac{Z}{a_0})^{1.5}(2-\frac{Zx}{a_0})e^{-\frac{Zx}{2a_0}}$$
+
+魔改一下去掉无所谓的常数部分
+
+$$\psi^{n=1}(x)=Z^{1.5}e^{-Zx}$$
+
+$$\psi^{n=2}(x)=Z^{1.5}(2-Zx)e^{-\frac{Zx}{2}}$$
+
+继续之前的实例体系，A是He位于x=5，B是H位于x=9
+
+$$\psi^{n=1}_H(x)=e^{-(x-9)}=e^{9-x}$$
+
+$$\psi^{n=2}_H(x)=(2-(x-9))e^{-(x-9)/2}=(11-x)e^{\frac{9-x}{2}}$$
+
+$$\psi^{n=1}_{He}(x)=2^{1.5}e^{-2(x-5)}\approx3e^{10-2x}$$
+
+$$\psi^{n=2}_{He}(x)=2^{1.5}(2-2(x-5))e^{-2(x-5)/2}\approx(34-6x)e^{5-x}$$
+
+得到了上面四个spatial orbital，可以进行任意组合出来spin orbital，然后组合成slater determinant
+
+组合成spin orbital的常数也可以随便乱填。比如可以组合出来这种：
+
+$$\chi^{n_1=2,n_2=2}_1(x,s(\sigma))=[0.7\psi^{n=2}_H(x)+0.3\psi^{n=2}_{He}(x)]s(\sigma)=[0.7*3e^{10-2x}+0.3*(34-6x)e^{5-x}]s(\sigma)=[2.1e^{10-2x}+(10.2-1.8x)e^{5-x}]s(\sigma)$$
+
+$$\chi^{n_1=1,n_2=1}_2(x,s(\sigma))=[0.9\psi^{n=1}_H(x)+0.1\psi^{n=1}_{He}(x)]s(\sigma)=[0.9e^{9-x}+0.3e^{10-2x}]s(\sigma_2)$$
+
+$$\chi^{n_1=1,n_2=1}_3(x,s(\sigma))=[0.4\psi^{n=1}_H(x)+0.6\psi^{n=1}_{He}(x)]s(\sigma)=[0.4e^{9-x}+0.6e^{10-2x}]s(\sigma_3)$$
+
+往里面填三个电子，假设三个电子里面由有两alpha 的spin，有一个是beta的spin
+
+$$\Phi^{n=(2,2,1,1,1,1)}_{c=(0.7,0.3,0.9,0.1,0.4,0.6)}(x_1,\alpha_1(\sigma_1),x_2,\alpha_2(\sigma_2),x_3,\beta(\sigma_3))=\frac{1}{\sqrt6}det\left\{\begin{matrix}
+\chi_1(x_1,\alpha(\sigma_1))&\chi_1(x_2,\alpha(\sigma_2),)&\chi_1(x_3,\beta(\sigma_3))\\
+\chi_2(x_1,\alpha(\sigma_1))&\chi_2(x_2,\alpha(\sigma_2),)&\chi_2(x_3,\beta(\sigma_3))\\
+\chi_3(x_1,\alpha(\sigma_1))&\chi_3(x_2,\alpha(\sigma_2),)&\chi_3(x_3,\beta(\sigma_3))\\
+\end{matrix}\right\}$$
+
+
+$$\Phi^{n=(2,2,1,1,1,1)}_{c=(0.7,0.3,0.9,0.1,0.4,0.6)}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\beta(\sigma_3))=\frac{1}{\sqrt6}det\left\{\begin{matrix}
+[2e^{10-2x_1}+(10-2x_1)e^{5-x_1}]\alpha(\sigma_1)&[2e^{10-2x_2}+(10-2x_2)e^{5-x_2}]\alpha(\sigma_2)&[2e^{10-2x_3}+(10-2x_3)e^{5-x_3}]\beta(\sigma_3)\\
+[0.9e^{9-x_1}+0.3e^{10-2x_1}]\alpha(\sigma_1)&[0.9e^{9-x_2}+0.3e^{10-2x_2}]\alpha(\sigma_2)&[0.9e^{9-x_3}+0.3e^{10-2x_3}]\beta(\sigma_3)\\
+[0.4e^{9-x_1}+0.6e^{10-2x_1}]\alpha(\sigma_1)&[0.4e^{9-x_2}+0.6e^{10-2x_2}]\alpha(\sigma_2)&[0.4e^{9-x_3}+0.6e^{10-2x_3}]s\beta(\sigma_3)\\
+\end{matrix}\right\}$$
 
 ## expectation Value
 
