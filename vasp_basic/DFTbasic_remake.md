@@ -500,7 +500,7 @@ $$\chi^{n,m_{s}}\approx\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(
 
 沿用实例中，假设是每个spin orbital由两个atomic orbital模拟组成，即K=2情形
 
-$$\chi_1^{n_1,n_2,m_s}_(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)]\alpha(\sigma)$$
+$$\chi_1^{n_1,n_2,m_s}(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)]\alpha(\sigma)$$
 
 
 一维的spatial orbital
