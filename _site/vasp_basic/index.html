@@ -226,7 +226,7 @@ hydrogen:比较特殊，因为氢原子是唯一没有core electron的 （往上
 
 <ul>
   <li>
-    <p>\(\chi^{n,m_s}(x,\alpha(\sigma))\)，或者\chi^{n_1,n_2,…n_K,m_s}_{LCAO:c_1,c_2,…c_K}(x,\alpha(\sigma)),chi</p>
+    <p>\(\chi^{n,m_s}(x,\alpha(\sigma))\)，或者\(\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma))\),chi</p>
 
     <p>spin orbital: 包括了spin信息的单电子波函数/单电子轨道。未必是类氢原子的，也可以是多电子体系中某单个电子的波函数</p>
 
@@ -683,6 +683,10 @@ Trial wave function: 指以Slater determinant形式模拟出来的波函数,是�
 [0.9e^{9-x_1}+0.3e^{10-2x_1}]\alpha(\sigma_1)&amp;[0.9e^{9-x_2}+0.3e^{10-2x_2}]\alpha(\sigma_2)&amp;[0.9e^{9-x_3}+0.3e^{10-2x_3}]\beta(\sigma_3)\\
 [0.4e^{9-x_1}+0.6e^{10-2x_1}]\alpha(\sigma_1)&amp;[0.4e^{9-x_2}+0.6e^{10-2x_2}]\alpha(\sigma_2)&amp;[0.4e^{9-x_3}+0.6e^{10-2x_3}]s\beta(\sigma_3)\\
 \end{matrix}\right\}\]
+
+<p>继续看，发现一些有趣的性质，比如\(x_1=x_2\)时候determinant肯定是0了，因为前两列元素完全相同，然而\(x_2=x_3\)却没事，因为有alpha和beta的区别。</p>
+
+<p>这个determinant就是trial function。可以把trial function前面挂上算符就能得到本征之类的。看起来完全能解出来啊</p>
 
 <h2 id="expectation-value">expectation Value</h2>
 

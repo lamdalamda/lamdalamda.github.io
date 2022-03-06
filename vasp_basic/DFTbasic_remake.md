@@ -103,7 +103,7 @@ Spatial orbital / Monoelectron Orbital / Hydrogen like orbital:没有包含电�
 
 在LCAO方法中量子数确定的，单个类氢原子单电子波函数/单电子轨道,可以在数值或者形式上精确且完整地表达出来的波函数,有唯一明确形式,而且只有x是变量,可求本征值,与$$\phi^{n}(x)$$不同的是,其量子数(一维下是n,三维下是三个量子数)是固定的（或者提前确定好的）.或者说， $$\psi^{n_0}(x)$$是n=n0时候的$$\phi^{n}(x)$$。在LCAO方法中用来组成$$\chi$$.K个具有不同量子数的$$\psi^{n_i}(x)$$组成了$$\chi^{n_1,n_2,...,n_K,m_s}(x,\alpha(\sigma))$$
 
-- $$\chi^{n,m_s}(x,\alpha(\sigma))$$，或者\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma)),chi
+- $$\chi^{n,m_s}(x,\alpha(\sigma))$$，或者$$\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma))$$,chi
 
     spin orbital: 包括了spin信息的单电子波函数/单电子轨道。未必是类氢原子的，也可以是多电子体系中某单个电子的波函数
 
@@ -555,6 +555,10 @@ $$\Phi^{n=(2,2,1,1,1,1)}_{c=(0.7,0.3,0.9,0.1,0.4,0.6)}(x_1,x_2,x_3,\alpha_1(\sig
 [0.9e^{9-x_1}+0.3e^{10-2x_1}]\alpha(\sigma_1)&[0.9e^{9-x_2}+0.3e^{10-2x_2}]\alpha(\sigma_2)&[0.9e^{9-x_3}+0.3e^{10-2x_3}]\beta(\sigma_3)\\
 [0.4e^{9-x_1}+0.6e^{10-2x_1}]\alpha(\sigma_1)&[0.4e^{9-x_2}+0.6e^{10-2x_2}]\alpha(\sigma_2)&[0.4e^{9-x_3}+0.6e^{10-2x_3}]s\beta(\sigma_3)\\
 \end{matrix}\right\}$$
+
+继续看，发现一些有趣的性质，比如$$x_1=x_2$$时候determinant肯定是0了，因为前两列元素完全相同，然而$$x_2=x_3$$却没事，因为有alpha和beta的区别。
+
+这个determinant就是trial function。可以把trial function前面挂上算符就能得到本征之类的。看起来完全能解出来啊
 
 ## expectation Value
 
