@@ -313,6 +313,37 @@ spatial orbital: $$\phi^{n,l,m_l}(x,y,z)=\phi^{n,l,m_l}(r,\theta,\phi)=\Psi^{n,l
 
 spin orbital: $$\chi_{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)\alpha^{m_s}(\sigma)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}c_1e^{im_l\phi}P(cos\theta)\alpha^{m_s}(\sigma)$$
 
+对于单电子的波函数，spin有没有并不重要，因为不需要区分不同spin的电子，也没有第二个电子会占据这个轨道
+
+所以以下几个函数是等价的：真实波函数，真实电子波函数，spatial orbital， spin orbital。 也就是说，$$\Psi, \Psi_{ele},\phi$$
+
+注意，trial wavefunction和LCAO orbital并不表示真实波函数，因为这两个函数中的量子数是提前指定下来的常数。
+
+## one-dimension single electron wavefunction
+
+因为三维依旧是一个难以理解的波函数，所以这里有一个一维的单电子波函数供参照
+
+一维单电子波函数有一个量子数n，这个应该没什么难理解的，就是表示波函数能级
+
+由于波函数本身有很多常数，但是这个常数对于理解这个函数形式并不重要所以，所以直接将全部常数变成1
+
+其完整形式在这篇文章里面可以看到（https://royalsocietypublishing.org/doi/10.1098/rspa.2015.0534#RSPA20150534M2x7）
+
+$$\Psi_n(x)=e^{-|x|}L_n(|x|)$$
+
+其中$$L_n$$是一个随n变化形式的方程，称作laguerre polynomial
+
+对于前面几个n，其大概形式是
+
+$$\Psi_1(x)=e^{-|x|}L_1(|x|)=e^{-|x|}(1-x)$$
+
+$$\Psi_2(x)=e^{-|x|}L_2(|x|)=e^{-|x|}(x^2-4x+2)$$
+
+$$\Psi_3(x)=e^{-|x|}L_3(|x|)=e^{-|x|}(-x^3+9x^2-18x+6)$$
+
+...
+
+为了理解起来方便，我把那堆常数换成了1，而Laguerre polynomial多项式中每项的常数（摘抄自wikipedia），也没必要拘泥于其具体数值。
 
 
 # Manybody schrodinger equation
@@ -336,7 +367,7 @@ $$0.5\sum_{i\neq j}\frac{e^2}{|r_i-r_j|}=\sum_{i< j}\frac{e^2}{|r_i-r_j|}$$
 
     $$[-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i<j}\frac{e^2}{|r_i-r_j|}+C]\Psi=E\Psi$$
 
-    $$-\frac{\hbar ^2 }{2m_e}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})+(\frac{2e^2}{x_1-5}_{He与1号电子相互作用}+\frac{2e^2}{x_2-5}_{He,x_2}+\frac{2e^2}{x_3-5}_{He,x_3}+\frac{1e^2}{x_1-9}_{H,x_1}+\frac{1e^2}{x_2-9}_{H,x_2}+\frac{1e^2}{x_3-9}_{H,x_3}+\frac{e^2}{|x_1-x_2|}+\frac{e^2}{|x_1-x_3|}+\frac{e^2}{|x_2-x_3|}+C)\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
+    $$-\frac{\hbar ^2 }{2m_e}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}-\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2e^2}{x_1-5}_{He与1号电子相互作用}+\frac{2e^2}{x_2-5}_{He,x_2}+\frac{2e^2}{x_3-5}_{He,x_3}+\frac{1e^2}{x_1-9}_{H,x_1}+\frac{1e^2}{x_2-9}_{H,x_2}+\frac{1e^2}{x_3-9}_{H,x_3})\Psi(x_1,x_2,x_3)+(\frac{e^2}{|x_1-x_2|}+\frac{e^2}{|x_1-x_3|}+\frac{e^2}{|x_2-x_3|}+C)\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
 
     显然形似$$\Psi(x_1,x_2,x_3)=e^{ikx_1}+e^{ikx_2}+e^{ikx_3}$$的这种简单解不成立，整体波函数将会是非常复杂的。注意$$x_1,x_2,x_3$$是三个在x轴上的变量。当然如果确实地解出了波函数（本征方程），那么粒子准确的运动形式就可以知道了（通过将解出的本征方程以及本征值代入time dependent schrodinger equation，可以得到比如x1与x2x3的关联,什么$$x_1*x_2=e^{x_3}-x_2$$之类的关系,这个是随便乱写的）
 
@@ -399,26 +430,27 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
 
 
 - 实例:
+  
     这时候实例系统的电子Hamiltonian:
     $$\hat{H}_{ele}=-\frac{1}{2}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_I}{r_i-R_I}+\sum_{i<j}\frac{1}{|r_i-r_j|}$$
 
-    波函数:
+    作用在波函数上:
 
     $$\hat{H}_{ele}\Psi=-\frac{1}{2}\sum_i\nabla_i^2\Psi-\sum_{i,I}\frac{Z_I}{r_i-R_I}\Psi+\sum_{i<j}\frac{1}{|r_i-r_j|}\Psi$$    
 
-    - 电子动能:
+    - 第一项是电子动能:
 
     $$-\frac{1}{2}\sum_i\nabla_i^2\Psi=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})$$
 
-    - 电子和He原子核的相互作用:(注意,电子之间不区分,所以三个电子既与He作用又与H作用)
+    - 然后第二项中，电子和He原子核的相互作用:(注意,电子之间不区分,所以三个电子既与He作用又与H作用)
 
     $$-\sum_{i,He}\frac{Z_{He}}{x_i-x_{He}}\Psi=-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5})\Psi$$
 
-    - 电子和H原子核的相互作用:
+    - 第二项中电子和H原子核的相互作用:
 
     $$-\sum_{i,H}\frac{Z_{H}}{x_i-x_{H}}\Psi=-(\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})\Psi$$
 
-    - 电子之间的相互作用
+    - 最后第三项中电子之间的相互作用
 
     $$\sum_{i<j}\frac{1}{|r_i-r_j|}\Psi=(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi$$
 
@@ -426,9 +458,9 @@ $$\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_
 
     - 所以最后是:
 
-    $$H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})$$
+    $$H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})+(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})$$
 
-    $$H_{ele}\Psi(x_1,x_2,x_3)=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
+    $$H_{ele}\Psi(x_1,x_2,x_3)=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})\Psi(x_1,x_2,x_3)+(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)$$
 
 - Hartree Fock的表示法;
 
@@ -556,9 +588,9 @@ $$\Phi^{n=(2,2,1,1,1,1)}_{c=(0.7,0.3,0.9,0.1,0.4,0.6)}(x_1,x_2,x_3,\alpha_1(\sig
 [0.4e^{9-x_1}+0.6e^{10-2x_1}]\alpha(\sigma_1)&[0.4e^{9-x_2}+0.6e^{10-2x_2}]\alpha(\sigma_2)&[0.4e^{9-x_3}+0.6e^{10-2x_3}]s\beta(\sigma_3)\\
 \end{matrix}\right\}$$
 
-继续看，发现一些有趣的性质，比如$$x_1=x_2$$时候determinant肯定是0了，因为前两列元素完全相同，然而$$x_2=x_3$$却没事，因为有alpha和beta的区别。
+继续看，发现一些有趣的性质，比如$$x_1=x_2$$时候determinant肯定是0了，因为前两列元素完全相同，然而$$x_2=x_3$$却没事，因为有alpha和beta的区别。也就是说，两个电子坐标相同但具有相反自旋的时候，可以看到slater determinant不是0，也就是说这个波函数概率不总为0
 
-这个determinant就是trial function。可以把trial function前面挂上算符就能得到本征之类的。看起来完全能解出来啊
+这个determinant就是trial function。可以把trial function前面挂上算符就能得到本征之类的。看起来只要想要解就能完全能解出来啊
 
 ## expectation Value
 
@@ -571,6 +603,10 @@ $$\hat{H}\Psi=E\Psi$$
 而期待值是这么算的,比如能量的期待值〈E〉,这里假设波函数已经归一化
 
 $$〈E〉=\int\Phi^*\hat{H}\Phi d\tau$$
+
+本征值是一组数值，随着量子数而变化，或许可以说，本征值是量子数的函数，所以本征值还不是确定的值，只是一系列可能的值。
+
+但是期待值是确定的，只要算出来了，就是一个数，不是任何东西的变量。
 
 ## Hartree Fock Energy
 
