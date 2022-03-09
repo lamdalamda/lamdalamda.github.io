@@ -578,7 +578,10 @@ $$〈E〉=\int\Phi^*\hat{H}\Phi d\tau$$
 
     $$\hat{H}_{ele}\Psi(x_1,x_2,x_3) \approx\hat{H}_{ele}\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))=(\sum_i \hat{h}_i+\sum_i \sum_{j<i} \hat{V}_{ee}^{i,j})\Phi$$
 
+    也就是说对于实例体系中
+
     $$\hat{h}_1\Phi=-\frac{1}{2}\frac{d^2\Phi}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\Phi$$
+
 
     然后尝试得到h1期待值(而不是本征值)
     
@@ -586,11 +589,27 @@ $$〈E〉=\int\Phi^*\hat{H}\Phi d\tau$$
 
     其对应的能量为
 
-    $$E_{h1}=E_{k}+E_{ne}=〈\hat{h}_1〉=\int\Phi^*\hat{h}_1\Phi dx_1dx_2dx_3=\int\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}*}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))\hat{h}_1\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3)) dx_1dx_2dx_3$$
+    $$E_{h1}=E_{k}+E_{ne}=〈\hat{h}_1〉=\int\Phi^*\hat{h}_1\Phi dx_1dx_2dx_3=\int\int\int\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}*}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))\hat{h}_1\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3)) dx_1dx_2dx_3$$
 
-    但是由于slater行列式中每一个单电子原子轨道互相是正交的,所以上面这个积分可以化简(我也不知道是不是对的,但反正不可思议的事情发生了,我也不知道这个是不是Hatree Fock使用的一个近似还是说,本来就是真的可以化简):
+    由于三电子的Slater determinant实在太长,所以这里临时更改一下实例体系,假设只有两个电子
+
+    $$\Phi=\frac{1}{\sqrt{2}}[\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)]$$
+
+    $$\hat{h}_1\Phi=-\frac{1}{2\sqrt{2}}[\frac{d^2\chi_1^{n_1,m_{s1}}(x_1)}{dx_1^2}\chi_2^{n_2,m_{s2}}(x_2)-\frac{d^2\chi_2^{n_2,m_{s2}}(x_1)}{dx_1^2}\chi_1^{n_1,m_{s1}}(x_2)]-\frac{1}{\sqrt{2}}[\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)](\frac{1}{x_1-9}+\frac{1}{x_1-5})$$
+
+    $$\Phi^*\hat{h}_1\Phi=-\frac{1}{4}[\frac{d^2\chi_1^{n_1,m_{s1}}(x_1)}{dx_1^2}\chi_2^{n_2,m_{s2}}(x_2)-\frac{d^2\chi_2^{n_2,m_{s2}}(x_1)}{dx_1^2}\chi_1^{n_1,m_{s1}}(x_2)][\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)]^*-\frac{1}{2}[\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)](\frac{1}{x_1-9}+\frac{1}{x_1-5})[\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)]^*$$
+
+    但是由于slater行列式中每一个单电子原子轨道互相是正交的(么?),所以上面这个积分可以化简(我也不知道是不是对的,但反正不可思议的事情发生了,我也不知道这个是不是Hatree Fock使用的一个近似还是说,本来就是真的可以化简):
     
-    $$〈\hat{h}_1〉=\int\Phi^*\hat{h}_1\Phi dx_1dx_2dx_3=\int \chi_1^{n_1,m_{s1}*}(x_1)\hat{h}_1\chi_1^{n_1,m_{s1}}(x_1)dx_1=\int \chi_1^{n_1,m_{s1}*}(x_1)[-\frac{1}{2}\frac{d^2\chi_1^{n_1,m_{s1}*}(x_1)}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\chi_1^{n_1,m_{s1}*}(x_1)]dx$$
+    $$〈\hat{h}_1〉=\int\int\Phi^*\hat{h}_1\Phi dx_1=\int\Phi^*\hat{h}_1\Phi dx_1dx_2$$
+
+    其中
+
+    $$〈\hat{h}_1〉=\int\Phi^*\hat{h}_1\Phi dx_1dx_2=\int \chi_1^{n_1,m_{s1}*}(x_1)\hat{h}_1\chi_1^{n_1,m_{s1}}(x_1)dx_1=\int \chi_1^{n_1,m_{s1}*}(x_1)[-\frac{1}{2}\frac{d^2\chi_1^{n_1,m_{s1}*}(x_1)}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\chi_1^{n_1,m_{s1}*}(x_1)]dx_1$$
+
+    或者说,这个想表达的是
+
+    $$\int\int-\frac{1}{4}[\frac{d^2\chi_1^{n_1,m_{s1}}(x_1)}{dx_1^2}\chi_2^{n_2,m_{s2}}(x_2)-\frac{d^2\chi_2^{n_2,m_{s2}}(x_1)}{dx_1^2}\chi_1^{n_1,m_{s1}}(x_2)][\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)]^*-\frac{1}{2}[\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)](\frac{1}{x_1-9}+\frac{1}{x_1-5})[\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)]^*dx_1dx_2=\int \chi_1^{n_1,m_{s1}*}(x_1)[-\frac{1}{2}\frac{d^2\chi_1^{n_1,m_{s1}*}(x_1)}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\chi_1^{n_1,m_{s1}*}(x_1)]dx_1$$
 
     回顾一下,前面说的$$\chi_1^{n_1,m_{s1}}(x_1)$$是单个电子的spin orbital,这是个有明确数学表达的function,那么显然E的这个期待值,不管是用手算还是用电脑积分,肯定是能得到一个确定的值的
 
