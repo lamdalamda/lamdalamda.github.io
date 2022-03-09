@@ -57,6 +57,7 @@ Revision@22.03.05 from MLE5215</p>
       <li><a href="#spatial-orbital" id="markdown-toc-spatial-orbital">spatial orbital</a></li>
       <li><a href="#spin" id="markdown-toc-spin">Spin</a></li>
       <li><a href="#单电子schrodinger方程大约的最终形式" id="markdown-toc-单电子schrodinger方程大约的最终形式">单电子schrodinger方程大约的最终形式</a></li>
+      <li><a href="#one-dimension-single-electron-wavefunction" id="markdown-toc-one-dimension-single-electron-wavefunction">one-dimension single electron wavefunction</a></li>
     </ul>
   </li>
   <li><a href="#manybody-schrodinger-equation" id="markdown-toc-manybody-schrodinger-equation">Manybody schrodinger equation</a>    <ul>
@@ -427,6 +428,12 @@ n是主量子数，l是角量子数,b是一个与l相关的常数</p>
 
 <p>spin orbital: \(\chi_{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)\alpha^{m_s}(\sigma)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}c_1e^{im_l\phi}P(cos\theta)\alpha^{m_s}(\sigma)\)</p>
 
+<h2 id="one-dimension-single-electron-wavefunction">one-dimension single electron wavefunction</h2>
+
+<p>因为三维依旧是一个难以理解的波函数，所以这里有一个一维的单电子波函数供参照
+一维单电子波函数有一个量子数yo
+由于波函数本身有很多常数，但是这个常数对于理解这个函数形式并不重要所以，所以将全部常数bian’c</p>
+
 <h1 id="manybody-schrodinger-equation">Manybody schrodinger equation</h1>
 
 <p>为了研究物质的物理性质，需要解电子的波函数，然后可以通过算符施加在波函数来获得性质（例如用hamiltonian获得基态能量）</p>
@@ -449,7 +456,7 @@ n是主量子数，l是角量子数,b是一个与l相关的常数</p>
 
 \[[-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i&lt;j}\frac{e^2}{|r_i-r_j|}+C]\Psi=E\Psi\]
 
-\[-\frac{\hbar ^2 }{2m_e}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})+(\frac{2e^2}{x_1-5}_{He与1号电子相互作用}+\frac{2e^2}{x_2-5}_{He,x_2}+\frac{2e^2}{x_3-5}_{He,x_3}+\frac{1e^2}{x_1-9}_{H,x_1}+\frac{1e^2}{x_2-9}_{H,x_2}+\frac{1e^2}{x_3-9}_{H,x_3}+\frac{e^2}{|x_1-x_2|}+\frac{e^2}{|x_1-x_3|}+\frac{e^2}{|x_2-x_3|}+C)\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)\]
+\[-\frac{\hbar ^2 }{2m_e}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}-\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2e^2}{x_1-5}_{He与1号电子相互作用}+\frac{2e^2}{x_2-5}_{He,x_2}+\frac{2e^2}{x_3-5}_{He,x_3}+\frac{1e^2}{x_1-9}_{H,x_1}+\frac{1e^2}{x_2-9}_{H,x_2}+\frac{1e^2}{x_3-9}_{H,x_3})\Psi(x_1,x_2,x_3)+(\frac{e^2}{|x_1-x_2|}+\frac{e^2}{|x_1-x_3|}+\frac{e^2}{|x_2-x_3|}+C)\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)\]
 
     <p>显然形似\(\Psi(x_1,x_2,x_3)=e^{ikx_1}+e^{ikx_2}+e^{ikx_3}\)的这种简单解不成立，整体波函数将会是非常复杂的。注意\(x_1,x_2,x_3\)是三个在x轴上的变量。当然如果确实地解出了波函数（本征方程），那么粒子准确的运动形式就可以知道了（通过将解出的本征方程以及本征值代入time dependent schrodinger equation，可以得到比如x1与x2x3的关联,什么\(x_1*x_2=e^{x_3}-x_2\)之类的关系,这个是随便乱写的）</p>
   </li>
@@ -515,34 +522,35 @@ n是主量子数，l是角量子数,b是一个与l相关的常数</p>
 \[\hat{H}_{ele}=-\frac{1}{2}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_I}{r_i-R_I}+\sum_{i&lt;j}\frac{1}{|r_i-r_j|}\]
   </li>
   <li>
-    <p>实例:
-  这时候实例系统的电子Hamiltonian:
+    <p>实例:</p>
+
+    <p>这时候实例系统的电子Hamiltonian:
   \(\hat{H}_{ele}=-\frac{1}{2}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_I}{r_i-R_I}+\sum_{i&lt;j}\frac{1}{|r_i-r_j|}\)</p>
 
-    <p>波函数:</p>
+    <p>作用在波函数上:</p>
 
 \[\hat{H}_{ele}\Psi=-\frac{1}{2}\sum_i\nabla_i^2\Psi-\sum_{i,I}\frac{Z_I}{r_i-R_I}\Psi+\sum_{i&lt;j}\frac{1}{|r_i-r_j|}\Psi\]
 
     <ul>
-      <li>电子动能:</li>
+      <li>第一项是电子动能:</li>
     </ul>
 
 \[-\frac{1}{2}\sum_i\nabla_i^2\Psi=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})\]
 
     <ul>
-      <li>电子和He原子核的相互作用:(注意,电子之间不区分,所以三个电子既与He作用又与H作用)</li>
+      <li>然后第二项中，电子和He原子核的相互作用:(注意,电子之间不区分,所以三个电子既与He作用又与H作用)</li>
     </ul>
 
 \[-\sum_{i,He}\frac{Z_{He}}{x_i-x_{He}}\Psi=-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5})\Psi\]
 
     <ul>
-      <li>电子和H原子核的相互作用:</li>
+      <li>第二项中电子和H原子核的相互作用:</li>
     </ul>
 
 \[-\sum_{i,H}\frac{Z_{H}}{x_i-x_{H}}\Psi=-(\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})\Psi\]
 
     <ul>
-      <li>电子之间的相互作用</li>
+      <li>最后第三项中电子之间的相互作用</li>
     </ul>
 
 \[\sum_{i&lt;j}\frac{1}{|r_i-r_j|}\Psi=(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi\]
@@ -556,9 +564,9 @@ n是主量子数，l是角量子数,b是一个与l相关的常数</p>
       </li>
     </ul>
 
-\[H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\]
+\[H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})+(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\]
 
-\[H_{ele}\Psi(x_1,x_2,x_3)=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9}+\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)\]
+\[H_{ele}\Psi(x_1,x_2,x_3)=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})\Psi(x_1,x_2,x_3)+(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)\]
   </li>
   <li>
     <p>Hartree Fock的表示法;</p>
@@ -630,7 +638,7 @@ Trial wave function: 指以Slater determinant形式模拟出来的波函数,是�
 
 <p>沿用实例中，假设是每个spin orbital由两个atomic orbital模拟组成，即K=2情形</p>
 
-\[\chi_1^{n_1,n_2,m_s}_(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)]\alpha(\sigma)\]
+\[\chi_1^{n_1,n_2,m_s}(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)]\alpha(\sigma)\]
 
 <p>一维的spatial orbital</p>
 
