@@ -162,11 +162,16 @@ cos\phi\\
 
 grain boundary plane的表示法:
 
-$$t_R=\left\{\begin{matrix}
-cos\alpha sin\phi\\
-sin\alpha sin\phi\\
-cos\phi\\
+$$n_B=\left\{\begin{matrix}
+cos\alpha_B sin\phi_B\\
+sin\alpha_B sin\phi_B\\
+cos\phi_B\\
 \end{matrix}\right\}$$
+
+$$n_B=t_R$$,twist
+$$n_B\cdot t_R=0$$,tilt
+
+其他情况下:混合
 
 # microscopic degree of freedom
 

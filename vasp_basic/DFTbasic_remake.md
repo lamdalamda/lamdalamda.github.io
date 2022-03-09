@@ -10,8 +10,11 @@ Remake@21.10.22
 Revision@22.03.05 from MLE5215
 
 # What I cannot create, I do not understand.
-# If you are not completely confused by quantum mechanics, you do not understand it.
+
+# 如果你懂量子力学,说明你不懂量子力学.如果你不懂量子力学,那你确实不懂量子力学.
+
 # 不要再迷信科学了
+
 # 我是笨比
 
 * TOC
