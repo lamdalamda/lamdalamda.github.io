@@ -100,7 +100,10 @@ $$R_{12}\left\{\begin{matrix}
 
 两个方向任意的晶体A和B,B一定可以通过将A绕某个轴旋转一定角度并且进行一定的平移得到(旋转轴-角度的组合不唯一,由于周期性,平移也不唯一)
 
-例如$$\Sigma 5(210) $$晶界,可以通过绕001轴旋转53.13度
+例如$$\Sigma 5(210) $$晶界,可以通过绕001轴旋转53.13度,也可以绕210轴旋转180度
+
+虽然旋转轴有三个坐标,但是只有两个自由度.因为旋转轴是单位矢量,其第三个坐标没有自由度.或者换一种角度,放在球坐标中,只有其角度部分是自由度,长度部分不算自由度.即,在表示自由度的时候需要这么理解旋转轴
+
 
 旋转轴与角度的关系通过如下方式定义:
 
@@ -108,11 +111,46 @@ $$R_{12}\left\{\begin{matrix}
 t_{R_x}\\
 t_{R_y}\\
 t_{R_z}\\
+\end{matrix}\right\}=\left\{\begin{matrix}
+cos\alpha_rsin\phi_r\\
+sin\alpha_rsin\phi_r\\
+cos\phi_r\\
 \end{matrix}\right\}$$
 
 旋转角度为$$\theta$$
 
-则
+首先定义
+
+$$Z_{12}=\left\{\begin{matrix}
+cos\alpha_rcos\phi_r&sin\alpha_rcos\phi_r&-sin\phi_r\\
+-sin\alpha_r&cos\alpha_r&0\\
+cos\alpha_rsin\phi_r&sin\alpha_rsin\phi_r&cos\phi_r\\
+\end{matrix}\right\}$$
+
+其具有性质
+
+$$Z_{12}\cdot t_R=\left\{\begin{matrix}
+0\\
+0\\
+1\\
+\end{matrix}\right\}$$
+
+以及绕001旋转theta度的旋转矩阵是
+
+$$g(\theta)=\left\{\begin{matrix}
+cos\theta&-sin\theta&0\\
+sin\theta&cos\theta&0\\
+0&0&1\\
+\end{matrix}\right\}$$
+
+则有
+
+$$R_{12}=Z_{12}^T\cdot g(\theta)\cdot Z_{12}$$
+
+$$R_{12}=\left[\begin{matrix}\sin^{2}{\left(\alpha \right)} \cos{\left(\theta \right)} + \sin^{2}{\left(\phi \right)} \cos^{2}{\left(\alpha \right)} + \cos^{2}{\left(\alpha \right)} \cos^{2}{\left(\phi \right)} \cos{\left(\theta \right)} & - \sin{\left(\alpha \right)} \sin^{2}{\left(\phi \right)} \cos{\left(\alpha \right)} \cos{\left(\theta \right)} + \sin{\left(\alpha \right)} \sin^{2}{\left(\phi \right)} \cos{\left(\alpha \right)} - \sin{\left(\theta \right)} \cos{\left(\phi \right)} & \left(\sin{\left(\alpha \right)} \sin{\left(\theta \right)} - \cos{\left(\alpha \right)} \cos{\left(\phi \right)} \cos{\left(\theta \right)} + \cos{\left(\alpha \right)} \cos{\left(\phi \right)}\right) \sin{\left(\phi \right)}\\- \sin{\left(\alpha \right)} \sin^{2}{\left(\phi \right)} \cos{\left(\alpha \right)} \cos{\left(\theta \right)} + \sin{\left(\alpha \right)} \sin^{2}{\left(\phi \right)} \cos{\left(\alpha \right)} + \sin{\left(\theta \right)} \cos{\left(\phi \right)} & - \sin^{2}{\left(\alpha \right)} \sin^{2}{\left(\phi \right)} \cos{\left(\theta \right)} + \sin^{2}{\left(\alpha \right)} \sin^{2}{\left(\phi \right)} + \cos{\left(\theta \right)} & \left(- \sin{\left(\alpha \right)} \cos{\left(\phi \right)} \cos{\left(\theta \right)} + \sin{\left(\alpha \right)} \cos{\left(\phi \right)} - \sin{\left(\theta \right)} \cos{\left(\alpha \right)}\right) \sin{\left(\phi \right)}\\\left(- \sin{\left(\alpha \right)} \sin{\left(\theta \right)} - \cos{\left(\alpha \right)} \cos{\left(\phi \right)} \cos{\left(\theta \right)} + \cos{\left(\alpha \right)} \cos{\left(\phi \right)}\right) \sin{\left(\phi \right)} & \left(- \sin{\left(\alpha \right)} \cos{\left(\phi \right)} \cos{\left(\theta \right)} + \sin{\left(\alpha \right)} \cos{\left(\phi \right)} + \sin{\left(\theta \right)} \cos{\left(\alpha \right)}\right) \sin{\left(\phi \right)} & \sin^{2}{\left(\phi \right)} \cos{\left(\theta \right)} + \cos^{2}{\left(\phi \right)}\end{matrix}\right]$$
+
+
+其关系为
 
 $$t_{R_x}=\frac{b_1\cdot c_2-c_1\cdot b_2}{2sin\theta}$$
 
@@ -120,10 +158,14 @@ $$t_{R_y}=\frac{a_1\cdot c_2-c_1\cdot a_2}{2sin\theta}$$
 
 $$t_{R_z}=\frac{a_1\cdot b_2-b_1\cdot a_2}{2sin\theta}$$
 
-$$t_R=\left\{\begin{matrix}
-\frac{b_1\cdot c_2-c_1\cdot b_2}{2sin\theta}\\
-\frac{a_1\cdot c_2-c_1\cdot a_2}{2sin\theta}\\
-\frac{a_1\cdot b_2-b_1\cdot a_2}{2sin\theta}\\
+可以验证$$t_R=\left\{\begin{matrix}
+t_{R_x}\\
+t_{R_y}\\
+t_{R_z}\\
+\end{matrix}\right\}=\left\{\begin{matrix}
+cos\alpha_rsin\phi_r\\
+sin\alpha_rsin\phi_r\\
+cos\phi_r\\
 \end{matrix}\right\}$$
 
 验证:
@@ -142,14 +184,7 @@ $$t_R=\left\{\begin{matrix}
 0\\0\\1\\
 \end{matrix}\right\}$$
 
-另外,虽然旋转轴有三个坐标,但是只有两个自由度.因为旋转轴是单位矢量,其第三个坐标没有自由度.或者换一种角度,放在球坐标中,只有其角度部分是自由度,长度部分不算自由度.即,在表示自由度的时候需要这么理解旋转轴
-
-
-$$t_R=\left\{\begin{matrix}
-cos\alpha sin\phi\\
-sin\alpha sin\phi\\
-cos\phi\\
-\end{matrix}\right\}$$
+也就是说,比如通过一个已知旋转轴和角度得到了一个orientational matrix,想要得到在另一个旋转轴的等效角度,那么就带进去Z求g矩阵,反则反之
 
 ## grain boundary plane normal
 
