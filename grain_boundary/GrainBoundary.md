@@ -186,6 +186,11 @@ cos\phi_r\\
 
 也就是说,比如通过一个已知旋转轴和角度得到了一个orientational matrix,想要得到在另一个旋转轴的等效角度,那么就带进去Z求g矩阵,反则反之
 
+
+$$ Z_{12}^{-1}R_{12}Z_{12}^{T-1}=g(\theta)$$
+
+
+
 ## grain boundary plane normal
 
 

@@ -798,6 +798,10 @@ configure之前conda deactivate
 
 
 
+## zotero
+
+zotero 批量合并重复条目:
+
 
 
 ## latex 配置
