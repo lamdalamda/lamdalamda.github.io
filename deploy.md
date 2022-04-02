@@ -800,8 +800,16 @@ configure之前conda deactivate
 
 ## zotero
 
-zotero 批量合并重复条目:
+- zotero 批量合并重复条目
+https://github.com/frangoud/ZoteroDuplicatesMerger
+下载安装之后,zotero中最左侧导航栏里面有duplicates items,选中之后会显示所有的重复项目.然后右键duplicate merger -> bulk merge还是啥的.就可以合并了
 
+
+- citation
+
+https://marketplace.visualstudio.com/items?itemName=mblode.zotero
+
+这个是用vscode写latex时候用来插入引文的插件.暂时还不知道该怎么用
 
 
 ## latex 配置
@@ -901,8 +909,82 @@ zotero 批量合并重复条目:
       ]
 ```
 
+2022-04-02:
 
- 
+在苹果上面好像没没法正常运行,改了一下recipe,变成这个样子
+```
+
+"latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "-pdf",
+      "%DOC%"
+      ]
+    },
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "%DOC%"
+        ]
+    },          
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "%DOC%"
+      ]
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": [
+      "%DOCFILE%"
+      ]
+    }
+  ],
+"latex-workshop.latex.recipes": [
+  
+    {
+      "name": "xelatex",
+      "tools": [
+      "xelatex",
+      "bibtex",
+      "xelatex",
+      "xelatex",
+                  ]
+            },
+    {
+      "name": "latexmk",
+      "tools": [
+      "latexmk"
+                  ]
+    },
+
+    {
+      "name": "pdflatex -> bibtex -> pdflatex*2",
+      "tools": [
+      "pdflatex",
+      "bibtex",
+      "pdflatex",
+      "pdflatex"
+                  ]
+    }
+  ],
+```
+
+
 ## slurm队列管理
 
 在slurm官网下载配置文件放到/etc/slurm-llvm/中

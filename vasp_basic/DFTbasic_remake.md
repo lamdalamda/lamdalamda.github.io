@@ -661,7 +661,16 @@ C是一个NxN的矩阵,e是1x  N的轨道能量值矩阵
 
 
 
-## 错误的尝试:通过真实的电子hamiltonian计算slater determinant的期待值(翻车现场)
+
+## correlation energy
+
+Correlation energy 是Hartree Fcok方法得到的能量与真实能量的差.Hartree fock方法由于没有考虑到电子之间的correlation,所以其能量高于真实值.
+
+Correlation有偏差的原因: 目前为止只考虑了电子的两种自旋.但是实际上,还有中间态的自旋. 这个没有考虑到
+
+可以通过couple cluster方法:即将电子波函数表示为多个slater determinant的组合的方式来抵消以上偏差.
+
+## 错误的尝试:通过真实的电子hamiltonian计算slater determinant的期待值(因为slater determinant是近似值,所以不能这么干.)
 
 总之是将slater determinant代入hamiltonian之后能得到的一部分解.这部分没什么意义.只是之前写了不想删掉.
 
@@ -723,12 +732,10 @@ C是一个NxN的矩阵,e是1x  N的轨道能量值矩阵
 
 
 
-220305- 目前更新到这里
------------------------------------------------------------------
-后面的很多需要重新写一下，改一下符号之类的
 
+# DFT 密度泛函理论
 
-# Non-interacting (i.e. Hartree) electron approximation
+## Non-interacting (i.e. Hartree) electron approximation
 
 Hartree like electron approximation是假设电子之间没有某种相互作用(不知道我理解的对不对)此假设通过更改hamiltonian来实现，是不准确的。得到的eigenfunction不是真实波函数，但是至少可以用那个variation theory来去努力地估计真实值.
 
