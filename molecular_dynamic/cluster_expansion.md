@@ -31,28 +31,28 @@ a function whose value can be calculated from the microscopic description of a s
 
 
 - phase space
-例如,单个粒子具有position vector和canonically conjugate momentum vector. 投影到cartesian space这两个vector可以表示为$x,y,z,p_x,p_y,p_z$,即6个坐标.对于含有这6个坐标轴的空间,此空间中的一个点可以独特地定义一个系统的state. 对于含有N个粒子的系统,则有6N个坐标.此6N个坐标组成的space就是phase space.
+例如,单个粒子具有position vector和canonically conjugate momentum vector. 投影到cartesian space这两个vector可以表示为$$x,y,z,p_x,p_y,p_z$$,即6个坐标.对于含有这6个坐标轴的空间,此空间中的一个点可以独特地定义一个系统的state. 对于含有N个粒子的系统,则有6N个坐标.此6N个坐标组成的space就是phase space.
 
 - phase point
 在phase space中的一个点,这个点对应的是一个state. 一般写作
-$\Gamma=(r^N,p^N)$
+$$\Gamma=(r^N,p^N)$$
 例如一个只含有一个粒子的系统,此粒子位于(1,2,3),具有4,5,6的动能则
-$\Gamma=(1,2,3,4,5,6)$
-此$\Gamma$点,即phase point,对应了这个系统的一个state
+$$\Gamma=(1,2,3,4,5,6)$$
+此$$\Gamma$$点,即phase point,对应了这个系统的一个state
 
 ## types of Ensemble
 1. canonical ensemble:NVT
 特指NVT ensemble,即在固定粒子数量,体积,温度情况下的ensemble/state集合.所有允许的state之间NVT都是一样的
-对于此ensemble,其stastistical weight是$W_j=Ce^{-\frac{E_j}{k_BT}}$
+对于此ensemble,其stastistical weight是$$W_j=Ce^{-\frac{E_j}{k_BT}}$$
 2. microcanonical ensemble:NVE
 因为E是固定的,所以stastistical weight是一个常数
 - 如果严格要求E=E0,成为surface ensemble
-- 如果考虑quantum system,有时候能量不是连续的,所以保持E不变是比较难以实施的(具体在P33),所以此时变为quantum microcanonical ensemble,要求E保持在$E_0+\delta E$此极小范围内.
-对于一个仅固定了N和V的系统,其能量可以从0到正无穷,microcasnonical ensemble取其中所有满足E=E0(surface ensemble)或者$E_0+\delta E$(quantum)此条件的state(element)组成ensemble
-3. grand canonical ensemble: $\mu VT$
-可以理解为对许多个N不一样但是VT一样的canonical ensemble的集合中,取其中$\mu = \mu_0 $的所有element组成一个ensemble
+- 如果考虑quantum system,有时候能量不是连续的,所以保持E不变是比较难以实施的(具体在P33),所以此时变为quantum microcanonical ensemble,要求E保持在$$E_0+\delta E$$此极小范围内.
+对于一个仅固定了N和V的系统,其能量可以从0到正无穷,microcasnonical ensemble取其中所有满足E=E0(surface ensemble)或者$$E_0+\delta E$$(quantum)此条件的state(element)组成ensemble
+3. grand canonical ensemble: $$\mu VT$$
+可以理解为对许多个N不一样但是VT一样的canonical ensemble的集合中,取其中$$\mu = \mu_0 $$的所有element组成一个ensemble
 或者说
-对于所有满足$V=V_0, T=T_0$而N随意取值(0~正无穷)的canonical ensemble,其组成一个canonical ensemble 的集合,对于所有满足了mu的element,提取出来组成grand canonical ensemble
+对于所有满足$$V=V_0, T=T_0$$而N随意取值(0~正无穷)的canonical ensemble,其组成一个canonical ensemble 的集合,对于所有满足了mu的element,提取出来组成grand canonical ensemble
 
 4. isothermal-isobaric ensemble: NTP
 5. isodynamic-polythermal ensembleL NVE, 与microcanonical ensemble不同之处在于其stastistical weight的定义不一样
