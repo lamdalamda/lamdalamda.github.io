@@ -1,6 +1,6 @@
 ---
 layout: default
-title: DFT抽象圣经
+title: DFT基本
 permalink: /vasp_basic/
 katex: True
 ---
@@ -11,8 +11,6 @@ Revision@22.03.05 from MLE5215
 
 # What I cannot create, I do not understand.
 
-
-# 不要再迷信科学了
 
 
 * TOC
