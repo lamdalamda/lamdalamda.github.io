@@ -681,6 +681,28 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 首先移除了所有的旧版软件，然后安装5.11kernel
 
 
+5.0.1不支持gfx803
+
+```
+sudo apt-get update
+
+wget https://repo.radeon.com/amdgpu-install/21.50/ubuntu/focal/amdgpu-install_21.50.50000-1_all.deb
+
+sudo apt-get install ./amdgpu-install_21.50.50000-1_all.deb
+
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.3   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.5   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+
+
+sudo amdgpu-install --usecase=rocm --rocmrelease=5.0.0
+sudo amdgpu-install --usecase=rocm --rocmrelease=4.3.0
+
+```
+
+
 ### 4.1
 
 - 安装kernel
