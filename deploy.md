@@ -673,6 +673,12 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 /opt/rocm/opencl/bin/clinfo
 
 
+
+- 数学lib
+注意一定要在最后安装
+
+`sudo apt-get install rocm-libs`
+
 ### 5.0.1
 
 5.0.1 要求5.8或者5.11kernel
@@ -681,7 +687,23 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 首先移除了所有的旧版软件，然后安装5.11kernel
 
 
-5.0.1不支持gfx803
+但是4.5.0开始不支持gfx803,所以只是用那个package manager方便
+
+最好直接修改/etc/apt/sources.list.d/rocm.list
+```
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0   ubuntu main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0.1   ubuntu main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.3   ubuntu main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1   xenial main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1.1   xenial main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.5  ubuntu main
+
+
+```
+
+
+
+
 
 ```
 sudo apt-get update
@@ -691,10 +713,12 @@ wget https://repo.radeon.com/amdgpu-install/21.50/ubuntu/focal/amdgpu-install_21
 sudo apt-get install ./amdgpu-install_21.50.50000-1_all.deb
 
 echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
-
-echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0.1   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1   xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
 echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.3   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
 echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.5   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1.1   xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
+
 
 
 sudo amdgpu-install --usecase=rocm --rocmrelease=5.0.0
@@ -743,7 +767,7 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 
 sudo apt install rocm-dkms && sudo reboot
 ```
-- 安装hip
+- 手动安装hip (大可不必,因为已经给安装好了)
 ```
 git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/llvm-project.git
 cd llvm-project
@@ -1175,13 +1199,15 @@ compilers:
 
 不要加载oneapi环境！！！！
 
+ROCM4.3尝试安装
+
 
 ### 需要安装openmpi
 
 下载openmpi
 
 安装过程：
-`./configure`
+`CC=amdclang CXX=amdclang++ FC=amdflang ./configure`
 
 `make`
 
@@ -1233,6 +1259,15 @@ cmake -D PKG_GPU=on -D GPU_API=HIP -D HIP_PLATFORM=amd -D HIP_ARCH=gfx803 -D CMA
 make -j32
 make install
 ```
+
+
+- KOKKOS
+```
+mkdir build
+cd build
+cmake -C ../cmake/presets/basic.cmake -C ../cmake/presets/hip_amd.cmake ../cmake
+```
+尚未成功
 
 **注意运行lammps时候需要 -sf gpu才能正常运行**
 
@@ -1311,6 +1346,12 @@ make -j32 mpi
 
 ```
 最后会得到lmp-mpi
+
+但是mlip和kokkos没法一块用
+
+鉴定为脑瘫行为.
+
+
 ## vasp
 
 似乎不能在root账户编译。
