@@ -7,13 +7,11 @@ permalink: /about/
 
 # Education
 
-Bachelor for Years, No.1 Chinese University ranked by President Trump
+读的大学，QS1000开外的的美国学校都不收
 
+硕士函绶的
 
-Master of Grand Order, CMU
-
-
-Doctor of Arknights, Kent Ridge Polytech
+博士在肯特岗职业技术学院
 
 # Acknowledge
 

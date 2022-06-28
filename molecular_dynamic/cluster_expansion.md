@@ -170,3 +170,31 @@ level限制住了mu的数量
 
 ## total energy
 $$E=\sum_i V(n_i)=\sum_i \sum_{\alpha}\xi_{\alpha}B_{\alpha}(n_i)$$
+# cluster expansion
+
+比如说这样一个lattice
+![Image](./1.png)
+- site:
+一共有4个site， a,b,c,d
+- state
+总共有$$2^4=16$$个state
+- occupation variables $$\sigma_i$$:
+在site i上面的occupation
+例如在a上面有occupy的原子，则$$\sigma_a=1$$
+- occupation vector $$\vec{\sigma}$$
+$$\vec{\sigma}=(\sigma_a,\sigma_b,\sigma_c,\sigma_d)$$
+例如在state0下面的occupation vector是
+$$\vec{\sigma_0}=(-1,1,1,-1)$$
+- cluster: $$\alpha$$
+比如，单个site可以是一个cluster
+两个比较近的site可以是一个cluster
+例如$$\alpha=(a)$$
+$$\beta=(a,b)$$
+$$\gamma=(a,d)$$
+$$\delta=(a,b,c)$$
+- cluster function 
+$$\sigma_{\alpha}(\vec{\sigma})=\prod_{i\in \alpha}\sigma_i $$
+例如对于$$\vec{\sigma_0}=(-1,1,1,-1)$$
+$$\sigma_{\alpha}(\vec{\sigma_0})=\prod_{i\in \alpha}\sigma_i=\prod_{i\in (a))}\sigma_i=\sigma_a=-1$$
+$$\sigma_{\beta}(\vec{\sigma_0})=\prod_{i\in \beta}\sigma_i=\prod_{i\in (a,b))}\sigma_i=\sigma_a*\sigma_b=(-1)*1=-1$$
+$$\sigma_{\delta}(\vec{\sigma_0})=\prod_{i\in \delta}\sigma_i=\prod_{i\in (a,b,c))}\sigma_i=\sigma_a*\sigma_b*\sigma_c=-1*1*1=-1$$
