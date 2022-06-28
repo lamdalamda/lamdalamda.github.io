@@ -4,10 +4,17 @@ title: 原子悸动学
 permalink: /molecular_dynamic/
 katex: True
 ---
-# **不要迷信科学**
+
+
+# 我已经完全悸动起来了!
 
 **Phillies, George DJ. Elementary lectures in statistical mechanics. Springer Science & Business Media, 2000.**
 **Guha, E. Statistical Mechanics: An Introduction. Alpha Science International, 2008.**
+*https://iopscience.iop.org/article/10.1088/2632-2153/abc9fe*
+
+
+* TOC
+{:toc}
 
 
 # Ensemble
@@ -107,16 +114,22 @@ $$Q^{\beta}(|r_{ij}|)= 0 \space when\space |r_{ij}|>R_{cut}$$
 对于前几级别
 ![Image](./mlstabc9fef1_hr.jpeg)
 *cite from https://iopscience.iop.org/article/10.1088/2632-2153/abc9fe*
+1. Q0
+$$Q^{0}(|r_{ij}|)= (R_{cut}-|r_{ij}|)^2=(2.5-|r_{ij}|)^2$$
+$$Q^{0}(|r_{ij}|=R_{cut})= 0$$
+$$Q^{0}(|r_{ij}|=R_{min})= (R_{cut}-|r_{ij}|)^2=(2.5-0.8)^2=2.89$$
 
-- $$Q^{0}(|r_{ij}|)= (R_{cut}-|r_{ij}|)^2=(2.5-|r_{ij}|)^2$$
-    $$Q^{0}(|r_{ij}|=R_{cut})= 0$$
-    $$Q^{0}(|r_{ij}|=R_{min})= (R_{cut}-|r_{ij}|)^2=(2.5-0.8)^2=2.89$$
-- $$Q^{1}(|r_{ij}|)= (\frac{2r_{ij}-R_{cut}-R_{min}}{R_{cut}-R_{min}})(R_{cut}-|r_{ij}|)^2=(\frac{2r_{ij}-3.3}{1.7})(2.5-|r_{ij}|)^2$$
-    $$Q^{1}(|r_{ij}|=R_{cut})= (\frac{2R_{cut}-R_{cut}-R_{min}}{R_{cut}-R_{min}})(R_{cut}-R_{cut})^2=(R_{cut}-R_{cut})^2=0$$
-    $$Q^{1}(|r_{ij}|=R_{min})= (\frac{2R_{min}-R_{cut}-R_{min}}{R_{cut}-R_{min}})(R_{cut}-|r_{ij}|)^2=-(R_{cut}-R_{min})^2=-2.89$$
-- $$Q^{2}(|r_{ij}|)= [2(\frac{2r_{ij}-R_{cut}-R_{min}}{R_{cut}-R_{min}})^2-1](R_{cut}-|r_{ij}|)^2$$
-    $$Q^{2}(|r_{ij}|=R_{cut})= (2*(-1)^2-1)(R_{cut}-R_{cut})^2=(R_{cut}-R_{cut})^2=(R_{cut}-R_{cut})^2=0$$
-    $$Q^{2}(|r_{ij}|=R_{min})= (2*1^2-1)(R_{cut}-|r_{ij}|)^2=(R_{cut}-R_{min})^2=2.89$$
+
+2. Q1
+$$Q^{1}(|r_{ij}|)= (\frac{2r_{ij}-R_{cut}-R_{min}}{R_{cut}-R_{min}})(R_{cut}-|r_{ij}|)^2=(\frac{2r_{ij}-3.3}{1.7})(2.5-|r_{ij}|)^2$$
+$$Q^{1}(|r_{ij}|=R_{cut})= (\frac{2R_{cut}-R_{cut}-R_{min}}{R_{cut}-R_{min}})(R_{cut}-R_{cut})^2=(R_{cut}-R_{cut})^2=0$$
+$$Q^{1}(|r_{ij}|=R_{min})= (\frac{2R_{min}-R_{cut}-R_{min}}{R_{cut}-R_{min}})(R_{cut}-|r_{ij}|)^2=-(R_{cut}-R_{min})^2=-2.89$$
+
+3. Q2
+$$Q^{2}(|r_{ij}|)= [2(\frac{2r_{ij}-R_{cut}-R_{min}}{R_{cut}-R_{min}})^2-1](R_{cut}-|r_{ij}|)^2$$
+$$Q^{2}(|r_{ij}|=R_{cut})= (2*(-1)^2-1)(R_{cut}-R_{cut})^2=(R_{cut}-R_{cut})^2=(R_{cut}-R_{cut})^2=0$$
+$$Q^{2}(|r_{ij}|=R_{min})= (2*1^2-1)(R_{cut}-|r_{ij}|)^2=(R_{cut}-R_{min})^2=2.89$$
+
 - 更高形式参考wikipedia的第一类切比雪夫多项式
 
 ## radial part
