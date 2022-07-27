@@ -680,6 +680,38 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 
 首先移除了所有的旧版软件，然后安装5.11kernel
 
+```
+sudo apt-get update
+
+wget https://repo.radeon.com/amdgpu-install/21.50.1/ubuntu/bionic/amdgpu-install_21.50.1.50001-1_all.deb
+
+sudo apt-get install ./amdgpu-install_21.50.1.50001-1_all.deb 
+
+```
+
+修改rocm list文件：
+`sudo gedit /etc/apt/sources.list.d/rocm.list`
+添加这些内容
+```
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0.1 ubuntu main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1.1 xenial main
+```
+然后
+```
+sudo apt update
+sudo amdgpu-install --usecase=rocm --rocmrelease=4.1.1
+sudo amdgpu-install --usecase=rocm --rocmrelease=5.0.1
+```
+
+会报错说需要modules-extra
+
+尝试用“新立德软件管理器“搜索5.11.0-46，除了unsigned image和nvidia相关的都安装
+
+发现使用low latency kernel还是会报错，必须使用generic
+使用generic之后成功
+
+安装4.1.1时候正常，但是安装5.0.1时候出现一个comgr冲突，可能是旧版的comgr没卸载干净
+卸载之后重新安装可能会有问题，重启一下然后`sudo apt-get autoremove`
 
 ### 4.1
 
