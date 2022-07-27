@@ -673,6 +673,12 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 /opt/rocm/opencl/bin/clinfo
 
 
+
+- 数学lib
+注意一定要在最后安装
+
+`sudo apt-get install rocm-libs`
+
 ### 5.0.1
 
 5.0.1 要求5.8或者5.11kernel
@@ -712,6 +718,46 @@ sudo amdgpu-install --usecase=rocm --rocmrelease=5.0.1
 
 安装4.1.1时候正常，但是安装5.0.1时候出现一个comgr冲突，可能是旧版的comgr没卸载干净
 卸载之后重新安装可能会有问题，重启一下然后`sudo apt-get autoremove`
+
+但是4.5.0开始不支持gfx803,所以只是用那个package manager方便
+
+最好直接修改/etc/apt/sources.list.d/rocm.list
+```
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0   ubuntu main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0.1   ubuntu main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.3   ubuntu main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1   xenial main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1.1   xenial main
+deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.5  ubuntu main
+
+
+```
+
+
+
+
+
+```
+sudo apt-get update
+
+wget https://repo.radeon.com/amdgpu-install/21.50/ubuntu/focal/amdgpu-install_21.50.50000-1_all.deb
+
+sudo apt-get install ./amdgpu-install_21.50.50000-1_all.deb
+
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.0.1   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1   xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.3   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.5   ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1.1   xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
+
+
+
+sudo amdgpu-install --usecase=rocm --rocmrelease=5.0.0
+sudo amdgpu-install --usecase=rocm --rocmrelease=4.3.0
+
+```
+
 
 ### 4.1
 
@@ -753,7 +799,7 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 
 sudo apt install rocm-dkms && sudo reboot
 ```
-- 安装hip
+- 手动安装hip (大可不必,因为已经给安装好了)
 ```
 git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/llvm-project.git
 cd llvm-project
@@ -830,6 +876,18 @@ configure之前conda deactivate
 
 
 
+## zotero
+
+- zotero 批量合并重复条目
+https://github.com/frangoud/ZoteroDuplicatesMerger
+下载安装之后,zotero中最左侧导航栏里面有duplicates items,选中之后会显示所有的重复项目.然后右键duplicate merger -> bulk merge还是啥的.就可以合并了
+
+
+- citation
+
+https://marketplace.visualstudio.com/items?itemName=mblode.zotero
+
+这个是用vscode写latex时候用来插入引文的插件.暂时还不知道该怎么用
 
 
 ## latex 配置
@@ -929,8 +987,82 @@ configure之前conda deactivate
       ]
 ```
 
+2022-04-02:
 
- 
+在苹果上面好像没没法正常运行,改了一下recipe,变成这个样子
+```
+
+"latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "-pdf",
+      "%DOC%"
+      ]
+    },
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "%DOC%"
+        ]
+    },          
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "%DOC%"
+      ]
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": [
+      "%DOCFILE%"
+      ]
+    }
+  ],
+"latex-workshop.latex.recipes": [
+  
+    {
+      "name": "xelatex",
+      "tools": [
+      "xelatex",
+      "bibtex",
+      "xelatex",
+      "xelatex",
+                  ]
+            },
+    {
+      "name": "latexmk",
+      "tools": [
+      "latexmk"
+                  ]
+    },
+
+    {
+      "name": "pdflatex -> bibtex -> pdflatex*2",
+      "tools": [
+      "pdflatex",
+      "bibtex",
+      "pdflatex",
+      "pdflatex"
+                  ]
+    }
+  ],
+```
+
+
 ## slurm队列管理
 
 在slurm官网下载配置文件放到/etc/slurm-llvm/中
@@ -1099,13 +1231,15 @@ compilers:
 
 不要加载oneapi环境！！！！
 
+ROCM4.3尝试安装
+
 
 ### 需要安装openmpi
 
 下载openmpi
 
 安装过程：
-`./configure`
+`CC=amdclang CXX=amdclang++ FC=amdflang ./configure`
 
 `make`
 
@@ -1157,6 +1291,15 @@ cmake -D PKG_GPU=on -D GPU_API=HIP -D HIP_PLATFORM=amd -D HIP_ARCH=gfx803 -D CMA
 make -j32
 make install
 ```
+
+
+- KOKKOS
+```
+mkdir build
+cd build
+cmake -C ../cmake/presets/basic.cmake -C ../cmake/presets/hip_amd.cmake ../cmake
+```
+尚未成功
 
 **注意运行lammps时候需要 -sf gpu才能正常运行**
 
@@ -1235,6 +1378,12 @@ make -j32 mpi
 
 ```
 最后会得到lmp-mpi
+
+但是mlip和kokkos没法一块用
+
+鉴定为脑瘫行为.
+
+
 ## vasp
 
 似乎不能在root账户编译。

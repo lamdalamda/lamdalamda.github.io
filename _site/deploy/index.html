@@ -30,7 +30,7 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/vasp_basic/">vasp理论</a><a class="page-link" href="/about/">About</a><a class="page-link" href="/deploy/">Deploy  Guide</a><a class="page-link" href="/pymatgen/">pymatgen</a><a class="page-link" href="/vasp_inputs/">vasp输入</a><a class="page-link" href="/vasp_practice/">vasp实例</a></div>
+        <div class="trigger"><a class="page-link" href="/vasp_basic/">DFT抽象圣经</a><a class="page-link" href="/about/">About</a><a class="page-link" href="/deploy/">Deploy  Guide</a><a class="page-link" href="/pymatgen/">pymatgen</a><a class="page-link" href="/vasp_inputs/">vasp输入</a><a class="page-link" href="/vasp_practice/">vasp实例</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -127,6 +127,7 @@
       </li>
       <li><a href="#rocm" id="markdown-toc-rocm">ROCm</a>        <ul>
           <li><a href="#43" id="markdown-toc-43">4.3</a></li>
+          <li><a href="#501" id="markdown-toc-501">5.0.1</a></li>
           <li><a href="#41" id="markdown-toc-41">4.1</a></li>
         </ul>
       </li>
@@ -804,6 +805,13 @@ echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl
 
 <p>/opt/rocm/bin/rocminfo
 /opt/rocm/opencl/bin/clinfo</p>
+
+<h3 id="501">5.0.1</h3>
+
+<p>5.0.1 要求5.8或者5.11kernel
+根据文档，如果想要安装多个rocm版本的话，需要先安装最新的。比如想要安装5.0.1和4.1，那么需要先安装5.0.1</p>
+
+<p>首先移除了所有的旧版软件，然后安装5.11kernel</p>
 
 <h3 id="41">4.1</h3>
 
