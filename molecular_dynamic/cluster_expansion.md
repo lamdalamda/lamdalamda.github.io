@@ -105,9 +105,11 @@ $$n_i=[z_i,z_j,r_{ij}]$$
 
 例如对于Na原子
 
-$$n_1=[z_1,z_2,r_{12},z_3,r_{13},z_4,r{14}]=[11,8,1,8,2,15,1.414]$$
+$$n_1=[z_1,z_2,r_{12},z_3,r_{13},z_4,r{14}]=[11,8,(0,1,0),8,(0,0,2),15,(1,1,0)]$$
 
-## radial basis function:
+z1是Na的原子序数11
+
+## Radial basis function:
 
 $$Q^{\beta}(|r_{ij}|)= \phi^{\beta}(R_{cut}-r_{ij}^2)\space when\space |r_{ij}|<R_{cut}$$
 
@@ -116,8 +118,12 @@ $$Q^{\beta}(|r_{ij}|)= 0 \space when\space |r_{ij}|>R_{cut}$$
 
 
 其中phi是在$$[R_{min},R_{cut}]$$区间上的chebyshev polynomials,beta是chebyshev polynomial的级数
-对于前几级别
+*https://en.wikipedia.org/wiki/Chebyshev_polynomials*
 
+
+![Image](./Chebyshev_Polynomials_of_the_First_Kind.svg.png)
+
+而乘以了$$(R_{cut}-r_{ij}^2)$$之后长成这个样子：
 
 ![Image](./mlstabc9fef1_hr.jpeg)
 *cite from https://iopscience.iop.org/article/10.1088/2632-2153/abc9fe*
@@ -159,12 +165,13 @@ $$Q^{2}(|r_{ij}|=R_{min})= (2*1^2-1)(R_{cut}-|r_{ij}|)^2=(R_{cut}-R_{min})^2=2.8
 
 - 更高形式参考wikipedia的第一类切比雪夫多项式
 
-## radial part
+## Radial part, 由Nq个radial basis function组合产生
 $$f_{\mu}(n_{ij})=f_{\mu}(|r_{ij},z_i,z_j|)=\sum^{N_Q}_{\beta=1}c^{\beta}_{\mu,z_i,z_j}Q^{\beta}(|r_{ij}|)$$
 
 
-$$N_Q$$是beta/切比雪夫不等式的最高级数,越大精度越高?
-虽然似乎文章里面beta(切比雪夫多项式的级数是从1开始的),为了方便,假设从0开始,当$$N_Q=1$$,示例对于Na-P
+$$N_Q$$是beta/切比雪夫不等式的最高级数
+
+c的上标beta是每个radial basis function的系数。示例对于Na-P,当$$N_Q=1$$，
 
 
 $$f_{\mu}(Na-P)=f_{\mu}(|r_{Na,P},Na,P|)=\sum^{2}_{\beta=1}c^{\beta}_{\mu,Na,P}Q^{\beta}(|r_{Na,P}|)$$
@@ -172,17 +179,12 @@ $$f_{\mu}(Na-P)=f_{\mu}(|r_{Na,P},Na,P|)=\sum^{2}_{\beta=1}c^{\beta}_{\mu,Na,P}Q
 
 $$=c^{0}_{\mu,Na,P}(2.5-|r_{Na-P}|)^2+c^{1}_{\mu,Na,P}(\frac{2|r_{Na-P}|-3.3}{1.7})(2.5-|r_{Na-P}|)^2$$
 
+里面c对应的是trained mtp文件中的一行radial_coeffs，beta分别对应这行的每个数。如果Nq=8 （展开8个chebyshev polynomial），则radialcoeff每行就有8个
 
-*https://en.wikipedia.org/wiki/Chebyshev_polynomials*
-
-
-![Image](./Chebyshev_Polynomials_of_the_First_Kind.svg.png)
-
-在MLIP的软件包里面给的所有的untrained potential里面的Nq=8
+在MLIP的软件包里面给的所有的untrained potential里面默认的Nq=8
 
 
-## angular part
-
+## Angular part
 $$angular_v=r_{ij}\otimes r_{ij} \otimes ....(v \space times)$$
 
 对于neighbor求n次外积(outer product)
@@ -195,28 +197,62 @@ v=2 看文章,是3*3矩阵
 
 
 
-## moment tensor
+## Moment tensor:
+moment tensor是组合angular part和radial part，然后再遍历所有种类的neighbor
 
-$$M_{\mu,v}(n_i)=\sum_j f_{\mu}(|r_ij|)*angular$$
+$$M_{\mu,v}(n_i)=\sum_j f_{\mu}(|r_{ij}|)*angular$$
 
+需要注意的是，moment tensor可能是标量，也可能是矢量，比如
 
-$$M_{0,1}(Na)=\sum_j f_{0}(|r_ij|)*(x_{ij},y_{ij},z_{ij})=[c^{0}_{0,Na,P}(2.5-|r_{Na-P}|)^2+c^{1}_{0,Na,P}(\frac{2|r_{Na-P}|-3.3}{1.7})(2.5-|r_{Na-P}|)^2](x,y,z)+...=[c^{0}_{0,Na,P}(2.5-1.414)^2+c^{1}_{\mu,Na,P}(\frac{2.828-3.3}{1.7})(2.5-1.414)^2](1,1,0)+....$$
+$$M_{0,0}=\sum_j f_{0}(|r_{Na,j}|)*1=[c^{0}_{0,Na,P}(2.5-|r_{Na-P}|)^2+c^{1}_{0,Na,P}(\frac{2|r_{Na-P}|-3.3}{1.7})(2.5-|r_{Na-P}|)^2]+[Na-O]+...=[c^{0}_{0,Na,P}(2.5-1.414)^2+c^{1}_{\mu,Na,P}(\frac{2.828-3.3}{1.7})(2.5-1.414)^2]+....$$
+这个就是个标量
 
-只写出来了Na和P,省略号的是Na和其他neighbor
+然而比如当v=1时候
+$$M_{0,1}(Na-P)=\sum_j f_{1}(|r_{Na,j}|)*(x_{ij},y_{ij},z_{ij})=[c^{0}_{1,Na,P}(2.5-|r_{Na-P}|)^2+c^{1}_{1,Na,P}(\frac{2|r_{Na-P}|-3.3}{1.7})(2.5-|r_{Na-P}|)^2](x,y,z)+...=[c^{0}_{1,Na,P}(2.5-1.414)^2+c^{1}_{1,Na,P}(\frac{2.828-3.3}{1.7})(2.5-1.414)^2](1,1,0)+[Na-O]+...$$
 
-## level
+得到一个长度为3的矢量，和angular一样
+
+## level OF MOMENT tensor
 
 $$lev[M]=2+4\mu+v$$
 
 这个是MLIP的level,可见随$$\mu$$增长很快,在v是0情况下,v=0时候level是2,v=1 (也就是说,有两组radial part)的level就已经是6了.
 
 
-## basis functions
-$$B_{\alpha}=M_{\mu,v}$$  
-$$lev[B]=2+4\mu+v$$
-例如,level小于等于8的basis function总共有9个,即B0到B8,每个basic function有不同的mu或者v,也或者可能由低level的function组合而成
+## Basis functions
 
-level限制住了mu的数量
+basis functions 和 moment tensor 在定义上面不同在于，moment tensor 可以是标量也可以是矢量，但是basis function 必须是标量。 basis function可以是本身就是标量的moment tensor , 也可以是两个矢量moment tensor通过一些运算（例如点乘）组合成标量。这个限定条件在MLIP文章里面没有，在另一片文章里面（Accelerating high-throughput searches for new alloys with active learning of interatomic potentials）
+
+$$B_{\alpha}=M_{\mu,v}$$  
+
+basis function 如果直接是以单个的moment tensor 来表示的话，level计算和moment tensor当然是一样的
+当进行组合的时候
+例如
+- 对于本身就是标量的moment tensor，可以互相相乘组成新的
+比如说对于$$M_{0,0}$$, angular part是常数1，这个moment tensor是个标量。那么自己与自己相乘得到一个新的标量
+$$M_{0,0}*M_{0,0}=M_{0,0}^2$$
+
+$$M_{0,0}$$的level是$$2+4*0+0=2$$
+$$M_{0,0}^2$$的level是$$2*2$$，
+$$M_{0,0}^6$$的level是$$2*6=12$$
+
+- 对于本身是矢量的moment tensor，可以取向量点积得到一个标量的basis function
+比如说对于$$M_{0,1}=C_1r_{Na-P}+C_2r_{Na-O}+...=C_1(x_{Na-P},y_{Na-P},z_{Na-P})+....$$ 
+这里用C来省略radial part
+这是个矢量
+那么
+$$M_{0,1} \cdot M_{0,1}= [C_1r_{Na-P}+C_2r_{Na-O}+...] \cdot [C_1r_{Na-P}+C_2r_{Na-O}+...]  $$
+$$=C_1^2r_{Na-P}\cdot r_{Na-P}+2C_1C_2r_{Na-P}\cdot r_{Na-O}+C_2^2r_{Na-O}\cdot r_{Na-O}$$
+$$=C_1^2\vert r_{Na-P}\vert ^2+2C_1C_2 \vert r_{Na-P} \vert \vert r_{Na-O} \vert cos(\alpha _{P-Na-O})+.....$$
+这重新变成了一个标量
+点乘的时候，level是相加的
+这个的level 是 $$(2+4*0+1)+(2+4*0+1)=6$$
+
+
+- 对于矩阵，可以求frobenius积
+这个是两个相同形状的矩阵对其每个同位置元素相乘后求和
+此操作同样是导致level相加
+
 
 ## total energy
 $$E=\sum_i V(n_i)=\sum_i \sum_{\alpha}\xi_{\alpha}B_{\alpha}(n_i)$$
