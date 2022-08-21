@@ -1,6 +1,6 @@
 ---
 layout: default
-title: DFT基本
+title: DFT理论
 permalink: /vasp_basic/
 katex: True
 ---

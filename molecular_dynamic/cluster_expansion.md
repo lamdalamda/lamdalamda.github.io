@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 原子悸动学
+title: 原子动力，小子！
 permalink: /molecular_dynamic/
 katex: True
 ---
