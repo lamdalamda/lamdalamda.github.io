@@ -225,3 +225,39 @@ $$n_B\cdot t_R=0$$,tilt
 
 除此之外,两个晶体还可以在旋转之后做相对的平移.有两个自由度是在grain boundary平面内的平移,比如对于NaCl,平移之前可能是Cl对Cl,Na对Na,平移之后是交错着.而垂直于grain boundary plane方向的平移,不知道算不算自由度.因为垂直方向只有一个特定距离是能量最低的,很难将这个是自由度.
 
+
+# Energy
+
+## grain boundary formation energy
+
+## adhesion energy
+- https://aip.scitation.org/doi/full/10.1063/1.4795300
+$$W_{adhesion}= \frac{E_{slab1}+E_{slab2}-E_{IF}}{2A}$$ 其中slab1slab2是两个晶粒在slab状态下的能量。IF是整个晶界模型的能量，没有说有没有限定方向收敛
+- https://journals-aps-org.libproxy1.nus.edu.sg/prb/pdf/10.1103/PhysRevB.67.115415
+    - work of adhesion: 同上
+
+- https://pubs.rsc.org/en/content/articlelanding/2022/TA/D2TA02202H#cit41
+    $$W_{adhesion}=\gamma_a+\gamma_b-E_f=\frac{E_{slab1}-E_{bulk1}}{2S}+\frac{E_{slab1}-E_{bulk1}}{2S}-\frac{E_{interface}-E_{bulk1}-E_{bulk2}}{2A}=\frac{E_{slab1}+E_{slab2}-E_{IF}}{2A}$$
+    也就是说还是一样的
+
+
+
+
+## interface formation energy:
+energy gain to create one unit of interface from bulk material
+- https://journals-aps-org.libproxy1.nus.edu.sg/prb/pdf/10.1103/PhysRevB.67.115415
+    固定方式：slab的三个最外层原子可以移动，中间层的尺寸锁定-》即至少锁定了XY，不知道Z方向如何
+    感觉应该也是锁定的
+    bulk肯定是relax之后的了
+    In the relaxed calculations, all atoms in the three outermost layers on each side of
+    each slab are allowed to relaxed in all directions. The supercell size and the atomic positions in the middle layers are
+    kept the same as in the unrelaxed system
+    $$\gamma = \frac{E_{interface}-E_{bulk1}-E_{bulk2}}{2A}$$
+
+## surface energy 
+- https://journals-aps-org.libproxy1.nus.edu.sg/prb/pdf/10.1103/PhysRevB.67.115415
+    固定方式：slab的三个最外层原子可以移动，中间层的尺寸锁定-》即至少锁定了XY，不知道Z方向如何
+    In the relaxed calculations, all atoms in the three outermost layers on each side of
+    each slab are allowed to relaxed in all directions. The supercell size and the atomic positions in the middle layers are
+    kept the same as in the unrelaxed system
+    $$\sigma = \frac{E_{slab1}-E_{bulk1}}{2A}$$
