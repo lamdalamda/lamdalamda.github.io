@@ -82,6 +82,15 @@ bios设置：
 
 方法，对于目前的GPT硬盘，直接把EFI分区清空之后把200M的clover盘中文件全考进去，重启之后bios可以识别这个uefi并且引导出来就是clover
 
+## RAID
+
+`lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT`
+显示所有的分区和硬盘
+注意显示的这些都在/dev下面
+
+然后根据显示对应的三个磁盘 可能是sda, sdb, sdc ,sdd ,sde 等等每次会变化
+
+`sudo mdadm --create /dev/raid5 --level=5 --raid-devices=3 /dev/磁盘1 /dev/磁盘2 /dev/磁盘3`
 
 
 # MacOS系统问题
