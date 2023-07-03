@@ -1,0 +1,217 @@
+Region: us-west-2
+Image:
+  Os: ubuntu2004
+HeadNode:
+  InstanceType: t2.micro
+  Networking:
+    SubnetId: subnet-0856af2e3fbd9dc21
+  Ssh:
+    KeyName: pc-key-3b87a314-2023-06-05
+  LocalStorage:
+    RootVolume:
+      VolumeType: gp3
+      Size: 500
+  Iam:
+    AdditionalIamPolicies:
+      - Policy: arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+Scheduling:
+  Scheduler: slurm
+  SlurmQueues:
+    - Name: r6i64
+      ComputeResources:
+        - Name: r6i64-cr-0
+          Instances:
+            - InstanceType: r6i.32xlarge
+          MinCount: 0
+          MaxCount: 2
+          DisableSimultaneousMultithreading: true
+      Networking:
+        PlacementGroup: {}
+        SubnetIds:
+          - subnet-02d86d607cbfe2d75
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      AllocationStrategy: lowest-price
+    - Name: p4d
+      ComputeResources:
+        - Name: gpu
+          Instances:
+            - InstanceType: p4d.24xlarge
+          MinCount: 0
+          MaxCount: 2
+          Efa:
+            Enabled: true
+            GdrSupport: true
+          DisableSimultaneousMultithreading: true
+      Networking:
+        PlacementGroup:
+          Enabled: true
+        SubnetIds:
+          - subnet-02d86d607cbfe2d75
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+    - Name: p3
+      ComputeResources:
+        - Name: gpu
+          Instances:
+            - InstanceType: p3.16xlarge
+          MinCount: 0
+          MaxCount: 2
+          DisableSimultaneousMultithreading: true
+      Networking:
+        PlacementGroup:
+          Enabled: true
+        SubnetIds:
+          - subnet-02d86d607cbfe2d75
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      AllocationStrategy: lowest-price
+    - Name: g5
+      ComputeResources:
+        - Name: gpu
+          Instances:
+            - InstanceType: g5.48xlarge
+          MinCount: 0
+          MaxCount: 1
+          Efa:
+            Enabled: true
+            GdrSupport: true
+          DisableSimultaneousMultithreading: true
+      Networking:
+        PlacementGroup:
+          Enabled: true
+        SubnetIds:
+          - subnet-02d86d607cbfe2d75
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      AllocationStrategy: lowest-price
+    - Name: g4
+      ComputeResources:
+        - Name: gpu
+          Instances:
+            - InstanceType: g4dn.12xlarge
+          MinCount: 0
+          MaxCount: 1
+          Efa:
+            Enabled: true
+            GdrSupport: true
+          DisableSimultaneousMultithreading: true
+      Networking:
+        PlacementGroup:
+          Enabled: true
+        SubnetIds:
+          - subnet-02d86d607cbfe2d75
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+    - Name: r4i32
+      ComputeResources:
+        - Name: r4i32-cr-0
+          Instances:
+            - InstanceType: r4.16xlarge
+          MinCount: 0
+          MaxCount: 4
+          DisableSimultaneousMultithreading: true
+      Networking:
+        PlacementGroup: {}
+        SubnetIds:
+          - subnet-02d86d607cbfe2d75
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      AllocationStrategy: lowest-price
+    - Name: avx2compile
+      AllocationStrategy: lowest-price
+      ComputeResources:
+        - Name: avx2compile-cr-0
+          Instances:
+            - InstanceType: r4.4xlarge
+          MinCount: 0
+          MaxCount: 1
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      Networking:
+        SubnetIds:
+          - subnet-0856af2e3fbd9dc21
+        PlacementGroup: {}
+    - Name: c6i64
+      AllocationStrategy: lowest-price
+      ComputeResources:
+        - Name: c6i64-cr-0
+          Instances:
+            - InstanceType: c6i.32xlarge
+          MinCount: 0
+          MaxCount: 2
+          DisableSimultaneousMultithreading: true
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      Networking:
+        SubnetIds:
+          - subnet-0856af2e3fbd9dc21
+        PlacementGroup: {}
+    - Name: x2i64
+      AllocationStrategy: lowest-price
+      ComputeResources:
+        - Name: x2idn
+          Instances:
+            - InstanceType: x2idn.32xlarge
+          MinCount: 0
+          MaxCount: 1
+          DisableSimultaneousMultithreading: true
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      Networking:
+        SubnetIds:
+          - subnet-0856af2e3fbd9dc21
+        PlacementGroup: {}
+    - Name: x2zi24
+      AllocationStrategy: lowest-price
+      ComputeResources:
+        - Name: x2iezn
+          Instances:
+            - InstanceType: x2iezn.12xlarge
+          MinCount: 0
+          MaxCount: 1
+          DisableSimultaneousMultithreading: true
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      Networking:
+        SubnetIds:
+          - subnet-0856af2e3fbd9dc21
+        PlacementGroup: {}
+    - Name: m6i64
+      AllocationStrategy: lowest-price
+      ComputeResources:
+        - Name: m6i64-cr-0
+          Instances:
+            - InstanceType: m6i.32xlarge
+          MinCount: 0
+          MaxCount: 1
+          DisableSimultaneousMultithreading: true
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      Networking:
+        SubnetIds:
+          - subnet-0856af2e3fbd9dc21
+        PlacementGroup: {}
+  SlurmSettings: {}

@@ -536,6 +536,38 @@ tf.config.list_physical_devices('GPU')
 
 https://www.jianshu.com/p/7c4f251485b7?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
 
+### matplotlib Helvetica等字体问题
+
+首先找到config位置
+```
+import matplotlib as mpl
+mpl.get_configdir()
+```
+进去之后建立matplotlibrc文件
+```
+font.sans-serif     : Helvetica, Lucida Grande, Verdana, Geneva, Lucid, Arial, Avant Garde, sans-serif
+```
+之后删除缓存
+```
+rm -rf ~/.cache/matplotlib/
+```
+之后下载helvetica字体ttf文件放在matplotlib文件夹里，例如
+`/home/dx/intel/oneapi/intelpython/python3.7/envs/grain/lib/python3.8/site-packages/matplotlib/mpl-data/fonts/ttf`
+
+- matplotlibrc
+在~/.config/matplotlib/matplotlibrc
+```
+font.sans-serif     : Helvetica-light, Lucida Grande, Verdana, Geneva, Lucid, Arial, Avant Garde, sans-serif
+font.cursive:    Helvetica-light, Apple Chancery, Textile, Zapf Chancery, Sand, Script MT, Felipa, Comic Neue, Comic Sans MS, cursive
+mathtext.bf:  Helvetica
+mathtext.cal: Helvetica
+mathtext.it:  Helvetica
+mathtext.rm:  Helvetica
+mathtext.sf:  Helvetica
+font.family:  HelveticaLt
+```
+
+
 
 ## LMOD - module 管理软件
 - lua
