@@ -6,7 +6,6 @@ katex: True
 ---
 
 
-# 我已经完全悸动起来了!
 
 **Phillies, George DJ. Elementary lectures in statistical mechanics. Springer Science & Business Media, 2000.**
 **Guha, E. Statistical Mechanics: An Introduction. Alpha Science International, 2008.**

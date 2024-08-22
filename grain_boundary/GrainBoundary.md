@@ -5,7 +5,7 @@ permalink: /grainboundary/
 katex: True
 ---
 
-# **不要迷信科学**
+<!-- # **不要迷信科学** -->
 
 * TOC
 {:toc}
