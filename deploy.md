@@ -206,6 +206,67 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=2-17,20-35"
 
 # windows的一些系统设置
 
+## outlook
+outlook经典版添加gmail账户显示错误无法连接到imap服务器而且不跳出来gmail登录界面的话
+唯一有效在
+https://support.microsoft.com/zh-cn/office/unable-to-add-a-gmail-account-to-classic-outlook-4d9530c5-3f40-4e6d-9b45-4477f160828f
+```
+原因
+
+如果将 Gmail 帐户添加到 Outlook，但在浏览器登录期间未检查框，则可能会出现此问题： 
+
+选择 & 服务可以访问Microsoft应用：“从 Gmail 读取、撰写、发送和永久删除所有电子邮件。
+
+MS 应用 & 服务需要访问检查框
+
+状态：解决方法
+
+若要解决此问题，需要删除 Microsoft应用 & 服务的 Gmail 访问权限，然后再次从 Outlook 登录浏览器。 通过以下步骤，可以返回到浏览器登录，可在其中检查该检查框。 
+
+步骤 1：删除 Gmail 中Microsoft Apps &服务的访问权限。 
+关闭 Outlook。
+
+在 google.com 登录到 Google 帐户。
+
+选择顶部角的个人资料图片，然后选择 “管理 Google 帐户”。
+
+在左侧菜单中，选择“ 安全性”。
+
+向下滚动到 “连接到第三方应用 & 服务”，然后选择“Microsoft应用 & 服务”。
+
+找到 Microsoft应用 & 服务有权访问你的 Google 帐户 ，然后选择“ 查看详细信息”。
+
+在“ 你授予Microsoft应用 & 服务的访问权限”下，选择“删除所有访问权限”。
+
+选择“确认”。
+
+步骤 2：从 Windows 凭据管理器中删除 Google IMAP 凭据
+在 Windows“开始”菜单中，搜索 凭据管理器 并将其打开。 在Windows 10可能需要打开控制面板才能访问凭据管理器。 有关详细信息，请转到 访问凭据管理器。
+
+在 “管理凭据”下，选择“Windows 凭据”。
+
+向下滚动到 “通用凭据 ”，并找到 以 MicrosoftOffice16_Data：OAUTH2 开头的凭据。
+
+展开其中的每一个，将鼠标悬停在 MicrosoftOffice16_Data：OAUTH2 上，直到显示包括 tp_google_imap_Oauth2在内的全名。 这些是 Gmail 帐户的 Google 凭据。
+
+使用 MicrosoftOffice16_Data：OAUTH2 为其中每个选择“删除”。 如果你有多个 Gmail 帐户，则需要重新登录到每个帐户。
+
+如果要避免删除 Google IMAP 凭据（特定受影响的帐户除外），可以通过将凭据与以下注册表项中的标识进行比较来映射凭据。 打开注册表编辑器将此路径粘贴到顶部的“地址”栏中。 
+
+Computer\HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Common\Identity\Identities
+
+上述此注册表项的子项包括 Gmail 标识。 标识注册表项的开头是一个与凭据管理器中的 Gmail 凭据匹配的数字。 有关参考，请参阅以下示例。  
+
+MicrosoftOffice16_Data示例
+Reg edit 示例 Gmail 错误
+
+完成上述步骤后，现在即可通过浏览器从 Outlook 登录。 打开 Outlook 到未同步的 Outlook 配置文件，然后选择 Outlook 中的“通过浏览器登录”业务栏。 请确保在浏览器登录期间检查本文顶部记下的Microsoft应用 & 服务框。
+
+登录栏 Outlook 功能区
+
+如果从 Outlook 配置文件中删除了 Gmail 帐户，请选择“ 文件”、“ 添加帐户 ”以再次添加 Gmail 帐户，然后再次执行浏览器登录过程。
+```
+
 
 ## Driver 安装驱动的那些事
 ### 声卡soundblaster
