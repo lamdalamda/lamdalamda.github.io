@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>vasp实例 | Personal webpage</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="vasp实例" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="stay 24, stay student." />
+<meta property="og:description" content="stay 24, stay student." />
+<link rel="canonical" href="http://localhost:4000/vasp_practice/" />
+<meta property="og:url" content="http://localhost:4000/vasp_practice/" />
+<meta property="og:site_name" content="Personal webpage" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="vasp实例" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"vasp实例","description":"stay 24, stay student.","url":"http://localhost:4000/vasp_practice/","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Personal webpage" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Personal webpage</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/vasp_basic/">DFT抽象圣经</a><a class="page-link" href="/about/">About</a><a class="page-link" href="/deploy/">Deploy  Guide</a><a class="page-link" href="/pymatgen/">pymatgen</a><a class="page-link" href="/vasp_inputs/">vasp输入</a><a class="page-link" href="/vasp_practice/">vasp实例</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">vasp实例</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="实例普通的计算过渡金属氧化物nasicon">实例：普通的计算（过渡金属氧化物nasicon）</h1>
+
+<h2 id="计算内容">计算内容</h2>
+<p>通过conjugate gradient算法（studynote里面有）进行对晶格尺寸的优化（ionic relaxation）[IBRION=2]。通过计算力和stress tensor来调整晶格，计算过程中晶格中离子位置 和 晶格形状 和 晶格体积 都是可变的[ISIF=3]。</p>
+
+<h2 id="计算过程解释">计算过程解释</h2>
+<p>参考vasp_study_note中的DFT计算过程总结部分：</p>
+
+<h3 id="起始">起始</h3>
+<p>读取POSCAR得到起始离子位置，并给出初始电荷密度猜测为：（假设没有相互作用时的）单个原子电荷密度的简单叠加[ICHARG=2]，从而得到起始的电子密度n(r)。</p>
+
+<h3 id="电子步">电子步</h3>
+<p>用这个电子密度代入Kohn-sham 方程\([\frac{-\hbar^2}{2m}\nabla^2+V(r)+V_H(r)+V_{XC}(r)]\phi_i(r)=\epsilon_i\phi_i(r)\)中的hartree potential，\(V_H(r)=e^2\int \frac{n(r')}{|r-r'|}d^3r'\)，可以得到一组电子波函数，用得到的电子波函数求新的n(r)，然后递归运算。递归运算算法是常用算法[ALGO=NORMAL]（Blocked-Davidson 算法）。</p>
+
+<p>计算时，费米面附近轨道的占有概率用Gaussian method计算[ISMEAR = 0]，这个设置适合于半导体绝缘体。计算方式是：设定一个初始的sigma值0.05[SIGMA = 0.05]，使得能量在\(E_{Fermi} \pm sigma\)范围内的轨道可以被电子部分占据（常用于计算金属） 。通过减少sigma重新计算来外推到 sigma=0 时候的能量。</p>
+
+<p><a href="eV">ENCUT = 520</a>与计算速度有关，参考studynote中energy cutoff。block theorem给出的倒空间某点k对应的单电子波函数波函数\(\phi(x,k)=e^{ikx}\sum _K c_{k+K} e^{iKx}\)。此电子波函数所对应的能量本征值为\(E=\frac{\hbar}{2m}|k+K|^2\)，由于K是任意倒易单位矢量，所以E有无数多个，但是显然只有较低能量的是有效的（电子不会优先占用高能量）。所以设定了cutoff使得
+\(E_{cutoff}=\frac{\hbar}{2m}G_{cut}^2\)
+这样对于给定的cutoff（如520eV），可以得到k的新的波函数
+\(\phi(x,k)=e^{ikx}\sum _{|k+K|&lt;G_{cut}} c_{k+K} e^{iKx}\)
+这样使得电子波函数不会太复杂，减少计算成本</p>
+
+<p>由于过渡金属的存在（Ti），设置了自旋极化的计算[ISPIN = 2]。自旋极化是指d轨道被部分占据时，自旋方向相同的电子会产生磁矩的现象。磁矩大小 与 自旋方向相同的电子数量有关。起始的磁矩猜测是[MAGMOM = 38*0.6]。这个是用pymatgen生成的</p>
+
+<p>另外，过渡金属需要LDA+U计算来引入d电子局域化的影响。U参数是向d或f层加入电子时候的额外能量参数。由[LDAU = True]打开LDA+U计算，[LDAUTYPE = 2]指定了+U计算类别是简化LSDA+U方法。设定[LDAUU]中四个数字依次对应POSCAR中的四个元素的U值（POSCAR中第二个元素是Ti，对应U=某值。POSCAR中其他元素不是过渡金属，所以U=0）。J参数是与d、f电子自旋相关的参数，但是在LDAU的基础上J也有对应的一套参数
+[LDAUL = 0 0 0 0]是quantum number of on-site interaction。[LDAUPRINT = 1]是将LDA+U的一些结果写入OUTCAR输出。[LASPH = True]（平面波基矢的非球面贡献）可增加+U计算的准确性。对于[LDAUTYPE = 2]，[LMAXMIX = 4]可以加速收敛</p>
+
+<p>计算时候使用的赝势是[METAGGA = Scan]，是meta-GGA的一种。[LMIXTAU = True]可以通过传递电子的动能信息帮助收敛。[LREAL = Auto]要求赝势在实空间进行投影，对投影算符进行自动优化，一般都会使用这个。</p>
+
+<p>此递归运算为电子步（离子位置固定，计算电子密度从而获得当前离子位置所对应的能量），收敛条件是[EDIFF = 1e-05]。[NELMIN = 6]和[NELM = 200]要求电子步最多进行200步，最少进行6步。事实上大于40步一般就完蛋。</p>
+
+<h3 id="离子步">离子步</h3>
+<p>每次电子步收敛后，进行离子步（通过conjugate gradient算法[IBRION=2]）计算。从最后一个电子步中读取受力，通过受力方向来对离子来进行一个微小的移动（此移动与POTIM相关，或许不收敛的时候可以尝试修改以下POTIM？），得到新的离子位置。对新的离子位置，重复电子步的计算。如果EDIFFG&gt;0当 新的离子步 的 电子步收敛时的<strong>能量</strong> 与 上一个离子步 的 电子步收敛时的<strong>能量</strong> 之差小于收敛判据EDIFFG时离子步优化结束。如果EDIFFG&lt;0,则为当所有力小于|EDIFFG|时离子步优化结束。得到最终的晶体结构</p>
+
+<p>离子步收敛时（离子移动的判据EDIFFG = -0.01）计算结束。cutoff是ENCUT = 520 eV。最多允许进行[NSW = 150]150步</p>
+
+<h2 id="输出">输出</h2>
+<p>[LDAUPRINT = 1]是将LDA+U的一些结果写入OUTCAR输出。[LORBIT = 11]输出了DOSCAR和lm-decomposed PROCAR。[LWAVE = False]是指不将波函数写入WAVECAR</p>
+
+<h2 id="性能优化">性能优化</h2>
+
+<p>[LPLANE = TRUE]是一个计算优化项目，[NCORE=12]是并行核心数量，一般等于单路核心数量。[NSIM = 4]是同时优化的band数量一般不需要改。[PREC = Accurate]会让计算结果相对准确。</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Personal webpage</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Personal webpage</li><li><a class="u-email" href="mailto:davidnormal@126.com">davidnormal@126.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/lamdalamda"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">lamdalamda</span></a></li><li><a href="https://www.twitter.com/unknown"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">unknown</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>stay 24, stay student.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+  }
+});
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+  <!--KaTeX-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              // ...options...
+          });
+      });
+  </script>

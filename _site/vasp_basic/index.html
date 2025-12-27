@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>DFT抽象圣经 | Personal webpage</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="DFT抽象圣经" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="stay 24, stay student." />
+<meta property="og:description" content="stay 24, stay student." />
+<link rel="canonical" href="http://localhost:4000/vasp_basic/" />
+<meta property="og:url" content="http://localhost:4000/vasp_basic/" />
+<meta property="og:site_name" content="Personal webpage" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="DFT抽象圣经" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"DFT抽象圣经","description":"stay 24, stay student.","url":"http://localhost:4000/vasp_basic/","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Personal webpage" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Personal webpage</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/vasp_basic/">DFT抽象圣经</a><a class="page-link" href="/about/">About</a><a class="page-link" href="/deploy/">Deploy  Guide</a><a class="page-link" href="/pymatgen/">pymatgen</a><a class="page-link" href="/vasp_inputs/">vasp输入</a><a class="page-link" href="/vasp_practice/">vasp实例</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <p>Remake@21.10.22
+Revision@22.03.05 from MLE5215</p>
+
+<ul id="markdown-toc">
+  <li><a href="#必备知识或者说一些写法之类的" id="markdown-toc-必备知识或者说一些写法之类的">必备知识（或者说一些写法之类的）</a>    <ul>
+      <li><a href="#born-oppenheimer-approximation" id="markdown-toc-born-oppenheimer-approximation">Born-oppenheimer approximation</a></li>
+      <li><a href="#bracket" id="markdown-toc-bracket">bracket</a></li>
+      <li><a href="#泛函" id="markdown-toc-泛函">泛函</a></li>
+      <li><a href="#fourier-transformation" id="markdown-toc-fourier-transformation">fourier transformation</a></li>
+      <li><a href="#物质的性质与电子的关系" id="markdown-toc-物质的性质与电子的关系">物质的性质与电子的关系</a></li>
+      <li><a href="#bonding" id="markdown-toc-bonding">bonding：</a></li>
+    </ul>
+  </li>
+  <li><a href="#度量衡" id="markdown-toc-度量衡">度量衡</a>    <ul>
+      <li><a href="#hartree-atomic-units" id="markdown-toc-hartree-atomic-units">Hartree atomic units</a></li>
+      <li><a href="#notation那堆符号" id="markdown-toc-notation那堆符号">Notation，那堆符号</a></li>
+    </ul>
+  </li>
+  <li><a href="#single-electron-schrodinger-equation" id="markdown-toc-single-electron-schrodinger-equation">single electron schrodinger equation</a>    <ul>
+      <li><a href="#spatial-orbital" id="markdown-toc-spatial-orbital">spatial orbital</a></li>
+      <li><a href="#spin" id="markdown-toc-spin">Spin</a></li>
+      <li><a href="#单电子schrodinger方程大约的最终形式" id="markdown-toc-单电子schrodinger方程大约的最终形式">单电子schrodinger方程大约的最终形式</a></li>
+      <li><a href="#one-dimension-single-electron-wavefunction" id="markdown-toc-one-dimension-single-electron-wavefunction">one-dimension single electron wavefunction</a></li>
+    </ul>
+  </li>
+  <li><a href="#manybody-schrodinger-equation" id="markdown-toc-manybody-schrodinger-equation">Manybody schrodinger equation</a>    <ul>
+      <li><a href="#时间相关的薛定谔方程" id="markdown-toc-时间相关的薛定谔方程">时间相关的薛定谔方程</a></li>
+      <li><a href="#一些简化" id="markdown-toc-一些简化">一些简化</a></li>
+      <li><a href="#slater-determinant" id="markdown-toc-slater-determinant">Slater determinant</a></li>
+      <li><a href="#lcao--linear-combination-of-atomic-orbitals" id="markdown-toc-lcao--linear-combination-of-atomic-orbitals">LCAO- Linear-Combination of Atomic Orbitals</a></li>
+      <li><a href="#expectation-value" id="markdown-toc-expectation-value">expectation Value</a></li>
+      <li><a href="#hartree-fock-energy" id="markdown-toc-hartree-fock-energy">Hartree Fock Energy</a></li>
+      <li><a href="#hartree-fock-spin-orbital" id="markdown-toc-hartree-fock-spin-orbital">Hartree Fock spin orbital</a></li>
+    </ul>
+  </li>
+  <li><a href="#non-interacting-ie-hartree-electron-approximation" id="markdown-toc-non-interacting-ie-hartree-electron-approximation">Non-interacting (i.e. Hartree) electron approximation</a>    <ul>
+      <li><a href="#nr-或者基态电子密度" id="markdown-toc-nr-或者基态电子密度">n(r), 或者基态电子密度</a></li>
+      <li><a href="#220305--目前更新到这里" id="markdown-toc-220305--目前更新到这里">220305- 目前更新到这里</a></li>
+      <li><a href="#hartree-fock-limit" id="markdown-toc-hartree-fock-limit">hartree fock limit</a></li>
+    </ul>
+  </li>
+  <li><a href="#kohn-sham方程" id="markdown-toc-kohn-sham方程">Kohn Sham方程</a>    <ul>
+      <li><a href="#hohenberg-kohn-1st-theorem-" id="markdown-toc-hohenberg-kohn-1st-theorem-">Hohenberg-Kohn 1st Theorem :</a></li>
+      <li><a href="#hohenberg-kohn-2nd-theorem-" id="markdown-toc-hohenberg-kohn-2nd-theorem-">Hohenberg-Kohn 2nd Theorem :</a></li>
+      <li><a href="#泛函的具体形式-the-energy-functional" id="markdown-toc-泛函的具体形式-the-energy-functional">泛函的具体形式 the energy functional</a></li>
+      <li><a href="#kohn-sham-equation" id="markdown-toc-kohn-sham-equation">Kohn-Sham equation</a></li>
+      <li><a href="#寻找合适的e_xc泛函" id="markdown-toc-寻找合适的e_xc泛函">寻找合适的\(E_{XC}\)泛函</a>        <ul>
+          <li><a href="#lda近似计算exc的一种方式" id="markdown-toc-lda近似计算exc的一种方式">LDA近似：计算Exc的一种方式</a></li>
+          <li><a href="#lsda-lda中与spin相关的项目" id="markdown-toc-lsda-lda中与spin相关的项目">LSDA: LDA中与spin相关的项目</a></li>
+          <li><a href="#gga" id="markdown-toc-gga">GGA</a></li>
+          <li><a href="#meta-gga" id="markdown-toc-meta-gga">meta-GGA</a></li>
+          <li><a href="#hyper-gga" id="markdown-toc-hyper-gga">hyper-GGA</a></li>
+        </ul>
+      </li>
+      <li><a href="#一些补充" id="markdown-toc-一些补充">一些补充</a></li>
+    </ul>
+  </li>
+  <li><a href="#晶体学知识-crystallography" id="markdown-toc-晶体学知识-crystallography">晶体学知识 crystallography</a>    <ul>
+      <li><a href="#reciprocal-sapce-倒易空间" id="markdown-toc-reciprocal-sapce-倒易空间">reciprocal sapce 倒易空间</a>        <ul>
+          <li><a href="#一维理解" id="markdown-toc-一维理解">一维理解</a></li>
+          <li><a href="#倒空间的有意义的点q需要满足的条件" id="markdown-toc-倒空间的有意义的点q需要满足的条件">倒空间的有意义的点q需要满足的条件</a></li>
+          <li><a href="#一维小晶体的倒空间与布里渊区" id="markdown-toc-一维小晶体的倒空间与布里渊区">一维小晶体的倒空间与布里渊区</a></li>
+          <li><a href="#三维大晶体的倒空间与布里渊区" id="markdown-toc-三维大晶体的倒空间与布里渊区">三维大晶体的倒空间与布里渊区</a></li>
+        </ul>
+      </li>
+      <li><a href="#bloch-theorem的推导" id="markdown-toc-bloch-theorem的推导">bloch theorem的推导</a>        <ul>
+          <li><a href="#bloch-theorem第一种证明" id="markdown-toc-bloch-theorem第一种证明">bloch theorem第一种证明</a></li>
+          <li><a href="#bloch-theorem的第二种证明" id="markdown-toc-bloch-theorem的第二种证明">bloch theorem的第二种证明</a>            <ul>
+              <li><a href="#block-theorem单电子波函数的本征值和周期性" id="markdown-toc-block-theorem单电子波函数的本征值和周期性">block theorem单电子波函数的本征值和周期性</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#k-point取样" id="markdown-toc-k-point取样">k point取样</a>        <ul>
+          <li><a href="#trapezoidal-method" id="markdown-toc-trapezoidal-method">trapezoidal method</a></li>
+          <li><a href="#gaussian-quadrature" id="markdown-toc-gaussian-quadrature">Gaussian quadrature</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#dft-实践" id="markdown-toc-dft-实践">DFT 实践</a>    <ul>
+      <li><a href="#压缩模量-bulk-modulus" id="markdown-toc-压缩模量-bulk-modulus">压缩模量 bulk modulus</a></li>
+      <li><a href="#分析表面-slab-models" id="markdown-toc-分析表面-slab-models">分析表面-slab models</a></li>
+      <li><a href="#kpoint的数量" id="markdown-toc-kpoint的数量">kpoint的数量</a></li>
+      <li><a href="#energy-cutoff" id="markdown-toc-energy-cutoff">energy cutoff</a>        <ul>
+          <li><a href="#hard-and-soft-psudopotential" id="markdown-toc-hard-and-soft-psudopotential">hard and soft psudopotential</a></li>
+        </ul>
+      </li>
+      <li><a href="#optimization-method" id="markdown-toc-optimization-method">optimization method</a>        <ul>
+          <li><a href="#bisection-method" id="markdown-toc-bisection-method">bisection method</a></li>
+          <li><a href="#newton-method" id="markdown-toc-newton-method">newton method</a></li>
+          <li><a href="#quasi-newton-method" id="markdown-toc-quasi-newton-method">quasi-newton method</a></li>
+          <li><a href="#conjugate-gradient-methodsteepest-descent-method" id="markdown-toc-conjugate-gradient-methodsteepest-descent-method">conjugate-gradient method/steepest descent method</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#reference-book-参考书" id="markdown-toc-reference-book-参考书">reference book 参考书</a></li>
+</ul>
+
+<h1 id="必备知识或者说一些写法之类的">必备知识（或者说一些写法之类的）</h1>
+
+<h2 id="born-oppenheimer-approximation">Born-oppenheimer approximation</h2>
+
+<p>由于原子核质量远大于电子，在计算电子的一些性质时可以假设原子不动</p>
+
+<h2 id="bracket">bracket</h2>
+
+\[&lt;\hat{O}&gt;=&lt;\Phi|\hat{O}|\Phi&gt;=\int\int\int...\int\Phi^*\hat{O}\Phi dx_0dx_1.....dx_n\]
+
+<h2 id="泛函">泛函</h2>
+
+<p>方括号是泛函的意思。泛函类似于函数，函数是输入未知数得到一个结果，或者说数到数的对应。而泛函是输入一个函数得到一个数，或者说函数到数的映射。比如说，一个泛函的形式是从0到1积分，那么输入f(x)=x+1这个函数，得到的是数字1.5。泛函跟函数的表达方式类似，但是把圆括号变成方括号</p>
+
+\[n(r) -- E[] --&gt; E[n(r)]\]
+
+<h2 id="fourier-transformation">fourier transformation</h2>
+
+<p><img src="/vasp_basic/pic/Fourier_series_and_transform.gif" alt="Image" />
+转载自 wikipedia
+<img src="/vasp_basic/pic/40cf849e55ed95732a60b52d4019d609_720w.jpg" alt="Image" />
+转载自_https://zhuanlan.zhihu.com/p/19763358_，这个讲的很清楚</p>
+
+<h2 id="物质的性质与电子的关系">物质的性质与电子的关系</h2>
+<p><em>Richard M Martic, Electronic Structure: Basic theory and Practical method</em>
+物质的所有性质可以被划分为两种，第一种是可以由基态电子决定的性质，第二种是可以由激发态电子来决定的性质</p>
+
+<p>由于原子核质量远大于电子，所以相对电子来说是精致的（波恩奥本海默近似），所以电子决定了物质的绝大部分性质</p>
+
+<p>基态电子可以决定物质的这些性质：cohesive energy内聚能， equilibrium crystal structure晶体结构， phase transitions 相变，elastic constant弹性常数 charge density电荷密度，magneticorder， static dielectric and magnetic susceptibilities, nuclear vibrations and motion, etc….</p>
+
+<p>激发态电子决定了：specific heat 热容,pauli spin susceptibility, transport, insulating gap电阻, optical properties, spectra 光谱</p>
+
+<p>DFT的主要目的：研究基态电子所对应的物质性质</p>
+
+<h2 id="bonding">bonding：</h2>
+<p>一般认为分为5类：
+closed shell system:稀有气体
+ionic
+metallic
+covalent
+hydrogen:比较特殊，因为氢原子是唯一没有core electron的 （往上面的氦的core electron是1s的两个电子）</p>
+
+<p>实际材料的bonding一般是这五种的结合</p>
+
+<h1 id="度量衡">度量衡</h1>
+
+<h2 id="hartree-atomic-units">Hartree atomic units</h2>
+
+\[\hbar =m_e = e = 4\pi /\epsilon_0 = 1\]
+
+<h2 id="notation那堆符号">Notation，那堆符号</h2>
+
+<p>定义以上单位为1，用来简化计算
+取自MLE5215</p>
+
+<p>notation and symbol</p>
+
+<p>区分这些符号是非常重要的.以下全部假设空间是一维的.扩充到三维只需要把变量和量子数从1变成3,或者说,x变成(x,y,z)或者(\(r,\theta,\phi\)),量子数\(n,m_s\)变成\(n,l,m_l,m_s\)</p>
+
+<ul>
+  <li>电子数量N</li>
+</ul>
+
+<p>体系中电子数量，N</p>
+
+<ul>
+  <li>\(\Psi^{n_0,n_1,...n_?,m_{s}^0,m_{s}^1,...m_{s}^{N}}(x_0,x_1,...x_N,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_N(\sigma_N))\), Psi</li>
+</ul>
+
+<p>true wave function: 真正的(实际的)原子波函数,可以是单个电子体系,也可以是多个电子体系,N是总共的电子数.包含了来自于原子核和电子的所有信息.对于多个电子体系来讲这个Psi是个根本就无法表示也求不出来的理想值,是我们想要去趋近的值.<strong>另外,这个波函数的变量数目是灵活的,取决于你考虑什么。他可以是spin的函数,或者时间的函数,也可以不考虑这两个变量.因为spin,时间,和电子坐标这三个东西应该说，是不会互相影响，还是说，线性不相关？所以(或许)把他们劈开看是没什么问题的</strong>,至于量子数,我也不知道这个有多少个量子数，可能是3*电子数，也可能不是。在N&gt;=2不可解，无法求本征值</p>
+
+<ul>
+  <li>\(\Psi_{ele}^{n_0,n_1,...n_?,m_{s}^0,m_{s}^1,...m_{s}^{N}}(x_0,x_1,...x_N,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_N(\sigma_N))\), Psi——electron</li>
+</ul>
+
+<p>True electronic wave function: 真正的(实际的)电子波函数,只表示电子部分而不表示原子部分.但是复杂度与Psi是一样的,因为原子部分只是一个常数(或者说随原子间距简单变化的值)</p>
+
+<ul>
+  <li>\(\phi^{n}(x)\),phi</li>
+</ul>
+
+<p>Spatial orbital / Monoelectron Orbital / Hydrogen like orbital:没有包含电子自旋信息的（也不需要包含电子自旋信息的）,真实类氢原子单电子波函数/单电子轨道.可以在数值或者形式上精确且完整地表达出来的波函数。可求本征值,其就是single electron schrodinger方程的解.其能量是真实能量,本征态是真实本征态,有实际的物理意义.与\(\chi，\psi\)不同在于，其量子数(一维下是n,三维下是三个量子数n,l,\(m_l\))是一个变量,而不是预先定好的。会随能量不同而变化，反映出不同能级。\(\phi^{n}(x)\)是具有实际物理含义而且是真实描述了单电子体系中电子的波函数的。</p>
+
+<ul>
+  <li>\(\psi^{n_0}(x)\),psi</li>
+</ul>
+
+<p>在LCAO方法中量子数确定的，单个类氢原子单电子波函数/单电子轨道,可以在数值或者形式上精确且完整地表达出来的波函数,有唯一明确形式,而且只有x是变量,可求本征值,与\(\phi^{n}(x)\)不同的是,其量子数(一维下是n,三维下是三个量子数)是固定的（或者提前确定好的）.或者说， \(\psi^{n_0}(x)\)是n=n0时候的\(\phi^{n}(x)\)。在LCAO方法中用来组成\(\chi\).K个具有不同量子数的\(\psi^{n_i}(x)\)组成了\(\chi^{n_1,n_2,...,n_K,m_s}(x,\alpha(\sigma))\)</p>
+
+<ul>
+  <li>
+    <p>\(\chi^{n,m_s}(x,\alpha(\sigma))\)，或者\(\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma))\),chi</p>
+
+    <p>spin orbital: 包括了spin信息的单电子波函数/单电子轨道。未必是类氢原子的，也可以是多电子体系中某单个电子的波函数</p>
+
+    <p>是用来组合出slater determinant，作为slater行列式中的单个元素存在</p>
+
+    <p>可以表示真实的原子轨道，也可以表示近似的原子轨道。一般对于单电子体系，表示真实原子轨道；对于多电子体系，表示（通过LCAO或者其他方法）近似出来的原子轨道</p>
+
+    <ul>
+      <li>
+        <p>如果表示真实波函数:</p>
+
+        <p>如果在单电子体系中，则有明确解，可以表示为\(\chi^{n,l,m_{l},m_{s}}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_{l},m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))\)。</p>
+
+        <p>但如果是多电子体系，则其函数是未知的。n是一个变量集合，而且不知道有多少个量子数，而且如果组合成slater determinant，则slater determinant也是无法表示，不可解的</p>
+
+        <p>所以一般在单电子体系中，表示的是真实的自旋轨道</p>
+      </li>
+      <li>
+        <p>如果是近似波函数</p>
+
+        <p>也可以是近似出来的波函数,一般用来在多电子体系中组合出slater determinant。其中一种得到近似的\(\chi\)的方法是使用LCAO,对K个LCAO轨道\(\psi^{n_i}(x)\)进行线性组合,并且加入自旋部分，注意此时的量子数n是由LCAO决定的确定值，形式上发生了变化：</p>
+
+        <p>\(\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)+...+c_{K}\psi^{n_K}(x)]\alpha(\sigma)=[\sum_{\mu=1}^{K}c_{\mu}\psi^{n_{\mu}}(x)]\alpha(\sigma)\)。</p>
+
+        <p>以此种方法得到的spin orbital\(\chi\)可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值。以此种方法得到的spin orbital\(\chi\)的量子数是LCAO轨道们的量子数的集合，是固定的，不是变量</p>
+
+        <p>但是，未必就要用LCAO方法来得到\(\chi\)，也可以（可能）有其他方法。（平面波基矢？不知道是不是）</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>\(\Phi^{n_0,n_1,...n_{(K*N)},m_{s}^0,m_{s}^1,...m_{s}^{N}}(x_0,x_1,...x_N,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_N(\sigma_N))\), Phi</p>
+  </li>
+</ul>
+
+<p>Trial wave function: 指以Slater determinant形式模拟出来的波函数,不是实际的波函数.是由\(\chi^{n,m_s}(x,\alpha(\sigma))\)形成slater行列式组合出来的波函数.</p>
+
+<p>如果\(\chi^{n,m_s}(x,\alpha(\sigma))\)可以在数值或者形式上精确且完整地表达出来的波函数，例如使用LCAO方法,将spin orbital近似为K个原子轨道的linear combination：\(\chi^{n,m_s}(x,\alpha(\sigma))\approx\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma))\)，这里面除了x和spin都是常数</p>
+
+<p>则N个电子的trial wave function可以表示成\(\Phi^{n_0,n_1,...n_{(K*N)},m_{s}^0,m_{s}^1,...m_{s}^{N}}(x_0,x_1,...x_N,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_N(\sigma_N))\)此形式。是数值或者形式上可以精确且完整地表达出来的波函数,可解,可求本征值,但是这个的本征值不是真实值,而是真实原子波函数的本征值的近似,根据variational theory其能量总高于真实波函数的真实能量.</p>
+
+<ul>
+  <li>\(\alpha(\sigma),\beta(\sigma)\)
+spin function, 表示电子自旋量的函数,不知道怎么表达(但是好像也不需要表达)</li>
+</ul>
+
+<h1 id="single-electron-schrodinger-equation">single electron schrodinger equation</h1>
+
+<p>单电子薛定谔方程,此体系中只有一个电子.在不考虑电子自旋时候(也不需要考虑,因为自旋部分的方程和其他未知量是不相关的,即使算微分也是直接就被扔在外面)</p>
+
+\[\hat{H}=-\frac{\hbar ^2 }{2m_e}\nabla^2-\frac{Ze^2}{4\pi\epsilon_0r}\]
+
+<p>此Hamiltonian用来求解真实波函数,所以是\(\Psi\),在求解之前我们不知道这东西还依赖于量子数,所以没有写量子数的上标.</p>
+
+<p>三维情况下:</p>
+
+\[-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(x,y,z)}{dx^2}-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(x,y,z)}{dy^2}-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(x,y,z)}{dz^2}-\frac{Ze^2}{4\pi\epsilon_0\sqrt{x^2+y^2+z^2}}\Psi=E\Psi\]
+
+<p>解这个方程的话转化为球坐标比较方便</p>
+
+<p>\(x=rcos\phi sin\theta\)
+\(y=rsin\phi sin\theta\)
+\(z=rcos\theta\)</p>
+
+<p>得到</p>
+
+\[-\frac{\hbar^2 }{2m_e}\frac{d^2\Psi(r,\theta,\phi)}{d(rcos\phi sin\theta)^2}-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(r,\theta,\phi)}{d(rsin\phi sin\theta)^2}-\frac{\hbar ^2 }{2m_e}\frac{d^2\Psi(r,\theta,\phi)}{d(rcos\theta)^2}-\frac{Ze^2}{4\pi\epsilon_0r}\Psi=E\Psi\]
+
+<p>我不会解这个东西，网上得到的转换是</p>
+
+\[-\frac{\hbar ^2 }{2\mu r^2}\frac{d[r^2\frac{d\Psi}{dr}]}{dr}-\frac{\hbar ^2 }{2\mu r^2 sin\theta}\frac{d[sin\theta \frac{d\Psi}{d\theta}]}{d\theta}-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}\frac{d^2\Psi}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}\Psi=E\Psi\]
+
+\[-\frac{\hbar ^2 }{2\mu r^2}[2r\frac{d\Psi}{dr}+r^2\frac{d^2\Psi}{dr^2}]-\frac{\hbar ^2 }{2\mu r^2 sin\theta}[cos\theta\frac{d\Psi}{d\theta}+sin\theta\frac{d^2\Psi}{d\theta^2}]-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}\frac{d^2\Psi}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}\Psi=E\Psi\]
+
+\[-\frac{\hbar ^2 }{\mu r}\frac{d\Psi}{dr}-\frac{\hbar ^2 }{2\mu }\frac{d^2\Psi}{dr^2}-\frac{\hbar ^2 cos\theta}{2\mu r^2 sin\theta}\frac{d\Psi}{d\theta}-\frac{\hbar ^2 }{2\mu r^2 }\frac{d^2\Psi}{d\theta^2}-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}\frac{d^2\Psi}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}\Psi=E\Psi\]
+
+<p>将波函数分成r部分和角度部分</p>
+
+\[\Psi(r,\theta,\phi)=R(r)Y(\theta,\phi)\]
+
+\[-\frac{\hbar ^2 }{\mu r}\frac{d(R(r)Y(\theta,\phi))}{dr}-\frac{\hbar ^2 }{2\mu }\frac{d^2(R(r)Y(\theta,\phi))}{dr^2}-\frac{\hbar ^2 cos\theta}{2\mu r^2 sin\theta}\frac{d(R(r)Y(\theta,\phi))}{d\theta}-\frac{\hbar ^2 }{2\mu r^2 }\frac{d^2(R(r)Y(\theta,\phi))}{d\theta^2}-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}\frac{d^2(R(r)Y(\theta,\phi))}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}(R(r)Y(\theta,\phi))=E(R(r)Y(\theta,\phi))\]
+
+\[-\frac{\hbar ^2 }{\mu r}Y(\theta,\phi)\frac{dR(r)}{dr}-\frac{\hbar ^2 }{2\mu }Y(\theta,\phi)\frac{d^2R(r)}{dr^2}-\frac{\hbar ^2 cos\theta}{2\mu r^2 sin\theta}R(r)\frac{dY(\theta,\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu r^2 }R(r)\frac{d^2Y(\theta,\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu r^2sin\theta^2}R(r)\frac{d^2Y(\theta,\phi)}{d\phi^2}-\frac{Ze^2}{4\pi\epsilon_0r}R(r)Y(\theta,\phi)=ER(r)Y(\theta,\phi)\]
+
+<p>两边乘以\(\frac{r^2}{R(r)Y(\theta,\phi)}\)</p>
+
+\[-\frac{\hbar ^2 r}{\mu R(r)}\frac{dR(r)}{dr}-\frac{\hbar ^2 r^2}{2\mu R(r)}\frac{d^2R(r)}{dr^2}-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta Y(\theta,\phi)}\frac{dY(\theta,\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu  Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2 Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\phi^2}-\frac{Ze^2r^2}{4\pi\epsilon_0}=E\]
+
+<p>由此将整个的hamiltonian算符分割成了两个部分</p>
+
+<p>也就是说可以假设E=y+r（两个常数使得）</p>
+
+\[-\frac{\hbar ^2 r}{\mu R(r)}\frac{dR(r)}{dr}-\frac{\hbar ^2 r^2}{2\mu R(r)}\frac{d^2R(r)}{dr^2}-\frac{Ze^2r^2}{4\pi\epsilon_0}=r_0\]
+
+\[-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta Y(\theta,\phi)}\frac{dY(\theta,\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu  Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2 Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\phi^2}=y_0\]
+
+<p>这里相当于解也不知道叫啥（常微分？）方程</p>
+
+<p>然后继续分割角度部分</p>
+
+\[-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta Y(\theta,\phi)}\frac{dY(\theta,\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu  Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2 Y(\theta,\phi)}\frac{d^2Y(\theta,\phi)}{d\phi^2}=y_0\]
+
+\[-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta  \Theta(\theta)\Phi(\phi)}\frac{d \Theta(\theta)\Phi(\phi)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)\Phi(\phi)}\frac{d^2 \Theta(\theta)\Phi(\phi)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2  \Theta(\theta)\Phi(\phi)}\frac{d^2 \Theta(\theta)\Phi(\phi)}{d\phi^2}=y_0\]
+
+\[-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta  \Theta(\theta)\Phi(\phi)}\Phi(\phi)\frac{d \Theta(\theta)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)\Phi(\phi)}\Phi(\phi)\frac{d^2 \Theta(\theta)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2  \Theta(\theta)\Phi(\phi)}\Theta(\theta)\frac{d^2 \Phi(\phi)}{d\phi^2}=y_0\]
+
+\[-\frac{\hbar ^2 cos\theta}{2\mu  sin\theta  \Theta(\theta)}\frac{d \Theta(\theta)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)}\frac{d^2 \Theta(\theta)}{d\theta^2}-\frac{\hbar ^2 }{2\mu sin\theta^2  \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=y_0\]
+
+\[-\frac{\hbar ^2 cos\theta sin\theta}{2\mu   \Theta(\theta)}\frac{d \Theta(\theta)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)}sin\theta^2\frac{d^2 \Theta(\theta)}{d\theta^2}-\frac{\hbar ^2 }{2\mu   \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=y_0sin\theta^2\]
+
+<p>得到</p>
+
+\[-\frac{\hbar ^2 }{2\mu   \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=\phi_0\]
+
+<p>和</p>
+
+\[-\frac{\hbar ^2 cos\theta sin\theta}{2\mu   \Theta(\theta)}\frac{d \Theta(\theta)}{d\theta}-\frac{\hbar ^2 }{2\mu   \Theta(\theta)}sin\theta^2\frac{d^2 \Theta(\theta)}{d\theta^2}=y_0sin\theta^2-\phi_0\]
+
+<p>实质上可以看出来，这两个之间是挺难分开的，干脆就是说，分不开。所以在解方程时候要先解phi的部分，将phi的结果代入theta.注意这个phi不是什么trial wave function,而是真实波函数的一部分.只是恰好这些有相同的希腊字母</p>
+
+<ul>
+  <li>
+    <p>Azimuth part \(\Phi\)</p>
+
+    <p>也就是\(\Phi\)</p>
+
+\[-\frac{\hbar ^2 }{2\mu   \Phi(\phi)}\frac{d^2 \Phi(\phi)}{d\phi^2}=\phi_0\]
+
+    <p>有简单的解</p>
+
+\[\Phi _m=c_1e^{im_l\phi}\]
+
+    <p>带回去得到</p>
+
+\[-\frac{\hbar ^2 }{2\mu   c_1e^{im_l\phi}}[c_1(-m_l^2) e^{im_l\phi}]=\phi_0\]
+
+\[\frac{\hbar ^2m_l^2 }{2\mu }=\phi_0, (m_l=0,\pm 1,\pm 2, ...)\]
+
+    <p>大概能体会到这里面phi是一个在整个空间中比较均匀的项</p>
+  </li>
+  <li>
+    <p>theta part \(\Theta\)</p>
+
+    <p>一堆看不懂的多项式，随量子数变化非常复杂，而且是一个与phi有关的</p>
+
+    <p>在解这个的同时，theta回对phi的量子数进行限制</p>
+
+    <p>结果上来看的话</p>
+
+    <p>(5215)</p>
+
+\[P(cos\theta)=sin^m\theta(a_0\sum_{n=0}^{\infty}\frac{a_{2n}}{a_0}cos^{2n}\theta+a_1\sum_{n=1}^{\infty}\frac{a_{2n+1}}{a_1}cos^{2n+1}\theta)\]
+
+\[l=0,ml=0,p=1\]
+
+\[l=0,ml=0,p=sin\theta\]
+
+\[l=0,ml=1,p=cos\theta\]
+
+\[l=2,ml=0, p=1.5cos^2\theta-0.5\]
+
+\[l=2, ml=1, p=3cos\theta sin\theta=1.5cos2\theta\]
+
+\[l=2, ml=2, p=3-3cos^2\theta=3sin^2\theta\]
+  </li>
+  <li>
+    <p>R part</p>
+
+\[-\frac{\hbar ^2 r}{\mu R(r)}\frac{dR(r)}{dr}-\frac{\hbar ^2 r^2}{2\mu R(r)}\frac{d^2R(r)}{dr^2}-\frac{Ze^2r^2}{4\pi\epsilon_0}=r_0\]
+
+    <p>解是</p>
+
+    <p>\(R_{n,l}(r)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}\)
+n是主量子数，l是角量子数,b是一个与l相关的常数</p>
+  </li>
+</ul>
+
+<h2 id="spatial-orbital">spatial orbital</h2>
+
+<p>已经解好了这几个部分的话,就可以得到单电子的,不考虑电子自旋时候的,spatial orbital(参考度量衡部分)
+量子数反映了能级，不同量子数对应不同能级/激发态（不知道这么说对不对）</p>
+
+\[\phi^{n,l,m_l}(x,y,z)=\Psi^{n,l,m_l}(r,\theta,\phi)=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)\]
+
+<h2 id="spin">Spin</h2>
+<p>spin有点像一个dummy项，\(s^{m_s}(\sigma), s=[\alpha , \beta],s取哪个由m_s决定\)
+一个与xyz无关的项和波函数相乘，所以其实在计算时候不会影响，因为算微分之类的东西的时候直接就被分离跑了.对于单个电子来说，spin或许是个无所谓的东西？（虽然它确实会受到外在磁场的影响）但是在研究多电子体系的时候则必须将spin纳入考虑。</p>
+
+<p>在考虑电子自旋之后此时的oribtal变成了spin orbital. 试试区分这两个。注意这个spin orbital是前面定义中，表示真实波函数的情形，其量子数为变量。</p>
+
+<p>spatial orbital: \(\phi^{n,l,m_l}(x,y,z)=\phi^{n,l,m_l}(r,\theta,\phi)=\Psi^{n,l,m_l}(r,\theta,\phi)=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)\)</p>
+
+<p>量子数是变量的spin orbital: \(\chi^{n,l,m_{l},m_{s}}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_{l},m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))\)</p>
+
+<h2 id="单电子schrodinger方程大约的最终形式">单电子schrodinger方程大约的最终形式</h2>
+
+<p>(可能少了几项,估计哪里可能写错了,但不重要,反正没人在乎对不对,我们只需要知道这东西是能表示出来的就彳亍.)</p>
+
+<p>spin orbital: \(\chi_{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))=R_{n,l}(r)\Phi_{m_l}(\phi)\Theta_{l,m_l}(\theta)\alpha^{m_s}(\sigma)=(c_3e^{i\sqrt{\frac{2\mu E}{\hbar^2}}r}+c_4e^{-i\sqrt{\frac{2\mu E}{\hbar^2}}r})b_le^{\frac{\mu Z e^2r}{2\pi \epsilon_0 \hbar^2 n}}c_1e^{im_l\phi}P(cos\theta)\alpha^{m_s}(\sigma)\)</p>
+
+<h2 id="one-dimension-single-electron-wavefunction">one-dimension single electron wavefunction</h2>
+
+<p>因为三维依旧是一个难以理解的波函数，所以这里有一个一维的单电子波函数供参照
+一维单电子波函数有一个量子数yo
+由于波函数本身有很多常数，但是这个常数对于理解这个函数形式并不重要所以，所以将全部常数bian’c</p>
+
+<h1 id="manybody-schrodinger-equation">Manybody schrodinger equation</h1>
+
+<p>为了研究物质的物理性质，需要解电子的波函数，然后可以通过算符施加在波函数来获得性质（例如用hamiltonian获得基态能量）</p>
+
+<p>多电子的,不考虑时间的,真实Hamiltonian写作如下形式：</p>
+
+\[\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+0.5\sum_{i\neq j}\frac{e^2}{|r_i-r_j|}-\sum_I\frac{\hbar ^2 }{2M_I}\sum_I\nabla_I^2+0.5\sum_{I\neq J}\frac{Z_IZ_Je^2}{|R_I-R_J|}\]
+
+<p>注意</p>
+
+\[0.5\sum_{i\neq j}\frac{e^2}{|r_i-r_j|}=\sum_{i&lt; j}\frac{e^2}{|r_i-r_j|}\]
+
+<ul>
+  <li>
+    <p>实例</p>
+
+    <p>假设<strong>一维系统</strong>中有A，B两个原子，A是He位于x=5，B是H位于x=9（坐标只是为了方便看），体系中还有三个电子，其坐标为变量\(x_1,x_2,x_3\)。则,如果把原子核之间相互作用和原子核动能项写作C：</p>
+
+    <p>time independent schorodinger方程：</p>
+
+\[[-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i&lt;j}\frac{e^2}{|r_i-r_j|}+C]\Psi=E\Psi\]
+
+\[-\frac{\hbar ^2 }{2m_e}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}-\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2e^2}{x_1-5}_{He与1号电子相互作用}+\frac{2e^2}{x_2-5}_{He,x_2}+\frac{2e^2}{x_3-5}_{He,x_3}+\frac{1e^2}{x_1-9}_{H,x_1}+\frac{1e^2}{x_2-9}_{H,x_2}+\frac{1e^2}{x_3-9}_{H,x_3})\Psi(x_1,x_2,x_3)+(\frac{e^2}{|x_1-x_2|}+\frac{e^2}{|x_1-x_3|}+\frac{e^2}{|x_2-x_3|}+C)\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)\]
+
+    <p>显然形似\(\Psi(x_1,x_2,x_3)=e^{ikx_1}+e^{ikx_2}+e^{ikx_3}\)的这种简单解不成立，整体波函数将会是非常复杂的。注意\(x_1,x_2,x_3\)是三个在x轴上的变量。当然如果确实地解出了波函数（本征方程），那么粒子准确的运动形式就可以知道了（通过将解出的本征方程以及本征值代入time dependent schrodinger equation，可以得到比如x1与x2x3的关联,什么\(x_1*x_2=e^{x_3}-x_2\)之类的关系,这个是随便乱写的）</p>
+  </li>
+</ul>
+
+<h2 id="时间相关的薛定谔方程">时间相关的薛定谔方程</h2>
+
+<p><strong>这部分可以先跳过,不需要管波函数随时间怎么变化.结论就是,我们想要的结果是不需要考虑时间变量也可以得到的</strong></p>
+
+<p>此hamiltonian所对应的含时间的薛定谔方程time dependent schrodinger equation是：</p>
+
+\[i\hbar\frac{d\Psi(r_i,t)}{dt}=\hat{H}\Psi({r_i,t})\]
+
+<p>time dependent schrodinger equation描述了粒子随时间变化的真实运动方程。</p>
+
+<p>解这个time dependent schrodinger equation，其eigenstate为\(\Psi({r_i,t})=\Psi(r_i)e^{i\frac{E}{\hbar}t}\)。也就说真实粒子的运动必须满足这个方程</p>
+
+<p>而\(E=\frac{\bra{\Psi(r_i)}{\hat{H}}\ket{\Psi(r_i)}}{\bra{\Psi(r_i)}\ket{\Psi(r_i)}}\)</p>
+
+<p>经过书中证明，E的本征值是time independent schrodinger方程中的hamiltonian的本征值</p>
+
+<p>即\(\hat{H}\ket{\Psi _m}=E\ket{\Psi _m }\)</p>
+
+<p><strong>以上，看不懂，换一种说法：</strong></p>
+
+<p>有一个time independent schorodinger与时间无关的薛定谔方程
+\(\hat{H}\ket{\Psi }=E\ket{\Psi _m }\)</p>
+
+\[\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i&lt;j}\frac{e^2}{|r_i-r_j|}+Constant\]
+
+<p>假设其eigen function本征态的集合是\(\Psi\),其本征值的集合是E。</p>
+
+<p>这些本征态就是time dependent schorodinger时间相关薛定谔方程本征态\(\Psi({r_i,t})=\Psi(r_i)e^{i\frac{E}{\hbar}t}\)中的\(\Psi(r_i)\)。本征态对应本征值E就是time dependent schorodinger时间相关薛定谔方程本征态\(\Psi({r_i,t})=\Psi(r_i)e^{i\frac{E}{\hbar}t}\)中的E。</p>
+
+<p>或者说time dependent schrodinger equation的本征态是由time independent schrodinger equation来确定的.<strong>因为没有人关心波函数随时间怎么变化,只关心本征值.那么即使把时间部分扔掉本征值也不会变,而且算起来还方便,所以干脆就扔掉了.</strong></p>
+
+<h2 id="一些简化">一些简化</h2>
+
+<p>所以说,继续研究这个不含时间的薛定谔方程</p>
+
+<p>对于真实Hamiltonian,可以进行一些简化.这些简化不损害其准确性和物理意义.</p>
+
+<ul>
+  <li>
+    <p>继续使用这个实例系统:</p>
+
+    <p>假设<strong>一维系统</strong>中有A，B两个原子，A是He位于<strong>x=5</strong>，B是H位于<strong>x=9</strong>（<strong>坐标只是为了方便看</strong>），体系中还有三个电子，其坐标为变量\(x_1,x_2,x_3\)。则：</p>
+  </li>
+  <li>
+    <p>Born Oppenheimer近似：原子核质量远大于电子质量且原子相对静止（R不是变量）</p>
+
+\[\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i&lt;j}\frac{e^2}{|r_i-r_j|}+Constant\]
+
+    <p>刨去那个constant，剩下得到的是电子hamiltonian</p>
+
+\[\hat{H}_{ele}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i&lt;j}\frac{e^2}{|r_i-r_j|}=\hat{T}_{electron}+\hat{V}_{nuclei-electron}+\hat{V}_{electron-electron}=\hat{T_e}+\hat{V_{ne}}+\hat{V_{ee}}\]
+
+    <p>研究电子hamiltonian等效于研究真实的Hamiltonian,因为两者之间只差了常数+原子核的动能量.常数只需要加减一下,原子核的动能量很小</p>
+  </li>
+  <li>
+    <p>转换成原子单位制:</p>
+
+\[\hat{H}_{ele}=-\frac{1}{2}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_I}{r_i-R_I}+\sum_{i&lt;j}\frac{1}{|r_i-r_j|}\]
+  </li>
+  <li>
+    <p>实例:</p>
+
+    <p>这时候实例系统的电子Hamiltonian:
+  \(\hat{H}_{ele}=-\frac{1}{2}\sum_i\nabla_i^2-\sum_{i,I}\frac{Z_I}{r_i-R_I}+\sum_{i&lt;j}\frac{1}{|r_i-r_j|}\)</p>
+
+    <p>作用在波函数上:</p>
+
+\[\hat{H}_{ele}\Psi=-\frac{1}{2}\sum_i\nabla_i^2\Psi-\sum_{i,I}\frac{Z_I}{r_i-R_I}\Psi+\sum_{i&lt;j}\frac{1}{|r_i-r_j|}\Psi\]
+
+    <ul>
+      <li>第一项是电子动能:</li>
+    </ul>
+
+\[-\frac{1}{2}\sum_i\nabla_i^2\Psi=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})\]
+
+    <ul>
+      <li>然后第二项中，电子和He原子核的相互作用:(注意,电子之间不区分,所以三个电子既与He作用又与H作用)</li>
+    </ul>
+
+\[-\sum_{i,He}\frac{Z_{He}}{x_i-x_{He}}\Psi=-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5})\Psi\]
+
+    <ul>
+      <li>第二项中电子和H原子核的相互作用:</li>
+    </ul>
+
+\[-\sum_{i,H}\frac{Z_{H}}{x_i-x_{H}}\Psi=-(\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})\Psi\]
+
+    <ul>
+      <li>最后第三项中电子之间的相互作用</li>
+    </ul>
+
+\[\sum_{i&lt;j}\frac{1}{|r_i-r_j|}\Psi=(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi\]
+
+    <ul>
+      <li>
+        <p>原子核动能和相互作用在电子Hamiltonian中不写</p>
+      </li>
+      <li>
+        <p>所以最后是:</p>
+      </li>
+    </ul>
+
+\[H_{ele}=-\frac{1}{2}(\frac{d^2}{dx_1^2}+\frac{d^2}{dx_2^2}+\frac{d^2}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})+(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\]
+
+\[H_{ele}\Psi(x_1,x_2,x_3)=-\frac{1}{2}(\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_2^2}+\frac{d^2\Psi(x_1,x_2,x_3)}{dx_3^2})-(\frac{2}{x_1-5}+\frac{2e}{x_2-5}+\frac{2}{x_3-5}+\frac{1}{x_1-9}+\frac{1}{x_2-9}+\frac{1}{x_3-9})\Psi(x_1,x_2,x_3)+(\frac{1}{|x_1-x_2|}+\frac{1}{|x_1-x_3|}+\frac{1}{|x_2-x_3|})\Psi(x_1,x_2,x_3)=E\Psi(x_1,x_2,x_3)\]
+  </li>
+  <li>
+    <p>Hartree Fock的表示法;</p>
+
+    <p>主要是为了把单电子和双电子部分区分开,跟Hamiltonian本身没有区别</p>
+
+    <p>令:</p>
+
+\[\hat{h}_i=\hat{T_e^i}+\hat{V_{ne}^i}=-\frac{1}{2}\nabla_i^2-\sum_{I}\frac{Z_I}{r_i-R_I}\]
+
+\[\hat{V}_{ee}^{i,j}=\frac{1}{|r_i-r_j|}\]
+
+\[\hat{H}_{ele}=\sum_i \hat{h}_i+\sum_i \sum_{j&lt;i} \hat{V}_{ee}^{i,j}\]
+
+    <ul>
+      <li>实例:对于之前实例中的第一个电子</li>
+    </ul>
+
+\[\hat{h}_1=\hat{T_e^1}+\hat{V_{ne}^1}=-\frac{1}{2}\nabla_1^2-\sum_{I}\frac{Z_I}{x_1-x_I}=-\frac{1}{2}\nabla_1^2-\frac{1}{x_1-9}-\frac{1}{x_1-5}\]
+
+\[\hat{h}_1\Psi=\hat{T_e^1}\Psi+\hat{V_{ne}^1}\Psi=-\frac{1}{2}\frac{d^2\Psi(x_1,x_2,x_3)}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\Psi\]
+
+\[\hat{V}_{ee}^{1,2}=\frac{1}{|x_1-x_2|}\]
+  </li>
+</ul>
+
+<h2 id="slater-determinant">Slater determinant</h2>
+
+<p>波函数的第一次近似</p>
+
+<p>算符简化完了之后，得想想办法把波函数给表示出来。遗憾的是，简化了半天，波函数肯定还是算不出来。所以通过variational theory，寻找近似的足够好的波函数。波函数的一个还算好的表示法是slater determinant</p>
+
+<p><em>定理(还是公理?):由于电子是费米子，所以当两个电子交换位置时候符号必须改变</em></p>
+
+<p>如果电子之间没有相互作用(这是错的),则波函数可以写作简单的单电子波函数相乘的形式.然而，当电子交换位置时候，波函数的正负号没有变化</p>
+
+<p>所以：引入Slater determinant来作为一种,模拟或者说,近似地表示多电子体系波函数的方式.</p>
+
+<p>也就是说\(\Psi\approx \Phi\)</p>
+
+<p>前面说到</p>
+
+<ul>
+  <li>\(\Phi^{n_0,n_1,...n_i,m_{s0},m_{s1},...m_{si}}(x_0,x_1,...x_i,\alpha_0(\sigma_0),\alpha_1(\sigma_1)...\alpha_i(\sigma_i))\), Phi
+Trial wave function: 指以Slater determinant形式模拟出来的波函数,是可以在数值或者形式上精确且完整地表达出来的波函数,可解,可求本征值</li>
+</ul>
+
+<p>前面说到，如果\(\chi^{n,m_{s}}\)表示真实波函数:如果在单电子体系中，则有明确解，可以表示为\(\chi^{n,l,m_{l},m_{s}}(x,y,z,\alpha(\sigma))=\chi^{n,l,m_{l},m_s}(r,\theta,\phi,\alpha(\sigma))=\phi^{n,l,m_l}(r,\theta,\phi)\alpha^{m_s}(\sigma)=\Psi^{n,l,m_l,m_s}(r,\theta,\phi,\alpha(\sigma))\)。但如果是多电子体系，则其函数是未知的。此时n不是单个量子数，而是一个变量集合，而且不知道有多少个量子数，而且如果组合成slater determinant，则slater determinant也是无法表示，不可解的</p>
+
+<p>继续沿用那个实例体系:则一维三电子的Slater determinant: 我懒得把alpha放在变量里面了,我不知道对不对,大概可能,比如状态为\(\alpha(\sigma)\)只能占据ms=+0.5的轨道,而状态为\(\beta(\sigma)\)只能占据ms=-0.5的轨道?或许吧,需要以后搞清楚.另外这里面的\(\chi^{n,m_{s}}\)是真实波函数，在这个多电子体系下，是一个未知的函数。其中n1，n2，n3各自是一个不知道多少个量子数的集合，ms倒是确定只有一个。</p>
+
+\[\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))=\frac{1}{\sqrt6}det\left\{\begin{matrix}
+\chi_1^{n_1,m_{s1}}(x_1)&amp;\chi_1^{n_1,m_{s1}}(x_2)&amp;\chi_1^{n_1,m_{s1}}(x_3)\\
+\chi_2^{n_2,m_{s2}}(x_1)&amp;\chi_2^{n_2,m_{s2}}(x_2)&amp;\chi_2^{n_2,m_{s2}}(x_3)\\
+\chi_3^{n_3,m_{s3}}(x_1)&amp;\chi_3^{n_3,m_{s3}}(x_2)&amp;\chi_3^{n_3,m_{s3}}(x_3)\\
+\end{matrix}\right\}\]
+
+\[\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))=\frac{1}{\sqrt6}[\chi_1^{n_1,m_{s1}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)\chi_3^{n_3,m_{s3}}(x_3)+\chi_2^{n_2,m_{s2}}(x_1)\chi_3^{n_3,m_{s3}}(x_2)\chi_1^{n_1,m_{s1}}(x_3)+\chi_3^{n_3,m_{s3}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)\chi_2^{n_2,m_{s2}}(x_3)-\chi_3^{n_3,m_{s3}}(x_1)\chi_2^{n_2,m_{s2}}(x_2)\chi_1^{n_1,m_{s1}}(x_3)-\chi_1^{n_1,m_{s1}}(x_1)\chi_3^{n_3,m_{s3}}(x_2)\chi_2^{n_2,m_{s2}}(x_3)-\chi_2^{n_2,m_{s2}}(x_1)\chi_1^{n_1,m_{s1}}(x_2)\chi_3^{n_3,m_{s3}}(x_3)]\]
+
+<p>这个slater determinant主要是用来满足pauli exclusiong principle：不区分电子， 而且当两个电子具有相同坐标的波函数（概率）等于0（也就是说这个波函数不允许两个电子有相同坐标）。此表示方式也称为(不知道对不对)hartree product。不过虽然slater determinant有了明确形式，但是行列式里面每个元素（spin orbital）的形式暂时还不知道</p>
+
+<h2 id="lcao--linear-combination-of-atomic-orbitals">LCAO- Linear-Combination of Atomic Orbitals</h2>
+
+<p>LCAO是其中一种得到slater determinant中spin orbital的近似的方法，</p>
+
+<p>即</p>
+
+<p>\(\chi^{n,m_{s}}\approx\chi^{n_1,n_2,...n_K,m_s}_{LCAO:c_1,c_2,...c_K}(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)+...+c_{K}\psi^{n_K}(x)]\alpha(\sigma)=[\sum_{\mu=1}^{K}c_{\mu}\psi^{n_{\mu}}(x)]\alpha(\sigma)\)。</p>
+
+<p>沿用实例中，假设是每个spin orbital由两个atomic orbital模拟组成，即K=2情形</p>
+
+\[\chi_1^{n_1,n_2,m_s}(x,\alpha(\sigma))=[c_1\psi^{n_1}(x)+c_2\psi^{n_2}(x)]\alpha(\sigma)\]
+
+<p>一维的spatial orbital</p>
+
+\[\frac{d^2 \Psi(x)}{dx^2}+\frac{Z}{x-x_{N}}\Psi=E\Psi\]
+
+<p>看起来不知道怎么解，人手算估计费劲，但是肯定电脑能给出一个足够好的解（真实解而不是近似，实际上的一维单电子波函数）。为了理解起来方便，假设和三维单电子波函数的R部分相同或者类似（只是为了说明这是一个明确的公式，别那么抽象）</p>
+
+<p>根据网上的R部分解（https://chem.libretexts.org/Courses/University_of_California_Davis/UCD_Chem_107B%3A_Physical_Chemistry_for_Life_Scientists/Chapters/4%3A_Quantum_Theory/4.10%3A_The_Schr%C3%B6dinger_Wave_Equation_for_the_Hydrogen_Atom）</p>
+
+\[\psi^{n=1}(x)=\frac{1}{\sqrt{\pi}}(\frac{Z}{a_0})^{1.5}e^{-\frac{Zx}{a_0}}\]
+
+\[\psi^{n=2}(x)=\frac{1}{\sqrt{32\pi}}(\frac{Z}{a_0})^{1.5}(2-\frac{Zx}{a_0})e^{-\frac{Zx}{2a_0}}\]
+
+<p>魔改一下去掉无所谓的常数部分</p>
+
+\[\psi^{n=1}(x)=Z^{1.5}e^{-Zx}\]
+
+\[\psi^{n=2}(x)=Z^{1.5}(2-Zx)e^{-\frac{Zx}{2}}\]
+
+<p>继续之前的实例体系，A是He位于x=5，B是H位于x=9</p>
+
+\[\psi^{n=1}_H(x)=e^{-(x-9)}=e^{9-x}\]
+
+\[\psi^{n=2}_H(x)=(2-(x-9))e^{-(x-9)/2}=(11-x)e^{\frac{9-x}{2}}\]
+
+\[\psi^{n=1}_{He}(x)=2^{1.5}e^{-2(x-5)}\approx3e^{10-2x}\]
+
+\[\psi^{n=2}_{He}(x)=2^{1.5}(2-2(x-5))e^{-2(x-5)/2}\approx(34-6x)e^{5-x}\]
+
+<p>得到了上面四个spatial orbital，可以进行任意组合出来spin orbital，然后组合成slater determinant</p>
+
+<p>组合成spin orbital的常数也可以随便乱填。比如可以组合出来这种：</p>
+
+\[\chi^{n_1=2,n_2=2}_1(x,s(\sigma))=[0.7\psi^{n=2}_H(x)+0.3\psi^{n=2}_{He}(x)]s(\sigma)=[0.7*3e^{10-2x}+0.3*(34-6x)e^{5-x}]s(\sigma)=[2.1e^{10-2x}+(10.2-1.8x)e^{5-x}]s(\sigma)\]
+
+\[\chi^{n_1=1,n_2=1}_2(x,s(\sigma))=[0.9\psi^{n=1}_H(x)+0.1\psi^{n=1}_{He}(x)]s(\sigma)=[0.9e^{9-x}+0.3e^{10-2x}]s(\sigma_2)\]
+
+\[\chi^{n_1=1,n_2=1}_3(x,s(\sigma))=[0.4\psi^{n=1}_H(x)+0.6\psi^{n=1}_{He}(x)]s(\sigma)=[0.4e^{9-x}+0.6e^{10-2x}]s(\sigma_3)\]
+
+<p>往里面填三个电子，假设三个电子里面由有两alpha 的spin，有一个是beta的spin</p>
+
+\[\Phi^{n=(2,2,1,1,1,1)}_{c=(0.7,0.3,0.9,0.1,0.4,0.6)}(x_1,\alpha_1(\sigma_1),x_2,\alpha_2(\sigma_2),x_3,\beta(\sigma_3))=\frac{1}{\sqrt6}det\left\{\begin{matrix}
+\chi_1(x_1,\alpha(\sigma_1))&amp;\chi_1(x_2,\alpha(\sigma_2),)&amp;\chi_1(x_3,\beta(\sigma_3))\\
+\chi_2(x_1,\alpha(\sigma_1))&amp;\chi_2(x_2,\alpha(\sigma_2),)&amp;\chi_2(x_3,\beta(\sigma_3))\\
+\chi_3(x_1,\alpha(\sigma_1))&amp;\chi_3(x_2,\alpha(\sigma_2),)&amp;\chi_3(x_3,\beta(\sigma_3))\\
+\end{matrix}\right\}\]
+
+\[\Phi^{n=(2,2,1,1,1,1)}_{c=(0.7,0.3,0.9,0.1,0.4,0.6)}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\beta(\sigma_3))=\frac{1}{\sqrt6}det\left\{\begin{matrix}
+[2e^{10-2x_1}+(10-2x_1)e^{5-x_1}]\alpha(\sigma_1)&amp;[2e^{10-2x_2}+(10-2x_2)e^{5-x_2}]\alpha(\sigma_2)&amp;[2e^{10-2x_3}+(10-2x_3)e^{5-x_3}]\beta(\sigma_3)\\
+[0.9e^{9-x_1}+0.3e^{10-2x_1}]\alpha(\sigma_1)&amp;[0.9e^{9-x_2}+0.3e^{10-2x_2}]\alpha(\sigma_2)&amp;[0.9e^{9-x_3}+0.3e^{10-2x_3}]\beta(\sigma_3)\\
+[0.4e^{9-x_1}+0.6e^{10-2x_1}]\alpha(\sigma_1)&amp;[0.4e^{9-x_2}+0.6e^{10-2x_2}]\alpha(\sigma_2)&amp;[0.4e^{9-x_3}+0.6e^{10-2x_3}]s\beta(\sigma_3)\\
+\end{matrix}\right\}\]
+
+<p>继续看，发现一些有趣的性质，比如\(x_1=x_2\)时候determinant肯定是0了，因为前两列元素完全相同，然而\(x_2=x_3\)却没事，因为有alpha和beta的区别。</p>
+
+<p>这个determinant就是trial function。可以把trial function前面挂上算符就能得到本征之类的。看起来完全能解出来啊</p>
+
+<h2 id="expectation-value">expectation Value</h2>
+
+<p>注意区分期待值和本征值.</p>
+
+<p>本征值: 把算符放在波函数上面得到的一组可能值.这个E就是本征值的集合</p>
+
+\[\hat{H}\Psi=E\Psi\]
+
+<p>而期待值是这么算的,比如能量的期待值〈E〉,这里假设波函数已经归一化</p>
+
+\[〈E〉=\int\Phi^*\hat{H}\Phi d\tau\]
+
+<h2 id="hartree-fock-energy">Hartree Fock Energy</h2>
+
+<ul>
+  <li>
+    <p>继续是按照之前实例的体系: 将slater行列式作为真实波函数的近似值代入Hamiltonian</p>
+
+\[\hat{H}_{ele}\Psi(x_1,x_2,x_3) \approx\hat{H}_{ele}\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))=(\sum_i \hat{h}_i+\sum_i \sum_{j&lt;i} \hat{V}_{ee}^{i,j})\Phi\]
+
+\[\hat{h}_1\Phi=-\frac{1}{2}\frac{d^2\Phi}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\Phi\]
+
+    <p>然后尝试得到h1期待值(而不是本征值)</p>
+
+    <p>因为h1包含的信息是电子动能Kinetic和电子-原子核的相互作用n-e</p>
+
+    <p>其对应的能量为</p>
+
+\[E_{h1}=E_{k}+E_{ne}=〈\hat{h}_1〉=\int\Phi^*\hat{h}_1\Phi dx_1dx_2dx_3=\int\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}*}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3))\hat{h}_1\Phi^{n_1,n_2,n_3,m_{s1},m_{s2},m_{s3}}(x_1,x_2,x_3,\alpha_1(\sigma_1),\alpha_2(\sigma_2),\alpha_3(\sigma_3)) dx_1dx_2dx_3\]
+
+    <p>但是由于slater行列式中每一个单电子原子轨道互相是正交的,所以上面这个积分可以化简(我也不知道是不是对的,但反正不可思议的事情发生了,我也不知道这个是不是Hatree Fock使用的一个近似还是说,本来就是真的可以化简):</p>
+
+\[〈\hat{h}_1〉=\int\Phi^*\hat{h}_1\Phi dx_1dx_2dx_3=\int \chi_1^{n_1,m_{s1}*}(x_1)\hat{h}_1\chi_1^{n_1,m_{s1}}(x_1)dx_1=\int \chi_1^{n_1,m_{s1}*}(x_1)[-\frac{1}{2}\frac{d^2\chi_1^{n_1,m_{s1}*}(x_1)}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\chi_1^{n_1,m_{s1}*}(x_1)]dx\]
+
+    <p>回顾一下,前面说的\(\chi_1^{n_1,m_{s1}}(x_1)\)是单个电子的spin orbital,这是个有明确数学表达的function,那么显然E的这个期待值,不管是用手算还是用电脑积分,肯定是能得到一个确定的值的</p>
+
+    <p>(脑洞)另外,如果上面的成立的话,似乎说明了电子之间无法区分,因为大概这个也是对的?</p>
+
+\[\int \chi_1^{n_1,m_{s1}*}(x_1)\hat{h}_1\chi_1^{n_1,m_{s1}}(x_1)dx_1=\int \chi_1^{n_1,m_{s1}*}(x_2)\hat{h}_1\chi_1^{n_1,m_{s1}}(x_2)dx_2=\int \chi_1^{n_1,m_{s1}*}(x_2)[-\frac{1}{2}\frac{d^2\chi_1^{n_1,m_{s1}*}(x_2)}{dx_2^2}-(\frac{1}{x_2-9}+\frac{1}{x_2-5})\chi_1^{n_1,m_{s1}*}(x_2)]dx\]
+
+    <p>虽然我不知道到底\(\chi_1^{n_1,m_{s1}}(x_1)=\chi_1^{n_1,m_{s1}}(x_2)\)还是\(\chi_1^{n_1,m_{s1}}(x_1)=-\chi_1^{n_1,m_{s1}}(x_2)\),因为这两个都可以满足上面的公式,也有可能两个都不对</p>
+  </li>
+  <li>
+    <p>electron-electron interaction 部分</p>
+
+\[E_{ee}(1,2)=〈\hat{V}_{ee}^{1,2}〉=\int\Phi^*\hat{V}_{ee}^{1,2}\Phi dx_1dx_2dx_3=\int\Phi^*\frac{1}{|x_1-x_2|}\Phi dx_1dx_2dx_3\]
+
+    <p>再一次地,不可思议的事情发生了,不知道是近似还是说因为正交性</p>
+
+\[〈\hat{V}_{ee}^{1,2}〉=\int\Phi^*\frac{1}{|x_1-x_2|}\Phi dx_1dx_2dx_3=\int\chi_1^{n_1,m_{s1}*}(x_1)\chi_1^{n_1,m_{s1}}(x_1)\frac{1}{|x_1-x_2|}\chi_2^{n_2,m_{s2}*}(x_2)\chi_2^{n_2,m_{s2}}(x_2)dx_1dx_2\]
+  </li>
+</ul>
+
+<h2 id="hartree-fock-spin-orbital">Hartree Fock spin orbital</h2>
+
+<p>鬼知道这是个什么.</p>
+
+\[-\frac{1}{2}\frac{d^2\chi_1^{n_1,m_{s1}*}(x_1)}{dx_1^2}-(\frac{1}{x_1-9}+\frac{1}{x_1-5})\chi_1^{n_1,m_{s1}*}(x_1)+[(\int \frac{\chi_2^{n_2,m_{s2}*}(x_2)\chi_2^{n_2,m_{s2}}(x_2)}{x_1-x_2}dx_2)\chi_1^{n_1,m_{s1}}(x_1)+(\int \frac{\chi_3^{n_3,m_{s3}*}(x_2)\chi_3^{n_3,m_{s3}}(x_2)}{x_1-x_2}dx_2)\chi_1^{n_1,m_{s1}}(x_1)]-[(\int \frac{\chi_2^{n_2,m_{s2}*}(x_2)\chi_1^{n_2,m_{s2}}(x_2)}{x_1-x_2}dx_2)\chi_2^{n_2,m_{s2}}(x_2)+(\int \frac{\chi_3^{n_3,m_{s3}*}(x_2)\chi_1^{n_3,m_{s3}}(x_2)}{x_1-x_2}dx_2)\chi_3^{n_3,m_{s3}}(x_2)]=\epsilon_i\chi_1^{n_1,m_{s1}}(x_1)\]
+
+\[\hat{h_1}\chi_1^{n_1,m_{s1}*}(x_1)+[(\int \frac{\chi_2^{n_2,m_{s2}*}(x_2)\chi_2^{n_2,m_{s2}}(x_2)}{x_1-x_2}dx_2)\chi_1^{n_1,m_{s1}}(x_1)+(\int \frac{\chi_3^{n_3,m_{s3}*}(x_2)\chi_3^{n_3,m_{s3}}(x_2)}{x_1-x_2}dx_2)\chi_1^{n_1,m_{s1}}(x_1)]-[(\int \frac{\chi_2^{n_2,m_{s2}*}(x_2)\chi_1^{n_2,m_{s2}}(x_2)}{x_1-x_2}dx_2)\chi_2^{n_2,m_{s2}}(x_2)+(\int \frac{\chi_3^{n_3,m_{s3}*}(x_2)\chi_1^{n_3,m_{s3}}(x_2)}{x_1-x_2}dx_2)\chi_3^{n_3,m_{s3}}(x_2)]=\epsilon_i\chi_1^{n_1,m_{s1}}(x_1)\]
+
+<h1 id="non-interacting-ie-hartree-electron-approximation">Non-interacting (i.e. Hartree) electron approximation</h1>
+
+<p>Hartree like electron approximation是假设电子之间没有某种相互作用(不知道我理解的对不对)此假设通过更改hamiltonian来实现，是不准确的。得到的eigenfunction不是真实波函数，但是至少可以用那个variation theory来去努力地估计真实值.</p>
+
+<p>many body hamiltonian:
+\(\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2-\sum_{i,I}\frac{Z_Ie^2}{r_i-R_I}+\sum_{i&lt;j}\frac{e^2}{|r_i-r_j|}+Constant\)</p>
+
+<p>而Hartree like approximation中的hamiltonian是(这个不是课上的,是书上的)</p>
+
+\[\hat{H}=-\frac{\hbar ^2 }{2m_e}\sum_i\nabla_I^2+V_{eff}(r,\sigma)\]
+
+<p>\(V_{eff}(r,\sigma)\)是等效势能，是与位置和电子自旋\(\sigma\)相关的量。</p>
+
+<p>Hartree like approximation最大的作用是使得波函数可以通过hartree product被拆解：当电子之间有interaction时候，整体波函数\(\Psi(r_1,r_2,r_3,...r_i)\)是复杂难以分割的。而当没有interaction（也就是hartree like approximation）的时候，整体波函数可以表示为hartree product的形式，是可以拆分的，hamiltonian也是可以拆分的</p>
+
+<h2 id="nr-或者基态电子密度">n(r), 或者基态电子密度</h2>
+
+<p>基态电子密度　\(n_{(r)} = 2\Sigma \phi_i^*(r)\phi_i(r)\)</p>
+
+<p>更清楚一点</p>
+
+\[n_{(x,y,z)} = 2\phi_1^*(x,y,z)\phi_1(x,y,z)+2\phi_2^*(x,y,z)\phi_2(x,y,z)+2\phi_3^*(x,y,z)\phi_3(x,y,z)+.....\]
+
+<p>缩成一维：</p>
+
+<p>\(n_{(x)} = 2\phi_1^*(x)\phi_1(x)+2\phi_2^*(x)\phi_2(x)+2\phi_3^*(x)\phi_3(x)+.....\)，对所有电子</p>
+
+<p>是个期望值一样的东西</p>
+
+<h2 id="220305--目前更新到这里">220305- 目前更新到这里</h2>
+<p>这些应该需要重新写一下</p>
+
+<h2 id="hartree-fock-limit">hartree fock limit</h2>
+
+<p>由前面slater行列式可以看到，如果想要描述一个N个电子体系，那么需要知道\(\phi_1\)到\(\phi_N\)</p>
+
+<p>虽然或许可以通过代数手法硬算，但是也可以通过系数拟合的方式更方便地得到结果。对此，可以找到有限个（K个）函数，即\(\chi_{1}(x)\)到\(\chi_{K}(x)\)，使得这K个函数可以加权相加得到\(\phi_1\)到\(\phi_N\)
+这K个函数被称为basis set
+即：</p>
+
+\[\phi_j(x)=\sum^K_{i=1}\alpha_{j,i}\chi_{i}(x)\]
+
+<p>写的清楚一点，对第一个\(\phi_1(x)\)：</p>
+
+\[\phi_1(x)=\alpha_{1,1}\chi_{1}(x)+\alpha_{1,2}\chi_{2}(x)+...+\alpha_{1,K}\chi_{K}(x)\]
+
+<p>现在已知\(\chi_{1}(x)\)到\(\chi_{K}(x)\)，问题变成了找到\(\alpha_{j,i}\)</p>
+
+<p>找到\(\alpha_{i,j}\)的方式：继续进行递归运算：</p>
+
+<p>1, 猜测一组初始的\(\alpha_{j,i}\)</p>
+
+<p>2，通过这个初始的\(\alpha_{j,i}\)代回\(\phi_j(x)=\sum^K_{i=1}\alpha_{j,i}\chi_{i}(x)\)方程计算出来一组电子密度\(n_{(r)} = 2\Sigma \phi_i^*(r)\phi_i(r)\)</p>
+
+<p>3, 将n(r)代入\(V_H(r)=e^2\int \frac{n(r')}{\vert r-r' \vert}d^3r'\)得到新的hamiltonian，用这个hamiltonian求解本征方程，得到新的\(\alpha_{j,i}\)</p>
+
+<p>通过这个递归运算，可以得到一个精确的能量值，这个能量值是Hartree fock limit.</p>
+
+<p>这个值虽然精确，但并不是实际的电子能量， 因为没有考虑到exchange 和correlation （Exc），即Hartree fock方法实际上并没有解决电子-电子相互作用</p>
+
+<h1 id="kohn-sham方程">Kohn Sham方程</h1>
+
+<h2 id="hohenberg-kohn-1st-theorem-">Hohenberg-Kohn 1st Theorem :</h2>
+
+<p>The ground-state energy from Schroginger’s equation is a unique functional of the electron density.</p>
+
+<p>OR</p>
+
+<p>ground state electron density uniquely determines all properties: energy/ wavefunction.</p>
+
+<p>基态能量是电子密度分布函数(或者说，基态电子在空间中的密度分布)的泛函
+一个基态电子密度对应了唯一的能量、波函数。</p>
+
+<p>问题：泛函形式未知</p>
+
+<h2 id="hohenberg-kohn-2nd-theorem-">Hohenberg-Kohn 2nd Theorem :</h2>
+
+<p>The electron density that minimizes the energy of the overall functional is the true electron density corresponding to the full solution of the schrodinger equation.</p>
+
+<p>使这个泛函结果（能量）最低的电子密度是薛定谔方程的解</p>
+
+<p>-&gt;如果知道了泛函的形式，那么就可以计算出基态电子密度</p>
+
+<p>又或者说，引申一下，（书中没有）使得泛函能量最低的电子密度是薛定谔方程的解，而任何使得泛函成立的电子密度分布方程，其代入泛函后得到的值（或者说，其期待值）总大于等于薛定谔方程的基态能量？</p>
+
+<h2 id="泛函的具体形式-the-energy-functional">泛函的具体形式 the energy functional</h2>
+
+<p>Hohenberg-Kohn 2nd Theorem中的泛函是什么形式？</p>
+
+<p>对于单个电子已知如下：</p>
+
+\[E[\phi_i(r)]=E_{known}[\phi_i(r)]+E_{unknown}[\phi_i(r)]\]
+
+<p>显然，这个泛函就是hamiltonian。
+将其分成已知项和未知项：</p>
+
+<p>\(E_{known}[]\)是已知的能量泛函，包括电子动能，电子-核与电子-电子</p>
+
+<p>\(E_{unknown}[]\)是未知的能量泛函：交换能</p>
+
+<p>其中</p>
+
+\[E_{known}[\phi_i(r)]=\frac{-\hbar}{m}\Sigma\int\phi_i^*(r)\nabla^2\phi_i(r)d^3r+\int V(r)n(r)d^3r+e^2/2\int \int \frac {n(r)n(r')}{|r-r'|}d^3rd^3r'+E_{ion}\]
+
+<p>缩成一维，对于0号电子\(\phi_0\)</p>
+
+\[E_{known}[\phi_0(x)]=\frac{-\hbar}{m}\Sigma\int\phi_0^*(x)\phi_0''(x)dx+\int V(x)n(x)dx+e^2/2\int \int \frac {n(x)n(x')}{|x-x'|}dxdx'+E_{ion}\]
+
+<p>（不太清楚为什么会有一个求和）</p>
+
+<p>由于前述\(n_{(r)} = 2\Sigma \phi_i^*(r)\phi_i(r)\)</p>
+
+<p>所以虽然不知道是否合理，但是推导出来这个公式，即phi（波函数）和n（r）（电子密度）有同样的泛函</p>
+
+\[E[2\Sigma \phi_i^*(r)\phi_i(r)]=E_{known}[2\Sigma \phi_i^*(r)\phi_i(r)]+E_{unknown}[2\Sigma \phi_i^*(r)\phi_i(r)]\]
+
+<p>也就是说电子密度的泛函的形式与波函数相同，是： 
+\(E[]=E_{known}[]+E_{unknown}[]\)</p>
+
+<h2 id="kohn-sham-equation">Kohn-Sham equation</h2>
+
+<p>Kohn-Sham 方程是:</p>
+
+\[[\frac{-\hbar^2}{2m}\nabla^2+V(r)+V_H(r)+V_{XC}(r)]\phi_i(r)=\epsilon_i\phi_i(r)\]
+
+<p>相比于hartree fock添加了exchange项</p>
+
+<p>\(V_{XC}\)是未知的，虽然有
+\(V_{XC}=\frac{\delta E_{XC}(r)}{\delta n(r)}\)</p>
+
+<p>用人能看懂的方法重新写</p>
+
+<p>对于0号电子,其具有能量\(\epsilon_0\)，缩到一维，波函数满足</p>
+
+\[[\frac{-\hbar^2}{2m}\phi_0''(x)+V(x)+e^2\int \frac{n(x')}{|x-x'|}dx'+V_{XC}(x)]\phi_0(x)=\epsilon_0\phi_0(x)\]
+
+<h2 id="寻找合适的e_xc泛函">寻找合适的\(E_{XC}\)泛函</h2>
+
+<h3 id="lda近似计算exc的一种方式">LDA近似：计算Exc的一种方式</h3>
+
+<p>如前文所讲Exc泛函是很难知道形式的。</p>
+
+<p>Exc只在一种情况下可以知道形式:当n(r)=常数，即uniform electron gas</p>
+
+\[V_{XC}(r)=V^{electron gas}_{XC}[n(r)]\]
+
+<p>*防止混淆,左边是函数\(V_{XC}()\)，右边是泛函\(V^{electron gas}_{XC}[]\)</p>
+
+<p>使用LDA近似后，可以精确地解薛定谔方程，但是这个解不是真实解，因为薛定谔方程中的Exc是假的</p>
+
+<h3 id="lsda-lda中与spin相关的项目">LSDA: LDA中与spin相关的项目</h3>
+
+<p>在LDA基础上，对于spin进行了区分</p>
+
+\[V_{XC}(r)=V^{electron gas}_{XC}[n(r)^{\uparrow},n(r)^{\downarrow}]\]
+
+<p>如果是没有spin polarize的系统，其结果和LDA是一样的。 但是对于有spin polarize系统等会有一些变化</p>
+
+<h3 id="gga">GGA</h3>
+
+<p>Use local electron density and the local gradient in the electron density calculation</p>
+
+<p>GGA泛函是局部电子密度，和局部电子密度的梯度的函数</p>
+
+\[V_{XC}^{GGA}(r)=V_{XC}[n(r),\nabla n(r)]\]
+
+<p>一维下：</p>
+
+\[V_{XC}^{GGA}(x)=V_{XC}[n(x),\frac{dn(x)}{dx}]\]
+
+<p>主流有：PW91 和 PBE
+由于包括了电子密度一阶导项，所以一般认为GGA会比LDA更加准确，但是也有例外，比如在计算过渡金属的表面能的时候</p>
+
+<h3 id="meta-gga">meta-GGA</h3>
+
+<p>在GGA基础上，还会包含二阶导的信息。实际操作上，二阶导是使用了kinetic energy density of the Kohn Sham orbital:</p>
+
+\[\tau(r)=0.5\sum_{occupied states}|\nabla\phi(r)|^2\]
+
+<p>泛函形式是：
+\(V_{XC}^{meta-GGA}[n(r),\nabla n(r),\tau(r)]\)</p>
+
+<h3 id="hyper-gga">hyper-GGA</h3>
+
+<p>看不太懂啥意思，形式更加复杂，包含了部分真实Exc项，但是只有在计算小分子时候效果好，在计算bulk material时候不太行的</p>
+
+<h2 id="一些补充">一些补充</h2>
+<p>参考书：Richard M. Martin <em>Electronic structure: Basic theory and practical method</em></p>
+
+<h1 id="晶体学知识-crystallography">晶体学知识 crystallography</h1>
+
+<p>Kohn Sham或者hartree fock在晶体中会有一些特殊性质，因为其potential是周期性的</p>
+
+<p>参考书：Richard M. Martin <em>Electronic structure: Basic theory and practical method</em></p>
+
+<p>A crystal can be completely specified by the types and positions of the nuclei in <strong>one repeat unit (primitive unit cell)</strong> annd the rules that describe the <strong>repetition (translation)</strong></p>
+
+<p>primitive cell有很多种，wigner seitz cell是其中一种</p>
+
+<p>Wigner Seitz cell: the most compact cell that is symmetric about the origin <strong>注意 wigner seitz cell是在real space/实空间</strong></p>
+
+<p>wigner seitz cell在倒空间对应的是<strong>first brillouin zone</strong></p>
+
+<p><em>fcc 的 wigner seitz cell是bcc的first brillouin zone</em></p>
+
+<h2 id="reciprocal-sapce-倒易空间">reciprocal sapce 倒易空间</h2>
+
+<p>考虑任何一个描述晶体性质的方程（比如说电子密度）</p>
+
+<p>由于晶体的周期性，在实空间电子密度是周期性相同的,也就是说对于电子密度\(n(r+T(r'))=n(r)\)其中T是任何的translation操作</p>
+
+<h3 id="一维理解">一维理解</h3>
+
+<p>对于一个一维的，总共三个晶格的晶体，晶格常数为a</p>
+
+<p>—《原子》—a—《原子》—a—《原子》—</p>
+
+<p><img src="/vasp_basic/pic/pic1.jpg" alt="Image" /></p>
+
+<p>那么电子密度n(x)必须满足：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n(x)    =    n(x+a)       =n(x+2a)  
+</code></pre></div></div>
+
+<p>当0&lt;x&lt;a</p>
+
+<p>因为n(x)有这样的周期性，所以一定可以对其进行傅里叶变化</p>
+
+<p>傅里叶变化是从x空间变为q空间\(n(x)-&gt;n(q)\)</p>
+
+<p>对于这个长度为3的一维晶体，其中含有3个cell，那么晶格个数N=3</p>
+
+<p>从x空间到q空间的傅里叶变化是</p>
+
+\[n(q)=\frac{1}{\Omega_{crystal}}\int_{\Omega_{crystal}} dxn(x)exp(iq·x)\]
+
+<p>代入条件</p>
+
+\[n(q)=\frac{1}{3a}\int_0^{3a} dxn(x)e^{(iq·x)}\]
+
+<p>对于每一个晶格内部进行积分</p>
+
+\[n(q)=\frac{1}{3a}(\int_0^adxn(x)e^{iq·x} +\int_a^{2a}dxn(x)e^{iq·x}+\int_{2a}^{3a}dxn(x)e^{iq·x})\]
+
+\[n(q)=\frac{1}{3a}(\int_0^adxn(x)e^{iq·x} +\int_0^{a}dxn(x+a)e^{iq·(x+a)}+\int_{0}^{a}dxn(x+2a)e^{iq·x+2a})\]
+
+<p>由于n(x)周期性n(x)=n(x+a)=n(x+2a)</p>
+
+\[n(q)=\frac{1}{3a}(\int_0^adxn(x)e^{iq·x} +\int_0^{a}dxn(x)e^{iq·(x+a)}+\int_{0}^{a}dxn(x)e^{iq·x+2a})\]
+
+<p>把exp拆开</p>
+
+\[n(q)=\frac{1}{3a}(\int_0^adxn(x)e^{iq·x} +\int_0^{a}dxn(x)e^{iq·x}e^{iq·a}+\int_{0}^{a}dxn(x)e^{iq·x}e^{iq·2a})\]
+
+<p>合并得到</p>
+
+\[n(q)=\frac{1}{3a}(e^{iq·0a}+e^{iq·a}+e^{iq·2a})(\int_0^adxn(x)e^{iq·x})\]
+
+<p>从而得到三维大晶体的一般形式：</p>
+
+\[f(q)=\frac{1}{\Omega_{crystal}}\sum_0^{N_xa1}\sum_0^{N_ya2} \sum_0^{N_za3}  e^{iq·T(n1,n2,n3)} \int_0^{a1} \int_0^{a2} \int_0^{a3} dxdydzf(x,y,z) e^{iq·(x,y,z)}\]
+
+\[f(q)=\frac{1}{\Omega_{crystal}}\sum e^{iq·T} \int drf(r) e^{iq·r}\]
+
+<p>T是所有可能的平移（translation）操作</p>
+
+<h3 id="倒空间的有意义的点q需要满足的条件">倒空间的有意义的点q需要满足的条件</h3>
+
+<p>根据Born-Von Karmen条件，傅里叶变化后的每一个component都必须满足 \(exp(i q·Na)=1\)</p>
+
+<p>为了满足\(exp(iq·3a) =1\)，则必须有：</p>
+
+\[q·a=2\pi \frac{integer}{3}\]
+
+<p>对于三维大晶体，\(q·a=2\pi \frac{integer}{N}\)</p>
+
+<p>N是一个很大的值，所以大晶体的q点是连续的</p>
+
+<h3 id="一维小晶体的倒空间与布里渊区">一维小晶体的倒空间与布里渊区</h3>
+
+<p>继续对于\(q·a=2\pi \frac{integer}{3}\)</p>
+
+<p>尝试当interger=1</p>
+
+\[q·a=\frac{2\pi}{3}\]
+
+\[q=\frac{2\pi}{3a}\]
+
+\[n(q)=\frac{1}{3a}(e^{0}+e^{\frac{i2\pi}{3}}+e^{\frac{i4\pi}{3}})(\int_0^adxn(x)e^{iq·x})\]
+
+<p>然而</p>
+
+\[e^{0}+e^{\frac{i2\pi}{3}}+e^{\frac{i4\pi}{3}}=0\]
+
+<p>所以\(n(\frac{2\pi}{3a})=0\)</p>
+
+<p>之后发现只有当\(q·a=2\pi · integer\)时（而非\(q·a=2\pi \frac{integer}{3}\)）</p>
+
+<p>n(q)才有</p>
+
+\[n(q)=\frac{1}{3a}(e^{2\pi}+e^{2\pi}+e^{2\pi})(\int_0^adxn(x)e^{2\pi})\]
+
+\[n(q)=\frac{1}{3a}(1+1+1)(\int_0^adxn(x)*1)\]
+
+<p>也就是说，是个非0的fourier component</p>
+
+<p>从而定义单位倒易矢量\(b=\frac{2\pi}{a}\)</p>
+
+<p>使n(r)的fourier component 非0的q的集
+合记为G（倒易空间），</p>
+
+\[G(m)=m * b\]
+
+<p>其中m为任意正整数，且m=0 为基态</p>
+
+<p>第一布里渊区是倒空间的wigner-seitz cell</p>
+
+<p>同样用上面的3a大小的一维晶体距离</p>
+
+<p>注意倒空间是无限长的一维空间,倒空间两个相邻格点之间距离为\(b=\frac{2\pi}{a}\)</p>
+
+<p>第一布里渊区是</p>
+
+\[-\frac{\pi}{a}&lt;q&lt;+\frac{\pi}{a}\]
+
+<p>q=0对应了基态</p>
+
+<p><strong>注意：这些是基态的条件</strong></p>
+
+<h3 id="三维大晶体的倒空间与布里渊区">三维大晶体的倒空间与布里渊区</h3>
+
+<p>\(n(x+x',y+y',z+z')=n(x,y,z)\)，其中x’ y’ z’是整数倍的\(a_1 a_2 a_3\)</p>
+
+<p>\(a_1 a_2 a_3\)是三个晶格向量</p>
+
+<p>傅里叶变化可以对所有有周期性性质的函数使用</p>
+
+<p>因为n(r)有这样的周期性，所以一定可以对其进行傅里叶变化</p>
+
+<p>傅里叶变化是\(n(r)-&gt;n(q)\)</p>
+
+<p>对于一个体积为\(\Omega\)的三维晶体，其中含有\(N_x \times N_y \times N_z = N_{cell}\)个cell的体系</p>
+
+<p>根据Born-Von Karmen条件，傅里叶变化后的每一个component都要满足 \(exp(iq· N_x a_1)=exp(iq· N_ya_2)=exp(iq· N_z a_3)=1\)</p>
+
+<p>为了满足\(exp(iq· N_x a_1)=exp(iq· N_ya_2)=exp(iq· N_z a_3)=1\)，则必须有：</p>
+
+\[q·(a_1,a_2,a_3)=2\pi \frac{integer}{N_i}\]
+
+<p>从r到q的傅里叶变化是</p>
+
+\[f(q)=\frac{1}{N_{cell}\Omega_{cell}}\sum e^{iq·T} \int drf(r) e^{iq·r}\]
+
+<p>通过计算，使f(q)非零需要满足的条件是</p>
+
+\[q·(a_1,a_2,a_3)=2\pi · integer\]
+
+<p>从而确立了倒空间的基矢，
+\(G(m_1,m_2,m_3)=m_1b_1,m_2b_2,m_3b_3\)</p>
+
+<p>其中\(m_1,m_2,m_3\)是任意整数，\(b_1,b_2,b_3\)是\(a_1 a_2 a_3\)的倒向量</p>
+
+<h2 id="bloch-theorem的推导">bloch theorem的推导</h2>
+
+<h3 id="bloch-theorem第一种证明">bloch theorem第一种证明</h3>
+
+<p>根据一通看不懂的证明（P87~P88, section 4.4 Richard M. Martin <em>Electronic structure: Basic theory and practical method</em>）</p>
+
+<p>继续考虑一维情况，对于一个算符，比如说\(\hat{H}\)作用在电子波函数上，得到电子能量。\(\hat{H}\)是算符，\(\epsilon\)是本征态\(\phi(x)\)是本征方程
+\(\hat{H}\phi(x)=[-\frac{\hbar^2}{2m_e }\nabla^2+V(r)]\phi(x)=\epsilon\phi(x)\)</p>
+
+<p>类似得，可以定义translation算符\(\hat{T_x}\),角标x代表一维的x轴上的translation</p>
+
+\[\hat{T}_{x_0}\phi(x)=\phi(x+x_0)\]
+
+<p>不知道为什么但是hamiltonian \(\hat{H}\)与\(\hat{T_x}\)是commute的</p>
+
+\[\hat{H}\hat{T_x}=\hat{T_x}\hat{H}\]
+
+<p>由于commute，\(\hat{H}\)的本征态也是\(\hat{T_x}\)的本征态</p>
+
+<p>另外由于\(\hat{T}_{x_0}\hat{T}_{x_1}=\hat{T}_{x_0+x_1}\)</p>
+
+<p>(显然分别挪了x0和x1的操作与一下子挪了x0+x1的操作结果是一样的)</p>
+
+<p>则一定有\(\hat{T}_{x_0+x_1}\phi(x)=\hat{T}_{x_0}\hat{T}_{x_1}\phi(x)=t_{(x_0+x_1)}\phi(x)=(t_{x_0}+t_{x_1})\phi(x)\)</p>
+
+<p>由于如下看不懂的原因：
+<strong>modules of t(x) must be unity 模必须为1？？</strong></p>
+
+<p><strong>且本征方程必须满足周期性</strong></p>
+
+<p>所以<strong>t(x)必须有\(t(x)=e^{ik·T_x}\)格式</strong></p>
+
+<p>其中\(T_x\)是x轴上移动的距离，\(k=\frac{integer\times b}{cell总数}=\frac{2n\pi}{3a}\).其中n是任意整数integer，b是倒易空间单位矢量</p>
+
+<p>由此有bloch theorem：</p>
+
+<p><strong>\(\hat{T}_x\phi(x)=\phi(x+t_x)=e^{ik·T_x}\phi(x)\)</strong></p>
+
+<h3 id="bloch-theorem的第二种证明">bloch theorem的第二种证明</h3>
+
+<p>继续在之前的晶格常数为a总长度为3的一维晶体例子</p>
+
+<p>由于势能一定具有晶格的周期性，晶格的周期性是整数倍的晶格常数，根据前面的Born-Von Karmen条件，一定可以将V(x)进行从x空间变换到k空间的傅里叶变换，变成成如下形式</p>
+
+<p>\(V(x)=\sum _K v_K e^{iKx}\)其中\(v_K\)是系数,K是所有的倒易空间矢量（整数倍的\(\frac{2\pi}{a}\)）</p>
+
+<p>这个变换是正确的，因为V(x)保留了周期性且周期性为a（晶格常数），有如下证明\(V(x+a)=\sum _K v_K e^{iK(x+a)}=\sum _K v_K e^{i\frac{2n\pi}{a}(x+a)}=\sum _K v_K e^{i\frac{2n\pi}{a}x}e^{i\frac{2n\pi}{a}a}=\sum _K v_K e^{i\frac{2n\pi}{a}x}*1=V(x)\)</p>
+
+<p>傅里叶变换中的系数\(v_K=\frac 1v \int_{cell} dxe^{-iKx}V(x)\)
+在此一维晶体\(v_K=\frac{1}{a} \int_{0}^{a} dxe^{-iKx}V(x)\)</p>
+
+<p>取决于参照对象，势能是可以整体上升或者下降的（考虑同一高度对于1、地面和2、珠穆朗玛峰 的重力势能），为了计算方便要求\(v_0=0\)</p>
+
+<p>也就是说\(v_0=\frac{1}{a} \int_{0}^{a} dxe^{-i*0*x}V(x)=\frac{1}{a} \int_{0}^{a} V(x)dx\)</p>
+
+<p>由于V(x)是实数方程，要求有\(v_K=v_{-K}=v_K*\)</p>
+
+<p>由于电子在接近原子核处势能高，离开原子核处势能低，而且势能是周期性的</p>
+
+<p>非常粗浅地假设势能是cos形式 \(V(x)=-cos\frac{2\pi x}{a}\)</p>
+
+<p><img src="/vasp_basic/pic/pic1.jpg" alt="Image" /></p>
+
+<p>此时可以得到V(x)有精确的傅里叶展开是（对于其他一般的V(x)难以得到精确展开，只是举个例子）</p>
+
+\[V(x)=-cos\frac{2\pi x}{a}=-(0.5cos\frac{2\pi x}{a}+0.5isin\frac{2\pi x}{a})-(0.5cos\frac{2\pi x}{a}-0.5isin\frac{2\pi x}{a})=-0.5e^{\frac{i2\pi}{a}x}-0.5e^{\frac{-i2\pi}{a}x}\]
+
+<p>也就是说当\(K=2\pi/a以及K=-2\pi/a\) 时\(v_k=-0.5\)，对其他K值\(v_k=0\)</p>
+
+<p>根据前面的Born-Von Karmen条件，也可以将单电子波函数（本征方程）进行类似的变换。注意波函数本身未必具有周期性，所以只是普通的傅里叶展开.\(c_q\)是每个展开的系数</p>
+
+\[\phi(x)=\sum _q c_qe^{iqx}\]
+
+<p>将以上代入薛定谔方程得到</p>
+
+<p>有\(\hat{H}\sum_q c_qe^{iqx}=[-\hbar^2 \nabla^2 /2m + (-0.5e^{\frac{i2\pi}{a}x}-0.5e^{\frac{-i2\pi}{a}x})]\sum_q c_qe^{iqx}\)</p>
+
+\[=\frac{\hbar^2}{2m} \sum _q q^2c_qe^{iqx}+ \sum_q -0.5c_qe^{i(q+\frac{2\pi}{a})x} + \sum_q -0.5c_qe^{i(q+\frac{-2\pi}{a})x}=\epsilon \sum _q c_qe^{iqx}\]
+
+<p>由于一个不知道的原因（需要后面再进行理解，或许是因为傅里叶展开的q是从负无穷到正无穷所以无所谓？）
+\(\sum_q -0.5c_qe^{i(q+\frac{2\pi}{a})x} =\sum_{q'}-0.5c_{q'-\frac{2\pi}{a}}e^{iq'r}=\sum_q-0.5c_{q-\frac{2\pi}{a}}e^{iqr}\)
+\(\sum_q -0.5c_qe^{i(q+\frac{-2\pi}{a})x} =\sum_{q'}-0.5c_{q'-\frac{-2\pi}{a}}e^{iq'r}=\sum_q-0.5c_{q-\frac{-2\pi}{a}}e^{iqr}\)</p>
+
+<p>代入上式</p>
+
+<p>\(\frac{\hbar^2}{2m} \sum _q q^2c_qe^{iqx}+ \sum_q -0.5c_qe^{i(q+\frac{2\pi}{a})x} + \sum_q -0.5c_qe^{i(q+\frac{-2\pi}{a})x}=\epsilon \sum _q c_qe^{iqx}\)
+\(\frac{\hbar^2}{2m} \sum _q q^2c_qe^{iqx}+ \sum_q-0.5c_{q-\frac{2\pi}{a}}e^{iqr} + \sum_q-0.5c_{q-\frac{-2\pi}{a}}e^{iqr}=\epsilon \sum _q c_qe^{iqx}\)
+\(\sum _q e^{iqx}[(\frac{\hbar^2}{2m}q^2-\epsilon)c_q+(-0.5c_{q-\frac{2\pi}{a}})+(-0.5c_{q-\frac{-2\pi}{a}})]=0\)</p>
+
+<p>最后得到了动量空间的薛定谔方程，形式如下
+\((\frac{\hbar^2}{2m}q^2-\epsilon)c_q+(-0.5c_{q-\frac{2\pi}{a}})+(-0.5c_{q-\frac{-2\pi}{a}})=0\)</p>
+
+<p>对于任意的V(x),薛定谔方程的一般形式为
+<strong>\((\frac{\hbar^2}{2m}q^2-\epsilon)c_q+\sum_{K'}v_{K'}c_{q-K}=0\)</strong></p>
+
+<p>\(c_q\)是单电子波函数傅里叶变换的展开项系数，是未知量，q在这里是自变量，是倒易空间中的倒易矢量（任意分数/整数倍的\(\frac{2\pi}{a}\)）。对于每一个倒易矢量q，这个动量空间薛定谔方程都（大概）是可解的，得到了每个q对应的\(c_q\)值，从而获得单电子波函数在空间的比较严格的表达形式\(\Phi(x)=\sum _q c_qe^{iqx}\)。此式也被称为wannier functions</p>
+
+<p>显然倒空间的q有无限多个，计算上面是不可能实现的。所以只取一部分的q点进行计算。vasp的k point就是用来定义取的q点，也就是说，如果把q取值范围限定成这样的一系列点的集合：\(q_k \in [k+K,k是第一布里渊区中的一个有效点,K是整数倍的 \frac{2\pi}{a}]\)，比如说\(q_\frac{2\pi}{3a} \in  [\frac{2\pi}{3a}, \frac{2\pi}{a}+\frac{2\pi}{3a},\frac{4\pi}{a}+\frac{2\pi}{3a},\frac{6\pi}{a}+\frac{2\pi}{3a},.......]\)</p>
+
+<p>把这个限制条件代入\(\phi(x)=\sum _q c_qe^{iqx}\)</p>
+
+<p>可以得到限定条件中规定的点k所对应的单电子波函数，即</p>
+
+\[\phi(x,k)=\sum _{q_k} c_{q_k}e^{iq_kx}\]
+
+<p>将\(q_k\)限定条件代入可以写作如下格式</p>
+
+\[\phi(x,k)=\sum _K c_{k+K\times \frac{2\pi}{a}} e^{i(k+K)x}\]
+
+<p>例如</p>
+
+\[\phi(x,\frac{2\pi}{3a})=c_{\frac{2\pi}{3a}} e^{i(\frac{2\pi}{3a})x}+c_{\frac{2\pi}{3a}+\frac{2\pi}{a}} e^{i(\frac{2\pi}{3a}+\frac{2\pi}{a})x}+c_{\frac{2\pi}{3a}+\frac{4\pi}{a}} e^{i(\frac{2\pi}{3a}+\frac{4\pi}{a})x}+....\]
+
+<p>提取公因数</p>
+
+\[\phi(x,\frac{2\pi}{3a})=c_{\frac{2\pi}{3a}} e^{i(\frac{2\pi}{3a})x}+c_{\frac{2\pi}{3a}+\frac{2\pi}{a}} e^{i(\frac{2\pi}{3a})x}e^{\frac{2\pi}{a}x}+c_{\frac{2\pi}{3a}+\frac{4\pi}{a}} e^{i(\frac{2\pi}{3a})x}e^{\frac{4\pi}{a}x}+....\]
+
+<p>整理得到</p>
+
+\[\phi(x,\frac{2\pi}{3a})=e^{i(\frac{2\pi}{3a})x}[c_{\frac{2\pi}{3a}} e^{i*0*x}+c_{\frac{2\pi}{3a}+\frac{2\pi}{a}}e^{\frac{2\pi}{a}x}+c_{\frac{2\pi}{3a}+\frac{4\pi}{a}}e^{\frac{4\pi}{a}x}+....]\]
+
+<p>也就是说</p>
+
+\[\phi(x,k)=e^{ikx}\sum _K c_{k+K} e^{iKx}\]
+
+<p>令\(u(x,k)=\sum _K c_{k+K} e^{iKx}\)</p>
+
+<p>可以看到\(u(x,k)\)是一种傅里叶展开的形式，而且\(e^{iKx}\)项说明u(x,k)在x轴上具有周期性，且周期性为晶格常数a，与势能的周期性相同</p>
+
+<p>这样得到了bloch theorem第二种说法是：
+<strong>对于单电子的hamiltonian \(\hat{H}=[-\hbar^2 \nabla^2 /2m + V(r)]\),若其中V（r）为势能项且具有布拉维晶格的周期性，则这个Hamiltonian的本征方程一定可以被如下的形式写出：</strong></p>
+
+<p><strong>\(\phi(x,k)=e^{ikx}u(x,k)\)</strong></p>
+
+<p><strong>需要注意：本征方程可以如此写出，但是这个本征方程并不一定代表单电子波函数的方程，这个方程仅代表单电子在点k所对应的波函数。而完整单电子波函数方程是wannier function：\(\Phi(x)=\sum _{brillouin zone} c_qe^{iqx}\)。</strong></p>
+
+<p>继续假设\(u(x,k)=sin(x)\)或者具有类似形式（显然并不是的，因为u(x,k)估计是个复函数，只是为了画图）</p>
+
+<p>根据前面的Born-Von Karmen条件，</p>
+
+\[k=2\pi \frac{integer}{N_{cell}a}\]
+
+<p>则对于k=0</p>
+
+<p>单电子波函数为\(\phi(x,0)=e^{i*0*x}u(x,k)\)</p>
+
+<p>下一个是\(k=\frac{2\pi}{3a}\)</p>
+
+<p>即\(k=\frac{2\pi}{3a}\)对应的单电子波函数是
+\(\phi(x,\frac{2\pi}{3a})=e^{i\frac{2\pi x}{3a}}sin(x)\)</p>
+
+<p>再下一个\(k=\frac{4\pi}{3a}\)时注意第一布里渊区是\(\frac{-\pi}{a}&lt;k&lt;\frac{\pi}{a}\),此时已经超过了第一布里渊区</p>
+
+\[\phi(x,\frac{4\pi}{3a})=e^{i\frac{4\pi x}{3a}}sin(x)\]
+
+\[k=\frac{2\pi}{a}\]
+
+\[\phi(x,\frac{2\pi}{a})=e^{i\frac{2\pi x}{a}}sin(x)\]
+
+<p>画出来是这样的。这里看起来不太合理，但是一定注意u(x)本身是个复函数，而且前提假设“晶体只有三个原子”本身并不成立。这个图只为了显示大概的形式</p>
+
+<p><img src="/vasp_basic/pic/pic2.jpg" alt="Image" /></p>
+
+<h4 id="block-theorem单电子波函数的本征值和周期性">block theorem单电子波函数的本征值和周期性</h4>
+
+<p>对于bloch theorem 的 \(\phi(x,k)=e^{ikx}u(x,k)\)形式，求其能量</p>
+
+<p>有\(\hat{H}\phi(x,k)=[-\hbar^2 \nabla^2 /2m + V(r)]\phi(x,k)\)</p>
+
+<p>将\(\phi(x,k)=e^{ikx}u(x,k)\)代入</p>
+
+\[\hat{H}e^{ikx}u(x,k)=\frac{-\hbar^2}{2m} \frac{d^2e^{ikx}u(x,k)}{dx^2} + V(r)e^{ikx}u(x,k)\]
+
+\[\hat{H}e^{ikx}u(x,k)=\frac{-\hbar^2}{2m} \frac{d[ike^{ikx}u(x,k)+e^{ikx}u'(x,k)]}{dx} + V(r)e^{ikx}u(x,k)\]
+
+\[\hat{H}e^{ikx}u(x,k)=\frac{-\hbar^2}{2m}[ -k^2e^{ikx}u(x,k)+ike^{ikx}u'(x,k)+ike^{ikx}u'(x,k)+e^{ikx}u''(x,k)] + V(r)e^{ikx}u(x,k)\]
+
+<p><strong>得到\(\hat{H}u(x,k)=\frac{-\hbar^2}{2m}[ -k^2u(x,k)+2iku'(x,k)+u''(x,k)] + V(r)u(x,k)=\epsilon _ku(x,k)\)</strong></p>
+
+<p>从里面抽出来Hamiltonian\(\hat{H}=\frac{-\hbar^2}{2m} (\frac 1i \nabla+k)^2  + V(r)\)</p>
+
+<p>前面限定了k是在第一布里渊区，但是即使k不再局限于第一布里渊区，显然依旧能够在第一布里渊区找到与其完全对应的波函数</p>
+
+\[\phi(x,\frac{2\pi}{a}+\frac{2\pi}{3a})=...+c_{\frac{2\pi}{3a}+\frac{2\pi}{a}} e^{i(\frac{2\pi}{3a}+\frac{2\pi}{a})x}+c_{\frac{2\pi}{3a}+\frac{4\pi}{a}} e^{i(\frac{2\pi}{3a}+\frac{4\pi}{a})x}+...=...+c_{\frac{2\pi}{3a}} e^{i(\frac{2\pi}{3a})x}+c_{\frac{2\pi}{3a}+\frac{2\pi}{a}} e^{i(\frac{2\pi}{3a}+\frac{2\pi}{a})x}+c_{\frac{2\pi}{3a}+\frac{4\pi}{a}} e^{i(\frac{2\pi}{3a}+\frac{4\pi}{a})x}+.....=\phi(x,\frac{2\pi}{3a})\]
+
+<p>也就是说\(\phi(x,k)\)在k空间也有周期性，周期性为单位倒易矢量，或者说，具有如下性质(添加的这个n是能级)</p>
+
+\[\phi(x,n,k)=\phi(x,n,k+K)\]
+
+<p>这就使得其本征值（能量）以及block theorem中的u(x,k)同样具有这个性质</p>
+
+<p>\(\epsilon(n,k)=\epsilon(n,k+K)\)
+\(u(x,k)=u(x,k+K)\)</p>
+
+<h2 id="k-point取样">k point取样</h2>
+
+<p>继续考虑一维情况，已知从x到q有傅里叶变换 
+\(n(q)=\frac{1}{\Omega_{crystal}}\int_{\Omega_{crystal}} dxn(x)exp(iq·x)\)</p>
+
+<p>那么从q到x也有傅里叶变换<strong>注意：正负号很可能错了，需要以后勘误</strong></p>
+
+\[n(x)=\frac{1}{\Omega_{k space}}\int_{\Omega_{k space}} dqn(q)exp(ix·q)\]
+
+<p>虽然不知道n(q)是干什么的，但是n(x)是我们想要求的电子密度</p>
+
+<p>\(n(x)=\frac{1}{\Omega_{k space}}\int_{\Omega_{k space}} dqn(q)exp(ix·q)\)这个公式中，可以看到想要求的是一个积分。显然积分是很难求的，所以考虑积分的定义</p>
+
+<p>积分可以理解为：函数与x轴（在这个公式里面是与q轴）围出的面积</p>
+
+<p>那么可以将积分用取样点离散化</p>
+
+<h3 id="trapezoidal-method">trapezoidal method</h3>
+<p>trepezoidal 方式拟合积分公式，对区域内进行均匀取样
+\(\int _{-1}^1f(x)dx \approx \frac{1}{n}[f(-1)+2\sum_{j=1}^{n-1}f(x_j)+f(1)]\)</p>
+
+<p>比如当n=4情况</p>
+
+\[\int _{-1}^1f(x)dx \approx 0.25f(-1)+0.25f(-0.5)+0.25f(0)+0.25(0.5)+0.25(1)\]
+
+<h3 id="gaussian-quadrature">Gaussian quadrature</h3>
+
+<p>\(\int _{-1}^1f(x)dx \approx 0.25f(-1)+0.25f(-0.5)+0.25f(0)+0.25(0.5)+0.25(1)\)可以转为如下公式，此时取样点是不均匀分布的</p>
+
+\[\int _{-1}^1f(x)dx \approx \sum_{j=1}^n c_j f(x_j)\]
+
+<p>不均匀分布的取样点是Gaussian quadrature，\(c_j\)是系数，由Gaussian quadrature来规定。</p>
+
+<h1 id="dft-实践">DFT 实践</h1>
+
+<h2 id="压缩模量-bulk-modulus">压缩模量 bulk modulus</h2>
+
+<p>通过更改晶格常数得到不同的E可以计算压缩模量B</p>
+
+\[B=V^2\frac{d^2E_{DFT}}{dV^2}\]
+
+<p>实际操作上也有一些其他公式来计算，比如Birch-Murnaghan equation</p>
+
+\[E_{tot}(a)=E_0+\frac{9V_0B_0}{16}\{[(\frac{a_0}a)^2-1]^3 \frac{dB}{dP}|_T +[(\frac{a_0}a)^2-1)]^2[(6-4(\frac{a_0}a)^2]\}\]
+
+<h2 id="分析表面-slab-models">分析表面-slab models</h2>
+<p>surface是二维结构而dft是三维计算。因此建立一个在z方向有多个重复周期，但只有部分重复周期有原子的supercell（比如说是\(1*1*8\)的supercell，1~5层有原子，用于分析表面5层的性质，其余3层没有原子（vaccum space）使得此处电子密度约等于0），由此在分析其周期性时z方向上的supercell之间没有相互作用。</p>
+
+<h2 id="kpoint的数量">kpoint的数量</h2>
+<p>对于\(1*1*1\)的supercell和\(1*2*10\)的supercell所需要的kpoint是不一样的。保证两者的kpoint在空间中的密度接近即可，比如前者要\(10*10*10\)的kpoint，后者要\(10*5*1\)即可</p>
+
+<h2 id="energy-cutoff">energy cutoff</h2>
+
+<p>k对应的波函数\(\phi(x,k)=e^{ikx}\sum _K c_{k+K} e^{iKx}\)。此电子波函数所对应的能量本征值为\(E=\frac{\hbar}{2m}|k+K|^2\)，由于K是任意倒易单位矢量，所以E有无数多个，但是显然只有较低能量的是有效的（电子不会占用高能量）。所以设定了cutoff使得
+\(E_{cutoff}=\frac{\hbar}{2m}G_{cut}^2\)
+这样对于给定的cutoff，可以得到k的新的波函数
+\(\phi(x,k)=e^{ikx}\sum _{|k+K|&lt;G_{cut}} c_{k+K} e^{iKx}\)</p>
+
+<h3 id="hard-and-soft-psudopotential">hard and soft psudopotential</h3>
+<p>不同的赝势所需要的cutoff不一样，hard pseudopotential需要设定高的energy cutoff，soft pseudopotential只需要比较小的cutoff。目前用的应该都是ultrasoft pseudopotential</p>
+
+<h2 id="optimization-method">optimization method</h2>
+<p>比如在寻找晶格常数的时候，DFT进行的是optimization，寻找能量最低时候所对应的晶格常数。另外，能量的极小值等同于导数等于0。所以寻找导数等于0的点是等效的</p>
+<h3 id="bisection-method">bisection method</h3>
+<p>二分法进行递归寻找</p>
+
+<h3 id="newton-method">newton method</h3>
+<p>对于一维情况，假如说能量是晶格常数x的函数f(x)。通过newton method寻找能量最低值，亦或者说\(f'(x)=0\)的方法是：</p>
+
+<p>对\(f'(x)\)进行泰勒展开得到
+\(f'(x+dx)\approx f'(x)+dxf''(x)\)
+令dx=h时\(f'(x+h)\approx f'(x)+hf''(x)=0\)
+从而得到\(f'(x)\approx 0\)的x的计算方法：
+\(x^*=x+h=x-\frac{f'(x)}{f''(x)}\)
+得到\(x^*\)后代会x进行迭代计算。此方法收敛速度快于bisection</p>
+
+<p>对于三维情形，newton method过于复杂无法操作。对于含有N个原子的晶胞，\(\frac{f'(x)}{f''(x)}\)会变成一个3Nx3N的矩阵</p>
+<h3 id="quasi-newton-method">quasi-newton method</h3>
+<p>quasi newton method 中，将f’’()的矩阵换成了一个估算的A矩阵
+\(a_1,b_1,c_1=a_0,b_0,c_0-\frac{E'(a,b,c)}{A_1}\)
+其中
+\(A_1=A_0+F[a_1,b_1,c_1,G(a_1,b_1,c_1),E'(a_0,b_0,c_0)]\)
+在不同的quasi newton方法中F[]是不一样的，取决于算法的规定。</p>
+
+<h3 id="conjugate-gradient-methodsteepest-descent-method">conjugate-gradient method/steepest descent method</h3>
+
+<p>是不停的向f’(x)移动的算法</p>
+
+<p>initial guess:\((a_0,b_0,c_0)\)</p>
+
+<p>1st guess:\((a_1,b_1,c_1)=(a_0,b_0,c_0)-\alpha_0d_0\)
+\(d_0= (-\frac{dE(a,b,c)}{da},
+-\frac{dE(a,b,c)}{db},-\frac{dE(a,b,c)}{dc})|_{(a_0,b_0,c_0)}\)</p>
+
+<p>2nd guess:\((a_2,b_2,c_2)=(a_1,b_1,c_1)+\alpha_1d_1\)</p>
+
+\[d_1=(-\frac{dE(a,b,c)}{da},-\frac{dE(a,b,c)}{db},-\frac{dE(a,b,c)}{dc})|_{(a_1,b_1,c_1)}+\frac{(-\frac{dE(a,b,c)}{da},-\frac{dE(a,b,c)}{db},-\frac{dE(a,b,c)}{dc})|_{(a_1,b_1,c_1)}·d_0}{d_0·d_0} (\frac{dE(a,b,c)}{da},\frac{dE(a,b,c)}{db},\frac{dE(a,b,c)}{dc})|_{(a_0,b_0,c_0)}\]
+
+<h1 id="reference-book-参考书">reference book 参考书</h1>
+
+<p>David S. Sholl, <em>Density functional Theory</em></p>
+
+<p>Kittel, <em>solid state physics</em></p>
+
+<p>Dehoff <em>Thermodynamics</em></p>
+
+<p>Peter Fulde <em>Correlated Electrons in Quantum Matter</em></p>
+
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Personal webpage</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Personal webpage</li><li><a class="u-email" href="mailto:davidnormal@126.com">davidnormal@126.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/lamdalamda"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">lamdalamda</span></a></li><li><a href="https://www.twitter.com/unknown"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">unknown</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>stay 24, stay student.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+  }
+});
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+  <!--KaTeX-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              // ...options...
+          });
+      });
+  </script>

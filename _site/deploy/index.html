@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Deploy Guide | Personal webpage</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Deploy Guide" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="stay 24, stay student." />
+<meta property="og:description" content="stay 24, stay student." />
+<link rel="canonical" href="http://localhost:4000/deploy/" />
+<meta property="og:url" content="http://localhost:4000/deploy/" />
+<meta property="og:site_name" content="Personal webpage" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Deploy Guide" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"Deploy Guide","description":"stay 24, stay student.","url":"http://localhost:4000/deploy/","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Personal webpage" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Personal webpage</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/vasp_basic/">DFT抽象圣经</a><a class="page-link" href="/about/">About</a><a class="page-link" href="/deploy/">Deploy  Guide</a><a class="page-link" href="/pymatgen/">pymatgen</a><a class="page-link" href="/vasp_inputs/">vasp输入</a><a class="page-link" href="/vasp_practice/">vasp实例</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Deploy  Guide</h1>
+  </header>
+
+  <div class="post-content">
+    <p>相关文件在deploy_guide repo里</p>
+
+<ul id="markdown-toc">
+  <li><a href="#hardware-硬件" id="markdown-toc-hardware-硬件">Hardware 硬件</a>    <ul>
+      <li><a href="#e5-鸡血--z10pa" id="markdown-toc-e5-鸡血--z10pa">e5 鸡血 @ z10pa</a>        <ul>
+          <li><a href="#双路设置" id="markdown-toc-双路设置">双路设置：</a></li>
+        </ul>
+      </li>
+      <li><a href="#zbook17-changing-to-dc-screen-换屏幕" id="markdown-toc-zbook17-changing-to-dc-screen-换屏幕">zbook17 changing to DC screen 换屏幕</a></li>
+      <li><a href="#nvme-support" id="markdown-toc-nvme-support">nvme support</a></li>
+    </ul>
+  </li>
+  <li><a href="#macos系统问题" id="markdown-toc-macos系统问题">MacOS系统问题</a>    <ul>
+      <li><a href="#账户无法使用" id="markdown-toc-账户无法使用">账户无法使用</a></li>
+      <li><a href="#其他一些问题" id="markdown-toc-其他一些问题">其他一些问题</a></li>
+    </ul>
+  </li>
+  <li><a href="#linux系统设置" id="markdown-toc-linux系统设置">Linux系统设置</a>    <ul>
+      <li><a href="#安装54-kernel" id="markdown-toc-安装54-kernel">安装5.4 kernel</a></li>
+      <li><a href="#安装511-kernel" id="markdown-toc-安装511-kernel">安装5.11 kernel</a></li>
+      <li><a href="#basic-linux-command" id="markdown-toc-basic-linux-command">basic linux command：</a></li>
+      <li><a href="#basic-library" id="markdown-toc-basic-library">basic library</a></li>
+      <li><a href="#ubuntu1804-root-登陆" id="markdown-toc-ubuntu1804-root-登陆">ubuntu18.04 root 登陆</a></li>
+      <li><a href="#隔离部分cpu使其只用来运行部分任务" id="markdown-toc-隔离部分cpu使其只用来运行部分任务">隔离部分cpu使其只用来运行部分任务</a></li>
+      <li><a href="#系统监测" id="markdown-toc-系统监测">系统监测：</a></li>
+    </ul>
+  </li>
+  <li><a href="#windows的一些系统设置" id="markdown-toc-windows的一些系统设置">windows的一些系统设置</a>    <ul>
+      <li><a href="#driver-安装驱动的那些事" id="markdown-toc-driver-安装驱动的那些事">Driver 安装驱动的那些事</a>        <ul>
+          <li><a href="#声卡soundblaster" id="markdown-toc-声卡soundblaster">声卡soundblaster</a></li>
+          <li><a href="#install-graphic-card-driver-for-unsupported-graphic-card-安装显卡驱动-zbook17" id="markdown-toc-install-graphic-card-driver-for-unsupported-graphic-card-安装显卡驱动-zbook17">install graphic card driver for unsupported graphic card 安装显卡驱动 zbook17</a></li>
+          <li><a href="#killer-ax200" id="markdown-toc-killer-ax200">killer ax200</a></li>
+        </ul>
+      </li>
+      <li><a href="#开启远程桌面" id="markdown-toc-开启远程桌面">开启远程桌面:</a></li>
+      <li><a href="#windows照片查看器" id="markdown-toc-windows照片查看器">windows照片查看器</a></li>
+      <li><a href="#a-script-for-running-android-simulator-安卓模拟器等可以尝试" id="markdown-toc-a-script-for-running-android-simulator-安卓模拟器等可以尝试">a script for running android simulator 安卓模拟器等可以尝试</a></li>
+    </ul>
+  </li>
+  <li><a href="#wsl的基本设置" id="markdown-toc-wsl的基本设置">wsl的基本设置</a>    <ul>
+      <li><a href="#双路主机" id="markdown-toc-双路主机">双路主机：</a></li>
+      <li><a href="#root-权限" id="markdown-toc-root-权限">root 权限</a></li>
+      <li><a href="#重启wsl" id="markdown-toc-重启wsl">重启wsl</a></li>
+      <li><a href="#wsl的linux-gui" id="markdown-toc-wsl的linux-gui">WSl的linux GUI</a></li>
+      <li><a href="#远程桌面连接linux" id="markdown-toc-远程桌面连接linux">远程桌面连接linux</a></li>
+    </ul>
+  </li>
+  <li><a href="#基础软件" id="markdown-toc-基础软件">基础软件</a>    <ul>
+      <li><a href="#vmware" id="markdown-toc-vmware">VMware</a>        <ul>
+          <li><a href="#虚拟机的ssh注意事项对于vmware虚拟机" id="markdown-toc-虚拟机的ssh注意事项对于vmware虚拟机">虚拟机的ssh注意事项，对于vmware虚拟机</a></li>
+          <li><a href="#vmware-vmhs-fuge-使用的一些常用指令" id="markdown-toc-vmware-vmhs-fuge-使用的一些常用指令">vmware vmhs-fuge 使用的一些常用指令</a></li>
+        </ul>
+      </li>
+      <li><a href="#ssh设置操作" id="markdown-toc-ssh设置操作">SSH设置操作</a>        <ul>
+          <li><a href="#ssh-server" id="markdown-toc-ssh-server">ssh-server</a></li>
+          <li><a href="#ssh-config-文件示例" id="markdown-toc-ssh-config-文件示例">SSH config 文件示例</a></li>
+          <li><a href="#ssh免密码登录" id="markdown-toc-ssh免密码登录">ssh免密码登录</a></li>
+          <li><a href="#ssh映射磁盘" id="markdown-toc-ssh映射磁盘">ssh映射磁盘</a></li>
+        </ul>
+      </li>
+      <li><a href="#git--github" id="markdown-toc-git--github">git &amp; github</a>        <ul>
+          <li><a href="#github-ssh" id="markdown-toc-github-ssh">github ssh</a></li>
+          <li><a href="#github-clone" id="markdown-toc-github-clone">github clone</a></li>
+          <li><a href="#github-page" id="markdown-toc-github-page">GitHub page</a></li>
+          <li><a href="#github-page-目录" id="markdown-toc-github-page-目录">github page 目录</a></li>
+        </ul>
+      </li>
+      <li><a href="#python" id="markdown-toc-python">python</a>        <ul>
+          <li><a href="#environment-环境相关" id="markdown-toc-environment-环境相关">environment 环境相关</a></li>
+          <li><a href="#library-库" id="markdown-toc-library-库">library 库</a>            <ul>
+              <li><a href="#tensorflow" id="markdown-toc-tensorflow">tensorflow:</a></li>
+            </ul>
+          </li>
+          <li><a href="#实例" id="markdown-toc-实例">实例</a></li>
+        </ul>
+      </li>
+      <li><a href="#lmod---module-管理软件" id="markdown-toc-lmod---module-管理软件">LMOD - module 管理软件</a></li>
+      <li><a href="#easybuild" id="markdown-toc-easybuild">easybuild</a></li>
+      <li><a href="#spack" id="markdown-toc-spack">spack</a>        <ul>
+          <li><a href="#spack-镜像" id="markdown-toc-spack-镜像">spack 镜像</a></li>
+          <li><a href="#nscc" id="markdown-toc-nscc">NSCC</a></li>
+        </ul>
+      </li>
+      <li><a href="#rocm" id="markdown-toc-rocm">ROCm</a>        <ul>
+          <li><a href="#43" id="markdown-toc-43">4.3</a></li>
+          <li><a href="#501" id="markdown-toc-501">5.0.1</a></li>
+          <li><a href="#41" id="markdown-toc-41">4.1</a></li>
+        </ul>
+      </li>
+      <li><a href="#pbsqsub-队列目前未成功" id="markdown-toc-pbsqsub-队列目前未成功">PBS/qsub 队列–目前未成功</a>        <ul>
+          <li><a href="#源代码安装-未成功" id="markdown-toc-源代码安装-未成功">源代码安装-未成功</a></li>
+        </ul>
+      </li>
+      <li><a href="#latex-配置" id="markdown-toc-latex-配置">latex 配置</a>        <ul>
+          <li><a href="#latex中文支持" id="markdown-toc-latex中文支持">latex中文支持</a></li>
+        </ul>
+      </li>
+      <li><a href="#slurm队列管理" id="markdown-toc-slurm队列管理">slurm队列管理</a></li>
+      <li><a href="#看番-animesearcher" id="markdown-toc-看番-animesearcher">看番-animesearcher</a>        <ul>
+          <li><a href="#搜索不到东西等问题" id="markdown-toc-搜索不到东西等问题">搜索不到东西等问题</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#不好装的软件" id="markdown-toc-不好装的软件">不好装的软件</a>    <ul>
+      <li><a href="#quantum-espresso" id="markdown-toc-quantum-espresso">quantum espresso</a>        <ul>
+          <li><a href="#quantum-espresso普通编译-已经成功" id="markdown-toc-quantum-espresso普通编译-已经成功">quantum espresso普通编译-已经成功</a></li>
+          <li><a href="#quantum-espresso-rocm-sirius" id="markdown-toc-quantum-espresso-rocm-sirius">quantum espresso ROCm-sirius</a></li>
+          <li><a href="#quantum-espresso-rocm-spack安装目前未成功" id="markdown-toc-quantum-espresso-rocm-spack安装目前未成功">quantum espresso ROCm-spack安装–目前未成功</a></li>
+        </ul>
+      </li>
+      <li><a href="#lammps-rocm-已成功" id="markdown-toc-lammps-rocm-已成功">lammps-rocm 已成功</a>        <ul>
+          <li><a href="#需要安装openmpi" id="markdown-toc-需要安装openmpi">需要安装openmpi</a></li>
+          <li><a href="#安装lammps-rocm" id="markdown-toc-安装lammps-rocm">安装lammps-rocm</a></li>
+          <li><a href="#lammps-mlip" id="markdown-toc-lammps-mlip">lammps-mlip</a></li>
+        </ul>
+      </li>
+      <li><a href="#vasp" id="markdown-toc-vasp">vasp</a>        <ul>
+          <li><a href="#vasp-build" id="markdown-toc-vasp-build">vasp build</a></li>
+          <li><a href="#vasp-cuda" id="markdown-toc-vasp-cuda">vasp cuda</a></li>
+          <li><a href="#vasp-bug" id="markdown-toc-vasp-bug">vasp bug</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>转载侵删</strong></p>
+
+<h1 id="hardware-硬件">Hardware 硬件</h1>
+
+<h2 id="e5-鸡血--z10pa">e5 鸡血 @ z10pa</h2>
+
+<p>烧录器装好驱动https://item.taobao.com/item.htm?spm=a1z09.2.0.0.68162e8dApTxX1&amp;id=592580392777&amp;_u=n1ucmpp9f1e3
+取下BIOS芯片，按照商家页面把bios芯片夹住，然后连usb。打开软件之后，先检测烧录器，然后打开鸡血bios （.cap），先擦除再写入（不知道需不需要擦除）。</p>
+
+<p>电脑需要拔下电池，跳线到cmos重置模式半小时以上</p>
+
+<p>刷好的bios芯片对着缺口插回去，尝试安装系统发现不可以用（卡在win10logo），于是在别的电脑上安装系统之后插回来，还是卡在了win10的logo。 重启三次之后进入安全模式选择禁用驱动程序强制签名，成功进去系统。</p>
+
+<p>此时电脑上面是两个cpu，4条内存，一个nvme硬盘，连接了板载显卡，没有插独显</p>
+
+<p>以这种方式进去系统之后，在系统里面双击win10安装程序，删除所有个人文件重装系统，安装完后系统正常工作，重启之后也正常</p>
+
+<p>可以参考https://www.bilibili.com/read/cv4116433</p>
+
+<p>之后是电源选择高性能，关闭快速启动，bios设定里面c state limie 设置成c0、c1，开启c3 report,禁用c6 report</p>
+
+<p>再之后，格式化一个u盘，把  v3.efi 和 start.nsh放进去，引导这个优盘，让优盘把v3 efi相当于复制进系统的efi分区即可</p>
+
+<p><strong>未证实：</strong>
+似乎刷回5.4kernel之后，系统会卸载微码补丁，此时频率会经常达到3以上。而新版kernel似乎会安装intel microcode，导致破解失效？？</p>
+
+<h3 id="双路设置">双路设置：</h3>
+
+<p>只在1路插内存：即32g内存都在cpu1上面，cpuz跑分15w+</p>
+
+<p>两路都插内存，总共64g，跑分10w</p>
+
+<p>开启关闭虚拟化都是这样</p>
+
+<p>关闭numa之后跑分回到15w+</p>
+
+<p>而且在wsl相关性设置中，cpu 组1 变成了64个cpu，组2只有8个？？？？
+原本是平均分配的</p>
+
+<p>–&gt;可以通过重启虚拟机解决</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>net stop LxssManager 
+net start LxssManager
+</code></pre></div></div>
+
+<h2 id="zbook17-changing-to-dc-screen-换屏幕">zbook17 changing to DC screen 换屏幕</h2>
+
+<p>https://forum.51nb.com/thread-1966563-1-1.html</p>
+
+<p>2020.9新帖子，改30针屏线，没准可行！</p>
+
+<p>目前已有是40针屏线，具有2lane定义，查看b173han04.0 和04.7似乎符合 40pin 2lane</p>
+
+<h2 id="nvme-support">nvme support</h2>
+
+<p>参照https://tieba.baidu.com/p/6282527282?see_lz=1
+过程，使用clover来进行
+先把原本硬盘数据备份到新盘，再备份回这个m.2
+bios设置：
+制作了clover的启动盘，可以加载nvme驱动并且引导系统
+尝试把clover放进硬盘里面:</p>
+
+<p>方法，对于目前的GPT硬盘，直接把EFI分区清空之后把200M的clover盘中文件全考进去，重启之后bios可以识别这个uefi并且引导出来就是clover</p>
+
+<h1 id="macos系统问题">MacOS系统问题</h1>
+
+<h2 id="账户无法使用">账户无法使用</h2>
+
+<p>绑定银行卡之后再itunes里面激活</p>
+
+<h2 id="其他一些问题">其他一些问题</h2>
+<p>m1的yml和其他yml不太通用</p>
+
+<h1 id="linux系统设置">Linux系统设置</h1>
+
+<h2 id="安装54-kernel">安装5.4 kernel</h2>
+<pre><code class="language-{markdown}">sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+sudo dpkg -i *.deb
+</code></pre>
+<h2 id="安装511-kernel">安装5.11 kernel</h2>
+<pre><code class="language-{markdown}">sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.11.0-051100-generic_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.11.0-051100-lowlatency_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-headers-5.11.0-051100_5.11.0-051100.202102142330_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-image-unsigned-5.11.0-051100-generic_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-image-unsigned-5.11.0-051100-lowlatency_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-modules-5.11.0-051100-generic_5.11.0-051100.202102142330_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11/amd64/linux-modules-5.11.0-051100-lowlatency_5.11.0-051100.202102142330_amd64.deb
+sudo dpkg -i *.deb
+</code></pre>
+<h2 id="basic-linux-command">basic linux command：</h2>
+
+<p>su / sudo ：管理员权限</p>
+
+<p>sh xxxxx.sh :运行sh脚本</p>
+
+<p>yum install / apt-get install : centos 和 ubuntu安装软件</p>
+
+<p>scp （-r） 本地 目标： 可以复制到远程主机</p>
+
+<p>注意！ 远程主机的.bashrc不可以有echo</p>
+
+<p>pwd显示路径</p>
+
+<p><code class="language-plaintext highlighter-rouge">top</code>
+查看cpu使用率</p>
+
+<p><code class="language-plaintext highlighter-rouge">top -u david</code>
+查看用户的cpu使用率</p>
+
+<p><code class="language-plaintext highlighter-rouge">cat /proc/cpuinfo</code>
+查看cpu型号核心数量</p>
+
+<p><code class="language-plaintext highlighter-rouge">s-tui</code>
+很好用的检测软件</p>
+
+<h2 id="basic-library">basic library</h2>
+
+<ul>
+  <li>ubuntu 18.04:</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">apt-get install build-essential gcc-multilib rpm lib32ncurses5 lib32z1</code></p>
+
+<ul>
+  <li>ubuntu 20.04</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">apt-get install build-essential gcc-multilib rpm lib32z1</code></p>
+
+<h2 id="ubuntu1804-root-登陆">ubuntu18.04 root 登陆</h2>
+
+<p>https://blog.csdn.net/COCO56/article/details/107628019</p>
+
+<h2 id="隔离部分cpu使其只用来运行部分任务">隔离部分cpu使其只用来运行部分任务</h2>
+<p>对于z10pa可以打开
+<code class="language-plaintext highlighter-rouge">gedit /etc/default/grub</code>
+更改：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=2-17,20-35"
+</code></pre></div></div>
+<p>之后
+<code class="language-plaintext highlighter-rouge">sudo update-grub</code></p>
+
+<p>重启之后可以通过资源管理器看，如果一直是0%说明成功</p>
+
+<p>调度被隔离的核心：</p>
+
+<p>使用taskset
+例如：</p>
+
+<p><code class="language-plaintext highlighter-rouge">taskset -c 2-17,20-35 mpirun -n 32 vasp</code></p>
+
+<p>这样也可以开启numa然后只在一个numa节点上运行程序</p>
+
+<h2 id="系统监测">系统监测：</h2>
+
+<p>千万不要用aida64，会导致功耗bug</p>
+
+<p>使用hwinfo</p>
+
+<h1 id="windows的一些系统设置">windows的一些系统设置</h1>
+
+<h2 id="driver-安装驱动的那些事">Driver 安装驱动的那些事</h2>
+<h3 id="声卡soundblaster">声卡soundblaster</h3>
+
+<p>安装soundblaster xfi notebook （SB0950）:
+下载
+https://files.creative.com/manualdn/Drivers/AVP/10925/0x2F4D4864/SBXN_PCDRV_LB_1_01_0095.exe
+注意：<strong>安装时候卸载ESET等任何杀毒软件！</strong></p>
+
+<h3 id="install-graphic-card-driver-for-unsupported-graphic-card-安装显卡驱动-zbook17">install graphic card driver for unsupported graphic card 安装显卡驱动 zbook17</h3>
+
+<p>zbook17显卡：
+根据网上，只支持到p5200?</p>
+
+<p>更换–》简单，用热风枪吹掉显卡支架，
+记得bios开启混合显卡模式</p>
+
+<p>驱动：
+直接下载最新exe驱动，右键解压，卸载所有nvidia驱动，用driver cleaner再清除一遍，然后设备管理器-microsoft基本适配器
+然后安装，从磁盘安装，找到那个inf（是bli结尾的？）。我是安装之前改好了inf，不确定需不需要改inf</p>
+
+<p>inf更改：
+首先设备管理器找到显卡硬件id，然后再nVidia驱动解压出来的文件里面 找惠普对应的（103C结尾，应该是bli之类的inf）
+禁用设备签名（设置里面，恢复，高级重新启动），然后inf右键安装</p>
+
+<h3 id="killer-ax200">killer ax200</h3>
+
+<p>https://bbs.luobotou.org/thread-45955-1-1.html11</p>
+
+<h2 id="开启远程桌面">开启远程桌面:</h2>
+
+<p>文件资源管理器,右键此电脑,跳出来设置的窗口,在相关设置里面有远程桌面,点进去打开</p>
+
+<h2 id="windows照片查看器">windows照片查看器</h2>
+
+<p>保存成reg文件双击运行</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE<span class="se">\S</span>OFTWARE<span class="se">\M</span>icrosoft<span class="se">\W</span>indows Photo Viewer<span class="se">\C</span>apabilities<span class="se">\F</span>ileAssociations]
+ ".jpg"="PhotoViewer.FileAssoc.Tiff"
+ ".jpeg"="PhotoViewer.FileAssoc.Tiff"
+ ".bmp"="PhotoViewer.FileAssoc.Tiff"
+ ".png"="PhotoViewer.FileAssoc.Tiff"
+ ".ico"="PhotoViewer.FileAssoc.Tiff"
+ ".jpe"="PhotoViewer.FileAssoc.Tiff"
+ ".dib"="PhotoViewer.FileAssoc.Tiff"
+ ".jfif"="PhotoViewer.FileAssoc.Tiff"
+ ".wdp"="PhotoViewer.FileAssoc.Tiff"
+</code></pre></div></div>
+
+<h2 id="a-script-for-running-android-simulator-安卓模拟器等可以尝试">a script for running android simulator 安卓模拟器等可以尝试</h2>
+
+<p>启用：</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+bcdedit /set hypervisorlaunchtype off
+</code></pre></div></div>
+
+<p>恢复：</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+bcdedit /set hypervisorlaunchtype off
+</code></pre></div></div>
+
+<h1 id="wsl的基本设置">wsl的基本设置</h1>
+
+<h2 id="双路主机">双路主机：</h2>
+
+<p>可以任务管理器右键vmmm选择让wsl运行在哪个cpu上面</p>
+
+<p>新发现：当关闭超线程之后，wsl可以同时在两个cpu中运行</p>
+
+<p>注意可能需要重新安装libintel64？</p>
+
+<p>性能测试</p>
+
+<h2 id="root-权限">root 权限</h2>
+
+<p><code class="language-plaintext highlighter-rouge">ubuntu1804.exe config --default-user root</code></p>
+
+<p>打不开的时候：netsh winsock reset</p>
+
+<h2 id="重启wsl">重启wsl</h2>
+
+<p><code class="language-plaintext highlighter-rouge">net stop LxssManager</code>
+<code class="language-plaintext highlighter-rouge">net start LxssManager</code></p>
+
+<h2 id="wsl的linux-gui">WSl的linux GUI</h2>
+<p>GUI-xfce
+https://zhuanlan.zhihu.com/p/150555651
+RDP:
+https://zhuanlan.zhihu.com/p/149501381
+显示GUI</p>
+
+<p><strong>某个具体过程（通过xfce4实现）</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install xfce4</code></p>
+
+<p>.bashrc中添加：</p>
+
+<p><code class="language-plaintext highlighter-rouge">export DISPLAY=:0.0</code></p>
+
+<p>之后下载并安装 VcXsrv Windows X Server</p>
+
+<p>https://sourceforge.net/projects/vcxsrv/</p>
+
+<p>Windows X-server based on the xorg git sources (like xming or cygwin’s xwin), but compiled with Visual C++ 2012 Express Edition. Source code can also be compiled with VS2008, VS2008 Express Edition and VS2010 Express Edition, although current project and makefile are not fully compatible anymore.</p>
+
+<p>先启动 XLaunch</p>
+
+<p>再在 WSL 中启动 Xfce 会话</p>
+
+<p><code class="language-plaintext highlighter-rouge">startxfce4</code></p>
+
+<p>最好用centos或者ubuntu18.04</p>
+
+<h2 id="远程桌面连接linux">远程桌面连接linux</h2>
+<p>sudo apt install xrdp
+sudo systemctl enable –now xrdp
+sudo ufw allow from 192.168.3.0/24 to any port 3389 proto tcp</p>
+
+<h1 id="基础软件">基础软件</h1>
+
+<h2 id="vmware">VMware</h2>
+<h3 id="虚拟机的ssh注意事项对于vmware虚拟机">虚拟机的ssh注意事项，对于vmware虚拟机</h3>
+
+<p>安装vmhs-fuge还是啥的，为了虚拟机与实体机通信</p>
+
+<p>虚拟机可以尝试使用固定ip</p>
+
+<h3 id="vmware-vmhs-fuge-使用的一些常用指令">vmware vmhs-fuge 使用的一些常用指令</h3>
+<p>访问硬盘用的
+<code class="language-plaintext highlighter-rouge">/usr/bin/vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs-fuse,allow_other</code></p>
+
+<h2 id="ssh设置操作">SSH设置操作</h2>
+
+<h3 id="ssh-server">ssh-server</h3>
+<p>LINUX默认没有ssh-server，也就是说默认不能作为ssh的目标</p>
+
+<p>需要安装openssh-server</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install openssh-server</code></p>
+
+<h3 id="ssh-config-文件示例">SSH config 文件示例</h3>
+
+<pre><code class="language-{markdown}">
+Host vm
+    HostName 192.168.254.128
+    User root
+    IdentityFile "C:\Users\（改成用户名）\.ssh\id_rsa"
+
+</code></pre>
+
+<h3 id="ssh免密码登录">ssh免密码登录</h3>
+
+<p>(windows必须)首先在service服务中，打开openssh，自动启动</p>
+
+<ul>
+  <li>生成ssh密钥
+（可能需要先cd到~/.ssh再生成，因为ssh-keygen的-f有点傻）</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">ssh-keygen -t rsa -f ~/.ssh/${密钥名字}</code></p>
+
+<ul>
+  <li>将密钥放到远程主机</li>
+</ul>
+
+<p>生成两个文件，把.pub放到远程机器的/.ssh下面，再把内容复制到远程主机的~/.ssh/authorized_keys里面</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scp ~/.ssh/${密钥名字}.pub (用户名)@(远程主机):~/.ssh/
+
+ssh登录远程主机之后
+
+cat ~/.ssh/${密钥名字}.pub &gt;&gt; ~/.ssh/authorized_keys
+</code></pre></div></div>
+
+<p>之后windows机器ssh-add 私钥名字,或者在~/.ssh的config里面写好</p>
+
+<p><strong>注意authorized keys里面每个主机只能有一个密钥</strong></p>
+
+<h3 id="ssh映射磁盘">ssh映射磁盘</h3>
+
+<p>安装直接前往 github 对应项目的 release 中下载最新版本即可，需注意 sshfs-win 对 winfsp 的最低版本依赖（下载最新版本一般即可满足），另外有GUI（用户图形操作界面）可供下载</p>
+
+<p>sshfs-win：https://github.com/billziss-gh/sshfs-win/releases</p>
+
+<p>winfsp：https://github.com/billziss-gh/winfsp/releases</p>
+
+<p>然后映射网络磁盘里面输入</p>
+
+<p>\sshfs\用户名@服务器名字\</p>
+
+<p>后面不用加\home啥的，过去就相当于在\home\用户名底下</p>
+
+<p>如果想要上层的话也可以</p>
+
+<p>\sshfs.r\用户名@服务器名字\home\用户名.……</p>
+
+<p>sshfs相当于省略\home\用户名的过程</p>
+
+<h2 id="git--github">git &amp; github</h2>
+
+<p>对于新的os需要对git以及github进行设置</p>
+
+<p><code class="language-plaintext highlighter-rouge">git config --global user.name "lamdalamda"</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">git config --global user.email "邮箱"</code></p>
+
+<h3 id="github-ssh">github ssh</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ssh-keygen -t ed25519 -C "email address"</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">ssh-add ~/.ssh/id_ed25519</code></p>
+
+<p>再把pubkey复制到GitHub 设置里面的ssh keys里</p>
+
+<p>之后可以进行正常使用</p>
+
+<h3 id="github-clone">github clone</h3>
+
+<p>对于需要pull 或者 push 到github的
+如果是在vscode里面打开在点击pull或者push时候github扩展会跳出来打开chrome要求验证
+也可以使用ssh登录，比较费劲</p>
+
+<p>命令示例：
+<code class="language-plaintext highlighter-rouge">git clone git@github.com:lamdalamda/deploy_guide.git</code></p>
+
+<h3 id="github-page">GitHub page</h3>
+
+<p>一般是在settings-page里面设定source在/docs 下面，然后建立docs文件夹，放进去index.html</p>
+
+<p>如果用index.md使用markdown渲染出来，注意使用vscode插件markdown math和markdown preview enhanced</p>
+
+<p>渲染出来html的话，在GitHub page上面不能显示正确的数学公式，需要在在&lt;head&gt;部分把原本的stylesheet部分换成以下代码</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nv">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous"&gt;</span>
+<span class="nv">&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"&gt;&lt;/script&gt;</span>
+<span class="nv">&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>这段代码会更新</p>
+
+<p><em>https://katex.org/docs/autorender.html</em></p>
+
+<h3 id="github-page-目录">github page 目录</h3>
+
+<p>使用toc.py 搬运自https://github.com/Higurashi-kagome/pythontools/blob/master/text/toc.py</p>
+
+<p>For more details see <a href="https://guides.github.com/features/mastering-markdown/">GitHub Flavored Markdown</a>.</p>
+
+<h2 id="python">python</h2>
+
+<p>先装好anaconda</p>
+
+<h3 id="environment-环境相关">environment 环境相关</h3>
+
+<ul>
+  <li>
+    <p>默认环境
+在bashrc里添加
+<code class="language-plaintext highlighter-rouge">conda activate environment name</code></p>
+  </li>
+  <li>
+    <p>export the environment 导出环境:</p>
+  </li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">conda env export --name research &gt; research.yml</code></p>
+
+<ul>
+  <li>import environment from yml file 导入环境:</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">conda env create -f environment.yml</code></p>
+
+<ul>
+  <li>a sample</li>
+</ul>
+
+<p>https://github.com/lamdalamda/system-configure-record/blob/master/CARE/research.yml</p>
+
+<h3 id="library-库">library 库</h3>
+<h4 id="tensorflow">tensorflow:</h4>
+<ul>
+  <li>tensorflow windows 
+假设tensorflow安装在D:\Anaconda3\Lib\site-packages\tensorflow环境里，那么打开D:\Anaconda3\Lib\site-packages\tensorflow\python\platform\build_info.py这个文件</li>
+</ul>
+
+<p>检查一下默认写好的系统变量CUDA_PATH和CUDA_PATH_V9.0是否无误</p>
+
+<p>检查一下系统变量path中是否有NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin和NVIDIA GPU Computing Toolkit\CUDA\v9.0\lib\x64并且正确。
+默认路径如下：
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\lib\x64</p>
+
+<p>直接pip install tensorflow就行，有错误改错误</p>
+
+<p>tensorflow-cuda：需要找到tensorflow对应的cuda，cudnn</p>
+
+<p>下载下来之后安装，放在环境变量里面，缺什么加什么
+官网版本未必对应，可以看安装后缺少的dll版本</p>
+
+<ul>
+  <li>test code for tensorflow tensorflow测试</li>
+</ul>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import tensorflow as tf
+tf.config.list_physical_devices('GPU')
+</code></pre></div></div>
+
+<h3 id="实例">实例</h3>
+
+<ul>
+  <li>监控网站信息变化，比如托福或者疫苗等</li>
+</ul>
+
+<p>同时具有发送邮件提醒功能</p>
+
+<p>https://www.jianshu.com/p/7c4f251485b7?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation</p>
+
+<h2 id="lmod---module-管理软件">LMOD - module 管理软件</h2>
+<ul>
+  <li>lua</li>
+</ul>
+
+<pre><code class="language-{markdown}">sudo apt install lua5.3 lua-bit32:amd64 lua-posix:amd64 lua-posix-dev liblua5.3-0:amd64 liblua5.3-dev:amd64 tcl tcl-dev tcl8.6 tcl8.6-dev:amd64 libtcl8.6:amd64
+
+sudo update-alternatives --install /usr/bin/lua \
+    lua-interpreter /usr/bin/lua5.3 130 \
+    --slave /usr/share/man/man1/lua.1.gz lua-manual \
+    /usr/share/man/man1/lua5.3.1.gz
+sudo update-alternatives --install /usr/bin/luac \
+    lua-compiler /usr/bin/luac5.3 130 \
+    --slave /usr/share/man/man1/luac.1.gz lua-compiler-manual \
+    /usr/share/man/man1/luac5.3.1.gz
+sudo ln -s /usr/lib/x86_64-linux-gnu/liblua5.3-posix.so \
+    /usr/lib/x86_64-linux-gnu/lua/5.3/posix.so
+</code></pre>
+<ul>
+  <li>lmod</li>
+</ul>
+
+<p>下载lmod本体</p>
+
+<pre><code class="language-{markdown}">./configure --prefix=/opt/apps
+sudo make install
+sudo ln -s /opt/apps/lmod/lmod/init/profile        /etc/profile.d/z00_lmod.sh
+
+</code></pre>
+<p>之后：
+<code class="language-plaintext highlighter-rouge">sudo gedit /etc/bash.bashrc</code>
+添加这些：</p>
+
+<pre><code class="language-{markdown}">if ! shopt -q login_shell; then
+  if [ -d /etc/profile.d ]; then
+    for i in /etc/profile.d/*.sh; do
+      if [ -r $i ]; then
+        . $i
+      fi
+    done
+  fi
+fi
+</code></pre>
+
+<ul>
+  <li>oneapi的module
+在oneapi根目录下面运行</li>
+</ul>
+
+<pre><code class="language-{markdown}">./modulefiles-setup.sh
+module use modulefiles
+</code></pre>
+
+<ul>
+  <li>nvhpc
+nvhpc的modulefile在安装目录的modulefiles里面</li>
+</ul>
+
+<h2 id="easybuild">easybuild</h2>
+
+<p>安装好lmod之后</p>
+
+<pre><code class="language-{markdown}">export EB_TMPDIR=/tmp/$USER/eb_tmp
+python3 -m pip install --ignore-installed --prefix $EB_TMPDIR easybuild
+export PATH=$EB_TMPDIR/bin:$PATH
+export PYTHONPATH=$(/bin/ls -rtd -1 $EB_TMPDIR/lib*/python*/site-packages | tail -1):$PYTHONPATH
+export EB_PYTHON=python3
+eb --install-latest-eb-release --prefix $HOME/easybuild
+module use $HOME/easybuild/modules/all
+</code></pre>
+<p>重启清除tmp，之后module load Easybuild使用</p>
+
+<h2 id="spack">spack</h2>
+
+<p>spack find -v</p>
+
+<p>可以列出已经安装的包的完整名称，之后load</p>
+
+<h3 id="spack-镜像">spack 镜像</h3>
+<p>在没有外网链接的系统上尝试使用spack</p>
+
+<ol>
+  <li>在有外网连接的机器上创建镜像</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">spack mirror create -d ~/spack_mirror -D nvhpc@20.9 openmpi fftw clingo </code></p>
+
+<p>其中-d后面是创建镜像的位置，-D是包括所有的denpendency，后面是包的名称
+注意clingo是必须
+将得到的镜像文件夹上传到没有外网链接的机器</p>
+
+<h3 id="nscc">NSCC</h3>
+<ul>
+  <li>spack初始化
+必备条件：python3.8+ gcc6+</li>
+</ul>
+
+<p>nscc上面：module load gcc/6.5.0 python/3.8.3</p>
+
+<p><code class="language-plaintext highlighter-rouge">ssh nscc04-ib0</code>来获得外网连接</p>
+
+<p>之后<code class="language-plaintext highlighter-rouge">spack --insecure -d install zlib</code></p>
+
+<h2 id="rocm">ROCm</h2>
+<h3 id="43">4.3</h3>
+<p>amd gpu加速通过ROCm实现（类似CUDA）</p>
+
+<p>这次直接登陆的root来安装的：</p>
+
+<p>首先安装ROCm 4.3在ubuntu20.04.在安装系统时候不安装图形驱动：</p>
+
+<p>这里logname改称用户名</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo usermod -a -G video $LOGNAME
+sudo usermod -a -G render $LOGNAME
+
+echo 'ADD_EXTRA_GROUPS=1' | sudo tee -a /etc/adduser.conf
+
+echo 'EXTRA_GROUPS=video' | sudo tee -a /etc/adduser.conf
+
+echo 'EXTRA_GROUPS=render' | sudo tee -a /etc/adduser.conf
+
+sudo apt update
+
+sudo apt dist-upgrade
+
+sudo apt install libnuma-dev
+sudo apt install wget gnupg2
+
+wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
+
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.3/ ubuntu main' | sudo tee /etc/apt/sources.list.d/rocm.list
+
+sudo apt update
+sudo apt install rocm-dkms 
+
+echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl/bin' | sudo tee -a /etc/profile.d/rocm.sh
+
+</code></pre></div></div>
+
+<p>重启系统之后</p>
+
+<p>验证安装使用：</p>
+
+<p>/opt/rocm/bin/rocminfo
+/opt/rocm/opencl/bin/clinfo</p>
+
+<h3 id="501">5.0.1</h3>
+
+<p>5.0.1 要求5.8或者5.11kernel
+根据文档，如果想要安装多个rocm版本的话，需要先安装最新的。比如想要安装5.0.1和4.1，那么需要先安装5.0.1</p>
+
+<p>首先移除了所有的旧版软件，然后安装5.11kernel</p>
+
+<h3 id="41">4.1</h3>
+
+<ul>
+  <li>安装kernel
+rocm4.1需要linux 5.4kernel（或者5.6？）</li>
+</ul>
+
+<p>经过测试这样安装kernel</p>
+<pre><code class="language-{markdown}">sudo apt-get update
+sudo apt-get upgrade
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400_5.4.0-050400.201911242031_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-headers-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-image-unsigned-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-generic_5.4.0-050400.201911242031_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4/linux-modules-5.4.0-050400-lowlatency_5.4.0-050400.201911242031_amd64.deb
+sudo dpkg -i *.deb
+</code></pre>
+<p>然后需要将其他rocm卸载干净</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt autoremove rocm-opencl rocm-dkms rocm-dev rocm-utils &amp;&amp; sudo reboot
+sudo apt-get purge rocm-libs
+</code></pre></div></div>
+<p>安装过程：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt update
+
+sudo apt dist-upgrade
+
+sudo apt install libnuma-dev
+
+sudo reboot
+wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
+
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.1/ xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
+sudo apt update
+echo 'export PATH=$PATH:/opt/rocm/bin:/opt/rocm/rocprofiler/bin:/opt/rocm/opencl/bin' | sudo tee -a /etc/profile.d/rocm.sh
+
+sudo apt install rocm-dkms &amp;&amp; sudo reboot
+</code></pre></div></div>
+<ul>
+  <li>安装hip
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/llvm-project.git
+cd llvm-project
+mkdir -p build &amp;&amp; cd build
+cmake -DCMAKE_INSTALL_PREFIX=/opt/rocm/llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=1 -DLLVM_TARGETS_TO_BUILD="AMDGPU;X86" -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt" ../llvm
+make -j
+sudo make install
+</code></pre></div>    </div>
+  </li>
+  <li>ROCM device (用来cmake的？)
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=/opt/rocm/llvm/bin:$PATH
+git clone -b roc-4.1.x https://github.com/RadeonOpenCompute/ROCm-Device-Libs.git
+cd ROCm-Device-Libs
+mkdir -p build &amp;&amp; cd build
+CC=clang CXX=clang++ cmake -DLLVM_DIR=/opt/rocm/llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_WERROR=1 -DLLVM_ENABLE_ASSERTIONS=1 -DCMAKE_INSTALL_PREFIX=/opt/rocm ..
+make -j
+sudo make install
+</code></pre></div>    </div>
+  </li>
+  <li>数学lib
+注意一定要在最后安装</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install rocm-libs</code></p>
+
+<h2 id="pbsqsub-队列目前未成功">PBS/qsub 队列–目前未成功</h2>
+
+<p>安装PBS 队列管理；</p>
+
+<p>git clone git@github.com:openpbs/openpbs.git</p>
+
+<p>按照install操作
+configure之前conda deactivate</p>
+
+<p>安装libpython3.6
+<code class="language-plaintext highlighter-rouge">sudo add-apt-repository universe</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get update</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install libpython3.6</code></p>
+
+<p>安装libhwloc5</p>
+
+<p><code class="language-plaintext highlighter-rouge">wget http://ftp.de.debian.org/debian/pool/main/h/hwloc/libhwloc5_1.11.12-3_amd64.deb</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo dpkg -i libhwloc5_1.11.12-3_amd64.deb</code></p>
+
+<p>然后运行两次：
+<code class="language-plaintext highlighter-rouge">sudo dpkg -i openpbs-server_20.0.1-1_amd64.deb </code></p>
+
+<h3 id="源代码安装-未成功">源代码安装-未成功</h3>
+<p>github上下载master源码（20.0.1还没有ubutnu20.04支持，如果是ubuntu18.04那直接找安装包就行）</p>
+
+<p>安装依赖
+    sudo apt-get install gcc make libtool libhwloc-dev libx11-dev <br />
+      libxt-dev libedit-dev libical-dev ncurses-dev perl <br />
+      postgresql-server-dev-all postgresql-contrib python3-dev tcl-dev tk-dev swig <br />
+      libexpat-dev libssl-dev libxext-dev libxft-dev autoconf <br />
+      automake g++</p>
+
+<p>sudo apt install expat libedit2 postgresql python3 postgresql-contrib sendmail-bin <br />
+      sudo tcl tk libical3 postgresql-server-dev-all</p>
+
+<p>之后./autogen</p>
+
+<p>然后 ./configure CFLAGS=”-g -O2 -Wall -Werror -Wno-unused-result -Wno-array-bounds -Wno-stringop-overflow -Wno-format-truncation -Wno-format-overflow” –prefix=/opt/pbs</p>
+
+<p>make</p>
+
+<p>sudo make install</p>
+
+<h2 id="latex-配置">latex 配置</h2>
+<h3 id="latex中文支持">latex中文支持</h3>
+<p>参考https://zhuanlan.zhihu.com/p/43133114</p>
+
+<p>对于latex workshop插件，在visual studio code的settings.json 里面添加如下内容</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    // Latex workshop
+    "latex-workshop.latex.tools": [
+          {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-pdf",
+            "%DOC%"
+            ]
+          },
+          {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOC%"
+              ]
+          },          
+          {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOC%"
+            ]
+          },
+          {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+            "%DOCFILE%"
+            ]
+          }
+        ],
+    "latex-workshop.latex.recipes": [
+          {
+            "name": "xelatex",
+            "tools": [
+            "xelatex"
+                        ]
+                  },
+          {
+            "name": "latexmk",
+            "tools": [
+            "latexmk"
+                        ]
+          },<span class="sb">
+
+          {
+            "name": "pdflatex -&gt; bibtex -&gt; pdflatex*2",
+            "tools": [
+            "pdflatex",
+            "bibtex",
+            "pdflatex",
+            "pdflatex"
+                        ]
+          }
+        ],
+    "latex-workshop.view.pdf.viewer": "tab",  
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.ist",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk"
+      ]
+</span></code></pre></div></div>
+
+<h2 id="slurm队列管理">slurm队列管理</h2>
+
+<p>在slurm官网下载配置文件放到/etc/slurm-llvm/中</p>
+
+<p>然后</p>
+<pre><code class="language-{markdown}">sudo apt install slurm-wlm-torque
+sudo apt install slurm-wlm-emulator
+
+ systemctl start munge
+systemctl status munge
+
+systemctl enable munge
+</code></pre>
+
+<h2 id="看番-animesearcher">看番-animesearcher</h2>
+
+<p>https://github.com/zaxtyson/AnimeSearcher</p>
+
+<p>可以git下来源代码使用</p>
+
+<h3 id="搜索不到东西等问题">搜索不到东西等问题</h3>
+
+<p>git下来源代码，config里面更改一下端口之后，python运行app.py,之后记得在打开html之后在最底下更改app.py中的地址</p>
+
+<h1 id="不好装的软件">不好装的软件</h1>
+<h2 id="quantum-espresso">quantum espresso</h2>
+<h3 id="quantum-espresso普通编译-已经成功">quantum espresso普通编译-已经成功</h3>
+<p>只需要按照操作说明来</p>
+
+<h3 id="quantum-espresso-rocm-sirius">quantum espresso ROCm-sirius</h3>
+
+<p>quantum  espresso 的gpu实现使用sirius。 
+sirius手动安装方式：</p>
+
+<p>由于sirius的依赖太复杂，所以可以在spack里面安装sirius然后加载依赖，再手动安装</p>
+
+<p>在spack安装一遍sirius+rocm之后</p>
+
+<p>在不加载intel oneap：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load libxc-5.1.5-gcc-9.3.0-hh5tyyd 
+module load spfft-1.0.4-gcc-9.3.0-uxhem63  
+module load hdf5-1.10.7-gcc-9.3.0-rb5rztf 
+module load gsl-2.7-gcc-9.3.0-jrey7js
+module load spglib-1.16.1-gcc-9.3.0-vhsoqdf
+module load spla-1.5.1-gcc-9.3.0-k4ifbob
+module load openblas-0.3.18-gcc-9.3.0-5p72oue
+module load fftw-3.3.10-gcc-9.3.0-75kqnix 
+</code></pre></div></div>
+<p>在sirius里面</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir build
+cd build
+cmake -DUSE_ROCM=on -DUSE_OPENMP=on ..
+make -j4
+</code></pre></div></div>
+
+<h3 id="quantum-espresso-rocm-spack安装目前未成功">quantum espresso ROCm-spack安装–目前未成功</h3>
+
+<p>在整个安装过程中还跑了这些指令</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install build-essential gcc-multilib rpm lib32z1
+apt-get install gfortran
+apt-get install hipfort
+
+
+. ~/repo/spack/share/spack/setup-env.sh
+spack install zlib
+spack install gcc
+spack install sirius +rocm amdgpu_target=gfx803
+</code></pre></div></div>
+
+<p>另外注意更改spack的配置文件</p>
+
+<p>~/.spack/packages.yaml</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+packages:
+  hip:
+    externals:
+    - spec: hip@4.3.0
+      prefix: /opt/rocm/hip
+      extra_attributes:
+        compilers:
+          c: /opt/rocm/llvm/bin/clang++
+          c++: /opt/rocm/llvm/bin/clang++
+          hip: /opt/rocm/hip/bin/hipcc
+      buildable: false
+  hsa-rocr-dev:
+    externals:
+    - spec: hsa-rocr-dev@4.3.0
+      prefix: /opt/rocm
+      extra_attributes:
+        compilers:
+          c: /opt/rocm/llvm/bin/clang++
+          cxx: /opt/rocm/llvm/bin/clang++
+      buildable: false
+  llvm-amdgpu:
+    externals:
+    - spec: llvm-amdgpu@4.3.0
+      prefix: /opt/rocm/llvm
+      extra_attributes:
+        compilers:
+          c: /opt/rocm/llvm/bin/clang++
+          cxx: /opt/rocm/llvm/bin/clang++
+      buildable: false
+
+
+</code></pre></div></div>
+
+<p>~/.spack/linux/compilers.yaml</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>compilers:
+- compiler:
+    spec: clang@amd
+    paths:
+      cc: /opt/rocm/llvm/bin/clang
+      cxx: /opt/rocm/llvm/bin/clang++
+      f77: null
+      fc: null
+    flags: {}
+    operating_system: ubuntu20.04
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: clang@13.0.0
+    paths:
+      cc: /usr/bin/clang-ocl
+      cxx: null
+      f77: null
+      fc: null
+    flags: {}
+    operating_system: ubuntu20.04
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@9.3.0
+    paths:
+      cc: /usr/bin/gcc
+      cxx: /usr/bin/g++
+      f77: /usr/bin/gfortran
+      fc: /usr/bin/gfortran
+    flags: {}
+    operating_system: ubuntu20.04
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+</code></pre></div></div>
+
+<h2 id="lammps-rocm-已成功">lammps-rocm 已成功</h2>
+
+<p>不要加载oneapi环境！！！！</p>
+
+<h3 id="需要安装openmpi">需要安装openmpi</h3>
+
+<p>下载openmpi</p>
+
+<p>安装过程：
+<code class="language-plaintext highlighter-rouge">./configure</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">make</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo make install</code></p>
+
+<h3 id="安装lammps-rocm">安装lammps-rocm</h3>
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install hipcub ffmpeg</code></p>
+
+<p>在lammps下载目录中</p>
+<pre><code class="language-{markdown}">mkdir build
+cd build
+export HIP_PLATFORM=amd
+cmake -D PKG_GPU=on GPU_API=HIP -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc ../cmake/
+</code></pre>
+<p>运行时候出现问题：找不到libomp.so解决办法：</p>
+
+<p><code class="language-plaintext highlighter-rouge">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rocm-4.3.0/llvm/lib</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo ldconfig</code></p>
+
+<ul>
+  <li>第二次安装GPU</li>
+</ul>
+
+<p>环境ROCM-4.1
+spack安装的openmpi
+应该是通过<code class="language-plaintext highlighter-rouge">spack install openmpi^clang@amd</code></p>
+
+<p>clang@amd的配置文件：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- compiler:
+    spec: clang@amd
+    paths:
+      cc: /opt/rocm/llvm/bin/clang
+      cxx: /opt/rocm/llvm/bin/clang++
+      f77: /opt/rocm/llvm/bin/flang
+      fc: /opt/rocm/llvm/bin/flang
+    flags: {}
+    operating_system: ubuntu20.04
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+</code></pre></div></div>
+
+<p>具体安装lammps应该是</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake -D PKG_GPU=on -D GPU_API=HIP -D HIP_PLATFORM=amd -D HIP_ARCH=gfx803 -D CMAKE_CXX_COMPILER=hipcc -D CMAKE_INSTALL_PREFIX=/home/dx/app/lammps-gpu ../cmake
+make -j32
+make install
+</code></pre></div></div>
+
+<p><strong>注意运行lammps时候需要 -sf gpu才能正常运行</strong></p>
+
+<ul>
+  <li>测试
+<code class="language-plaintext highlighter-rouge">mpirun -n 4 ~/app/lammps-gpu/bin/lmp -sf gpu -var x 70 -in ~/repo/lammps-29sep2021/bench/in.lj</code></li>
+</ul>
+
+<p>var x是将系统扩大，但是x-100时候会爆显存
+x=70左右时候就已经有200w个原子了，应该也够用了</p>
+
+<h3 id="lammps-mlip">lammps-mlip</h3>
+
+<p>machine learning force field?</p>
+
+<p>尝试使用GPU包安装但是不成功。GPU和mlip是不能一起用的</p>
+
+<p>步骤：</p>
+
+<p><code class="language-plaintext highlighter-rouge">spack install openblas^clang@amd</code></p>
+
+<p>首先解压mlip2， interface， lammps
+然后</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load openblas-*
+mkdir build
+cd build
+cmake .. -D CMAKE_CXX_COMPILER=/opt/rocm/llvm/bin/clang++ -D CMAKE_C_COMPILER=/opt/rocm/llvm/bin/clang -D CMAKE_Fortran_COMPILER=/opt/rocm/llvm/bin/flang -DBLAS_ROOT=/home/dx/app/spack/opt/spack/linux-ubuntu20.04-haswell/clang-amd/openblas-0.3.18-m26i3cw4d3v2h3ntqqdqesjfrq5d5pxo/lib  # 记得改路径
+make -j32
+cp lib_mlip_interface.a /home/dx/repo/interface-lammps-mlip-2-master # 改路径
+export LAMMPS_PATH=/home/dx/repo/lammps-29Sep2021
+mkdir -p $LAMMPS_PATH/lib/mlip
+cp lib_mlip_interface.a $LAMMPS_PATH/lib/mlip
+cp LAMMPS/Makefile.lammps.template $LAMMPS_PATH/lib/mlip/Makefile.lammps
+cp -r LAMMPS/USER-MLIP/ $LAMMPS_PATH/src/
+cp LAMMPS/Install.sh $LAMMPS_PATH/src/USER-MLIP/
+cp LAMMPS/README $LAMMPS_PATH/src/USER-MLIP/
+cd $LAMMPS_PATH/src
+make no-user-mlip
+make yes-user-mlip
+# 之后需要修改一些makefile
+</code></pre></div></div>
+<p>安装GPU包
+需要在/home/dx/repo/lammps-29Sep2021/lib/gpu/Makefile.hip中，在“don’t change section below without need”之前添加</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HIP_PLATFORM=amd
+HIP_ARCH=gfx803
+</code></pre></div></div>
+<p>然后在这个文件夹里面<code class="language-plaintext highlighter-rouge">make -j32 -f Makefile.hip</code></p>
+
+<p>之后修改lammps-29Sep2021/src/MAKE/Makefile.mpi(注意路径)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CC =		mpicxx
+CCFLAGS =	-g -O3 -std=c++11 -lgfortran -L/opt/rocm/lib -lamdhip64   -fopenmp -L/home/dx/app/spack/opt/spack/linux-ubuntu20.04-haswell/clang-amd/openblas-0.3.18-m26i3cw4d3v2h3ntqqdqesjfrq5d5pxo/lib	-lopenblas
+
+
+SHFLAGS =	-fPIC
+DEPFLAGS =	-M
+
+LINK =		mpicxx
+LINKFLAGS =	-g -O3 -std=c++11  -lgfortran -L/opt/rocm/lib -lamdhip64   -fopenmp -L/home/dx/app/spack/opt/spack/linux-ubuntu20.04-haswell/clang-amd/openblas-0.3.18-m26i3cw4d3v2h3ntqqdqesjfrq5d5pxo/lib	-lopenblas
+LIB =
+SIZE =		size
+</code></pre></div></div>
+
+<p>以及<code class="language-plaintext highlighter-rouge">lammps-29Sep2021/src/STUBS/Makefile</code></p>
+
+<p>把g++改成<code class="language-plaintext highlighter-rouge">/opt/rocm/llvm/bin/clang++</code>（不确定有没有必要但还是改了吧）</p>
+
+<p>然后lammps-29Sep2021/src/中</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make yes-gpu
+make mpi-stubs
+make -j32 mpi
+
+</code></pre></div></div>
+<p>最后会得到lmp-mpi</p>
+<h2 id="vasp">vasp</h2>
+
+<p>似乎不能在root账户编译。</p>
+
+<p>首先：安装intel oneapi</p>
+
+<p>会更新</p>
+
+<p>要安装base和 hpctookit不知道需不需要</p>
+
+<p><code class="language-plaintext highlighter-rouge">wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17977/l_BaseKit_p_2021.3.0.3219_offline.sh</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17764/l_HPCKit_p_2021.2.0.2997_offline.sh</code></p>
+
+<p>sh 运行下载好的包，安装oneapi</p>
+
+<p>之后要source 一下，参考intel的start guide
+在.bashrc里面
+<code class="language-plaintext highlighter-rouge">source /opt/intel/oneapi/setvars.sh</code></p>
+
+<p>然后编译英特尔库
+<strong>make libintel64</strong> 如果是默认路径</p>
+
+<p><code class="language-plaintext highlighter-rouge">cd /opt/intel/oneapi/mkl/2021.3.0/interfaces/fftw3xf/ </code>
+<code class="language-plaintext highlighter-rouge">make libintel64</code></p>
+
+<h3 id="vasp-build">vasp build</h3>
+
+<p><code class="language-plaintext highlighter-rouge">OFLAG      = -O2 -xhost</code>
+参考bilibili</p>
+
+<p><code class="language-plaintext highlighter-rouge">export PATH=$PATH:/root/repo/vasp.5.4.4/bin</code></p>
+
+<h3 id="vasp-cuda">vasp cuda</h3>
+
+<p>CUDA在makefile include里面要改
+<code class="language-plaintext highlighter-rouge">GENCODE_ARCH    := -gencode=arch=compute_52,code=\"sm_52,compute_52\"</code></p>
+
+<p>报错icc: command line error: option ‘-openmp’ is not supported. Please use the replacement option ‘-qopenmp’</p>
+
+<p>解决后
+再报错找不到mpi.h
+尝试吧makefile.include中改成
+<code class="language-plaintext highlighter-rouge">MPI_INC    = $(I_MPI_ROOT)/intel64/include</code></p>
+
+<p>也可以尝试sudo apt install libopenmpi-dev，但还没试</p>
+
+<p>再报错，
+查看了一下，cuda root 指向CUDA_ROOT  ?= /usr/local/cuda/，这个cuda指向了\wsl\Ubuntu-18.04\usr\local\cuda-11.0\targets\x86_64-linux\lib，然后-lcuda不能运行是因为没有libcuda.so。 这个文件被放在了stub文件夹里，还有libnvidia-ml也被放了进去，所以复制了出来</p>
+
+<p>总之找不到什么文件就搜索一下然后指一下路径</p>
+
+<h3 id="vasp-bug">vasp bug</h3>
+
+<p><strong>segmentation fault</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">ulimit -s 262140</code></p>
+
+<p>至少需要incar poscar potcar kpoints才能运行</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Personal webpage</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Personal webpage</li><li><a class="u-email" href="mailto:davidnormal@126.com">davidnormal@126.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/lamdalamda"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">lamdalamda</span></a></li><li><a href="https://www.twitter.com/unknown"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">unknown</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>stay 24, stay student.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+  }
+});
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+  <!--KaTeX-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              // ...options...
+          });
+      });
+  </script>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>vasp输入 | Personal webpage</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="vasp输入" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="stay 24, stay student." />
+<meta property="og:description" content="stay 24, stay student." />
+<link rel="canonical" href="http://localhost:4000/vasp_inputs/" />
+<meta property="og:url" content="http://localhost:4000/vasp_inputs/" />
+<meta property="og:site_name" content="Personal webpage" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="vasp输入" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"vasp输入","description":"stay 24, stay student.","url":"http://localhost:4000/vasp_inputs/","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Personal webpage" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Personal webpage</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/vasp_basic/">DFT抽象圣经</a><a class="page-link" href="/about/">About</a><a class="page-link" href="/deploy/">Deploy  Guide</a><a class="page-link" href="/pymatgen/">pymatgen</a><a class="page-link" href="/vasp_inputs/">vasp输入</a><a class="page-link" href="/vasp_practice/">vasp实例</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">vasp输入</h1>
+  </header>
+
+  <div class="post-content">
+    <ul id="markdown-toc">
+  <li><a href="#incar-电子步" id="markdown-toc-incar-电子步">INCAR-电子步</a>    <ul>
+      <li><a href="#icharg" id="markdown-toc-icharg">ICHARG</a>        <ul>
+          <li><a href="#icharg0" id="markdown-toc-icharg0">ICHARG=0</a></li>
+          <li><a href="#icharg1" id="markdown-toc-icharg1">ICHARG=1</a></li>
+          <li><a href="#icharg2" id="markdown-toc-icharg2">ICHARG=2</a></li>
+          <li><a href="#icharg4" id="markdown-toc-icharg4">ICHARG=4</a></li>
+          <li><a href="#icharg100124" id="markdown-toc-icharg100124">ICHARG=10+（0，1，2，4）</a></li>
+        </ul>
+      </li>
+      <li><a href="#nelmin" id="markdown-toc-nelmin">NELMIN</a></li>
+      <li><a href="#ediff" id="markdown-toc-ediff">EDIFF</a></li>
+      <li><a href="#ismear" id="markdown-toc-ismear">ISMEAR</a>        <ul>
+          <li><a href="#ismear--n-n为正整数" id="markdown-toc-ismear--n-n为正整数">ISMEAR = N, N为正整数</a></li>
+          <li><a href="#ismear--0" id="markdown-toc-ismear--0">ISMEAR = 0</a></li>
+          <li><a href="#ismear1" id="markdown-toc-ismear1">ISMEAR=−1</a></li>
+          <li><a href="#ismear2" id="markdown-toc-ismear2">ISMEAR=−2</a>            <ul>
+              <li><a href="#ferwe" id="markdown-toc-ferwe">FERWE</a></li>
+              <li><a href="#ferdo" id="markdown-toc-ferdo">FERDO</a></li>
+            </ul>
+          </li>
+          <li><a href="#ismear3" id="markdown-toc-ismear3">ISMEAR=−3</a>            <ul>
+              <li><a href="#smearings" id="markdown-toc-smearings">SMEARINGS</a></li>
+            </ul>
+          </li>
+          <li><a href="#ismear4" id="markdown-toc-ismear4">ISMEAR=−4</a></li>
+          <li><a href="#ismear5" id="markdown-toc-ismear5">ISMEAR=−5</a></li>
+          <li><a href="#sigma" id="markdown-toc-sigma">SIGMA</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#incar-离子步" id="markdown-toc-incar-离子步">INCAR-离子步</a>    <ul>
+      <li><a href="#nsw" id="markdown-toc-nsw">NSW</a></li>
+      <li><a href="#ediffg" id="markdown-toc-ediffg">EDIFFG</a></li>
+    </ul>
+  </li>
+  <li><a href="#incar-任务" id="markdown-toc-incar-任务">INCAR-任务</a>    <ul>
+      <li><a href="#system--string" id="markdown-toc-system--string">SYSTEM = string</a></li>
+      <li><a href="#ibrion" id="markdown-toc-ibrion">IBRION</a>        <ul>
+          <li><a href="#isif--17" id="markdown-toc-isif--17">ISIF = 1~7</a></li>
+          <li><a href="#potim--real" id="markdown-toc-potim--real">POTIM = real</a></li>
+          <li><a href="#ibrion--0" id="markdown-toc-ibrion--0">IBRION = 0</a></li>
+          <li><a href="#smass" id="markdown-toc-smass">SMASS</a></li>
+          <li><a href="#irbion--1" id="markdown-toc-irbion--1">IRBION =-1</a></li>
+          <li><a href="#nfree" id="markdown-toc-nfree">NFREE</a></li>
+          <li><a href="#ibrion-1" id="markdown-toc-ibrion-1">IBRION =1</a></li>
+          <li><a href="#ibrion2" id="markdown-toc-ibrion2">IBRION=2</a></li>
+          <li><a href="#ibrion3" id="markdown-toc-ibrion3">IBRION=3</a></li>
+          <li><a href="#ibrion-5-67844" id="markdown-toc-ibrion-5-67844">IBRION =5 ,6,7,8,44</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#incar-输出" id="markdown-toc-incar-输出">INCAR-输出</a>    <ul>
+      <li><a href="#lorbit" id="markdown-toc-lorbit">LORBIT</a></li>
+    </ul>
+  </li>
+  <li><a href="#doscar" id="markdown-toc-doscar">DOSCAR</a></li>
+  <li><a href="#poscar" id="markdown-toc-poscar">POSCAR</a>    <ul>
+      <li><a href="#vasp5" id="markdown-toc-vasp5">vasp5</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>总结了一些常用tag和实例</p>
+
+<p>Adapted from vasp wiki</p>
+
+<h1 id="incar-电子步">INCAR-电子步</h1>
+
+<h2 id="icharg">ICHARG</h2>
+
+<p>initial charge density 初始电荷密度</p>
+
+<h3 id="icharg0">ICHARG=0</h3>
+
+<p>读取WAVECAR来获得初始电荷密度</p>
+
+<h3 id="icharg1">ICHARG=1</h3>
+
+<p>从CHGCAR里面读取</p>
+
+<h3 id="icharg2">ICHARG=2</h3>
+
+<p>原文：take superposition of atomic charge densities</p>
+
+<p>不知道什么意思</p>
+
+<h3 id="icharg4">ICHARG=4</h3>
+
+<p>从POT里面读取</p>
+
+<p>要求LVTOT=.TRUE.</p>
+
+<h3 id="icharg100124">ICHARG=10+（0，1，2，4）</h3>
+
+<p>与前面各自对应，但是电子密度在整个electronic minimization过程中不变
+用处：
+在绘制band structure时候（比如 L-Γ-X-U）的图的时候，通过读取已有的CHGCAR，把KPOINTS设定在L-Γ-X-U，就可以画出来band structure</p>
+
+<h2 id="nelmin">NELMIN</h2>
+<p>minimum number of electronic SCF steps：每个离子步中最少的电子步数量
+\(&gt;0\)： relaxation to local energy minimum 计算最小能量的模式：</p>
+
+<h2 id="ediff">EDIFF</h2>
+
+<p>电子步能量收敛的判据</p>
+
+<h2 id="ismear">ISMEAR</h2>
+<p>能量在费米能量周围的轨道，其电子占有概率的设置。？</p>
+
+<p>https://www.vasp.at/wiki/index.php/ISMEAR</p>
+
+<p>definition： determines how the partial occupancies \(f_{nk}\) are set for each orbital
+不知道对不对: 原本假设是Kohn Sham计算出来每一个态都与一个电荷相关联，但是，对于金属比如说，费米面附近的态是被<strong>部分</strong>填充的(fermi-dirac 公式，填充概率在\(E_{fermi}\)周围从100%下降到0%，这种情况下，ISMEAR来决定费米面附近是怎么被<strong>部分</strong>填充的</p>
+
+<h3 id="ismear--n-n为正整数">ISMEAR = N, N为正整数</h3>
+<p>计算方式为methfessel-paxton order N.
+看不懂，但是这个partial occpancies可以是负数或者大于1
+用于计算金属力和phonon frequency，有精确的SIGMA时候计算结果比较准确
+不应用于半导体和绝缘体，错误会达到20%</p>
+
+<h3 id="ismear--0">ISMEAR = 0</h3>
+<p>Gaussian smearing (不懂)
+这个方法通过sigma= finite value 外推到 sigma=0 时候的能量，但是可以不给初始的sigma？
+可用于绝缘体计算force和phonon frequency</p>
+
+<p>对于未知体系，用ismear=0比较好</p>
+
+<h3 id="ismear1">ISMEAR=−1</h3>
+<p>Fermi smearing.</p>
+<h3 id="ismear2">ISMEAR=−2</h3>
+<p>partial occupancies are read in from the WAVECAR or INCAR file, and kept fixed
+需要定义FERWE，有可能需要FERDO</p>
+
+<h4 id="ferwe">FERWE</h4>
+<p>条件:ISMEAR=−2时候必须</p>
+
+<p><code class="language-plaintext highlighter-rouge">FERWE=f(1)f(2)f(3)...f(NBANDS*Nk)</code>
+定义每一个band和k点的 partial occupancy 部分占据</p>
+
+<p>Nk应该是k点数量</p>
+
+<h4 id="ferdo">FERDO</h4>
+<p>条件：ISMEAR=-2且是 spin-polarized calculation(?)</p>
+
+<p><code class="language-plaintext highlighter-rouge">FERDO=f(1)f(2)f(3)...f(NBANDS*Nk)</code></p>
+
+<p>Nk应该是k点数量</p>
+
+<p>Note that the partial occupancies are also written to the OUTCAR file, but in this case they are multiplied by 2, i.e. they are between 0 and 2.</p>
+
+<h3 id="ismear3">ISMEAR=−3</h3>
+<p>: 根据一组sigma和ismear来循环计算，需要SMEARINGS参数</p>
+
+<h4 id="smearings">SMEARINGS</h4>
+
+<p>SMEARINGS =  ismear1 sigma1  ismear2 sigma2 … 
+当ISMEAR = -3 时候必须设置，对于SMEARINGS中每一个参数进行尝试 并且计算能量</p>
+
+<p>要求 
+IBRION = -1 即 离子不允许移动
+并且设置NSW</p>
+
+<h3 id="ismear4">ISMEAR=−4</h3>
+
+<p>: tetrahedron method (use a Γ-centered k-mesh).</p>
+<h3 id="ismear5">ISMEAR=−5</h3>
+
+<p>: tetrahedron method with Blöchl corrections (use a Γ-centered k-mesh).
+适用于semiconductor 和 insulator。
+适用于bulk materials, DOS 计算结果比较好，但是计算力和stress tensor时候对于金属在计算力的时候有5%~10%偏差，可用于绝缘体计算force和phonon frequency，因为没有partial occupation， occupation只能是1和0。</p>
+
+<h3 id="sigma">SIGMA</h3>
+
+<p>是ISMEAR的相关选项
+似乎ISMEAR=0 时候可以不定义SIGMA</p>
+
+<p>definition：width of the smearing in eV.
+不知道对不对；费米能级周围的宽度
+由于fermi-dirac公式，电子占据特定量子态的概率为\(\frac{1}{1+exp(\frac{E-E_f}{kT})}\)。由于vasp计算时候k点网格是有限的，电子没有办法精确的占据网格，所以通过这个sigma来允许\([E_{fermi}\pm (SIGMA) ]eV\)范围内的 轨道/态 被部分占据。 K点网格越多 （KPOINTS）那么SIGMA可以设置的越小</p>
+
+<h1 id="incar-离子步">INCAR-离子步</h1>
+
+<h2 id="nsw">NSW</h2>
+
+<p>maxmimum number of ionic steps 最大离子步数量</p>
+
+<p>IBRION =0 时候，是必须项目
+IBRION !=0 时候，即，在进行relaxation时候，能进行的最多离子步数量</p>
+
+<h2 id="ediffg">EDIFFG</h2>
+
+<p>离子步能量收敛的判据</p>
+
+<p>如果EDIFFG&gt;0当 新的离子步 的 电子步收敛时的<strong>能量</strong> 与 上一个离子步 的 电子步收敛时的<strong>能量</strong> 之差小于收敛判据EDIFFG时离子步优化结束。如果EDIFFG&lt;0,则为当所有力小于EDIFFG绝对值时（负的EDIFFG）离子步优化结束。</p>
+
+<h1 id="incar-任务">INCAR-任务</h1>
+
+<h2 id="system--string">SYSTEM = string</h2>
+<p>系统的名称，没有锤子用，显示在outcar里面</p>
+
+<h2 id="ibrion">IBRION</h2>
+
+<p>https://www.vasp.at/wiki/index.php/IBRION</p>
+
+<p>分子动力学或弛豫离子？  MD or relaxation to the local minimum energy</p>
+
+<p>当IBRION =0 进行分子动力学molecular dynamics计算</p>
+
+<p>其他情况下是relaxation to minimum energy的计算</p>
+
+<h3 id="isif--17">ISIF = 1~7</h3>
+<p>https://www.vasp.at/wiki/index.php/ISIF
+重要参数，指定自由度</p>
+
+<p>ISIF=3：全自由，用于晶格弛豫，寻找晶格常数</p>
+
+<h3 id="potim--real">POTIM = real</h3>
+
+<p>IBRION的重要参数
+set the time step for MD (IBRION=0) or step width scaling (IBRION !=0)</p>
+
+<h3 id="ibrion--0">IBRION = 0</h3>
+
+<p>分子动力学计算，integrate Newton’s equations of motion.
+POTIM的单位是femto second</p>
+
+<h3 id="smass">SMASS</h3>
+<p>是IBRION=0或者3时设置
+smass=-3 NVE ensemble molecular dynamic
+SMASS=-2 the initial velocities are kept constant
+SMASS=-1
+SMASS≥0, a canonical ensemble is simulated using the algorithm of Nosé.
+In this case the velocities are scaled
+总能量守恒</p>
+
+<p>SMASS提供阻尼因子 μ</p>
+
+<h3 id="irbion--1">IRBION =-1</h3>
+<p>离子不能移动，只是计算电子的自由度，没锤子用</p>
+
+<h3 id="nfree">NFREE</h3>
+
+<p>IBRIO&gt;0时的重要设置，定义了：离子收敛过程中记住的步骤数</p>
+
+<h3 id="ibrion-1">IBRION =1</h3>
+<p>要求初始位置非常精确，否则需要设置Nelmin=4~8</p>
+
+<h3 id="ibrion2">IBRION=2</h3>
+
+<p>比较快的离子弛豫算法</p>
+
+<h3 id="ibrion3">IBRION=3</h3>
+
+<p>阻尼分子动力学</p>
+
+<h3 id="ibrion-5-67844">IBRION =5 ,6,7,8,44</h3>
+
+<p>看不懂</p>
+
+<h1 id="incar-输出">INCAR-输出</h1>
+
+<h2 id="lorbit">LORBIT</h2>
+
+<p>LORBIT于RWIGS一起，决定了输出PROCAR PROOUT
+具体参考https://www.vasp.at/wiki/index.php/LORBIT</p>
+
+<h1 id="doscar">DOSCAR</h1>
+
+<p>需要INCAR 中 定义 LORBIT才会有这个输出</p>
+
+<h1 id="poscar">POSCAR</h1>
+<h2 id="vasp5">vasp5</h2>
+<p>fcc (100) surface <em>注释</em></p>
+
+<p>3.53 <em>大于0：晶格常数，缩放所有的晶格向量（之后 三行）和原子坐标，如果小于0，则代表了总体积</em></p>
+
+<p>.50000   .50000   .00000 <em>晶格向量1</em></p>
+
+<p>-.50000   .50000   .00000 <em>晶格向量1</em></p>
+
+<p>.00000   .00000  5.00000 <em>晶格向量1</em></p>
+
+<p>B N <em>元素</em></p>
+
+<p>1 1 <em>每个元素数量</em></p>
+
+<p>Selective Dynamics <em>如果是selective dynamics,则可以定义每个原子是否可以移动</em></p>
+
+<p>Kartesisch <em>笛卡尔坐标或者直接坐标</em></p>
+
+<p>.00000   .00000   .00000 F F F <em>F是fixed，固定坐标</em></p>
+
+<p>.00000   .50000   .50000 F F F</p>
+
+<p>.00000   .00000  1.00000 F F F</p>
+
+<p>.00000   .50000  1.50000 T T T</p>
+
+<p>.00000   .00000  2.00000 T T T</p>
+
+<p>Cartesian <em>如果有初始速度的话会有接下来这些行</em></p>
+
+<p>0.01 0.01 0.01 <em>初始速度相关的</em></p>
+
+<p>0.00 0.00 0.00</p>
+
+<p>optionally predictor-corrector coordinates</p>
+
+<p>given on file CONTCAR of MD-run</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Personal webpage</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Personal webpage</li><li><a class="u-email" href="mailto:davidnormal@126.com">davidnormal@126.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/lamdalamda"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">lamdalamda</span></a></li><li><a href="https://www.twitter.com/unknown"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">unknown</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>stay 24, stay student.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+  }
+});
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+  <!--KaTeX-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              // ...options...
+          });
+      });
+  </script>
