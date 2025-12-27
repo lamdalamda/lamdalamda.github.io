@@ -61,7 +61,12 @@ net stop LxssManager
 net start LxssManager
 ```
 
+## bios设定
 
+现在非常不稳定，需要设置如下
+CSM设置：disable
+IntelRCsetup里面
+改成custom然后禁用turbo，然后保持2.3GHz的频率运行，然后禁用cstate
 
 ## zbook17 changing to DC screen 换屏幕
 
