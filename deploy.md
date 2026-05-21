@@ -209,6 +209,12 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=2-17,20-35"
 使用hwinfo
 
 
+## zerotier bug
+zerotier有时候会取代默认的网络，可以通过ip route看见
+解决方法是
+禁用connman 服务
+`sudo systemctl disable connman`
+
 # windows的一些系统设置
 
 ## outlook
